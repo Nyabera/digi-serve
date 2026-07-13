@@ -32,11 +32,11 @@ DEC-042: B - V1 scope and Stage 1 scope are separate; use four page classes.
 DEC-043: APPROVED - Rename the resolved-decision file to DECISION-LOG.md.
 DEC-044: APPROVED - Delete and ignore .DS_Store.
 DEC-045: SUPERSEDED - The earlier v1.3 audit result is replaced by the final synchronized audit under DEC-050.
-DEC-046: C - Use /officer/requests/[id] and show approval actions only to the Registrar-profile Supervisor.
-DEC-047: B - Supervisors use the shared Officer processing shell with supervisor-only navigation and controls.
-DEC-048: APPROVED - Delete docs/00-stage-0/SOURCE-OF-TRUTH.md immediately.
-DEC-049: B - Move replacement instructions to docs/migrations/REPLACEMENT-INSTRUCTIONS.md.
-DEC-050: APPROVED - Stage 0 approval requires all final decisions to be synchronized across the controlling documents.
+DEC-046: C — Use `/officer/requests/[id]` and display Registrar decision actions only to a Registrar-profile Supervisor.
+DEC-047: B — Supervisors use the shared Officer processing shell with supervisor-only navigation and controls.
+DEC-048: APPROVED — Delete `docs/00-stage-0/SOURCE-OF-TRUTH.md` and retain only `docs/SOURCE-OF-TRUTH.md`.
+DEC-049: B — Store replacement instructions at `docs/migrations/REPLACEMENT-INSTRUCTIONS.md`.
+DEC-050: APPROVED — Stage 0 is approved only after all final decisions are synchronized across the controlling documents.
 ```
 
 ## 4. Consequences
@@ -58,4 +58,4 @@ DEC-050: APPROVED - Stage 0 approval requires all final decisions to be synchron
 
 ## 5. Result
 
-Stage 0 version 1.3 is approved for Stage 1.
+Stage 0 version 1.4 is approved for Stage 1, subject to the synchronized implementation controls recorded in DEC-046 through DEC-050.

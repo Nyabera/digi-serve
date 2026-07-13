@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Status Definitions And Mappings
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
