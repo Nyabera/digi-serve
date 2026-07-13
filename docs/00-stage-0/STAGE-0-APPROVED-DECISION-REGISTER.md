@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Approved Decision Register
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.2**
 Generated: **2026-07-13**  
 Applies to: **FAIDIA V1 / Stage 0**
 
@@ -41,8 +41,8 @@ DEC-026: A - Proceed with documented current-process assumptions for demo; valid
 DEC-027: A - In-app required; email optional for demo and required before external pilot.
 DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
 DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
-DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
-DEC-031: A - Stage 0 can be approved after source docs are updated.
+DEC-030: A - Canonical docs/SOURCE-OF-TRUTH.md has been created.
+DEC-031: A - Stage 0 is approved after the source docs are updated and synchronized.
 ```
 
 ## Blocking Decisions Applied
@@ -68,8 +68,8 @@ DEC-031: A - Stage 0 can be approved after source docs are updated.
 19. Handoffs complete at `COMPLETED`.
 20. Correction resubmission returns to `IN_REVIEW`.
 21. Public `Preparing Outcome` is conditional.
-22. Canonical root source of truth is required.
-23. Stage 0 is approved after these source docs are updated.
+22. Canonical root source of truth exists at `docs/SOURCE-OF-TRUTH.md`.
+23. Stage 0 source docs are updated and synchronized; Stage 0 is approved for Stage 1.
 
 ## Non-Blocking Decisions Applied
 

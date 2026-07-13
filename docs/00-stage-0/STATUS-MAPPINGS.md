@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Status Definitions And Mappings
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.1**
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -24,16 +24,18 @@ This document defines approved V1 statuses for requests, work items, handoffs, d
 |---|---|---|---|
 | `DRAFT` | Applicant has started but not submitted | Draft creation | Submit, cancel, or expire |
 | `SUBMITTED` | Submission accepted and awaiting staff action | Submit request | Start review or cancel |
-| `IN_REVIEW` | Active internal review | Start review or correction resubmission | Correction, department wait, approval, rejection, cancel |
+| `IN_REVIEW` | Active internal review or clarification by the coordinating department | Start review, correction resubmission, Finance clarification, or Registrar return | Correction, department wait, approval, rejection, cancel |
 | `WAITING_ON_APPLICANT` | Applicant action required | Correction request or Finance HOLD action | Resubmit, cancel, or expire |
 | `WAITING_ON_DEPARTMENT` | Waiting for required handoff result | Create Finance referral | Handoff completes, declines, or returns |
-| `PENDING_APPROVAL` | Operational checks complete; Registrar decision pending | Records work complete | Approve, reject, or return |
+| `PENDING_APPROVAL` | Operational checks complete; Registrar decision pending | Records work complete | Approve, reject, or return to `IN_REVIEW` |
 | `APPROVED` | Positive decision recorded | Registrar approval | Outcome preparation or ready |
-| `OUTCOME_PREPARATION` | Final outcome is being prepared | Start outcome work where there is delay | Ready or failed |
+| `OUTCOME_PREPARATION` | Final outcome is being prepared | Start outcome work where there is delay or retry after failure | Ready or `OUTCOME_FAILED` |
+| `OUTCOME_FAILED` | Outcome preparation failed and requires authorized retry or controlled closure | Outcome preparation failure | Retry to `OUTCOME_PREPARATION` or controlled cancellation |
 | `OUTCOME_READY` | Outcome available for download/collection | Issue document/outcome | Complete |
 | `REJECTED` | Final negative decision | Registrar rejection | Controlled reopen only |
 | `COMPLETED` | Service journey closed | Recorded download, collection, delivery, or closure | Terminal |
 | `CANCELLED` | Ended without final outcome | Applicant/staff cancellation | Terminal |
+| `EXPIRED` | Draft or applicant-waiting request passed its expiry deadline | Scheduled expiry job | Terminal |
 
 Approved primary flow:
 
@@ -49,6 +51,21 @@ DRAFT
 -> COMPLETED
 ```
 
+Expiry is a terminal branch from `DRAFT` or `WAITING_ON_APPLICANT` to `EXPIRED`.
+Outcome preparation failure is recoverable: an authorized outcome processor may
+move `OUTCOME_FAILED` back to `OUTCOME_PREPARATION` after recording the retry.
+
+Approved result transitions:
+
+| Event | Parent request transition | Related work/handoff transition |
+|---|---|---|
+| Finance returns `CLEAR` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item and handoff -> `COMPLETED`; Records work item -> `READY` or `IN_PROGRESS` |
+| Finance returns `HOLD` | `WAITING_ON_DEPARTMENT` -> `WAITING_ON_APPLICANT` | Finance work item and handoff -> `COMPLETED`; Records work item -> `WAITING_ON_APPLICANT` |
+| Applicant resolves Finance `HOLD` | `WAITING_ON_APPLICANT` -> `IN_REVIEW` | Records work item -> `READY` or `IN_PROGRESS`; new Finance referral if re-verification is required |
+| Finance returns `CANNOT_VERIFY` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item -> `RETURNED`; handoff -> `RETURNED_FOR_CLARIFICATION`; Records work item -> `IN_PROGRESS` |
+| Finance declines | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item -> `CANCELLED`; handoff -> `DECLINED`; revised referral uses a new handoff record |
+| Registrar returns for clarification | `PENDING_APPROVAL` -> `IN_REVIEW` | Records approval work item -> `READY` or `IN_PROGRESS`; decision -> `RETURNED_FOR_CLARIFICATION` |
+
 ## 4. Applicant-Visible Statuses
 
 | Public status | Meaning to applicant | Display guidance |
@@ -61,6 +78,7 @@ DRAFT
 | Awaiting Decision | Review complete, authorization pending | Do not imply approval |
 | Approved | Positive decision made | Explain outcome timing |
 | Preparing Outcome | Outcome is being prepared | Use only for meaningful delay |
+| Outcome Issue | Outcome preparation needs staff resolution | Do not expose internal failure details; show that staff are resolving the issue |
 | Ready | Outcome can be downloaded or collected | Show instructions |
 | Completed | Service journey finished | Show result and completion date |
 | Rejected | Not approved | Show applicant-visible reason |
@@ -82,10 +100,12 @@ DRAFT
 | Request `PENDING_APPROVAL` | Awaiting Decision |
 | Request `APPROVED`, no meaningful outcome delay | Approved |
 | Request `OUTCOME_PREPARATION` | Preparing Outcome |
+| Request `OUTCOME_FAILED` | Outcome Issue |
 | Request `OUTCOME_READY` | Ready |
 | Request `COMPLETED` | Completed |
 | Request `REJECTED` | Rejected |
 | Request `CANCELLED` | Cancelled |
+| Request `EXPIRED` | Expired |
 
 ## 6. Work-Item Statuses
 
@@ -113,7 +133,7 @@ DRAFT
 | `ASSIGNED` | Receiving officer assigned | `IN_PROGRESS`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED` |
 | `IN_PROGRESS` | Receiving department working | `COMPLETED`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED` |
 | `RETURNED_FOR_CLARIFICATION` | Originator must clarify | `PENDING_ACCEPTANCE`, `CANCELLED` |
-| `DECLINED` | Receiver declined with reason | Terminal or revised new handoff |
+| `DECLINED` | Receiver declined with reason | Terminal; any revised referral uses a new handoff |
 | `COMPLETED` | Required result recorded | Terminal |
 | `CANCELLED` | Ended without completion | Terminal |
 

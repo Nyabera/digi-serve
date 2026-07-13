@@ -1,7 +1,7 @@
 # FAIDIA Source of Truth
 
 **Status:** APPROVED_FOR_V1  
-**Version:** 1.0  
+**Version:** 1.2
 **Last updated:** 2026-07-13  
 **Applies to:** FAIDIA V1 / Stage 0  
 **Primary use:** Product definition, prompt building, implementation control, and change tracking
@@ -10,7 +10,7 @@
 
 This file is the master index for the FAIDIA V1 documentation system. It tells developers, designers, AI coding agents, and product contributors which files control each part of the product and how conflicts are resolved.
 
-The canonical root copy is `docs/SOURCE-OF-TRUTH.md`. This Stage 0 copy is retained for the downloadable Stage 0 pack.
+The canonical file is `docs/SOURCE-OF-TRUTH.md`. This synchronized Stage 0 copy is retained for the downloadable Stage 0 pack.
 
 ## 2. Core Authority Rule
 
@@ -75,8 +75,8 @@ DEC-026: A - Proceed with documented current-process assumptions for demo; valid
 DEC-027: A - In-app required; email optional for demo and required before external pilot.
 DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
 DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
-DEC-030: A - Create canonical `docs/SOURCE-OF-TRUTH.md`.
-DEC-031: A - Stage 0 can be approved after source docs are updated.
+DEC-030: A - Canonical `docs/SOURCE-OF-TRUTH.md` has been created.
+DEC-031: A - Stage 0 is approved after the source docs are updated and synchronized.
 
 ## 5. Source-Of-Truth Map
 
@@ -111,6 +111,8 @@ The following are frozen for Stage 1 implementation unless the product owner upd
 - document review status: `ACCEPTED`;
 - completion rule: recorded download, collection, or approved closure;
 - applicant registration: open email registration for demo, controlled applicant group for pilot.
+- V1 page boundary: all 63 pages classified `V1_REQUIRED` in `PAGE-INVENTORY.md` are Stage 1 scope; `DEMO_ONLY` and `POSTPONED` pages are not required V1 scope;
+- approval route: `/officer/requests/[id]/approval`.
 
 ## 7. Implementation Guardrails
 
@@ -131,6 +133,8 @@ AI coding agents should:
 - record audit events and status history;
 - derive reports from real timestamps/events;
 - keep applicant-facing status separate from internal state.
+- use the exact role grants in `ROLE-PERMISSIONS-MATRIX.md`;
+- use the canonical approval route in `PAGE-INVENTORY.md`.
 
 ## 8. Stage 0 Approval State
 

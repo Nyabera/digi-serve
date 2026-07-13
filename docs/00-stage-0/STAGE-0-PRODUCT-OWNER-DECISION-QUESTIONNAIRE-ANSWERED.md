@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Product Owner Decision Questionnaire, Answered
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.2**
 Generated: **2026-07-13**  
 Applies to: **FAIDIA V1 / Stage 0**
 
@@ -51,8 +51,8 @@ DEC-026: A - Proceed with documented current-process assumptions for demo; valid
 DEC-027: A - In-app required; email optional for demo and required before external pilot.
 DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
 DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
-DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
-DEC-031: A - Stage 0 can be approved after source docs are updated.
+DEC-030: A - Canonical docs/SOURCE-OF-TRUTH.md has been created.
+DEC-031: A - Stage 0 is approved after the source docs are updated and synchronized.
 ```
 
 ## Grouped Questionnaire Results
@@ -135,8 +135,8 @@ DEC-031: A - Stage 0 can be approved after source docs are updated.
 
 | ID | Question | Selected answer | Blocking |
 |---|---|---|---|
-| DEC-030 | Canonical source-of-truth file? | A - Create `docs/SOURCE-OF-TRUTH.md` | Yes |
-| DEC-031 | Stage 0 approval state? | A - Approve after source docs updated | Yes |
+| DEC-030 | Canonical source-of-truth file? | A - `docs/SOURCE-OF-TRUTH.md` created and canonical | Yes |
+| DEC-031 | Stage 0 approval state? | A - Stage 0 approved after source docs were updated and synchronized | Yes |
 
 ## Result
 

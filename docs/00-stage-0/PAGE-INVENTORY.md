@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — V1 Page Inventory
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.1**
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -19,7 +19,16 @@ Approved changes:
 - organization selection is required only for staff with multiple memberships;
 - standalone admin audit page remains demo-only, while request-level audit/history is required in request details.
 
-## 2. Public And Authentication
+## 2. Stage 1 Scope Boundary
+
+There are **63 `V1_REQUIRED` pages**, **12 `DEMO_ONLY` pages**, and **18 `POSTPONED` pages** in this inventory.
+
+- Every `V1_REQUIRED` page is part of the Stage 1 implementation scope and must have real data, server-side permissions, and the documented behavior before Stage 1 is approved.
+- `DEMO_ONLY` pages may use seeded or simplified behavior and must not become dependencies of the approved vertical slice.
+- `POSTPONED` pages must not have active V1 navigation or required routes.
+- The 63 `V1_REQUIRED` pages are the complete V1 surface; no additional page is implied by a mockup, backlog item, or old navigation reference.
+
+## 3. Public And Authentication
 
 | ID | Page | Suggested route | Class | Purpose |
 |---|---|---|---|---|
@@ -36,7 +45,7 @@ Approved changes:
 | AUTH-006 | Invitation acceptance | `/invitation/[token]` | V1_REQUIRED | Staff joins organization |
 | AUTH-007 | Organization selection | `/select-organization` | V1_REQUIRED | Shown only when staff has multiple memberships |
 
-## 3. Applicant Workspace
+## 4. Applicant Workspace
 
 | ID | Page | Suggested route | Class | Purpose |
 |---|---|---|---|---|
@@ -61,7 +70,7 @@ Approved changes:
 | APP-019 | Renewals | `/applicant/renewals` | POSTPONED | Future renewal workflows |
 | APP-020 | Verification records | `/applicant/verifications` | POSTPONED | Future verification history |
 
-## 4. Officer Workspace
+## 5. Officer Workspace
 
 | ID | Page | Suggested route | Class | Purpose |
 |---|---|---|---|---|
@@ -79,14 +88,14 @@ Approved changes:
 | OFF-012 | Outgoing handoffs | `/officer/handoffs/outgoing` | V1_REQUIRED | Track sent referrals |
 | OFF-013 | Handoff details | `/officer/handoffs/[id]` | V1_REQUIRED | Accept/decline/clarify/start/complete referral |
 | OFF-014 | Work-item details | `/officer/work-items/[id]` | V1_REQUIRED | Task, SLA, dependencies, completion |
-| OFF-015 | Approval/rejection | Details action or approval page | V1_REQUIRED | Registrar/supervisor decision prerequisites and reason |
+| OFF-015 | Approval/rejection | `/officer/requests/[id]/approval` | V1_REQUIRED | Canonical Registrar/supervisor decision page with prerequisites, reason, approve, reject, and return-for-clarification actions |
 | OFF-016 | Notifications | `/officer/notifications` | V1_REQUIRED | Assignment, handoff, correction, overdue |
 | OFF-017 | Global search | `/officer/search` | DEMO_ONLY | Permission-scoped lookup |
 | OFF-018 | Correspondence | `/officer/communications/correspondence` | DEMO_ONLY | Formal communication |
 | OFF-019 | Knowledge base | `/officer/communications/knowledge-base` | DEMO_ONLY | Staff guidance |
 | OFF-020 | Advanced workload | `/officer/workload` | POSTPONED | Capacity balancing |
 
-## 5. Supervisor Workspace
+## 6. Supervisor Workspace
 
 Supervisor reuses the officer shell with additional permission-gated navigation.
 
@@ -103,7 +112,7 @@ Supervisor reuses the officer shell with additional permission-gated navigation.
 | SUP-009 | Escalations | `/supervisor/escalations` | POSTPONED | Advanced ladder |
 | SUP-010 | Officer ranking | `/supervisor/officer-performance` | POSTPONED | Advanced fairness-aware analytics |
 
-## 6. Organization Admin
+## 7. Organization Admin
 
 | ID | Page | Suggested route | Class | Purpose |
 |---|---|---|---|---|
@@ -134,7 +143,7 @@ Supervisor reuses the officer shell with additional permission-gated navigation.
 | ADM-025 | Integration marketplace | `/admin/integrations` | POSTPONED | External systems |
 | ADM-026 | Custom report builder | `/admin/reports/builder` | POSTPONED | Arbitrary reports |
 
-## 7. Platform Admin
+## 8. Platform Admin
 
 | ID | Page | Route | Class | Purpose |
 |---|---|---|---|---|
@@ -144,7 +153,7 @@ Supervisor reuses the officer shell with additional permission-gated navigation.
 | PADM-004 | Subscriptions | `/platform-admin/subscriptions` | POSTPONED | Billing |
 | PADM-005 | System health | `/platform-admin/system-health` | POSTPONED | Monitoring UI |
 
-## 8. Approved Navigation
+## 9. Approved Navigation
 
 Applicant:
 
@@ -206,6 +215,8 @@ DEPARTMENT
 - Overdue Work
 - Approval Queue
 - Department Report
+
+Approval Queue links to the canonical approval route `/officer/requests/[id]/approval`.
 ```
 
 Admin:
@@ -233,7 +244,7 @@ SETTINGS
 - Feature Flags
 ```
 
-## 9. Remove From Active V1 Navigation
+## 10. Remove From Active V1 Navigation
 
 - transfer creation;
 - standalone payment workspace;
@@ -253,10 +264,10 @@ SETTINGS
 - native mobile administration;
 - enterprise SSO.
 
-## 10. Shared State Requirements
+## 11. Shared State Requirements
 
 Each V1 page needs loading, empty, error, permission-denied where relevant, mobile behavior, keyboard access, page title/breadcrumb, and clear data freshness expectations.
 
-## 11. Coding-Agent Instruction
+## 12. Coding-Agent Instruction
 
 Build only V1-required pages unless explicitly authorized. Do not add active navigation for postponed features.

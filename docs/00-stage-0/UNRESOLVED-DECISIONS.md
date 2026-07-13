@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Resolved Decisions Register
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.2**
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -43,8 +43,8 @@ DEC-026: A - Proceed with documented current-process assumptions for demo; valid
 DEC-027: A - In-app required; email optional for demo and required before external pilot.
 DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
 DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
-DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
-DEC-031: A - Stage 0 can be approved after source docs are updated.
+DEC-030: A - Canonical docs/SOURCE-OF-TRUTH.md has been created.
+DEC-031: A - Stage 0 is approved after the source docs are updated and synchronized.
 ```
 
 ## 3. Resolved Decisions
@@ -80,8 +80,8 @@ DEC-031: A - Stage 0 can be approved after source docs are updated.
 | DEC-027 | External email | In-app required; email optional for demo, required before external pilot | RESOLVED |
 | DEC-028 | Pilot operations | Synthetic demo first; limited pilot later with support/feedback | RESOLVED |
 | DEC-029 | Missing design references | Current visual direction approved; design missing screens during build | RESOLVED |
-| DEC-030 | Canonical source of truth | Create `docs/SOURCE-OF-TRUTH.md` | RESOLVED |
-| DEC-031 | Stage 0 approval state | Approve Stage 0 after source docs updated | RESOLVED |
+| DEC-030 | Canonical source of truth | `docs/SOURCE-OF-TRUTH.md` created and canonical | RESOLVED |
+| DEC-031 | Stage 0 approval state | Stage 0 approved after source docs were updated and synchronized | RESOLVED |
 
 ## 4. Remaining Non-Blocking Follow-Up Before Real Pilot
 

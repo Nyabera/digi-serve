@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — V1 Vertical Slice
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.1**
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -17,7 +17,7 @@ An applicant visits Savannah Technical College's service catalogue, selects Tran
 
 Student Records reviews the request, rejects one document, and requests a correction. The applicant replaces the rejected document and resubmits.
 
-Student Records creates a Finance referral. Finance accepts the referral, checks whether a Finance hold blocks transcript issuance, records `CLEAR`, `HOLD`, or `CANNOT_VERIFY`, and completes the referral.
+Student Records creates a Finance referral. Finance accepts the referral, checks whether a Finance hold blocks transcript issuance, and records `CLEAR`, `HOLD`, or `CANNOT_VERIFY`. `CLEAR` and `HOLD` complete the referral; `CANNOT_VERIFY` returns it for clarification.
 
 If Finance returns `HOLD`, the applicant receives clear applicant-visible action. If the result allows continuation, Student Records completes its review and sends the request to Registrar approval.
 
@@ -263,7 +263,7 @@ Finance accepts:
 - record acceptance timestamp;
 - audit event `HANDOFF_ACCEPTED`.
 
-Finance completes:
+Finance records a result:
 
 - result code: `CLEAR`, `HOLD`, or `CANNOT_VERIFY`;
 - explanatory note;
@@ -271,7 +271,7 @@ Finance completes:
 - officer;
 - optional reference.
 
-Completion transition:
+For `CLEAR`, completion transition:
 
 - Finance work item `COMPLETED`;
 - handoff `COMPLETED`;
@@ -279,15 +279,32 @@ Completion transition:
 - audit event `HANDOFF_COMPLETED`;
 - originator notification.
 
+For `HOLD`, the Finance work item and handoff are completed with the result
+recorded. The parent request becomes `WAITING_ON_APPLICANT`, the coordinating
+Records work item becomes `WAITING_ON_APPLICANT`, and the applicant receives the
+required action. When the applicant completes that action, the request returns
+to `IN_REVIEW`, the Records work item returns to `READY` or `IN_PROGRESS`, and
+the prior Finance result remains in history. A new Finance referral is required
+if the institution needs Finance to verify the updated information.
+
+For `CANNOT_VERIFY`, the Finance work item becomes `RETURNED` and the handoff
+becomes `RETURNED_FOR_CLARIFICATION`; the handoff is not completed. The parent
+request returns to `IN_REVIEW`, the Records work item becomes `IN_PROGRESS`, and
+the originator receives the clarification task. Records either clarifies the
+existing handoff and resubmits it to `PENDING_ACCEPTANCE`, or requests applicant
+action. Applicant action returns the request to `IN_REVIEW` before the Finance
+handoff is resubmitted. Every result and resubmission remains in handoff
+history.
+
 No `RETURNED_TO_ORIGINATOR` state is required.
 
 ### Phase 7 — Finance Result Handling
 
 If Finance returns `CLEAR`, Records continues review.
 
-If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible reason or next step. This normally uses `WAITING_ON_APPLICANT` and Action Required.
+If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible reason or next step. The parent request and coordinating Records work item use `WAITING_ON_APPLICANT`. Applicant completion returns both to the Records review path; it does not silently clear the Finance result.
 
-If Finance returns `CANNOT_VERIFY`, the referral returns to Student Records for clarification. Student Records keeps parent ownership and decides the next action: resend a clarified Finance referral or request applicant action if the missing information belongs to the applicant. The request must not proceed to approval while mandatory Finance verification remains unresolved.
+If Finance returns `CANNOT_VERIFY`, the referral moves to `RETURNED_FOR_CLARIFICATION`, the Finance work item moves to `RETURNED`, and the parent request returns to `IN_REVIEW` under Student Records ownership. Student Records must either clarify and resubmit the handoff or request applicant action before resubmission. The request must not proceed to approval while mandatory Finance verification remains unresolved.
 
 ### Phase 8 — Records Completion And Registrar Approval
 
@@ -331,6 +348,17 @@ Approval transaction:
 - product event `request_approved`;
 - outcome-generation/storage event.
 
+Registrar return-for-clarification transaction:
+
+- validates `requests.return_for_clarification`;
+- validates request state `PENDING_APPROVAL`;
+- requires an internal reason and any applicant-visible instruction;
+- creates a decision with status `RETURNED_FOR_CLARIFICATION`;
+- returns the request to `IN_REVIEW`;
+- returns or creates the Records work item in `READY`;
+- records status history, audit event `REQUEST_RETURNED_FOR_CLARIFICATION`, and notification;
+- prevents outcome preparation until Records completes the required work again.
+
 Public status becomes Approved or Preparing Outcome. Preparing Outcome is shown only when there is a meaningful delay.
 
 ### Phase 9 — Outcome And Completion
@@ -350,6 +378,12 @@ Process:
 5. link exact issued file;
 6. mark issued;
 7. create `OUTCOME_GENERATED` and `DOCUMENT_ISSUED`.
+
+If outcome preparation fails, the request becomes `OUTCOME_FAILED`, the public
+status becomes Outcome Issue, and the failure is recorded without exposing
+technical details to the applicant. An authorized outcome processor may retry
+by moving the request to `OUTCOME_PREPARATION`; the request cannot become
+`COMPLETED` while it is `OUTCOME_FAILED`.
 
 Applicant notification:
 
@@ -375,7 +409,10 @@ Audit:
 
 ## 7. Alternate Paths
 
-Finance declines: reason required; originator notified; parent remains with Records.
+Finance declines: reason required; the handoff becomes `DECLINED`, the Finance
+work item becomes `CANCELLED`, the parent returns to `IN_REVIEW`, and Records
+may create a revised referral. The parent remains with Records and cannot move
+to approval until the required Finance result exists.
 
 Finance requests clarification: handoff moves to clarification state; originator provides missing information; history is preserved.
 
@@ -383,7 +420,10 @@ Registrar rejects: applicant-visible reason required; request becomes `REJECTED`
 
 Transfer: postponed from Stage 1 main path.
 
-Draft abandonment: draft expires after 30 days unless policy changes.
+Draft abandonment: `DRAFT` expires after 30 days and becomes `EXPIRED`. A
+request waiting on applicant action also becomes `EXPIRED` when its recorded
+deadline passes under the configured expiry policy. Expiry is terminal and is
+recorded in status history and audit history.
 
 Concurrent staff actions: server validates current state and stale actions fail safely.
 
@@ -424,8 +464,10 @@ Minimum V1 notifications:
 - `HANDOFF_COMPLETED`
 - `WORK_ITEM_COMPLETED`
 - `REQUEST_APPROVED`
+- `REQUEST_RETURNED_FOR_CLARIFICATION`
 - `REQUEST_REJECTED`
 - `OUTCOME_GENERATED`
+- `OUTCOME_GENERATION_FAILED`
 - `DOCUMENT_ISSUED`
 - `DOCUMENT_DOWNLOADED`
 - `REQUEST_COMPLETED`

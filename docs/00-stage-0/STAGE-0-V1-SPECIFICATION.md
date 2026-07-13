@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — V1 Product Specification
 
 Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Version: **1.1**
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -133,7 +133,7 @@ Required Finance result codes:
 
 If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible explanation or next step. It is not automatically rejected.
 
-If Finance returns `CANNOT_VERIFY`, the referral returns to Student Records for clarification. Student Records may resend a clarified Finance referral or request applicant action if the missing information belongs to the applicant.
+If Finance returns `CANNOT_VERIFY`, the handoff becomes `RETURNED_FOR_CLARIFICATION`, the Finance work item becomes `RETURNED`, and the parent request returns to `IN_REVIEW` under Student Records ownership. Student Records may clarify and resubmit the handoff, or request applicant action before resubmission. The request cannot proceed to approval while mandatory Finance verification remains unresolved.
 
 ## 10. Approved Outcome And Completion
 
@@ -144,8 +144,10 @@ The institution or its current process creates the official transcript. FAIDIA s
 Request lifecycle meaning:
 
 - `APPROVED`: decision recorded;
+- `OUTCOME_FAILED`: outcome preparation failed and requires authorized retry or controlled closure;
 - `OUTCOME_READY`: controlled outcome available;
-- `COMPLETED`: recorded download, collection, delivery, or approved institutional closure rule.
+- `COMPLETED`: recorded download, collection, delivery, or approved institutional closure rule;
+- `EXPIRED`: draft or applicant-waiting request passed its configured expiry deadline.
 
 FAIDIA must not claim to generate a legally valid transcript unless the institution provides official data, template, signing method, approval process, and legal authority.
 
@@ -180,16 +182,17 @@ Organization Admin does not automatically receive access to sensitive request co
 10. Officer requests correction where needed.
 11. Applicant corrects and resubmits.
 12. Student Records creates Finance referral.
-13. Finance accepts and completes verification.
+13. Finance accepts and records verification.
 14. Finance returns `CLEAR`, `HOLD`, or `CANNOT_VERIFY`.
 15. If `HOLD`, applicant receives clear action.
-16. Records completes work when prerequisites are met.
-17. Request moves to Registrar approval.
-18. Registrar approves or rejects.
-19. FAIDIA records or stores the controlled outcome.
-20. Applicant is notified.
-21. Applicant downloads or collects outcome.
-22. Request is completed and audit history remains available.
+16. If `CANNOT_VERIFY`, Records clarifies and resubmits the Finance referral or requests applicant action.
+17. Records completes work when prerequisites are met.
+18. Request moves to Registrar approval.
+19. Registrar approves, rejects, or returns for clarification.
+20. FAIDIA records or stores the controlled outcome.
+21. Applicant is notified.
+22. Applicant downloads or collects outcome.
+23. Request is completed and audit history remains available.
 
 Transfer is postponed from the Stage 1 main path.
 
@@ -291,7 +294,9 @@ V1 is functionally successful when:
 - Student Records can create Finance referral;
 - Finance can accept and complete verification;
 - HOLD returns applicant to clear action;
+- CANNOT_VERIFY returns to Records clarification without allowing approval;
 - Registrar can approve or reject;
+- Registrar can return a request for clarification;
 - FAIDIA stores or records the controlled outcome;
 - applicant can access outcome;
 - request completes at recorded download/collection/closure;
