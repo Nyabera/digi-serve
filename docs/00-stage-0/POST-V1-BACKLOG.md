@@ -1,139 +1,117 @@
 # FAIDIA Stage 0 — Post-V1 Backlog
 
-Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This backlog preserves useful ideas without allowing them to interrupt V1. Items are not promises and have no fixed release date. Promote an item only after pilot evidence shows a real problem, buyer demand, or operational need.
+This file records features intentionally outside the complete V1 release.
 
-## 2. Promotion Rule
+`LATER_V1` items are not post-V1 backlog items. They remain controlled by `PAGE-INVENTORY.md`.
 
-A backlog item becomes V1 scope only after:
+## 2. Promotion rule
 
-1. real evidence is linked;
-2. the user and problem are clear;
-3. affected source-of-truth docs are identified;
-4. acceptance criteria are written;
-5. security/data impact is assessed;
-6. dependencies are identified;
-7. displaced work is named;
-8. product-owner approval is recorded.
+A backlog item may enter an active release only after:
 
-## 3. P1 Candidates After V1 Validation
+1. validated customer need;
+2. written scope and acceptance criteria;
+3. data-model impact review;
+4. permission/status/workflow review;
+5. page classification update;
+6. source-of-truth update;
+7. explicit product-owner approval.
 
-### WF-001 — Conditional Workflow Rules
+## 3. Priority candidates after V1 validation
 
-Problem: different request conditions need different paths.
+### WF-001 — Conditional workflow rules
 
-Evidence required: repeated manual branching in pilots.
+- limited condition types;
+- explicit validation;
+- no arbitrary code.
 
-Dependencies: stable workflow model, indexed fields, versioned conditions.
+### WF-002 — Parallel work items
 
-### WF-002 — Parallel Work Items
+- dependency model;
+- join behavior;
+- timeout and cancellation rules.
 
-Problem: multiple departments may be able to work at once.
+### DOC-001 — Public QR/token verification
 
-Evidence required: a validated service suffers delay from forced sequence.
+- controlled token;
+- revocation;
+- rate limiting;
+- privacy-safe output.
 
-Dependencies: dependency groups and completion rules.
+### DOC-002 — Malware scanning and quarantine
 
-### DOC-001 — Public QR / Token Verification
-
-Problem: issued-document trust may require public verification.
-
-Evidence required: pilot or buyer demand for external document validation.
-
-Dependencies: issued documents, opaque tokens, revocation, rate limiting.
-
-### DOC-002 — Malware Scanning And Quarantine
-
-Problem: sensitive production file uploads require scanning.
-
-Evidence required: production hardening requirement.
-
-Dependencies: scanner, quarantine state, retry, and admin review process.
+- upload quarantine;
+- scan result;
+- controlled release;
+- incident handling.
 
 ### PAY-001 — M-PESA STK Push
 
-Problem: manual payment reference may fail in live pilot.
+- provider integration;
+- idempotent callbacks;
+- reconciliation;
+- tenant configuration.
 
-Evidence required: payment is central and manual reference materially fails.
+### PAY-002 — PayBill reconciliation
 
-Dependencies: provider interface, idempotent webhook, reconciliation, support process.
+- payment matching;
+- exception queue;
+- audit trail.
 
-### PAY-002 — PayBill Reconciliation
+### ENT-001 — Bulk imports
 
-Problem: institution uses PayBill and allocation is painful.
+- schema validation;
+- dry run;
+- tenant-safe import;
+- rollback/error report.
 
-Evidence required: real PayBill workflow in pilot.
+## 4. Expansion items
 
-Dependencies: payment provider records and reconciliation logic.
-
-### ENT-001 — Bulk Imports
-
-Problem: pilot setup cannot be handled efficiently through individual entry.
-
-Evidence required: setup burden blocks pilot.
-
-Dependencies: import validation, rollback, error reporting.
-
-## 4. P2 Expansion Items
-
-- visual workflow builder;
-- visual form builder;
-- advanced conditional form sections;
-- repeating groups;
-- advanced eligibility engine;
-- multi-level escalation;
-- electronic signatures;
-- editable notification templates;
-- formal correspondence;
-- configurable report builder;
-- scheduled reports;
-- applicant-experience analytics;
-- compliance/access reports;
-- institution-system integration;
-- service-template library.
-
-## 5. P3 Enterprise Items
-
-- rules-based routing recommendations;
-- capacity-based assignment;
-- advanced permission editor;
-- enterprise SSO;
-- Stripe;
-- executive dashboards;
-- compliance reporting suite;
-- partner implementation tools.
-
-## 6. P4 Strategic Or Speculative Items
-
-- AI routing;
-- cross-organization handoffs;
-- public developer marketplace;
-- omnichannel inbox;
-- data warehouse;
-- native applicant app;
-- native officer app;
-- offline workflows;
-- dedicated deployment;
-- full public API.
-
-## 7. Items Explicitly Postponed From Stage 1
-
-- transfer as required Transcript Request path;
-- standalone applicant payments page;
-- standalone admin payment configuration;
-- public document verification;
-- admin permission editor;
-- visual builders;
-- advanced workload;
+- advanced SLA calendars;
 - escalation ladders;
-- custom report builder.
+- capacity-based assignment;
+- automatic routing;
+- reusable workflow subprocesses;
+- cross-organization handoffs;
+- advanced executive dashboards;
+- data warehouse;
+- custom reports;
+- WhatsApp/SMS;
+- OCR;
+- AI routing;
+- AI document analysis;
+- public API platform;
+- native mobile applications.
 
-## 8. Coding-Agent Instruction
+## 5. Enterprise items
 
-A backlog item is not approved scope. Do not implement it merely because it appears here.
+- enterprise SSO;
+- SCIM/directory sync;
+- dedicated tenant deployment;
+- advanced retention/legal hold;
+- fine-grained custom permissions;
+- support access controls;
+- regional data residency.
+
+## 6. Explicitly postponed from V1
+
+- transfer routes;
+- visual form/workflow/homepage builders;
+- permission editor;
+- template marketplace;
+- integration marketplace;
+- public document verification;
+- custom report builder;
+- cross-organization workflows;
+- native apps;
+- full API platform.
+
+## 7. Coding-agent instruction
+
+Backlog presence is not implementation authorization. Do not create schema, routes, flags, or placeholders for these items during Stage 1.

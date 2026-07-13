@@ -1,134 +1,131 @@
 # FAIDIA Stage 0 — Current Transcript Request Process
 
-Status: **APPROVED_FOR_V1_WITH_PILOT_VALIDATION_REQUIRED**  
-Version: **1.0**  
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document records the likely current-state or as-is Transcript Request process before FAIDIA. It identifies actors, tools, handoffs, delays, missing records, and communication outside formal systems.
+This document records the assumed current-state Transcript Request process before FAIDIA. It identifies actors, tools, handoffs, delays, missing records, and communication outside formal systems.
 
-Approved Stage 0 decision: FAIDIA may proceed to Stage 1 using these documented assumptions for a synthetic demo. These assumptions must be validated before an external real-data pilot.
+Stage 1 may use these assumptions for a synthetic demo. They must be validated before an external real-data pilot.
 
-## 2. Current-State Validation Position
+## 2. Validation position
 
-Decision: **Proceed with documented assumptions for demo; validate before real pilot.**
+Decision: **Proceed with documented assumptions for the synthetic Stage 1 demo; validate before external pilot.**
 
-Consequences:
+Stage 1 must not hard-code institution-specific facts beyond the approved Savannah defaults.
 
-- Stage 1 implementation is not blocked by missing current-process interviews.
-- Real pilot onboarding must validate the process areas listed below.
-- Coding agents must not hard-code unconfirmed institution-specific process details beyond approved V1 defaults.
+## 3. Generic current-state summary
 
-## 3. Generic Current-State Summary
+A typical process may involve:
 
-A typical Transcript Request process may involve:
-
-1. applicant learns about the service through word of mouth, notice, website, or physical office;
-2. applicant submits paper form, email, WhatsApp message, or verbal request;
+1. applicant learns about the service through word of mouth, notices, website, or a physical office;
+2. applicant submits a paper form, email, WhatsApp message, or verbal request;
 3. Student Records manually records or forwards the request;
 4. staff check identity and academic details in another system, paper file, or spreadsheet;
 5. Finance is contacted through call, email, WhatsApp, paper note, or in-person follow-up;
-6. Registrar approval is requested through moved file, email, or signature process;
+6. Registrar approval is requested through a moved file, email, or signature process;
 7. applicant repeatedly contacts staff for updates;
-8. final transcript, notice, or collection instruction is delivered manually;
+8. final transcript or collection instruction is delivered manually;
 9. stage duration, ownership, and handoff delay are poorly measured.
 
-## 4. Current Actors
+## 4. Current actors
 
 | Actor | Typical responsibility | Typical tools | Main risk |
 |---|---|---|---|
 | Applicant | Start request, provide information, follow up, collect outcome | Walk-in, paper, phone, email, WhatsApp | Repeated visits and unclear status |
 | Front desk | Explain requirements and direct applicant | Verbal instructions, printed checklist | Inconsistent guidance |
 | Student Records officer | Receive, review, coordinate | Paper file, email, spreadsheet, student system | Lost requests and unclear ownership |
-| Finance officer | Confirm hold, fee, balance, payment reference, or clearance | Finance system, spreadsheet, email, call, WhatsApp | Informal confirmation |
-| Registrar / approver | Review and authorize final result | Paper file, email, signature | Approval delay and weak tracking |
+| Finance officer | Confirm hold, fee, balance, or payment reference | Finance system, spreadsheet, email, call | Informal confirmation |
+| Registrar | Review and authorize | Paper file, email, signature | Approval delay and weak tracking |
 | Supervisor | Allocate work and resolve delay | Meetings, spreadsheet, phone | No reliable backlog view |
-| Support staff | Answer status enquiries | Phone, email, counter | Time spent finding updates |
+| Support staff | Answer enquiries | Phone, email, counter | Time spent reconstructing status |
 
-## 5. Validated V1 Assumptions For Stage 1 Demo
+## 5. Approved Stage 1 assumptions
 
-These are approved for Stage 1 demo implementation:
-
-- Student Records is the coordinating department.
+- Student Records coordinates the parent request.
 - Finance performs a structured referral check.
 - Finance result codes are `CLEAR`, `HOLD`, and `CANNOT_VERIFY`.
-- Manual payment reference may be captured in the request.
+- Manual payment reference is required for the Savannah demo.
 - Registrar approval is required for every Transcript Request.
-- Applicant identity uses ID/passport required and student ID conditional.
-- Outcome is controlled notice plus demo transcript, not legally asserted official transcript generation.
-- Completion occurs at recorded download, collection, delivery, or approved closure.
+- ID/passport is required; student ID is conditional.
+- Outcome is a controlled notice plus demo transcript.
+- Completion is recorded only after controlled download, physical collection, or exceptional Supervisor manual closure.
+- Transfer is not part of the Stage 1 path.
 
-## 6. Process Areas To Validate Before Real Pilot
+## 6. Process areas to validate before external pilot
 
-| Process area | Status | Owner to confirm | Evidence | Stage 1 position |
-|---|---|---|---|---|
-| Submission channel | Must validate before real pilot | Service owner | Interview/form | Use digital request flow in demo |
-| Required fields | Must validate before real pilot | Student Records | Blank form | Use approved V1 form baseline |
-| Documents | Must validate before real pilot | Student Records | Checklist | ID/passport required; student ID conditional |
-| Fee | Must validate before real pilot | Finance | Fee schedule | Manual payment reference in demo |
-| Finance check | Must validate before real pilot | Finance | Example request/result | Finance hold blocking issuance |
-| Approval authority | Must validate before real pilot | Registrar | SOP/interview | Registrar approval required |
-| Outcome type | Must validate before real pilot | Records/Registrar | Sample output | Controlled notice plus demo transcript |
-| Processing target | Must validate before real pilot | Service owner | Published target | Five working days as demo target |
-| Notification channel | Must validate before real pilot | Service owner | Current template | In-app required; email before external pilot |
-| Closure condition | Must validate before real pilot | Student Records | Register/SOP | Download/collection/delivery/closure record |
+| Process area | Owner to confirm | Evidence | Stage 1 assumption |
+|---|---|---|---|
+| Submission channel | Service owner | Interview/form | Digital service flow |
+| Required fields | Student Records | Blank form | Seeded V1 form |
+| Documents | Student Records | Checklist | ID/passport required |
+| Fee | Finance | Fee schedule | Manual reference required |
+| Finance check | Finance | Example result | Hold blocks issuance |
+| Approval authority | Registrar | SOP/interview | Registrar approval required |
+| Outcome type | Records/Registrar | Sample output | Controlled notice plus exact stored copy |
+| Processing target | Service owner | Published target | Five working days |
+| Notification channel | Service owner | Template | In-app; email before pilot |
+| Collection evidence | Student Records | Register/SOP | Collector, identifier, date/time, outcome reference |
+| Manual closure authority | Service owner | SOP | Supervisor only, reason/evidence required |
+| Reopening authority | Service owner | SOP | Supervisor only, reason required |
 
-## 7. Pain Inventory And FAIDIA Response
+## 7. Pain inventory and FAIDIA response
 
-| Pain | Operational effect | Intended FAIDIA response |
+| Pain | Operational effect | FAIDIA response |
 |---|---|---|
-| No unique reference | Difficult lookup and duplicates | Generated request reference and duplicate active request control |
-| Unclear owner | Requests stall | Work items, assignment, department queue, self-claim |
+| No unique reference | Difficult lookup and duplicates | Generated request reference and duplicate control |
+| Unclear owner | Requests stall | Work items, assignment, department queue |
 | Vague handoff | Rework and clarification | Structured Finance referral |
-| Missing documents | Repeated visits | Requirements, document states, correction action |
-| No tracking | Status enquiries | Public status and applicant-safe timeline |
-| Missing timestamps | Bottlenecks invisible | Request/work-item/handoff timestamps |
-| Informal approval | Weak auditability | Registrar decision record and audit event |
-| Disconnected outcome | Broken end-to-end record | Issued outcome link and checksum where available |
-| Spreadsheet reports | Conflicting totals | Database reports from timestamps/events |
-| External coordination | No audit trail | Handoffs, notes, messages, notifications, events |
+| Missing documents | Repeated visits | Requirements, review states, correction action |
+| No tracking | Status enquiries | Applicant-safe status and timeline |
+| Missing timestamps | Bottlenecks invisible | Request, work-item, handoff, and outcome timestamps |
+| Informal approval | Weak auditability | Registrar decision and audit event |
+| Disconnected outcome | Broken record | Exact issued copy/outcome link and checksum |
+| Spreadsheet reports | Conflicting totals | Reports from database timestamps/events |
+| External coordination | No audit trail | Handoffs, messages, notes, notifications, events |
 
-## 8. Current Artifacts To Request Before Real Pilot
+## 8. Artifacts to request before external pilot
 
-Where permitted, request blank or redacted examples of:
+Request blank or redacted examples of:
 
 - service description;
 - application form;
 - requirements checklist;
 - fee schedule;
-- spreadsheet/register columns;
 - correction message;
 - Finance verification request/result;
 - approval note;
 - rejection reasons;
 - request receipt;
-- collection or dispatch notice;
+- collection notice and collection register;
+- manual closure SOP;
+- reopening SOP;
 - supervisor report;
-- written turnaround target;
+- processing target;
 - current SOP.
 
 Do not request sensitive student records merely to design V1.
 
-## 9. Baseline Measurements Before Pilot
+## 9. Baseline measurements
 
-Estimate or measure:
+Measure or estimate:
 
 - monthly request volume;
 - end-to-end completion time;
 - time to first action;
 - correction rate;
 - applicant follow-ups per request;
-- departments per request;
-- percentage consistently logged;
-- lost or duplicated requests;
 - Finance response time;
 - approval waiting time;
-- outcome delivery rate;
-- staff time updating spreadsheets;
-- staff time answering status enquiries.
+- outcome access/collection rate;
+- reopened request rate;
+- manual closure rate;
+- overdue rate;
+- staff time spent on spreadsheets and status enquiries.
 
-## 10. Coding-Agent Instruction
+## 10. Coding-agent instruction
 
-Use this file as context for the problem and pilot validation. Use `V1-VERTICAL-SLICE.md` for the approved future workflow.
+Use this file for current-state assumptions only. Use `V1-VERTICAL-SLICE.md` for future-state behavior. Do not implement unvalidated institution-specific rules as generic platform behavior.

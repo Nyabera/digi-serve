@@ -1,226 +1,150 @@
-# FAIDIA Stage 0 — V1 Non-Goals
+# FAIDIA Stage 0 — V1 And Stage 1 Non-Goals
 
-Status: **APPROVED_FOR_V1**  
-Version: **1.0**  
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document prevents V1 from expanding into the complete future FAIDIA platform. A non-goal is not deleted forever; it is intentionally excluded because it is not required to validate the first end-to-end institutional workflow.
+This document prevents the first vertical slice from expanding into the full future platform.
 
-## 2. Scope Principle
+## 2. Stage 1 principle
 
-Build narrow and end-to-end, not broad and shallow.
+Stage 1 proves one complete Transcript Request journey. It does not prove every V1 page, every service, or every configuration capability.
 
-A feature is not part of V1 merely because:
+A useful feature is still excluded when it is not required by the approved acceptance scenario.
 
-- a mockup exists;
-- a competitor has it;
-- it sounds enterprise-ready;
-- the architecture may support it later;
-- it makes the demo look larger;
-- an AI coding agent can generate a rough version quickly.
+## 3. Stage 1 non-goals
 
-## 3. Approved Stage 1 Exclusions
+Stage 1 does not require:
 
-The following are not active Stage 1 scope:
+- all `LATER_V1` pages;
+- complete organization onboarding;
+- complete department/user/membership administration;
+- full applicant account management;
+- dedicated saved-draft management;
+- full supervisor assignment/reporting suite;
+- standalone work-item details;
+- standalone audit activity;
+- standalone payment workspace;
+- complete service template management;
+- arbitrary form-field creation;
+- arbitrary document-rule creation;
+- arbitrary workflow editing;
+- workflow migration;
+- automatic draft migration;
+- custom roles;
+- custom permission editor;
+- advanced feature-flag management;
+- organization-wide custom reports.
 
-- transfer route in the main Transcript Request path;
-- standalone applicant payment workspace;
-- standalone admin payment configuration;
-- live M-PESA;
-- PayBill reconciliation;
-- Stripe;
-- refunds;
-- fee waivers;
-- public document verification;
-- visual workflow builder;
-- visual form builder;
-- homepage block builder;
-- template marketplace;
-- integration marketplace;
-- custom report builder;
-- AI routing;
-- AI document analysis;
-- OCR;
-- capacity-based assignment;
-- automatic round-robin;
+## 4. Workflow/routing non-goals
+
+- transfer;
 - cross-organization handoffs;
-- enterprise SSO;
-- native mobile apps;
-- offline officer workflows;
-- microservices;
-- GraphQL as primary API;
-- Kubernetes;
-- Kafka;
-- Camunda;
-- Temporal.
-
-## 4. Workflow And Routing Non-Goals
-
-Excluded:
-
-- advanced visual workflow builder;
-- BPMN compatibility;
-- arbitrary workflow scripting;
-- unrestricted conditional branching;
-- transfer as required Stage 1 path;
+- parallel branches;
+- nested branches;
+- arbitrary conditions;
+- scripts;
+- BPMN;
+- reusable subprocesses;
 - automatic routing;
-- automatic workload balancing;
-- automatic round-robin as core dependency;
+- workload balancing;
 - multi-level escalation ladders;
-- cross-organization handoffs.
+- advanced SLA calendars.
 
-V1 alternative:
-
-- versioned workflow records;
-- controlled configuration;
-- sequential Transcript Request path;
-- Finance referral only in main path;
-- manual assignment and department self-claim;
-- due dates and overdue visibility.
-
-## 5. Forms And Public Pages Non-Goals
-
-Excluded:
+## 5. Form/public-page non-goals
 
 - drag-and-drop form builder;
-- unrestricted conditional logic;
-- custom scripts;
+- arbitrary field types;
+- arbitrary conditional logic;
 - homepage block builder;
-- template marketplace.
+- template marketplace;
+- developer marketplace;
+- arbitrary public themes;
+- multilingual content editor.
 
-V1 alternative:
+## 6. Permission/enterprise non-goals
 
-- supported field types;
-- versioned form schemas;
-- fixed institution service portal structure;
-- controlled form configuration.
-
-## 6. Permission And Enterprise Non-Goals
-
-Excluded:
-
-- arbitrary custom roles;
-- field-level permission builder;
-- visual permission matrix;
-- delegated policy administration;
-- SAML;
-- custom identity providers;
+- custom roles;
+- visual permission editor;
+- enterprise SSO;
 - directory synchronization;
-- full public API platform.
+- cross-organization operational access;
+- Organization Admin access to sensitive requests by default;
+- support impersonation;
+- unrestricted Platform Admin data access.
 
-V1 alternative:
+## 7. Communication non-goals
 
-- fixed roles;
-- permission keys and scopes;
-- email/password;
-- verification, reset, and staff invitations;
-- server-side authorization helpers.
-
-## 7. Communication Non-Goals
-
-Excluded:
-
-- WhatsApp integration;
-- SMS integration;
+- WhatsApp;
+- SMS;
+- live chat;
 - omnichannel inbox;
-- call-center integration;
-- unrestricted notification template builder.
+- advanced correspondence templates;
+- external email delivery for the internal Stage 1 demo.
 
-V1 alternative:
+Email is required before an external pilot.
 
-- in-app notifications required;
-- email optional for internal demo and required before external pilot;
-- applicant messages;
-- internal notes;
-- structured handoff instructions.
-
-## 8. Document-Intelligence Non-Goals
-
-Excluded:
+## 8. Document-intelligence non-goals
 
 - OCR;
+- AI extraction;
 - AI document analysis;
-- automatic classification;
-- fraud scoring;
-- biometric checks;
-- advanced e-signatures;
-- blockchain verification;
-- advanced retention/legal holds.
+- automatic authenticity determination;
+- biometric verification;
+- public QR/token verification;
+- document marketplace.
 
-V1 alternative:
+## 9. Payment non-goals
 
-- real private uploads;
-- metadata;
-- type/size validation;
-- signed downloads;
-- manual review;
-- exact issued-document storage.
-
-Malware scanning should be added before sensitive production use at scale.
-
-## 9. Payment Non-Goals
-
-V1 approved payment posture: manual payment reference inside the request flow.
-
-Excluded unless future scope changes:
-
-- live M-PESA STK Push;
-- PayBill reconciliation automation;
-- Stripe;
+- M-PESA STK Push;
+- PayBill reconciliation;
+- cards;
 - multiple providers;
 - refunds;
-- partial payments;
-- overpayment allocation;
-- fee-waiver workflow;
-- subscription billing.
+- fee waivers;
+- payment plans;
+- financial ledger;
+- standalone applicant/admin payment modules.
 
-## 10. Reporting Non-Goals
+Stage 1 records the configured manual payment reference inside the request.
 
-Excluded:
+## 10. Reporting non-goals
 
-- unrestricted custom report builder;
-- arbitrary SQL reporting;
-- advanced executive dashboard suite;
+- custom report builder;
 - data warehouse;
 - predictive analytics;
-- officer league tables;
-- scheduled report builder.
+- officer ranking;
+- arbitrary exports;
+- executive BI suite;
+- cross-organization benchmarks.
 
-V1 alternative:
+Stage 1 reporting is limited to real workflow timestamps, stage duration, backlog, handoff time, correction time, approval time, completion method, reopen count, and overdue state.
 
-- operational metrics;
-- officer, department, organization, and handoff reports;
-- product-validation events;
-- server-generated aggregate queries.
+## 11. Design non-goals
 
-## 11. Design Non-Goals
+- final pixel-perfect design freeze;
+- custom animation system;
+- native mobile apps;
+- complete dark mode;
+- every old mockup;
+- placeholders for postponed routes;
+- pixel-copying inconsistent references.
 
-Stage 0 does not finalize:
+## 12. Enforcement test
 
-- every missing screen;
-- exact spacing/dimensions;
-- every responsive detail;
-- advanced motion;
-- multiple visual themes;
-- full white-label website freedom.
+Before adding work, ask:
 
-The current visual direction is approved, and missing screens may be designed during implementation.
+1. Is it `STAGE_1_REQUIRED`?
+2. Is it required by the acceptance scenario?
+3. Is it supported by the exact permission/status/workflow documents?
+4. Does it avoid creating a new database or route commitment?
+5. Is it absent from this non-goal list?
 
-## 12. Enforcement Test
+If any answer is no, stop and update the documents before implementation.
 
-When a new feature is proposed, ask:
+## 13. Coding-agent instruction
 
-1. Is it required for the Transcript Request vertical slice?
-2. Is it required for pilot safety?
-3. Is it required to measure the core assumption?
-4. What existing V1 work will it replace?
-5. What evidence proves it must be built now?
-
-If the case is weak, move it to `POST-V1-BACKLOG.md`.
-
-## 13. Coding-Agent Instruction
-
-Do not implement, activate navigation for, or simulate completion of a non-goal unless product scope explicitly changes.
+Do not build excluded capabilities as “small extras.” Keep `LATER_V1`, `DEMO_ONLY`, and `POSTPONED` out of Stage 1 unless explicitly promoted.

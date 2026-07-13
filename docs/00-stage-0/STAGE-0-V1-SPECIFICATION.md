@@ -1,99 +1,108 @@
 # FAIDIA Stage 0 — V1 Product Specification
 
-Status: **APPROVED_FOR_V1**  
-Version: **1.1**
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-FAIDIA V1 proves that one formal institutional service request can move from applicant submission through officer review, departmental collaboration, approval, controlled outcome issuance, applicant tracking, audit history, notifications, and reporting inside one traceable system.
+FAIDIA V1 proves that one formal institutional service request can move from applicant submission through review, correction, departmental referral, approval, controlled outcome issuance, applicant tracking, audit history, notifications, and operational reporting in one traceable system.
 
-The V1 build is narrow and end-to-end. It is not a visual-only prototype and it is not the full future FAIDIA platform.
+Stage 1 is the first complete Transcript Request vertical slice. Stage 1 is not the entire V1 platform.
 
-## 2. Approved Product Definition
+## 2. Product definition
 
 Product category: **Service Operations Platform**.
 
-Positioning: **FAIDIA is the workflow and verification layer for institutional services.**
+Positioning: **FAIDIA is the workflow, coordination, tracking, and verification layer for institutional services.**
 
-Core assumption: institutions will adopt FAIDIA because their current mix of paper, walk-ins, spreadsheets, email, calls, and WhatsApp does not provide one continuous request record, clear ownership, structured handoffs, reliable applicant tracking, or management visibility.
+Validation question: can one institution process one formal service request end-to-end in FAIDIA with clearer ownership, fewer external follow-ups, structured departmental collaboration, and better management visibility than its current process?
 
-Central validation question: can a real institution process one formal service request end-to-end in FAIDIA with less external coordination, clearer ownership, and better visibility than its current process?
-
-## 3. Approved First Market Scenario
+## 3. First market scenario
 
 Target institution type: **Kenyan TVET, technical college, or small private college**.
 
 Demo organization: **Savannah Technical College**.
 
-Demo departments:
+Departments:
 
 1. **Student Records** — originating and coordinating department.
 2. **Finance** — receiving department for hold/payment-reference verification.
 3. **Registrar** — final approval and outcome authorization.
 
-Demo data must be synthetic or non-sensitive.
+Use synthetic or non-sensitive data for Stage 1.
 
-## 4. Approved V1 Service Scope
+## 4. Service scope
 
-Fully functional V1 service: **Transcript Request**.
+Fully functional Stage 1 service: **Transcript Request**.
 
 Controlled demonstration services:
 
-1. **Student Clearance Request**.
-2. **Certificate Replacement Request**.
+- Student Clearance Request.
+- Certificate Replacement Request.
 
-Only Transcript Request must work end-to-end for Stage 1. The two demonstration services prove configuration direction but may use simpler workflows.
+The two demonstration services may use seeded read-only or simplified behavior. They are not dependencies of the Stage 1 acceptance scenario.
 
-## 5. Transcript Request Definition
+## 5. Stage boundary
 
-The applicant requests an academic transcript or controlled transcript-related outcome. The institution reviews applicant identity, academic record information, and Finance status before approval and outcome issuance.
+`STAGE_1_REQUIRED` pages and capabilities must be complete before Stage 1 approval.
 
-Approved eligibility baseline:
+`LATER_V1` pages and capabilities are part of the complete V1 release but are not required for Stage 1.
+
+The authoritative classifications are in `PAGE-INVENTORY.md`.
+
+## 6. Transcript Request definition
+
+The applicant requests an academic transcript or transcript-related controlled outcome.
+
+Eligibility baseline:
 
 - applicant is a current or former student;
-- applicant provides admission or student number;
-- institution can locate the academic record;
-- applicant accepts the accuracy declaration;
-- Finance hold may block issuance even when submission is allowed;
-- third-party requests are postponed unless a pilot explicitly requires them.
+- applicant supplies an admission or student number;
+- the institution can locate the academic record;
+- the applicant accepts the accuracy declaration;
+- a Finance hold may block issuance even when submission is allowed;
+- third-party requests are postponed.
 
-## 6. Approved Form Data
+## 7. Seeded Stage 1 form
 
-Applicant information:
+The Stage 1 schema is seeded. Organization Admin may edit labels and help text, but may not add, remove, reorder, branch, or script fields.
+
+Supported seeded field types:
+
+- `SHORT_TEXT`
+- `EMAIL`
+- `PHONE`
+- `SELECT`
+- `YEAR`
+- `TEXTAREA`
+- `CHECKBOX`
+- `DECLARATION`
+
+Applicant fields:
 
 - full legal name;
 - email;
 - phone number;
 - admission or student number;
 - national ID or passport number;
-- former name where relevant.
-
-Academic information:
-
+- former name where relevant;
 - programme;
 - department or school;
 - campus where relevant;
 - year of admission;
 - year of completion or graduation;
-- study mode where relevant.
-
-Request information:
-
+- study mode where relevant;
 - transcript purpose;
-- one copy only for Stage 1;
+- one copy only;
 - delivery method: controlled download or physical collection;
 - recipient details where relevant;
 - manual payment reference;
-- additional notes.
+- additional notes;
+- accuracy declaration and required acknowledgement.
 
-Confirmation:
-
-- accuracy declaration;
-- consent or acknowledgement required by the institution.
-
-## 7. Approved Documents
+## 8. Seeded document requirements
 
 Required:
 
@@ -101,59 +110,152 @@ Required:
 
 Conditional:
 
-- student ID or equivalent institutional identifier where available;
-- payment receipt or reference evidence where required;
-- name-change evidence;
-- authorization letter where future policy requires it.
+- student ID or institutional identifier where available;
+- payment-reference evidence where policy requires it;
+- name-change evidence.
 
-Applicant-supplied documents use status `ACCEPTED`, not `APPROVED`, when they satisfy requirements.
+Stage 1 does not include arbitrary conditional-rule construction. Conditions are seeded and evaluated by approved application logic.
 
-## 8. Approved Fee Model
+Applicant-supplied documents use `ACCEPTED` when they satisfy a requirement.
 
-V1 supports a **conditional manual payment reference** controlled by service configuration. For the Savannah Technical College Transcript Request demo, manual payment reference is enabled and required. Payment remains inside the request form/review flow.
+## 9. Fee and Finance model
 
-V1 does not require:
+The generic V1 service model supports a conditional manual payment reference.
 
-- standalone applicant payment workspace;
-- standalone admin payment configuration;
-- live M-PESA;
-- PayBill reconciliation;
-- refunds;
-- fee-waiver workflow.
+For the Savannah Transcript Request demo:
 
-## 9. Approved Finance Verification
+- manual payment reference is enabled;
+- manual payment reference is required;
+- payment remains inside the request form/review flow;
+- no standalone payment page is required.
 
-Finance verifies whether the applicant has a hold that blocks transcript issuance. Where a manual payment reference is provided, Finance may use it as supporting evidence.
+Finance verifies whether a hold blocks transcript issuance.
 
-Required Finance result codes:
+Result codes:
 
 - `CLEAR`
 - `HOLD`
 - `CANNOT_VERIFY`
 
-If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible explanation or next step. It is not automatically rejected.
+`HOLD` returns the request to applicant action. `CANNOT_VERIFY` returns the referral for clarification and prevents approval until resolved.
 
-If Finance returns `CANNOT_VERIFY`, the handoff becomes `RETURNED_FOR_CLARIFICATION`, the Finance work item becomes `RETURNED`, and the parent request returns to `IN_REVIEW` under Student Records ownership. Student Records may clarify and resubmit the handoff, or request applicant action before resubmission. The request cannot proceed to approval while mandatory Finance verification remains unresolved.
+## 10. Seeded Stage 1 workflow
 
-## 10. Approved Outcome And Completion
+The workflow step order is fixed:
 
-V1 outcome: **Completion / Collection / Dispatch Notice**, with a controlled sample transcript PDF in demo mode.
+1. Applicant submission.
+2. Student Records review.
+3. Applicant correction when required.
+4. Finance referral and result.
+5. Student Records completion.
+6. Registrar approval, rejection, or return for clarification.
+7. Controlled outcome preparation and issue.
+8. Recorded download, collection, or exceptional manual closure.
 
-The institution or its current process creates the official transcript. FAIDIA stores the exact issued copy or controlled issued outcome.
+Transfer, parallel branches, arbitrary conditions, scripts, and visual workflow editing are excluded from Stage 1.
 
-Request lifecycle meaning:
+## 11. Stage 1 configuration model
 
-- `APPROVED`: decision recorded;
-- `OUTCOME_FAILED`: outcome preparation failed and requires authorized retry or controlled closure;
-- `OUTCOME_READY`: controlled outcome available;
-- `COMPLETED`: recorded download, collection, delivery, or approved institutional closure rule;
-- `EXPIRED`: draft or applicant-waiting request passed its configured expiry deadline.
+Stage 1 uses a seeded Transcript Request template with limited safe editing.
 
-FAIDIA must not claim to generate a legally valid transcript unless the institution provides official data, template, signing method, approval process, and legal authority.
+Organization Admin may edit:
 
-## 11. Approved Roles
+- organization name;
+- logo;
+- primary brand color;
+- service display name;
+- public description;
+- eligibility and requirement explanatory text;
+- processing target;
+- active/inactive state;
+- manual payment-reference enabled/required flags;
+- labels and help text for existing fields and document requirements.
 
-V1 roles:
+Organization Admin may not edit:
+
+- field types;
+- field order;
+- seeded validation rules;
+- workflow step order;
+- Finance result schema;
+- approval requirement;
+- internal statuses;
+- applicant status mappings;
+- permission bundles;
+- completion or reopening rules.
+
+## 12. Versioning rules
+
+- Published service, form, requirement, and workflow versions are immutable.
+- A change to published configuration creates a new draft version.
+- Publication is atomic and creates a new version number and timestamp.
+- Only users with the relevant publish permission may publish.
+- New requests use the latest published version.
+- Drafts and submitted requests store exact version IDs.
+- Submitted requests never migrate automatically.
+- Drafts remain pinned to the creation version.
+- A draft pinned to a retired version becomes read-only and must be restarted.
+- No Stage 1 migration engine is required.
+
+## 13. Outcome and completion
+
+V1 outcome:
+
+- Completion / Collection / Dispatch Notice;
+- controlled sample transcript PDF in demo mode;
+- exact issued copy when the institution provides it.
+
+The institution or its existing process creates the official transcript. FAIDIA stores and controls access to the exact issued copy or controlled outcome.
+
+Supported completion triggers:
+
+1. successful authorized controlled download;
+2. recorded physical collection;
+3. exceptional Supervisor manual closure.
+
+Physical collection requires:
+
+- authorized Student Records officer;
+- collector name;
+- collector identifier or relationship;
+- collection date/time;
+- outcome reference;
+- optional note;
+- `REQUEST_COMPLETED` audit event.
+
+Exceptional manual closure requires:
+
+- `SUPERVISOR` role;
+- `requests.manual_close`;
+- request state `OUTCOME_READY`;
+- mandatory reason code;
+- mandatory explanatory note;
+- supporting evidence reference where applicable;
+- `REQUEST_MANUALLY_CLOSED` and `REQUEST_COMPLETED` events.
+
+There is no generic “delivery” completion trigger in Stage 1.
+
+## 14. Reopening rules
+
+Only a Supervisor with `requests.reopen` may reopen `REJECTED` or `COMPLETED`.
+
+Reopening:
+
+- requires a mandatory reason;
+- creates `REQUEST_REOPENED`;
+- returns the request to `IN_REVIEW`;
+- creates or reactivates a Student Records work item;
+- preserves all previous decisions, outcomes, status history, and audit events;
+- notifies the applicant and coordinating department;
+- does not automatically revoke an issued outcome.
+
+Outcome revocation is a separate explicit action requiring `documents.revoke`.
+
+`CANCELLED` and `EXPIRED` are not reopenable in Stage 1.
+
+## 15. Roles
+
+Top-level V1 roles:
 
 - `APPLICANT`
 - `OFFICER`
@@ -164,166 +266,87 @@ Optional internal support role:
 
 - `PLATFORM_ADMIN`
 
-Registrar approval is required for every Transcript Request in Stage 1. Registrar is implemented as a `SUPERVISOR` membership profile with the membership label **Registrar** and explicit `requests.approve` / `requests.reject` permissions. Do not create a new top-level Registrar role.
+Registrar is a Supervisor membership profile labelled Registrar.
 
-Organization Admin does not automatically receive access to sensitive request content.
+Only the Registrar profile receives:
 
-## 12. Approved Workflow Summary
+- `requests.approve`
+- `requests.reject`
+- `requests.return_for_clarification`
 
-1. Applicant discovers Transcript Request.
-2. Applicant registers or signs in using email.
-3. System creates a draft.
-4. Applicant completes the form.
-5. Applicant uploads documents.
-6. Applicant reviews and submits.
-7. Duplicate active request is blocked unless a supervisor or organization admin with `requests.override_duplicate_active` records an override with a mandatory reason.
-8. Student Records receives the request.
-9. Officer starts review.
-10. Officer requests correction where needed.
-11. Applicant corrects and resubmits.
-12. Student Records creates Finance referral.
-13. Finance accepts and records verification.
-14. Finance returns `CLEAR`, `HOLD`, or `CANNOT_VERIFY`.
-15. If `HOLD`, applicant receives clear action.
-16. If `CANNOT_VERIFY`, Records clarifies and resubmits the Finance referral or requests applicant action.
-17. Records completes work when prerequisites are met.
-18. Request moves to Registrar approval.
-19. Registrar approves, rejects, or returns for clarification.
-20. FAIDIA records or stores the controlled outcome.
-21. Applicant is notified.
-22. Applicant downloads or collects outcome.
-23. Request is completed and audit history remains available.
+Ordinary Officers do not receive those permissions.
 
-Transfer is postponed from the Stage 1 main path.
+Organization Admin has configuration and organization-reporting access only. Organization Admin has no V1 sensitive request, document, applicant-message, or internal-note access.
 
-## 13. Minimum V1 Product Surface
+## 16. Minimum Stage 1 product surface
 
-Public and authentication:
+The Stage 1 product surface is limited to the `STAGE_1_REQUIRED` inventory.
 
-- organization service homepage or catalogue;
-- service details;
-- registration;
-- sign in;
-- email verification;
-- password reset;
-- staff invitation acceptance;
-- organization selection only for staff with multiple memberships.
+It must support:
 
-Applicant:
+- service discovery and service details;
+- applicant registration and sign in;
+- draft, form, documents, review, submission, tracking, correction, messaging, notifications, and outcome access;
+- Student Records queue, request review, correction, Finance referral, and outcome processing;
+- Finance incoming referral acceptance, result recording, and clarification;
+- Registrar approval queue and decision page;
+- supervisor stage-duration dashboard;
+- limited Organization Admin branding and service-metadata configuration;
+- real audit events, status history, timestamps, and permission checks.
 
-- dashboard;
-- browse services;
-- start request;
-- form;
-- document upload;
-- review and submit;
-- confirmation;
-- My Requests;
-- request details and timeline;
-- correction response;
-- messages;
-- notifications;
-- outcome access;
-- account;
-- saved drafts.
+The complete V1 may add `LATER_V1` pages after the vertical slice passes acceptance.
 
-Officer and supervisor:
-
-- dashboard;
-- My Queue;
-- Department Queue;
-- request details;
-- document review;
-- internal notes;
-- applicant messages;
-- correction action;
-- create referral;
-- incoming/outgoing handoffs;
-- handoff details;
-- work-item completion;
-- approval/rejection;
-- department dashboard;
-- unassigned work;
-- assignments;
-- overdue work;
-- approval queue;
-- basic department reporting.
-
-Organization admin:
-
-- admin dashboard;
-- organization details;
-- departments;
-- users and invitations;
-- memberships;
-- services;
-- controlled form configuration;
-- document requirements;
-- controlled workflow configuration;
-- branding;
-- feature flags;
-- basic reports.
-
-Standalone payment pages, transfer routes, visual builders, advanced workload tools, public verification, and custom report builders are not required for Stage 1.
-
-## 14. Pilot Posture
-
-Stage 1 may proceed using documented current-process assumptions and synthetic data. Before external pilot, validate current manual process assumptions with the institution.
-
-Pilot posture:
+## 17. Pilot posture
 
 - synthetic demo first;
-- carefully limited real pilot data later;
+- limited real pilot later;
 - founder plus service-owner support;
 - weekly staff feedback;
 - short applicant feedback;
 - structured issue log.
 
-In-app notifications are required for demo. Email is optional for internal demo and required before external pilot.
+Before external pilot, validate the real fee schedule, Finance process, approval authority, output, closure condition, email delivery, and support ownership.
 
-## 15. Success Criteria
+## 18. Stage 1 success criteria
 
-V1 is functionally successful when:
+Stage 1 passes when:
 
-- organization and departments can be configured;
-- an applicant can register, sign in, and submit a Transcript Request;
-- required documents are captured and manual payment reference is captured where the service requires it;
-- duplicate active requests are controlled;
-- Student Records can review and request correction;
-- applicant can correct and resubmit;
-- Student Records can create Finance referral;
-- Finance can accept and complete verification;
-- HOLD returns applicant to clear action;
-- CANNOT_VERIFY returns to Records clarification without allowing approval;
-- Registrar can approve or reject;
-- Registrar can return a request for clarification;
-- FAIDIA stores or records the controlled outcome;
-- applicant can access outcome;
-- request completes at recorded download/collection/closure;
-- supervisor can see stage durations and backlog;
-- audit history contains the complete sequence;
-- tenant and department permissions hold.
+- the canonical Source of Truth is used;
+- only `STAGE_1_REQUIRED` scope is treated as mandatory;
+- the seeded service configuration is published and versioned;
+- applicant registration/sign-in works;
+- a Transcript Request is submitted with required data/documents;
+- duplicate active request control works;
+- Student Records reviews and requests correction;
+- applicant corrects and resubmits;
+- Finance referral and all three result paths work;
+- approval cannot occur without resolved Finance verification;
+- only Registrar can approve/reject/return for clarification;
+- an outcome is stored or recorded;
+- controlled download or collection completes the request;
+- exceptional manual closure is permission-gated and audited;
+- rejected/completed reopening is permission-gated and audited;
+- applicant sees `Expired` when applicable;
+- supervisor sees stage timing and backlog;
+- tenant, department, ownership, and file isolation tests pass;
+- audit history contains the full sequence.
 
-## 16. Approval Checklist
+## 19. Approval checklist
 
-- [x] Purpose approved.
-- [x] Core assumption approved.
-- [x] Target institution approved.
-- [x] Transcript Request approved.
-- [x] Demo services approved.
-- [x] Demo organization approved.
-- [x] Departments approved.
-- [x] Fee decision resolved.
-- [x] Form and documents approved.
-- [x] Final outcome approved.
-- [x] Roles and permissions approved.
-- [x] Vertical slice approved.
-- [x] Status mappings approved.
-- [x] Page classifications approved.
-- [x] Non-goals approved.
-- [x] Pilot boundary approved.
-- [x] Open decisions do not block Stage 1.
+- [x] Stage 1 defined as the first vertical slice.
+- [x] Complete V1 separated from Stage 1.
+- [x] Configuration model fixed as seeded plus limited editing.
+- [x] Versioning and request pinning defined.
+- [x] Officer approval ambiguity removed.
+- [x] Organization Admin sensitive-content access denied.
+- [x] Completion triggers fixed.
+- [x] Manual closure evidence and permission fixed.
+- [x] Reopening rules fixed.
+- [x] `Expired` public status approved.
+- [x] Page classifications updated.
+- [x] Design asset paths corrected.
+- [x] No blocking Stage 0 decisions remain.
 
-## 17. Coding-Agent Instruction
+## 20. Coding-agent instruction
 
-Implement only the approved step in the current task. Do not invent statuses, roles, workflow steps, pages, permissions, or service rules. Preserve parent ownership during referral, use server-side authorization, and record audit/status history for critical actions.
+Implement only the approved Stage 1 task. Do not infer that `LATER_V1` is required. Do not create new roles, statuses, routes, permissions, configuration depth, workflow branches, or completion methods without first updating the controlling documents.

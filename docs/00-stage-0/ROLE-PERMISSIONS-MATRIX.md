@@ -1,189 +1,111 @@
 # FAIDIA Stage 0 — Roles And Permissions Matrix
 
-Status: **APPROVED_FOR_V1**  
-Version: **1.2**
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document defines fixed V1 roles, permission scopes, and access rules.
+This document defines fixed V1 roles, exact Stage 1 grants, permission scopes, and access boundaries.
 
-Authentication answers: who is this person?
+The exact grant registry in Section 6 is authoritative. Any permission not listed for a role/profile is denied.
 
-Authorization answers:
+## 2. Authorization principles
 
-- Which organization do they belong to?
-- Which department can they access?
-- Which records can they view?
-- Which actions can they perform?
-- What scope applies?
-
-V1 uses fixed role bundles. A visual permission editor is postponed.
-
-## 2. Authorization Principles
-
-Every organization-owned action must validate:
+Every organization-owned action validates:
 
 1. authenticated user;
 2. active organization membership;
 3. active organization context;
-4. required permission;
-5. department scope where relevant;
-6. ownership or assignment where relevant;
-7. server-side authorization;
-8. database/storage policy as defense in depth.
+4. exact permission;
+5. department scope;
+6. ownership, assignment, or handoff scope;
+7. current workflow state;
+8. server-side authorization;
+9. database/storage policy as defense in depth.
 
-Hidden buttons are not security.
+Hidden UI is not authorization.
 
-## 3. Approved Roles
+## 3. Roles and profiles
 
 ### `APPLICANT`
 
-Purpose: submit and track owned requests.
+Scope: `SELF`.
 
-Default scope: `SELF`.
+May use owned services, drafts, requests, messages, notifications, documents, and outcomes.
 
-Can:
-
-- browse active services;
-- register and sign in;
-- create/save drafts;
-- submit requests;
-- upload and replace permitted documents;
-- provide manual payment reference;
-- view owned requests;
-- view applicant-safe timeline/status;
-- respond to corrections and Finance HOLD actions;
-- send applicant-visible messages;
-- receive notifications;
-- access owned issued outcomes;
-- update permitted account fields.
-
-Cannot:
-
-- view another applicant's request;
-- view internal notes;
-- view confidential handoff or Finance details;
-- assign staff;
-- approve/reject;
-- manage organization configuration;
-- view internal reports;
-- download files without authorization.
+Never sees another applicant's data, internal notes, private handoff detail, or confidential Finance detail.
 
 ### `OFFICER`
 
-Purpose: process assigned, claimed, or permitted department work.
+Scope: assigned/claimed work and permitted own-department work.
 
-Default scopes: `ASSIGNED`; optionally `DEPARTMENT`.
+May review, request correction, create/receive referrals, communicate, review documents, complete work items, and process authorized outcomes.
 
-Can:
+An ordinary Officer may not:
 
-- view assigned requests/work items;
-- view unassigned department work if permitted;
-- claim unassigned work in own department if `assignments.claim` is enabled;
-- review form responses;
-- review, accept, or reject documents;
-- add internal notes;
-- send applicant-visible messages;
-- start review;
-- request corrections;
-- create referrals;
-- complete work items;
-- record handoff results when receiving officer;
-- recommend approval/rejection where allowed;
-- view in-scope request/handoff history.
-
-Cannot by default:
-
-- manage users or departments;
-- publish services/workflows;
-- manage branding;
-- view organization-wide reports;
-- force transfers;
-- approve outside explicit permission;
+- approve;
+- reject;
+- return an approval for clarification;
+- reopen a final request;
+- manually close a request;
 - access unrelated departments or organizations;
-- edit audit events.
+- manage configuration.
 
 ### `SUPERVISOR`
 
-Purpose: control department workload, assignment, approvals, and visibility.
+Scope: own department unless an explicit permission states otherwise.
 
-Default scope: `DEPARTMENT`.
+May assign/reassign, monitor, intervene, reopen, and view department reports.
 
-Can:
+A standard Supervisor does not automatically receive approval grants.
 
-- perform permitted officer actions;
-- view department requests/work;
-- assign/reassign;
-- permit or perform department self-claim where configured;
-- view handoffs;
-- monitor overdue work;
-- review blocked/repeatedly returned work;
-- approve/reject authorized requests;
-- return for clarification;
-- view department reports;
-- override selected actions with reason;
-- view permitted department audit information.
+### Registrar profile
 
-Registrar approval is represented by a `SUPERVISOR` membership profile with membership label **Registrar** and explicit `requests.approve` / `requests.reject` permissions. Do not create a new top-level Registrar role.
+Registrar is a `SUPERVISOR` membership profile labelled **Registrar**.
 
-Cannot by default:
+Only this profile receives:
 
-- manage organization-wide configuration;
-- access another organization;
-- edit audit events;
-- access financial/audit reports without separate permission.
+- `requests.approve`
+- `requests.reject`
+- `requests.return_for_clarification`
+
+No separate top-level Registrar role exists.
 
 ### `ORGANIZATION_ADMIN`
 
-Purpose: configure one institution.
+Scope: organization configuration and organization-level aggregate reporting.
 
-Default scope: `ORGANIZATION` for configuration, not unrestricted operational content.
+Organization Admin may manage organization details, departments, memberships, seeded service metadata, publication, branding, and feature flags.
 
-Can:
+Organization Admin has no V1 access to:
 
-- manage organization details;
-- create/edit/deactivate departments;
-- invite staff;
-- manage memberships;
-- assign fixed roles;
-- assign department memberships;
-- activate/deactivate services;
-- configure service metadata;
-- configure forms and document requirements;
-- configure controlled workflow steps;
-- publish new versions;
-- manage basic branding;
-- manage feature flags;
-- view organization reports and permitted metadata.
+- sensitive request content;
+- applicant documents;
+- applicant messages;
+- internal notes;
+- operational handoff detail;
+- issued outcome files.
 
-Cannot:
-
-- edit/delete audit events;
-- overwrite published versions used by requests;
-- access another organization;
-- bypass server permissions;
-- automatically read every sensitive request or file unless separately permitted.
+The duplicate-active override may use minimum request metadata only.
 
 ### `PLATFORM_ADMIN`
 
-Optional internal FAIDIA support role. Not required for the first institutional workflow and must not appear in ordinary organization navigation.
+Optional internal FAIDIA support role. It is outside ordinary organization navigation and has no grant through this Stage 1 registry.
 
-## 4. Permission Scopes
+## 4. Scopes
 
 | Scope | Meaning |
 |---|---|
 | `SELF` | Applicant-owned records |
 | `ASSIGNED` | Work assigned to staff member |
-| `DEPARTMENT` | One permitted department |
-| `MULTIPLE_DEPARTMENTS` | Specifically assigned departments |
-| `ORGANIZATION` | Current organization, within permission limits |
-| `PLATFORM` | Cross-organization internal administration |
+| `DEPARTMENT` | One active permitted department |
+| `MULTIPLE_DEPARTMENTS` | Explicitly assigned departments |
+| `ORGANIZATION_METADATA` | Aggregate/configuration metadata without sensitive request content |
+| `PLATFORM` | Internal cross-organization administration |
 
-A role does not automatically imply every scope.
-
-## 5. Approved Permission Keys
+## 5. Permission keys
 
 Requests:
 
@@ -200,10 +122,11 @@ Requests:
 - `requests.reject`
 - `requests.cancel`
 - `requests.complete`
+- `requests.manual_close`
 - `requests.reopen`
 - `requests.override_duplicate_active`
 
-Assignment and work items:
+Assignment/work:
 
 - `assignments.claim`
 - `assignments.assign`
@@ -226,9 +149,7 @@ Handoffs:
 - `handoffs.complete`
 - `handoffs.cancel`
 
-Transfer permissions are postponed from Stage 1 required scope.
-
-Documents:
+Documents/outcomes:
 
 - `documents.upload`
 - `documents.view_self`
@@ -253,9 +174,8 @@ Configuration:
 - `services.view`
 - `services.configure`
 - `services.publish`
-- `forms.configure`
-- `workflows.configure`
-- `workflows.publish`
+- `forms.configure_limited`
+- `workflows.publish_seeded`
 - `organizations.manage`
 - `departments.manage`
 - `users.invite`
@@ -264,7 +184,7 @@ Configuration:
 - `branding.manage`
 - `features.manage`
 
-Reporting and audit:
+Reporting/audit:
 
 - `reports.view_self`
 - `reports.view_department`
@@ -276,156 +196,100 @@ Reporting and audit:
 - `audit.view_department`
 - `audit.view_organization`
 
-## 6. Exact V1 Role Grant Registry
+## 6. Exact Stage 1 grant registry
 
-This registry is authoritative for V1 permission grants. A role may use a
-granted permission only within its scope, organization, department, ownership,
-assignment, and workflow-state rules. Any permission not listed for a role is
-denied to that role. `Registrar` means a `SUPERVISOR` membership profile with
-the additional Registrar grants shown below.
+| Group | Applicant | Officer | Supervisor | Registrar profile additions | Organization Admin |
+|---|---|---|---|---|---|
+| Requests | `requests.create`, `requests.view_self`, `requests.update_draft`, `requests.cancel` | `requests.view_assigned`, `requests.view_department`, `requests.start_review`, `requests.return_for_correction`, `requests.cancel`, `requests.complete` | Officer grants plus `requests.view_organization_metadata`, `requests.reopen`, `requests.override_duplicate_active`, `requests.manual_close` | `requests.approve`, `requests.reject`, `requests.return_for_clarification` | `requests.view_organization_metadata`, `requests.override_duplicate_active` |
+| Assignment/work | None | `assignments.claim`, `work_items.view_assigned`, `work_items.view_department`, `work_items.start`, `work_items.complete`, `work_items.return` | Officer grants plus `assignments.assign`, `assignments.reassign` | None | None |
+| Handoffs | None | `handoffs.create_referral`, `handoffs.view_incoming`, `handoffs.view_outgoing`, `handoffs.accept`, `handoffs.decline`, `handoffs.return_for_clarification`, `handoffs.complete` | Officer grants plus `handoffs.assign_receiving_officer`, `handoffs.cancel` | None | None |
+| Documents/outcomes | `documents.upload`, `documents.view_self`, `documents.download` | `documents.upload`, `documents.view_assigned`, `documents.review`, `documents.accept`, `documents.reject`, `documents.download`, `documents.issue` | Officer grants plus `documents.revoke` | None | None |
+| Communication | `messages.send_applicant`, `messages.read_applicant` | `messages.send_applicant`, `messages.read_applicant`, `internal_notes.create`, `internal_notes.read_department` | Officer grants plus `internal_notes.read_supervisor` | None | None |
+| Configuration | `services.view` | `services.view` | `services.view` | None | `services.view`, `services.configure`, `services.publish`, `forms.configure_limited`, `workflows.publish_seeded`, `organizations.manage`, `departments.manage`, `users.invite`, `memberships.manage`, `roles.assign_fixed`, `branding.manage`, `features.manage` |
+| Reporting/audit | `reports.view_self` | `reports.view_self`, `reports.view_department`, `audit.view_request` | Officer grants plus `reports.view_financial`, `reports.view_audit`, `reports.export`, `audit.view_department` | None | `reports.view_organization`, `reports.view_audit`, `reports.export`, `audit.view_organization` |
 
-| Permission group | Applicant | Officer | Supervisor / Registrar | Organization Admin |
-|---|---|---|---|---|
-| Requests | `requests.create`, `requests.view_self`, `requests.update_draft`, `requests.cancel` | `requests.view_assigned`, `requests.view_department`, `requests.start_review`, `requests.return_for_correction`, `requests.cancel`, `requests.complete` | `requests.view_assigned`, `requests.view_department`, `requests.view_organization_metadata`, `requests.start_review`, `requests.return_for_correction`, `requests.return_for_clarification`, `requests.approve`, `requests.reject`, `requests.cancel`, `requests.complete`, `requests.reopen`, `requests.override_duplicate_active` | `requests.view_organization_metadata`, `requests.override_duplicate_active` |
-| Assignment and work items | None | `assignments.claim`, `work_items.view_assigned`, `work_items.view_department`, `work_items.start`, `work_items.complete`, `work_items.return` | `assignments.claim`, `assignments.assign`, `assignments.reassign`, `work_items.view_assigned`, `work_items.view_department`, `work_items.start`, `work_items.complete`, `work_items.return` | None |
-| Handoffs | None | `handoffs.create_referral`, `handoffs.view_incoming`, `handoffs.view_outgoing`, `handoffs.accept`, `handoffs.decline`, `handoffs.return_for_clarification`, `handoffs.complete` | `handoffs.create_referral`, `handoffs.view_incoming`, `handoffs.view_outgoing`, `handoffs.accept`, `handoffs.decline`, `handoffs.return_for_clarification`, `handoffs.assign_receiving_officer`, `handoffs.complete`, `handoffs.cancel` | None |
-| Documents | `documents.upload`, `documents.view_self`, `documents.download` | `documents.upload`, `documents.view_assigned`, `documents.review`, `documents.accept`, `documents.reject`, `documents.download`, `documents.issue` | `documents.view_assigned`, `documents.review`, `documents.accept`, `documents.reject`, `documents.download`, `documents.issue`, `documents.revoke` | None |
-| Communication | `messages.send_applicant`, `messages.read_applicant` | `messages.send_applicant`, `messages.read_applicant`, `internal_notes.create`, `internal_notes.read_department` | `messages.send_applicant`, `messages.read_applicant`, `internal_notes.create`, `internal_notes.read_department`, `internal_notes.read_supervisor` | None |
-| Configuration | `services.view` | `services.view` | `services.view` | `services.view`, `services.configure`, `services.publish`, `forms.configure`, `workflows.configure`, `workflows.publish`, `organizations.manage`, `departments.manage`, `users.invite`, `memberships.manage`, `roles.assign_fixed`, `branding.manage`, `features.manage` |
-| Reporting and audit | `reports.view_self` | `reports.view_self`, `reports.view_department`, `audit.view_request` | `reports.view_self`, `reports.view_department`, `reports.view_financial`, `reports.view_audit`, `reports.export`, `audit.view_request`, `audit.view_department` | `reports.view_organization`, `reports.view_audit`, `reports.export`, `audit.view_organization` |
+## 7. Hard constraints
 
-Specific constraints:
+- Officer approval is denied even when the Officer can view the request.
+- Standard Supervisor approval is denied unless the membership has the Registrar profile additions.
+- Organization Admin configuration access never implies request-content access.
+- Organization Admin duplicate override shows only request reference, applicant identifier needed for duplicate matching, service, status, creation date, and override reason field.
+- `requests.complete` for Officers is limited to recording physical collection from `OUTCOME_READY`.
+- Controlled download completion is performed by the system after authorized access.
+- `requests.manual_close` is Supervisor-only and valid only from `OUTCOME_READY`.
+- `requests.reopen` is Supervisor-only and valid only for `REJECTED` or `COMPLETED`.
+- `documents.revoke` is separate from reopening.
+- No role may edit or delete audit events.
 
-- Applicant grants are limited to applicant-owned requests, files, messages,
-  and self-reporting.
-- Officer grants require active department membership and assigned, claimed,
-  or otherwise permitted department work. `documents.issue` is limited to an
-  authorized outcome-processing officer.
-- Supervisor grants are department-scoped unless the permission is explicitly
-  organization-scoped. Registrar approval grants apply only to the Registrar
-  membership profile.
-- Organization Admin duplicate override requires a recorded reason and the
-  `DUPLICATE_REQUEST_OVERRIDE_GRANTED` audit event; it does not grant request
-  content or file access.
-- Platform Admin is outside ordinary organization permissions and receives no
-  V1 grant through this registry.
-
-## 7. Role Matrix
-
-| Capability | Applicant | Officer | Supervisor / Registrar | Org Admin |
-|---|---:|---:|---:|---:|
-| Browse active services | Yes | Yes | Yes | Yes |
-| Create own request | Yes | No | No | No |
-| Edit own draft | Yes | No | No | No |
-| Submit own request | Yes | No | No | No |
-| View own requests | Yes | No | No | No |
-| View assigned requests | No | Yes | Yes | Conditional |
-| View department queue | No | Conditional | Yes | Conditional metadata |
-| View organization request content | No | No | Conditional | Conditional explicit permission |
-| Start review | No | Yes | Yes | No |
-| Review form responses | No | Yes | Yes | Conditional explicit permission |
-| Review documents | No | Yes | Yes | Conditional explicit permission |
-| Accept/reject documents | No | Yes | Yes | Conditional explicit permission |
-| Request correction | No | Yes | Yes | No |
-| Respond to correction | Yes | No | No | No |
-| Add internal note | No | Yes | Yes | Conditional explicit permission |
-| Read internal notes | No | Assigned/Dept | Department | Conditional explicit permission |
-| Send applicant message | Yes | Yes | Yes | Conditional |
-| Create referral | No | Yes | Yes | No |
-| Accept referral | No | Conditional | Yes | No |
-| Decline referral | No | Conditional | Yes | No |
-| Complete referral | No | Assigned receiver | Yes | No |
-| Claim unassigned work | No | Conditional own dept | Yes | No |
-| Assign/reassign officer | No | No | Yes | Conditional |
-| Approve/reject request | No | Conditional explicit permission | Yes | No |
-| Return request for clarification | No | No | Registrar/Supervisor with explicit permission | No |
-| Override duplicate active request block | No | No | Yes | Conditional explicit permission |
-| Complete request | No | Conditional | Yes | No |
-| Download own outcome | Yes | No | No | No |
-| Issue outcome | No | Conditional | Yes | Conditional explicit permission |
-| Manage configuration | No | No | No | Yes |
-| Manage feature flags | No | No | No | Yes |
-| View department report | No | Limited | Yes | Yes |
-| View organization report | No | No | Conditional | Yes |
-| Edit audit events | No | No | No | No |
-
-## 8. Department Rules
+## 8. Department and assignment rules
 
 - Officer actions require active department membership.
-- Finance officer may access assigned Finance referral without owning the parent request.
+- Finance may access an assigned/claimed Finance referral without owning the parent request.
 - Student Records remains coordinating owner during referral.
-- Registrar needs explicit approval permission.
-- Registrar is a Supervisor membership profile labelled Registrar, not a separate top-level role.
-- Cross-department access requires handoff, supervisory scope, or explicit multi-department permission.
-- Search must respect the same permissions as direct access.
+- Cross-department access requires an active handoff or explicit multi-department membership.
+- Supervisor may assign/reassign within scope.
+- Authorized Officers may claim unassigned work only in their department.
+- Reassignment requires a reason.
+- Completed work cannot be reassigned unless the request is reopened.
+- Search applies the same authorization as direct access.
 
-## 9. Assignment Rules
+## 9. Approval rules
 
-Approved:
+Approval eligibility requires:
 
-- supervisor can assign and reassign;
-- authorized officers may claim unassigned work in their own department;
-- reassignment requires a reason;
-- completed work cannot be reassigned without controlled reopening;
-- assigned officer must belong to the owning department;
-- cross-department assignment is not a handoff substitute;
-- automatic routing and capacity balancing are postponed.
+- request `PENDING_APPROVAL`;
+- required documents `ACCEPTED`;
+- Finance result `CLEAR`;
+- required work items complete;
+- no unresolved correction or handoff;
+- Registrar profile and exact permission.
 
-## 10. Approval Rules
+Approval, rejection, and return for clarification create immutable decision and audit records.
 
-- Registrar approval is required for every Transcript Request.
-- Approval permission is explicit.
-- Required work items must be complete.
-- Required documents must be accepted.
-- Required Finance result must exist.
-- Request must be in `PENDING_APPROVAL`.
-- Approval creates decision and audit records.
-- Repeat approval cannot issue duplicate outcomes.
-- Approved requests are normally read-only except outcome processing.
+## 10. Completion and reopening rules
 
-Transition-specific V1 grants:
+Physical collection:
 
-- Finance receiving officers may accept and complete Finance referrals with
-  `handoffs.accept` and `handoffs.complete`, or return them for clarification
-  with `handoffs.return_for_clarification`.
-- Student Records officers may clarify and resubmit their outgoing Finance
-  referral with `handoffs.create_referral`; the prior handoff history remains
-  immutable.
-- A Registrar membership profile must hold `requests.approve`,
-  `requests.reject`, and `requests.return_for_clarification`.
-- Only an authorized outcome processor with `documents.issue` may retry a
-  failed outcome; `requests.complete` is required to record final closure.
-- A Finance result of `CANNOT_VERIFY` or `DECLINED` never grants approval
-  eligibility. Required Finance verification must be recorded before the
-  request can enter `PENDING_APPROVAL`.
+- Officer with `requests.complete`;
+- assigned/permitted Student Records scope;
+- request `OUTCOME_READY`;
+- collection evidence required.
 
-## 11. Duplicate Override Rules
+Manual closure:
 
-- Applicants cannot override duplicate active request blocking.
-- Default officers cannot override duplicate active request blocking.
-- Supervisors may override with `requests.override_duplicate_active`.
-- Organization Admin may override only with explicit `requests.override_duplicate_active`.
-- Override happens from staff-side request review/intervention, not applicant self-service.
-- Override requires a mandatory reason and records `DUPLICATE_REQUEST_OVERRIDE_GRANTED`.
+- Supervisor with `requests.manual_close`;
+- request `OUTCOME_READY`;
+- reason code, note, and evidence required.
 
-## 12. Required Tests
+Reopen:
 
-- unauthenticated route access;
+- Supervisor with `requests.reopen`;
+- request `REJECTED` or `COMPLETED`;
+- reason required;
+- request returns `IN_REVIEW`;
+- previous history preserved.
+
+## 11. Required tests
+
+- unauthenticated denial;
 - applicant ownership isolation;
 - organization isolation;
 - cross-department denial;
 - internal notes hidden from applicant;
-- Finance sees referral but not unrelated work;
-- only permitted user accepts handoff;
-- only permitted user approves/rejects;
-- officer self-claim limited to own department;
-- duplicate override denied without `requests.override_duplicate_active`;
-- duplicate override creates audit event and mandatory reason;
-- admin cannot edit audit events;
-- admin cannot automatically access sensitive request content;
-- search does not leak;
-- signed file access requires authorization.
+- Finance access limited to referral;
+- ordinary Officer approval denied;
+- standard Supervisor approval denied without Registrar profile;
+- Organization Admin sensitive request/document/message/note access denied;
+- Officer self-claim limited to own department;
+- duplicate override denied without permission and reason;
+- manual closure denied to Officer;
+- manual closure denied outside `OUTCOME_READY`;
+- reopening denied to Officer and Organization Admin;
+- reopening preserves history;
+- search does not leak data;
+- signed file access requires authorization;
+- published versions are immutable.
 
-## 13. Coding-Agent Instruction
+## 12. Coding-agent instruction
 
-Use shared server-side permission helpers. Do not add roles when department membership or permission scope can represent the distinction.
+Use shared server-side permission helpers. The exact registry is authoritative. Do not infer grants from navigation visibility, job titles, or broad role descriptions.

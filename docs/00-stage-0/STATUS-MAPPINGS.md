@@ -1,43 +1,47 @@
 # FAIDIA Stage 0 — Status Definitions And Mappings
 
-Status: **APPROVED_FOR_V1**  
-Version: **1.1**
+Status: **APPROVED_FOR_STAGE_1**  
+Version: **1.3**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document defines approved V1 statuses for requests, work items, handoffs, documents, decisions, notifications, and SLA state. Pages must import status values from shared domain definitions and must not invent status strings.
+This document defines approved request, work-item, handoff, document, decision, notification, and SLA statuses.
 
-## 2. Approved Status Decisions
+Pages must import shared domain values. Applicant labels must never be used as internal business logic.
 
-- Parent request has no `ASSIGNED` status. Assignment lives on work items and assignment records.
-- Applicant documents use `ACCEPTED`, not `APPROVED`.
-- Handoffs complete at `COMPLETED`; originator receipt is represented by history and notification.
-- Correction resubmission returns the request to `IN_REVIEW`; no dedicated parent status is used.
-- Public `Preparing Outcome` is shown only when there is a meaningful delay.
-- Completion occurs at recorded download, collection, delivery, or approved institutional closure rule.
+## 2. Frozen status decisions
 
-## 3. Internal Request Statuses
+- No parent request `ASSIGNED` status.
+- Applicant documents use `ACCEPTED`.
+- Handoffs finish at `COMPLETED`; receipt is history/notification.
+- Correction resubmission returns to `IN_REVIEW`.
+- `Preparing Outcome` appears only for a meaningful delay.
+- `Expired` is an official applicant-visible status.
+- Completion triggers are controlled download, physical collection, or Supervisor manual closure.
+- Reopening uses an audit event and returns to `IN_REVIEW`; there is no `REOPENED` parent status.
 
-| Status | Meaning | Typical entry | Typical exit |
+## 3. Internal request statuses
+
+| Status | Meaning | Typical entry | Allowed exit |
 |---|---|---|---|
-| `DRAFT` | Applicant has started but not submitted | Draft creation | Submit, cancel, or expire |
-| `SUBMITTED` | Submission accepted and awaiting staff action | Submit request | Start review or cancel |
-| `IN_REVIEW` | Active internal review or clarification by the coordinating department | Start review, correction resubmission, Finance clarification, or Registrar return | Correction, department wait, approval, rejection, cancel |
-| `WAITING_ON_APPLICANT` | Applicant action required | Correction request or Finance HOLD action | Resubmit, cancel, or expire |
-| `WAITING_ON_DEPARTMENT` | Waiting for required handoff result | Create Finance referral | Handoff completes, declines, or returns |
-| `PENDING_APPROVAL` | Operational checks complete; Registrar decision pending | Records work complete | Approve, reject, or return to `IN_REVIEW` |
-| `APPROVED` | Positive decision recorded | Registrar approval | Outcome preparation or ready |
-| `OUTCOME_PREPARATION` | Final outcome is being prepared | Start outcome work where there is delay or retry after failure | Ready or `OUTCOME_FAILED` |
-| `OUTCOME_FAILED` | Outcome preparation failed and requires authorized retry or controlled closure | Outcome preparation failure | Retry to `OUTCOME_PREPARATION` or controlled cancellation |
-| `OUTCOME_READY` | Outcome available for download/collection | Issue document/outcome | Complete |
-| `REJECTED` | Final negative decision | Registrar rejection | Controlled reopen only |
-| `COMPLETED` | Service journey closed | Recorded download, collection, delivery, or closure | Terminal |
-| `CANCELLED` | Ended without final outcome | Applicant/staff cancellation | Terminal |
-| `EXPIRED` | Draft or applicant-waiting request passed its expiry deadline | Scheduled expiry job | Terminal |
+| `DRAFT` | Started, not submitted | Draft creation | `SUBMITTED`, `CANCELLED`, `EXPIRED` |
+| `SUBMITTED` | Accepted, awaiting staff action | Submission | `IN_REVIEW`, `CANCELLED` |
+| `IN_REVIEW` | Coordinating department work | Review start, correction resubmission, clarification, reopen | `WAITING_ON_APPLICANT`, `WAITING_ON_DEPARTMENT`, `PENDING_APPROVAL`, `REJECTED`, `CANCELLED` |
+| `WAITING_ON_APPLICANT` | Applicant action required | Correction or Finance HOLD | `IN_REVIEW`, `CANCELLED`, `EXPIRED` |
+| `WAITING_ON_DEPARTMENT` | Required referral result pending | Finance referral | `IN_REVIEW`, `WAITING_ON_APPLICANT`, `CANCELLED` |
+| `PENDING_APPROVAL` | Checks complete; Registrar decision pending | Records completion | `APPROVED`, `REJECTED`, `IN_REVIEW` |
+| `APPROVED` | Positive decision recorded | Registrar approval | `OUTCOME_PREPARATION`, `OUTCOME_READY`, `OUTCOME_FAILED` |
+| `OUTCOME_PREPARATION` | Outcome being prepared | Outcome work/retry | `OUTCOME_READY`, `OUTCOME_FAILED` |
+| `OUTCOME_FAILED` | Outcome preparation failed | Failure | `OUTCOME_PREPARATION`, `CANCELLED` |
+| `OUTCOME_READY` | Outcome available | Issue outcome | `COMPLETED` |
+| `REJECTED` | Final negative decision | Registrar rejection | `IN_REVIEW` through controlled reopen |
+| `COMPLETED` | Journey closed | Download, collection, or manual closure | `IN_REVIEW` through controlled reopen |
+| `CANCELLED` | Ended without final outcome | Authorized cancellation | Terminal |
+| `EXPIRED` | Draft/action deadline passed | Expiry job | Terminal |
 
-Approved primary flow:
+Primary flow:
 
 ```text
 DRAFT
@@ -46,149 +50,110 @@ DRAFT
 -> WAITING_ON_APPLICANT / WAITING_ON_DEPARTMENT
 -> PENDING_APPROVAL
 -> APPROVED / REJECTED
--> OUTCOME_PREPARATION (only when needed)
+-> OUTCOME_PREPARATION (when needed)
 -> OUTCOME_READY
 -> COMPLETED
 ```
 
-Expiry is a terminal branch from `DRAFT` or `WAITING_ON_APPLICANT` to `EXPIRED`.
-Outcome preparation failure is recoverable: an authorized outcome processor may
-move `OUTCOME_FAILED` back to `OUTCOME_PREPARATION` after recording the retry.
+## 4. Exact completion transitions
 
-Approved result transitions:
+| Trigger | Preconditions | Transition | Required events |
+|---|---|---|---|
+| Controlled download | Authorized applicant, issued outcome, `OUTCOME_READY` | `OUTCOME_READY` -> `COMPLETED` | `DOCUMENT_DOWNLOADED`, `REQUEST_COMPLETED` |
+| Physical collection | Authorized Student Records Officer, collection evidence, `OUTCOME_READY` | `OUTCOME_READY` -> `COMPLETED` | `OUTCOME_COLLECTED`, `REQUEST_COMPLETED` |
+| Manual closure | Supervisor, `requests.manual_close`, reason/note/evidence, `OUTCOME_READY` | `OUTCOME_READY` -> `COMPLETED` | `REQUEST_MANUALLY_CLOSED`, `REQUEST_COMPLETED` |
 
-| Event | Parent request transition | Related work/handoff transition |
+No generic delivery trigger exists in Stage 1.
+
+## 5. Reopening transitions
+
+| From | Actor/permission | To | Required behavior |
+|---|---|---|---|
+| `REJECTED` | Supervisor + `requests.reopen` | `IN_REVIEW` | Reason, new/reactivated Records work item, `REQUEST_REOPENED`, notification |
+| `COMPLETED` | Supervisor + `requests.reopen` | `IN_REVIEW` | Reason, preserve outcome/completion history, `REQUEST_REOPENED`, notification |
+
+Reopening does not revoke an outcome. Revocation is a separate `documents.revoke` action and records `DOCUMENT_REVOKED`.
+
+## 6. Applicant-visible statuses
+
+| Public status | Meaning | Display guidance |
 |---|---|---|
-| Finance returns `CLEAR` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item and handoff -> `COMPLETED`; Records work item -> `READY` or `IN_PROGRESS` |
-| Finance returns `HOLD` | `WAITING_ON_DEPARTMENT` -> `WAITING_ON_APPLICANT` | Finance work item and handoff -> `COMPLETED`; Records work item -> `WAITING_ON_APPLICANT` |
-| Applicant resolves Finance `HOLD` | `WAITING_ON_APPLICANT` -> `IN_REVIEW` | Records work item -> `READY` or `IN_PROGRESS`; new Finance referral if re-verification is required |
-| Finance returns `CANNOT_VERIFY` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item -> `RETURNED`; handoff -> `RETURNED_FOR_CLARIFICATION`; Records work item -> `IN_PROGRESS` |
-| Finance declines | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work item -> `CANCELLED`; handoff -> `DECLINED`; revised referral uses a new handoff record |
-| Registrar returns for clarification | `PENDING_APPROVAL` -> `IN_REVIEW` | Records approval work item -> `READY` or `IN_PROGRESS`; decision -> `RETURNED_FOR_CLARIFICATION` |
+| Draft | Not submitted | Continue action and expiry date |
+| Submitted | Institution received it | Reference and submission date |
+| In Review | Staff are reviewing | Do not expose assignment changes |
+| Action Required | Applicant must act | Exact action and deadline |
+| Additional Checks in Progress | Internal check underway | Do not expose confidential Finance detail |
+| Awaiting Decision | Authorization pending | Do not imply approval |
+| Approved | Positive decision recorded | Explain next outcome step |
+| Preparing Outcome | Outcome is being prepared | Use only for real delay |
+| Outcome Issue | Staff are resolving outcome preparation | Hide technical details |
+| Ready | Download or collection available | Show method/instructions |
+| Completed | Journey closed | Show completion method/date |
+| Rejected | Not approved | Applicant-visible reason |
+| Cancelled | Ended before completion | Reason where appropriate |
+| Expired | Draft or action deadline passed | Explain expiry and start-new-request action |
 
-## 4. Applicant-Visible Statuses
+## 7. Internal-to-public mapping
 
-| Public status | Meaning to applicant | Display guidance |
+| Internal condition | Public status |
+|---|---|
+| `DRAFT` | Draft |
+| `SUBMITTED` | Submitted |
+| `IN_REVIEW` | In Review |
+| `WAITING_ON_APPLICANT` | Action Required |
+| `WAITING_ON_DEPARTMENT` | Additional Checks in Progress |
+| Finance `HOLD` | Action Required |
+| Finance `CANNOT_VERIFY` under Records clarification | Additional Checks in Progress |
+| `PENDING_APPROVAL` | Awaiting Decision |
+| `APPROVED` with no delay | Approved |
+| `OUTCOME_PREPARATION` | Preparing Outcome |
+| `OUTCOME_FAILED` | Outcome Issue |
+| `OUTCOME_READY` | Ready |
+| `COMPLETED` | Completed |
+| `REJECTED` | Rejected |
+| `CANCELLED` | Cancelled |
+| `EXPIRED` | Expired |
+| `REJECTED` or `COMPLETED` after reopen to `IN_REVIEW` | In Review |
+
+## 8. Finance result transitions
+
+| Result/event | Request | Work item/handoff |
 |---|---|---|
-| Draft | Not submitted | Continue/edit action |
-| Submitted | Institution received it | Show reference and date |
-| In Review | Staff are reviewing | Do not expose reassignment |
-| Action Required | Applicant must correct/provide something | Show exact action and deadline |
-| Additional Checks in Progress | Internal check is underway | Avoid confidential Finance details |
-| Awaiting Decision | Review complete, authorization pending | Do not imply approval |
-| Approved | Positive decision made | Explain outcome timing |
-| Preparing Outcome | Outcome is being prepared | Use only for meaningful delay |
-| Outcome Issue | Outcome preparation needs staff resolution | Do not expose internal failure details; show that staff are resolving the issue |
-| Ready | Outcome can be downloaded or collected | Show instructions |
-| Completed | Service journey finished | Show result and completion date |
-| Rejected | Not approved | Show applicant-visible reason |
-| Cancelled | Ended before completion | Show reason where appropriate |
+| `CLEAR` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work/handoff `COMPLETED`; Records work ready/in progress |
+| `HOLD` | `WAITING_ON_DEPARTMENT` -> `WAITING_ON_APPLICANT` | Finance work/handoff `COMPLETED`; Records work waiting |
+| Applicant resolves HOLD | `WAITING_ON_APPLICANT` -> `IN_REVIEW` | Records work ready/in progress; new referral if recheck needed |
+| `CANNOT_VERIFY` | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work `RETURNED`; handoff `RETURNED_FOR_CLARIFICATION` |
+| Finance decline | `WAITING_ON_DEPARTMENT` -> `IN_REVIEW` | Finance work `CANCELLED`; handoff `DECLINED` |
+| Registrar clarification | `PENDING_APPROVAL` -> `IN_REVIEW` | Decision `RETURNED_FOR_CLARIFICATION`; Records work ready |
 
-## 5. Internal-To-Public Mapping
+## 9. Work-item statuses
 
-| Internal condition | Applicant status |
-|---|---|
-| Request `DRAFT` | Draft |
-| Request `SUBMITTED` | Submitted |
-| Request `IN_REVIEW` | In Review |
-| Request `WAITING_ON_APPLICANT` | Action Required |
-| Handoff `CREATED` or `PENDING_ACCEPTANCE` | Additional Checks in Progress |
-| Handoff `ACCEPTED` or `IN_PROGRESS` | Additional Checks in Progress |
-| Request `WAITING_ON_DEPARTMENT` | Additional Checks in Progress |
-| Finance result `HOLD` requiring applicant action | Action Required |
-| Finance result `CANNOT_VERIFY` needing Records clarification | Additional Checks in Progress |
-| Request `PENDING_APPROVAL` | Awaiting Decision |
-| Request `APPROVED`, no meaningful outcome delay | Approved |
-| Request `OUTCOME_PREPARATION` | Preparing Outcome |
-| Request `OUTCOME_FAILED` | Outcome Issue |
-| Request `OUTCOME_READY` | Ready |
-| Request `COMPLETED` | Completed |
-| Request `REJECTED` | Rejected |
-| Request `CANCELLED` | Cancelled |
-| Request `EXPIRED` | Expired |
+`NOT_STARTED`, `READY`, `PENDING_ACCEPTANCE`, `ASSIGNED`, `IN_PROGRESS`, `WAITING_ON_APPLICANT`, `WAITING_ON_DEPARTMENT`, `BLOCKED`, `RETURNED`, `COMPLETED`, `CANCELLED`.
 
-## 6. Work-Item Statuses
+## 10. Handoff statuses
 
-| Status | Meaning |
-|---|---|
-| `NOT_STARTED` | Exists but not ready or not begun |
-| `READY` | Preconditions met; may be assigned, claimed, or started |
-| `PENDING_ACCEPTANCE` | Receiving department must accept |
-| `ASSIGNED` | Officer assigned, not started |
-| `IN_PROGRESS` | Active work |
-| `WAITING_ON_APPLICANT` | Blocked on applicant |
-| `WAITING_ON_DEPARTMENT` | Blocked on another department |
-| `BLOCKED` | Another recorded issue prevents progress |
-| `RETURNED` | Sent back for clarification or rework |
-| `COMPLETED` | Required result recorded |
-| `CANCELLED` | No longer required |
+`CREATED`, `PENDING_ACCEPTANCE`, `ACCEPTED`, `ASSIGNED`, `IN_PROGRESS`, `RETURNED_FOR_CLARIFICATION`, `DECLINED`, `COMPLETED`, `CANCELLED`.
 
-## 7. Handoff Statuses
+`RETURNED_TO_ORIGINATOR` is not approved.
 
-| Status | Meaning | Allowed next states |
-|---|---|---|
-| `CREATED` | Draft or prepared handoff exists | `PENDING_ACCEPTANCE`, `CANCELLED` |
-| `PENDING_ACCEPTANCE` | Sent to receiver | `ACCEPTED`, `DECLINED`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED` |
-| `ACCEPTED` | Receiver accepted the work | `ASSIGNED`, `IN_PROGRESS`, `CANCELLED` |
-| `ASSIGNED` | Receiving officer assigned | `IN_PROGRESS`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED` |
-| `IN_PROGRESS` | Receiving department working | `COMPLETED`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED` |
-| `RETURNED_FOR_CLARIFICATION` | Originator must clarify | `PENDING_ACCEPTANCE`, `CANCELLED` |
-| `DECLINED` | Receiver declined with reason | Terminal; any revised referral uses a new handoff |
-| `COMPLETED` | Required result recorded | Terminal |
-| `CANCELLED` | Ended without completion | Terminal |
+## 11. Document statuses
 
-`RETURNED_TO_ORIGINATOR` is not part of the approved V1 handoff status set.
+`UPLOADED`, `PROCESSING`, `AVAILABLE`, `UNDER_REVIEW`, `ACCEPTED`, `REJECTED`, `REPLACED`, `ISSUED`, `REVOKED`, `DELETED`.
 
-## 8. Document Statuses
+## 12. Decision statuses
 
-| Status | Meaning |
-|---|---|
-| `UPLOADED` | File and metadata stored |
-| `PROCESSING` | Optional technical processing |
-| `AVAILABLE` | Ready for authorized review |
-| `UNDER_REVIEW` | Officer reviewing |
-| `ACCEPTED` | Satisfies requirement |
-| `REJECTED` | Does not satisfy requirement |
-| `REPLACED` | Newer linked version submitted |
-| `ISSUED` | Final institution document/outcome issued |
-| `REVOKED` | Issued document no longer valid |
-| `DELETED` | Logically deleted under policy |
+`PENDING`, `APPROVED`, `REJECTED`, `RETURNED_FOR_CLARIFICATION`, `CANCELLED`.
 
-## 9. Decision Statuses
+## 13. SLA states
 
-| Status | Meaning |
-|---|---|
-| `PENDING` | Decision requested |
-| `APPROVED` | Positive decision |
-| `REJECTED` | Negative decision |
-| `RETURNED_FOR_CLARIFICATION` | More information required |
-| `CANCELLED` | Decision no longer required |
+`NOT_STARTED`, `ON_TRACK`, `DUE_SOON`, `OVERDUE`, `COMPLETED_ON_TIME`, `COMPLETED_LATE`, `CANCELLED`.
 
-## 10. SLA States
+SLA state is separate from operational state.
 
-| Status | Meaning |
-|---|---|
-| `NOT_STARTED` | Timer has not begun |
-| `ON_TRACK` | Not near deadline |
-| `DUE_SOON` | Warning threshold reached |
-| `OVERDUE` | Due date passed |
-| `COMPLETED_ON_TIME` | Completed by due time |
-| `COMPLETED_LATE` | Completed after due time |
-| `CANCELLED` | Timer no longer applies |
+## 14. Notification delivery statuses
 
-Overdue is separate from operational state. Display examples: `IN_PROGRESS · OVERDUE`.
+`PENDING`, `SENDING`, `SENT`, `DELIVERED`, `FAILED`, `CANCELLED`.
 
-## 11. Notification Delivery Statuses
+## 15. Coding-agent instruction
 
-| Status | Meaning |
-|---|---|
-| `PENDING` | Stored, not sent |
-| `SENDING` | Provider request underway |
-| `SENT` | Provider accepted |
-| `DELIVERED` | Provider confirmed, where supported |
-| `FAILED` | Delivery failed |
-| `CANCELLED` | Intentionally suppressed |
-
-## 12. Coding-Agent Instruction
-
-Validate transitions on the server. Never compare public labels in business logic. Keep public mappings separate from internal state.
+Validate all transitions server-side. Use internal enums in business logic and a separate applicant-status mapper for presentation.
