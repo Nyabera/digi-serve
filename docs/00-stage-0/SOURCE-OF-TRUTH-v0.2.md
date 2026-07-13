@@ -1,606 +1,137 @@
 # FAIDIA Source of Truth
 
-**Status:** Draft for review  
-**Version:** 0.2  
+**Status:** APPROVED_FOR_V1  
+**Version:** 1.0  
 **Last updated:** 2026-07-13  
-**Applies to:** FAIDIA V1  
+**Applies to:** FAIDIA V1 / Stage 0  
 **Primary use:** Product definition, prompt building, implementation control, and change tracking
 
----
+## 1. Purpose
 
-## 1. Purpose of This File
+This file is the master index for the FAIDIA V1 documentation system. It tells developers, designers, AI coding agents, and product contributors which files control each part of the product and how conflicts are resolved.
 
-This file is the master index for the FAIDIA V1 documentation system.
-
-It tells developers, designers, AI coding agents, and product contributors:
-
-- which documents control each part of the product;
-- which files must be read before building a feature;
-- how conflicts between prompts, mockups, and specifications should be resolved;
-- where open questions should be recorded;
-- how changes should be documented and committed.
-
-This file does not replace the detailed specification files. It points to them and defines how they should be used.
-
----
+The canonical root copy is `docs/SOURCE-OF-TRUTH.md`. This Stage 0 copy is retained for the downloadable Stage 0 pack.
 
 ## 2. Core Authority Rule
 
-When there is a conflict between any of the following:
+When there is a conflict between chat, prompts, screenshots, old prototypes, implementation choices, and Markdown source files, use this priority order:
 
-- a chat conversation;
-- a coding prompt;
-- a screenshot or mockup;
-- an old prototype;
-- an implementation decision;
-- a source-of-truth Markdown file;
+1. Approved source-of-truth Markdown files.
+2. Latest approved product decision.
+3. Current implementation constraints.
+4. Design references.
+5. Chat history and exploratory ideas.
 
-use this priority order:
-
-1. Approved source-of-truth Markdown files
-2. Latest approved product decision
-3. Current implementation constraints
-4. Design references
-5. Chat history and exploratory ideas
-
-If a conflict cannot be resolved safely, do not guess. Add the issue to:
-
-```text
-`docs/00-stage-0/UNRESOLVED-DECISIONS.md`
-```
-
----
+If a conflict cannot be resolved safely, update `docs/00-stage-0/UNRESOLVED-DECISIONS.md` before implementation.
 
 ## 3. Mandatory Reading Before Any Build Task
 
-Before implementing a feature, route, workflow, role, page, or database change, read:
-
-```text
-- docs/SOURCE-OF-TRUTH.md
-- docs/00-stage-0/STAGE-0-V1-SPECIFICATION.md
-- docs/00-stage-0/V1-VERTICAL-SLICE.md
-- docs/00-stage-0/ROLE-PERMISSIONS-MATRIX.md
-- docs/00-stage-0/STATUS-MAPPINGS.md
-- docs/00-stage-0/PAGE-INVENTORY.md
-```
-
-Also read the following when relevant:
-
-```text
-- docs/00-stage-0/CURRENT-PROCESS.md
-- docs/00-stage-0/V1-NON-GOALS.md
-- docs/00-stage-0/POST-V1-BACKLOG.md
-- docs/00-stage-0/UNRESOLVED-DECISIONS.md
-- docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md
-```
-
----
-
-## 4. Source-of-Truth Map
-
-### 4.1 Product Scope and V1 Boundaries
-
-**Primary file**
-
-```text
-`docs/00-stage-0/STAGE-0-V1-SPECIFICATION.md`
-```
-
-**Controls**
-
-- purpose of FAIDIA V1;
-- target institution type;
-- first fully functional service;
-- demonstration services;
-- pilot size and limits;
-- problem statement;
-- validation assumptions;
-- success criteria;
-- V1 service rules;
-- departments involved;
-- final issued outcome;
-- intended shell structure;
-- scope-freeze decisions.
-
-**Implementation rule**
-
-Do not add a major V1 capability unless it is already approved here or explicitly authorized by the product owner.
-
----
-
-### 4.2 Current Manual Process
-
-**Primary file**
-
-```text
-`docs/00-stage-0/CURRENT-PROCESS.md`
-```
-
-**Controls**
-
-- how the institution currently processes the service;
-- current actors and departments;
-- current tools and communication channels;
-- manual workarounds;
-- current pain points;
-- delays, duplication, and failure points;
-- what FAIDIA is expected to reduce or replace.
-
-**Implementation rule**
-
-Do not invent a future workflow without checking what the current process actually does.
-
----
-
-### 4.3 End-to-End V1 Vertical Slice
-
-**Primary file**
-
-```text
-`docs/00-stage-0/V1-VERTICAL-SLICE.md`
-```
-
-**Controls**
-
-- complete Transcript Request journey;
-- applicant journey;
-- originating officer journey;
-- receiving officer journey;
-- referral journey;
-- transfer journey;
-- correction and resubmission;
-- approval;
-- rejection;
-- outcome delivery;
-- supervisor journey;
-- admin journey;
-- final vertical-slice acceptance scenario.
-
-**Implementation rule**
-
-This file is the behavioral reference for the first complete working flow. The main V1 build should preserve this journey unless the file is updated first.
-
----
-
-### 4.4 Roles and Permissions
-
-**Primary file**
-
-```text
-`docs/00-stage-0/ROLE-PERMISSIONS-MATRIX.md`
-```
-
-**Controls**
-
-- Applicant permissions;
-- Officer permissions;
-- Supervisor permissions;
-- Organization Admin permissions;
-- optional Platform Admin permissions;
-- action visibility;
-- workspace boundaries;
-- role-based restrictions.
-
-**Implementation rule**
-
-Do not introduce new V1 roles, permissions, or action access rules directly in code without updating this file.
-
----
-
-### 4.5 Status Models and Mappings
-
-**Primary file**
-
-```text
-`docs/00-stage-0/STATUS-MAPPINGS.md`
-```
-
-**Controls**
-
-- request statuses;
-- work-item statuses;
-- handoff statuses;
-- document statuses;
-- SLA statuses;
-- applicant-visible statuses;
-- internal-to-public status mappings;
-- status transitions;
-- status-related notifications;
-- status-related audit events.
-
-**Implementation rule**
-
-Do not create new status strings inside individual pages, components, or actions. Status values should come from shared approved definitions.
-
----
-
-### 4.6 Pages, Routes, Workspaces, and Navigation
-
-**Primary file**
-
-```text
-`docs/00-stage-0/PAGE-INVENTORY.md`
-```
-
-**Controls**
-
-- complete page inventory;
-- public pages;
-- applicant pages;
-- officer pages;
-- supervisor pages;
-- admin pages;
-- page ownership;
-- route expectations;
-- navigation groups and items;
-- classification as:
-  - `V1_REQUIRED`
-  - `DEMO_ONLY`
-  - `POSTPONED`
-
-**Implementation rule**
-
-A page should not be added to V1 only because it appears in an old mockup. It must exist in the approved page inventory or be explicitly authorized.
-
----
-
-### 4.7 V1 Non-Goals
-
-**Primary file**
-
-```text
-`docs/00-stage-0/V1-NON-GOALS.md`
-```
-
-**Controls**
-
-- features explicitly excluded from V1;
-- advanced capabilities that should not block launch;
-- ideas that must not expand the first build;
-- scope-protection rules.
-
-**Implementation rule**
-
-Before accepting a new feature into V1, check this file first.
-
----
-
-### 4.8 Post-V1 Backlog
-
-**Primary file**
-
-```text
-`docs/00-stage-0/POST-V1-BACKLOG.md`
-```
-
-**Controls**
-
-- future features;
-- postponed ideas;
-- roadmap items;
-- advanced integrations;
-- later reporting capabilities;
-- mobile, AI, automation, and enterprise features.
-
-**Implementation rule**
-
-When a good idea is not required for the approved vertical slice, move it here instead of expanding V1.
-
----
-
-### 4.9 Unresolved Decisions
-
-**Primary file**
-
-```text
-`docs/00-stage-0/UNRESOLVED-DECISIONS.md`
-```
-
-**Controls**
-
-- open product questions;
-- unclear workflow rules;
-- unresolved payment decisions;
-- incomplete permission decisions;
-- design ambiguity that affects implementation;
-- architecture blockers;
-- questions that require product-owner approval.
-
-**Implementation rule**
-
-Do not hide uncertainty inside code or prompts. Record it here.
-
----
-
-### 4.10 Design References
-
-**Primary file**
-
-```text
-`docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md`
-```
-
-**Controls**
-
-- approved visual direction;
-- applicant-shell references;
-- officer-shell references;
-- admin-shell references;
-- workflow illustration references;
-- shell aesthetic;
-- navigation styling cues;
-- known missing designs;
-- reference status such as draft, approved, or obsolete.
-
-**Implementation rule**
-
-Use this file for look and feel, but do not allow a visual reference to override approved product behavior.
-
----
-
-## 5. Recommended Project Structure
-
-```text
-faidia/
-├── app/
-├── components/
-├── lib/
-├── public/
-├── docs/
-│   ├── SOURCE-OF-TRUTH.md
-│   ├── 00-stage-0/
-│   │   ├── STAGE-0-V1-SPECIFICATION.md
-│   │   ├── CURRENT-PROCESS.md
-│   │   ├── V1-VERTICAL-SLICE.md
-│   │   ├── ROLE-PERMISSIONS-MATRIX.md
-│   │   ├── STATUS-MAPPINGS.md
-│   │   ├── PAGE-INVENTORY.md
-│   │   ├── V1-NON-GOALS.md
-│   │   ├── POST-V1-BACKLOG.md
-│   │   ├── UNRESOLVED-DECISIONS.md
-│   │   └── DESIGN-REFERENCE-REGISTER.md
-│   └── assets/
-│       ├── applicant-shell/
-│       ├── officer-shell/
-│       ├── admin-shell/
-│       └── workflows/
-└── README.md
-```
-
----
-
-## 6. Prompt-Building Template
-
-Use this at the beginning of future implementation prompts:
-
-```text
-Before making changes, read and follow:
-
-- docs/SOURCE-OF-TRUTH.md
-- docs/00-stage-0/STAGE-0-V1-SPECIFICATION.md
-- docs/00-stage-0/V1-VERTICAL-SLICE.md
-- docs/00-stage-0/ROLE-PERMISSIONS-MATRIX.md
-- docs/00-stage-0/STATUS-MAPPINGS.md
-- docs/00-stage-0/PAGE-INVENTORY.md
-- docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md
-
-Task:
-[Describe the exact build task here.]
-
-Rules:
-- Do not contradict the source-of-truth files.
-- Do not invent new roles, statuses, pages, or workflow steps.
-- Do not add postponed features.
-- Do not redesign unrelated shells or pages.
-- Do not change database structure unless required by the approved workflow.
-- Flag unresolved decisions instead of guessing.
-- Preserve existing wiring unless the task explicitly requires a change.
-```
-
----
-
-## 7. Task-Specific Reading Guide
-
-### Building an applicant page
-
-Read:
-
-```text
-- STAGE-0-V1-SPECIFICATION.md
-- V1-VERTICAL-SLICE.md
-- ROLE-PERMISSIONS-MATRIX.md
-- STATUS-MAPPINGS.md
-- PAGE-INVENTORY.md
-- DESIGN-REFERENCE-REGISTER.md
-```
-
-### Building an officer workflow
-
-Read:
-
-```text
-- V1-VERTICAL-SLICE.md
-- ROLE-PERMISSIONS-MATRIX.md
-- STATUS-MAPPINGS.md
-- PAGE-INVENTORY.md
-- CURRENT-PROCESS.md
-```
-
-### Building admin configuration
-
-Read:
-
-```text
-- STAGE-0-V1-SPECIFICATION.md
-- ROLE-PERMISSIONS-MATRIX.md
-- PAGE-INVENTORY.md
-- V1-NON-GOALS.md
-```
-
-### Building workflow logic
-
-Read:
-
-```text
-- V1-VERTICAL-SLICE.md
-- STATUS-MAPPINGS.md
-- ROLE-PERMISSIONS-MATRIX.md
-- UNRESOLVED-DECISIONS.md
-```
-
-### Building dashboards or reports
-
-Read:
-
-```text
-- STAGE-0-V1-SPECIFICATION.md
-- STATUS-MAPPINGS.md
-- PAGE-INVENTORY.md
-- DESIGN-REFERENCE-REGISTER.md
-```
-
----
-
-## 8. Change-Control Process
-
-When a decision changes:
-
-1. Identify the authoritative source file.
-2. Update that file first.
-3. Update any dependent documents.
-4. Change the version number where appropriate.
-5. Add or close any unresolved decision.
-6. Update implementation code.
-7. Commit the documentation and code together where practical.
-8. Use a clear Git commit message.
-
-Example commit messages:
-
-```text
-Update transcript workflow correction rules
-Add applicant navigation to page inventory
-Revise V1 status mappings
-Move WhatsApp integration to post-V1 backlog
-Approve Stage 0 specification v1.0
-```
-
----
-
-## 9. Freeze Rules
-
-### Frozen for V1
-
-Once approved, the following should not change casually:
-
-- target institution type;
-- primary service;
-- demonstration services;
-- V1 scope;
-- role model;
-- permission model;
-- workflow steps;
-- status definitions;
-- page inventory classifications;
-- shell and navigation structure.
-
-### Not yet frozen in Stage 0
-
-The following may remain flexible until later implementation stages:
-
-- exact font sizes;
-- exact spacing tokens;
-- exact sidebar width;
-- exact icon sizes;
-- final breakpoints;
-- final shadow values;
-- final card radii;
-- final mobile layouts;
-- final chart styling.
-
----
-
-## 10. AI Coding Agent Guardrails
-
-AI coding agents must not:
-
-- invent new product behavior;
-- create unapproved roles;
-- create page-specific status values;
-- expand V1 scope silently;
-- rebuild unrelated areas;
-- replace approved navigation with older mockup navigation;
-- expose internal statuses directly to applicants;
-- bypass role or tenant restrictions;
-- treat demo-only pages as production-complete;
-- implement postponed features unless explicitly instructed.
-
-AI coding agents should:
-
-- preserve existing structure where possible;
-- make the smallest necessary change;
-- report contradictions;
-- reference the correct source file;
-- update tests with implementation changes;
-- keep documentation aligned with code.
-
----
-
-## 11. Approval States
-
-Use these document states consistently:
-
-```text
-DRAFT
-UNDER_REVIEW
-APPROVED_FOR_V1
-FROZEN_FOR_IMPLEMENTATION
-SUPERSEDED
-POSTPONED
-```
-
-Recommended version progression:
-
-```text
-0.1 = initial draft
-0.2 = improved working draft
-0.3 = reviewed draft
-0.9 = final review candidate
-1.0 = approved V1 source of truth
-```
-
----
-
-## 12. Quick Reference Table
+Before implementing a feature, route, workflow, role, page, permission, status, or database change, read:
+
+- `docs/SOURCE-OF-TRUTH.md`
+- `docs/00-stage-0/STAGE-0-V1-SPECIFICATION.md`
+- `docs/00-stage-0/V1-VERTICAL-SLICE.md`
+- `docs/00-stage-0/ROLE-PERMISSIONS-MATRIX.md`
+- `docs/00-stage-0/STATUS-MAPPINGS.md`
+- `docs/00-stage-0/PAGE-INVENTORY.md`
+
+Also read these when relevant:
+
+- `docs/00-stage-0/CURRENT-PROCESS.md`
+- `docs/00-stage-0/V1-NON-GOALS.md`
+- `docs/00-stage-0/POST-V1-BACKLOG.md`
+- `docs/00-stage-0/UNRESOLVED-DECISIONS.md`
+- `docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md`
+- `docs/00-stage-0/STAGE-0-APPROVED-DECISION-REGISTER.md`
+
+## 4. Approved V1 Decisions
+
+DEC-001: B - Postpone transfer, keep referral only.
+DEC-002: A - Approve current demo defaults.
+DEC-003: A - Finance checks whether a hold blocks issuance.
+DEC-004: B - Finance HOLD returns request to applicant action.
+DEC-005: B - Final outcome is a controlled notice plus demo transcript.
+DEC-006: B - Institution/current process creates official transcript; FAIDIA stores exact issued copy.
+DEC-007: D - Complete at recorded download/collection or approved closure rule.
+DEC-008: C - ID/passport required; student ID conditional.
+DEC-009: A - Delivery methods are controlled download or physical collection.
+DEC-010: A - One copy only for Stage 1.
+DEC-011: A - Warn and block active duplicate unless staff override.
+DEC-012: A - Drafts expire after 30 days.
+DEC-013: B - Manual payment reference.
+DEC-014: C - Payment stays inside request form/review flow only.
+DEC-015: A - Open email registration for demo; controlled applicant group for pilot.
+DEC-016: B - Supervisor assignment plus department self-claim.
+DEC-017: A - Registrar approves every Transcript Request.
+DEC-018: A - Organization Admin does not automatically read sensitive request content.
+DEC-019: B - Parent request has no ASSIGNED status; assignment lives on work items.
+DEC-020: A - Applicant documents use ACCEPTED, not APPROVED.
+DEC-021: A - Handoffs complete at COMPLETED; originator receipt is history/notification.
+DEC-022: A - Correction resubmission returns request to IN_REVIEW and uses history.
+DEC-023: B - Preparing Outcome is public only when there is a real delay.
+DEC-024: B - Organization selection is required only for staff with multiple memberships.
+DEC-025: A - Standalone admin audit page remains demo-only; request audit appears in request details.
+DEC-026: A - Proceed with documented current-process assumptions for demo; validate before real pilot.
+DEC-027: A - In-app required; email optional for demo and required before external pilot.
+DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
+DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
+DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
+DEC-031: A - Stage 0 can be approved after source docs are updated.
+
+## 5. Source-Of-Truth Map
 
 | Product area | Authoritative file |
 |---|---|
-| V1 scope | `STAGE-0-V1-SPECIFICATION.md` |
-| Current process | `CURRENT-PROCESS.md` |
-| End-to-end workflow | `V1-VERTICAL-SLICE.md` |
-| Roles and permissions | `ROLE-PERMISSIONS-MATRIX.md` |
-| Status model | `STATUS-MAPPINGS.md` |
-| Pages and navigation | `PAGE-INVENTORY.md` |
+| V1 scope, pilot boundary, service definition | `STAGE-0-V1-SPECIFICATION.md` |
+| Current manual process and validation assumptions | `CURRENT-PROCESS.md` |
+| End-to-end Transcript Request workflow | `V1-VERTICAL-SLICE.md` |
+| Roles, scopes, permissions, access boundaries | `ROLE-PERMISSIONS-MATRIX.md` |
+| Internal statuses and applicant-facing mappings | `STATUS-MAPPINGS.md` |
+| Pages, routes, page classification, navigation | `PAGE-INVENTORY.md` |
 | Excluded V1 features | `V1-NON-GOALS.md` |
-| Future roadmap | `POST-V1-BACKLOG.md` |
-| Open questions | `UNRESOLVED-DECISIONS.md` |
-| Visual direction | `DESIGN-REFERENCE-REGISTER.md` |
+| Future roadmap and postponed work | `POST-V1-BACKLOG.md` |
+| Decision history and resolved items | `UNRESOLVED-DECISIONS.md` |
+| Visual direction and reference status | `DESIGN-REFERENCE-REGISTER.md` |
 
----
+## 6. Frozen For V1
 
-## 13. Final Operating Rule
+The following are frozen for Stage 1 implementation unless the product owner updates the source docs first:
 
-The repository documentation is the authority.
+- product category: Service Operations Platform;
+- target institution: Kenyan TVET / technical college / small private college;
+- demo organization: Savannah Technical College;
+- primary service: Transcript Request;
+- demonstration services: Student Clearance Request and Certificate Replacement Request;
+- departments: Student Records, Finance, Registrar;
+- handoff type in the main path: referral only;
+- payment model: manual payment reference inside request flow;
+- Finance check: hold blocking issuance;
+- Registrar approval: required for every Transcript Request;
+- parent request statuses: no parent `ASSIGNED` status;
+- document review status: `ACCEPTED`;
+- completion rule: recorded download, collection, or approved closure;
+- applicant registration: open email registration for demo, controlled applicant group for pilot.
 
-Use this sequence:
+## 7. Implementation Guardrails
 
-```text
-Explore in conversation
-→ make a decision
-→ update the correct Markdown file
-→ review the change
-→ commit to Git
-→ use the updated file in future prompts
-```
+AI coding agents must not:
 
-Do not rely on chat history alone to define the product.
+- invent roles, statuses, routes, workflow steps, or permissions;
+- activate transfer routes in Stage 1;
+- create standalone V1 payment pages unless product scope changes;
+- expose internal notes, raw handoff details, or confidential Finance details to applicants;
+- let Organization Admin automatically read sensitive request content;
+- use page-specific status strings;
+- implement postponed features because they appear in backlog or old mockups.
 
+AI coding agents should:
+
+- use server-side authorization and shared permission helpers;
+- keep transactions around critical state changes;
+- record audit events and status history;
+- derive reports from real timestamps/events;
+- keep applicant-facing status separate from internal state.
+
+## 8. Stage 0 Approval State
+
+Stage 0 is approved for Stage 1 implementation using these documents as controlling references. If a future product decision changes workflow, database structure, routes, permissions, statuses, or navigation, update the relevant Markdown files before code changes.

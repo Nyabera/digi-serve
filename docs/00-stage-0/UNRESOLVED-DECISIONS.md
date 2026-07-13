@@ -1,253 +1,102 @@
-# FAIDIA Stage 0 — Unresolved Decisions
+# FAIDIA Stage 0 — Resolved Decisions Register
 
-Status: **DRAFT — requires product-owner approval**  
-Version: **0.1**  
-Last updated: **2026-07-12**  
-Product: **FAIDIA — Service Operations Platform**  
-
-> This Stage 0 document is based on the uploaded FAIDIA product description, V1 structure, full development structure, recommended stack and strict build-order documents. Recommended defaults are filled in, while unresolved items are explicitly marked.
-
+Status: **APPROVED_FOR_V1**  
+Version: **1.0**  
+Last updated: **2026-07-13**  
+Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This file records decisions that remain open. Coding agents must not guess answers that affect the database, workflow, permissions, routes or user experience.
-
-Statuses:
-
-- `OPEN`
-- `RECOMMENDED_DEFAULT`
-- `RESOLVED`
-- `DEFERRED`
-- `SUPERSEDED`
-
-## 2. Resolved or recommended defaults
-
-| ID | Decision | Current answer | Status |
-|---|---|---|---|
-| DEC-001 | Product category | Service Operations Platform | RESOLVED |
-| DEC-002 | First market scenario | Kenyan TVET / technical college / small private college | RECOMMENDED_DEFAULT |
-| DEC-003 | Fully functional service | Transcript Request | RESOLVED |
-| DEC-004 | Demonstration services | Student Clearance and Certificate Replacement | RECOMMENDED_DEFAULT |
-| DEC-005 | Demo organization | Savannah Technical College | RECOMMENDED_DEFAULT |
-| DEC-006 | Demo departments | Student Records, Finance, Registrar | RECOMMENDED_DEFAULT |
-| DEC-007 | V1 roles | Applicant, Officer, Supervisor, Organization Admin | RESOLVED |
-| DEC-008 | Primary handoff | Referral; originator retains ownership | RESOLVED |
-| DEC-009 | Transfer rule | Ownership changes only after acceptance | RESOLVED |
-| DEC-010 | Supervisor shell | Reuse officer shell with extra permissions/navigation | RESOLVED |
-
-## 3. Blocking product decisions
-
-### DEC-011 — Transcript Request fee
-
-- **Status:** OPEN
-- **Options:** no fee; manual payment reference; cashier confirmation; live M-PESA.
-- **Recommended:** manual payment reference if Finance needs a meaningful check; otherwise no fee.
-- **Impact:** form, Finance workflow, payment records, pages, notifications and tests.
-- **Resolve before:** form schema and Finance implementation.
-
-### DEC-012 — Exact Finance verification
-
-- **Status:** OPEN
-- **Options:** outstanding balance/hold; payment reference; transcript fee; general clearance.
-- **Recommended:** confirm whether any Finance hold prevents issuance; verify payment reference only if fee is enabled.
-- **Impact:** referral request, result codes and continuation rules.
-- **Resolve before:** workflow and seed data.
-
-### DEC-013 — Finance HOLD result
-
-- **Status:** OPEN
-- **Options:** reject; return to applicant; pause; supervisor exception.
-- **Recommended:** return to applicant with clear action where the issue is resolvable; reject only where policy requires.
-- **Impact:** statuses, notification, SLA and correction logic.
-
-### DEC-014 — Final outcome type
-
-- **Status:** OPEN
-- **Options:** official transcript PDF; collection notice; dispatch confirmation; decision letter plus manually issued transcript.
-- **Recommended:** completion/collection/dispatch notice plus controlled sample transcript in demo mode.
-- **Impact:** PDF template, document type and demo narrative.
-
-### DEC-015 — Who creates the official transcript?
-
-- **Status:** OPEN
-- **Options:** FAIDIA; institution's current system; staff manual upload.
-- **Recommended:** current institution process or staff upload; FAIDIA stores the exact issued copy.
-- **Impact:** integrations, legal authority and PDF generation.
-
-### DEC-016 — Completion rule
-
-- **Status:** OPEN
-- **Options:** approval; outcome generation; notification; download/collection.
-- **Recommended:** Approved at decision, Ready at issuance, Completed at recorded delivery/collection or approved institutional closure rule.
-- **Impact:** statuses, reporting and SLA endpoint.
-
-### DEC-017 — Applicant registration model
-
-- **Status:** OPEN
-- **Options:** open registration; invitation; admission-number lookup; imported applicants.
-- **Recommended:** open email registration for demo; controlled applicant group for pilot.
-- **Impact:** auth, eligibility and abuse controls.
-
-### DEC-018 — Officer self-assignment
-
-- **Status:** OPEN
-- **Options:** supervisor only; self-claim; automatic round-robin.
-- **Recommended:** supervisor assignment plus optional self-claim within own department.
-- **Impact:** queue actions, permissions and history.
-
-### DEC-019 — Registrar approval requirement
-
-- **Status:** OPEN
-- **Options:** every request; exceptional cases only; Records approval for standard cases.
-- **Recommended:** every request in the first demo to validate role separation.
-- **Impact:** workflow length and approval queue.
-
-### DEC-020 — Transfer in first pilot
-
-- **Status:** OPEN
-- **Options:** build/test but keep outside transcript main path; postpone until referral validation.
-- **Recommended:** build after referrals, not in the main success path.
-- **Impact:** build order and tests.
-
-## 4. Status and domain decisions
-
-### DEC-021 — `ASSIGNED` on parent request
-
-- **Status:** OPEN
-- **Recommended:** keep assignment on work items/assignments unless a distinct parent status is operationally useful.
-- **Impact:** schema and reports.
-
-### DEC-022 — Document status wording
-
-- **Status:** OPEN
-- **Options:** `ACCEPTED` or `APPROVED`.
-- **Recommended:** `ACCEPTED` for applicant-supplied documents; reserve `APPROVED` for decisions.
-
-### DEC-023 — Final handoff state
-
-- **Status:** OPEN
-- **Options:** `COMPLETED` only; `COMPLETED` then `RETURNED_TO_ORIGINATOR`.
-- **Recommended:** `COMPLETED` with originator receipt represented by history/notification unless acknowledgement is required.
-
-### DEC-024 — Correction-resubmission status
-
-- **Status:** OPEN
-- **Recommended:** no dedicated request status; use history and return to `IN_REVIEW`.
-
-### DEC-025 — Preparing Outcome public status
-
-- **Status:** OPEN
-- **Recommended:** use only when outcome preparation has a meaningful delay.
-
-## 5. Service details
-
-### DEC-026 — Identity documents
-
-- **Status:** OPEN
-- **Options:** ID/passport; student ID; both; conditional.
-- **Recommended:** ID/passport required, student ID conditional.
-- **Confirm with:** pilot institution.
-
-### DEC-027 — Delivery methods
-
-- **Status:** OPEN
-- **Options:** controlled download; physical collection; email to institution; dispatch/courier.
-- **Recommended:** collection or controlled download for demo.
-
-### DEC-028 — Number of copies
-
-- **Status:** OPEN
-- **Recommended:** one copy unless fee and fulfillment explicitly support more.
-
-### DEC-029 — Duplicate active request
-
-- **Status:** OPEN
-- **Options:** block; warn; allow.
-- **Recommended:** warn and block another active request unless staff override.
-
-### DEC-030 — Draft expiry
-
-- **Status:** OPEN
-- **Recommended:** 30 days for demo/pilot, later configurable.
-
-## 6. Pilot and operations
-
-### DEC-031 — First real pilot institution
-
-- **Status:** OPEN
-- **Need:** named institution, service owner and weekly feedback agreement.
-
-### DEC-032 — Pilot data sensitivity
-
-- **Status:** OPEN
-- **Options:** synthetic only; limited real data; full production.
-- **Recommended:** synthetic demo, carefully limited real pilot data only after hardening and agreement.
-
-### DEC-033 — Pilot volume
-
-- **Status:** RECOMMENDED_DEFAULT
-- **Recommended:** 20–50 controlled requests.
-- **Confirm:** institution can generate enough requests in the pilot period.
-
-### DEC-034 — External email
-
-- **Status:** OPEN
-- **Recommended:** optional for internal demo; required for external pilot.
-
-### DEC-035 — Applicant support
-
-- **Status:** OPEN
-- **Options:** founder; institution helpdesk; service owner; shared.
-- **Recommended:** founder plus service owner during pilot.
-
-### DEC-036 — Feedback method
-
-- **Status:** OPEN
-- **Recommended:** weekly staff session, short applicant feedback and structured issue log.
-
-## 7. Design decisions intentionally deferred
-
-Not Stage 0 blockers:
-
-- exact sidebar width;
-- exact top-bar height;
-- exact typography scale;
-- final spacing values;
-- exact breakpoints;
-- final chart palette;
-- final shadow/radius values;
-- final mobile navigation pattern.
-
-Stage 0 still decides the visual direction, workspace boundaries and intended navigation.
-
-## 8. Decision template
-
-```md
-### DEC-XXX — Title
-
-- **Status:** OPEN
-- **Question:**
-- **Options:**
-- **Recommended default:**
-- **Decision:**
-- **Reason:**
-- **Affected documents:**
-- **Affected implementation:**
-- **Owner:**
-- **Resolve before:**
-- **Resolved date:**
+This file formerly tracked unresolved Stage 0 decisions. Product-owner answers have now been applied. The items below are the approved Stage 0 decisions for V1.
+
+No blocking Stage 0 decisions remain open for Stage 1.
+
+## 2. Approved Answer Set
+
+```text
+DEC-001: B - Postpone transfer, keep referral only.
+DEC-002: A - Approve current demo defaults.
+DEC-003: A - Finance checks whether a hold blocks issuance.
+DEC-004: B - Finance HOLD returns request to applicant action.
+DEC-005: B - Final outcome is a controlled notice plus demo transcript.
+DEC-006: B - Institution/current process creates official transcript; FAIDIA stores exact issued copy.
+DEC-007: D - Complete at recorded download/collection or approved closure rule.
+DEC-008: C - ID/passport required; student ID conditional.
+DEC-009: A - Delivery methods are controlled download or physical collection.
+DEC-010: A - One copy only for Stage 1.
+DEC-011: A - Warn and block active duplicate unless staff override.
+DEC-012: A - Drafts expire after 30 days.
+DEC-013: B - Manual payment reference.
+DEC-014: C - Payment stays inside request form/review flow only.
+DEC-015: A - Open email registration for demo; controlled applicant group for pilot.
+DEC-016: B - Supervisor assignment plus department self-claim.
+DEC-017: A - Registrar approves every Transcript Request.
+DEC-018: A - Organization Admin does not automatically read sensitive request content.
+DEC-019: B - Parent request has no ASSIGNED status; assignment lives on work items.
+DEC-020: A - Applicant documents use ACCEPTED, not APPROVED.
+DEC-021: A - Handoffs complete at COMPLETED; originator receipt is history/notification.
+DEC-022: A - Correction resubmission returns request to IN_REVIEW and uses history.
+DEC-023: B - Preparing Outcome is public only when there is a real delay.
+DEC-024: B - Organization selection is required only for staff with multiple memberships.
+DEC-025: A - Standalone admin audit page remains demo-only; request audit appears in request details.
+DEC-026: A - Proceed with documented current-process assumptions for demo; validate before real pilot.
+DEC-027: A - In-app required; email optional for demo and required before external pilot.
+DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
+DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
+DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
+DEC-031: A - Stage 0 can be approved after source docs are updated.
 ```
 
-## 9. Resolution procedure
+## 3. Resolved Decisions
 
-1. Discuss options.
-2. Record chosen answer here.
-3. Update the controlling specification/workflow/status/page file.
-4. Mark this entry `RESOLVED`.
-5. Increase affected versions.
-6. Commit documentation.
-7. Then prompt the coding agent.
+| ID | Decision | Approved answer | Status |
+|---|---|---|---|
+| DEC-001 | Transfer scope | Postpone transfer; keep referral only | RESOLVED |
+| DEC-002 | Demo defaults | Approve current defaults | RESOLVED |
+| DEC-003 | Finance verification | Check whether Finance hold blocks issuance | RESOLVED |
+| DEC-004 | Finance HOLD result | Return to applicant with clear action | RESOLVED |
+| DEC-005 | Final outcome type | Controlled notice plus demo transcript | RESOLVED |
+| DEC-006 | Official transcript creator | Institution/current process creates it; FAIDIA stores exact copy | RESOLVED |
+| DEC-007 | Completion rule | Complete at recorded download/collection/delivery/closure | RESOLVED |
+| DEC-008 | Identity documents | ID/passport required; student ID conditional | RESOLVED |
+| DEC-009 | Delivery methods | Controlled download or physical collection | RESOLVED |
+| DEC-010 | Number of copies | One copy only for Stage 1 | RESOLVED |
+| DEC-011 | Duplicate active request | Warn and block unless staff override | RESOLVED |
+| DEC-012 | Draft expiry | 30 days | RESOLVED |
+| DEC-013 | Transcript Request fee | Manual payment reference | RESOLVED |
+| DEC-014 | Payment page classification | Payment stays inside request form/review flow | RESOLVED |
+| DEC-015 | Applicant registration model | Open email registration for demo; controlled group for pilot | RESOLVED |
+| DEC-016 | Officer self-assignment | Supervisor assignment plus department self-claim | RESOLVED |
+| DEC-017 | Registrar approval requirement | Every Transcript Request requires Registrar approval | RESOLVED |
+| DEC-018 | Organization Admin request access | No automatic sensitive request-content access | RESOLVED |
+| DEC-019 | Parent request `ASSIGNED` | No parent `ASSIGNED`; assignment lives on work items | RESOLVED |
+| DEC-020 | Document status wording | Use `ACCEPTED` | RESOLVED |
+| DEC-021 | Final handoff state | `COMPLETED` only; originator receipt by history/notification | RESOLVED |
+| DEC-022 | Correction-resubmission status | No dedicated parent status; return to `IN_REVIEW` | RESOLVED |
+| DEC-023 | Preparing Outcome public status | Use only for meaningful delay | RESOLVED |
+| DEC-024 | Organization selection route | Required only for staff with multiple memberships | RESOLVED |
+| DEC-025 | Audit activity page | Standalone admin audit remains demo-only | RESOLVED |
+| DEC-026 | Current process validation | Proceed for demo; validate before real pilot | RESOLVED |
+| DEC-027 | External email | In-app required; email optional for demo, required before external pilot | RESOLVED |
+| DEC-028 | Pilot operations | Synthetic demo first; limited pilot later with support/feedback | RESOLVED |
+| DEC-029 | Missing design references | Current visual direction approved; design missing screens during build | RESOLVED |
+| DEC-030 | Canonical source of truth | Create `docs/SOURCE-OF-TRUTH.md` | RESOLVED |
+| DEC-031 | Stage 0 approval state | Approve Stage 0 after source docs updated | RESOLVED |
 
-## 10. Coding-agent instruction
+## 4. Remaining Non-Blocking Follow-Up Before Real Pilot
 
-> If an open decision affects the current task, surface the decision ID and stop. Do not choose the easiest coding option.
+The following do not block Stage 1 implementation but should be validated before external real-data pilot:
+
+- real institution name and owner;
+- real fee schedule;
+- real Finance hold/payment-reference process;
+- real approval authority/SOP;
+- real output sample;
+- real closure condition;
+- email provider setup;
+- pilot support owner;
+- weekly feedback mechanism.
+
+## 5. Coding-Agent Instruction
+
+If a future task conflicts with this resolved decision register, stop and ask for a documentation update before implementing.

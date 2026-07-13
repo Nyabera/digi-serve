@@ -1,22 +1,29 @@
 # FAIDIA Stage 0 — V1 Vertical Slice
 
-Status: **DRAFT — requires product-owner approval**  
-Version: **0.1**  
-Last updated: **2026-07-12**  
-Product: **FAIDIA — Service Operations Platform**  
-
-> This Stage 0 document is based on the uploaded FAIDIA product description, V1 structure, full development structure, recommended stack and strict build-order documents. Recommended defaults are filled in, while unresolved items are explicitly marked.
-
+Status: **APPROVED_FOR_V1**  
+Version: **1.0**  
+Last updated: **2026-07-13**  
+Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document defines the first complete FAIDIA journey that must work across authentication, database records, applicant pages, officer pages, departmental handoffs, permissions, notifications, timestamps, audit events and basic reporting.
+This document defines the first complete FAIDIA journey that must work across authentication, database records, applicant pages, officer pages, departmental referral, permissions, notifications, timestamps, audit events, outcome access, and reporting.
 
-The first vertical slice is not a visual-only demo. It is the end-to-end acceptance scenario for the working V1.
+The Stage 1 vertical slice is end-to-end. It is not a visual-only demo.
 
-## 2. Acceptance scenario
+## 2. Approved Acceptance Scenario
 
-> An applicant visits Savannah Technical College's service catalogue, selects Transcript Request, signs in, completes the form, uploads the required documents and submits. Student Records reviews the request and asks for one correction. The applicant replaces the rejected document and resubmits. Student Records creates a Finance referral. Finance accepts, completes the check and returns the result. Student Records completes its review and sends the request to the Registrar. The Registrar approves the request. FAIDIA records or generates the controlled outcome, notifies the applicant and completes the request. The applicant can access the outcome, the supervisor can see stage durations and the audit history contains the complete sequence.
+An applicant visits Savannah Technical College's service catalogue, selects Transcript Request, signs in or registers, completes the form, uploads required documents, enters a manual payment reference, and submits.
+
+Student Records reviews the request, rejects one document, and requests a correction. The applicant replaces the rejected document and resubmits.
+
+Student Records creates a Finance referral. Finance accepts the referral, checks whether a Finance hold blocks transcript issuance, records `CLEAR`, `HOLD`, or `CANNOT_VERIFY`, and completes the referral.
+
+If Finance returns `HOLD`, the applicant receives clear applicant-visible action. If the result allows continuation, Student Records completes its review and sends the request to Registrar approval.
+
+The Registrar approves or rejects the request. If approved, FAIDIA records or stores a controlled outcome: Completion / Collection / Dispatch Notice plus controlled demo transcript where applicable. The applicant is notified and can download the outcome or see collection instructions. The request completes when download, collection, delivery, or approved closure is recorded.
+
+The supervisor can see stage durations, and the audit history contains the complete sequence.
 
 ## 3. Actors
 
@@ -24,99 +31,91 @@ The first vertical slice is not a visual-only demo. It is the end-to-end accepta
 |---|---|
 | Applicant | Current or former student requesting a transcript |
 | Originating officer | Student Records officer coordinating the parent request |
-| Receiving officer | Finance officer completing a defined verification |
-| Supervisor / approver | Registrar or authorized supervisor making the final decision |
-| Organization admin | Configures departments, memberships and published service |
-| FAIDIA | Records state, files, notifications, audit events and metrics |
+| Receiving officer | Finance officer completing hold/payment-reference verification |
+| Registrar / authorized supervisor | Final decision maker |
+| Organization admin | Configures departments, memberships, service, forms, documents, workflow, and branding |
+| FAIDIA | Records state, files, notifications, audit events, and metrics |
 
 ## 4. Preconditions
 
 Before the scenario starts:
 
 - Savannah Technical College exists;
-- Student Records, Finance and Registrar exist;
-- applicant, Records officer, Finance officer, supervisor and admin accounts exist;
+- Student Records, Finance, and Registrar exist;
+- applicant, Records officer, Finance officer, Registrar/supervisor, and admin accounts exist;
 - memberships are active;
 - Transcript Request is active and published;
-- a published form schema exists;
-- document requirements exist;
-- a published workflow version exists;
-- shared status definitions exist;
+- form schema is published;
+- document requirements are published;
+- workflow version is published;
 - private storage is configured;
-- required feature flags are enabled;
+- shared statuses are defined;
+- feature flags required for the slice are enabled;
 - seed data is synthetic or non-sensitive.
 
-## 5. Required service data
+## 5. Required Service Data
 
-### Form data
+Form data:
 
-- admission number;
-- full name;
+- full legal name;
 - email;
 - phone;
+- admission or student number;
+- national ID or passport number;
 - programme;
+- department/school where relevant;
 - year of admission;
-- year of completion;
+- year of completion/graduation;
 - transcript purpose;
-- delivery method;
-- recipient details;
+- one copy;
+- delivery method: controlled download or physical collection;
+- recipient details where relevant;
+- manual payment reference;
 - declaration.
 
-### Documents
+Documents:
 
-- ID or passport;
-- student ID or institutional identifier;
-- one intentionally invalid sample document for the correction path;
-- optional payment reference or receipt if the fee path is enabled.
+- ID or passport: required;
+- student ID or institutional identifier: conditional where available;
+- optional proof of manual payment reference where policy requires it;
+- one intentionally invalid sample document for correction-path testing.
 
-## 6. Main journey
+## 6. Main Journey
 
-### Phase 1 — Service discovery
+### Phase 1 — Service Discovery
 
-#### Step 1: Open organization service portal
-
-**Actor:** Applicant  
-**Page:** Public organization homepage or service catalogue
+Applicant opens the organization service homepage or service catalogue.
 
 Display:
 
+- institution branding;
 - service name;
 - description;
 - eligibility;
 - requirements;
-- required documents;
-- fee or no-fee state;
+- required and conditional documents;
+- manual payment-reference requirement;
 - processing target;
 - start action.
 
-Record:
-
-- `service_viewed`.
+Record `service_viewed`.
 
 Acceptance:
 
 - only active published services appear;
-- institution branding appears;
-- the service version is identifiable;
-- the applicant can understand requirements before signing in.
+- service version is identifiable;
+- applicant can understand requirements before signing in.
 
-#### Step 2: Open service details
+### Phase 2 — Authentication And Draft
 
-Display a complete service description and a clear Start Request action.
+If unauthenticated, the applicant is redirected to sign in or registration and returned to the service after authentication.
 
-### Phase 2 — Authentication and draft
+Registration model:
 
-#### Step 3: Select Start Request
+- open email registration for demo;
+- controlled applicant group for pilot.
 
-If unauthenticated, redirect to sign in or registration and return to the service afterward.
-
-#### Step 4: Authenticate
-
-Validate identity and session. Applicants must not reach staff workspaces.
-
-#### Step 5: Create draft request
-
-Create or record:
+Draft creation records:
 
 - parent request;
 - organization ID;
@@ -124,302 +123,185 @@ Create or record:
 - service ID;
 - published service-version link;
 - status `DRAFT`;
-- initial audit event `REQUEST_CREATED`;
+- audit event `REQUEST_CREATED`;
 - product event `request_started`.
 
-The request must belong to the applicant and current organization context.
+Draft expiry: **30 days**.
 
-### Phase 3 — Form, files and submission
+### Phase 3 — Form, Files, Review, Submission
 
-#### Step 6: Complete application form
+Applicant completes the configured form, uploads documents, reviews the summary, and submits.
 
-Requirements:
-
-- fields load from the published schema;
-- client validation improves usability;
-- server validation remains authoritative;
-- draft can be saved and restored;
-- another applicant cannot access the draft.
-
-#### Step 7: Upload documents
-
-Requirements:
-
-- private storage;
-- allowed MIME types and extensions;
-- file-size limits;
-- sanitized names;
-- metadata stored in PostgreSQL;
-- request-level association;
-- replacement before submission;
-- no permanent public URL.
-
-Audit:
-
-- `DOCUMENT_UPLOADED`.
-
-#### Step 8: Review submission
-
-Show a read-only summary of:
-
-- field responses;
-- document checklist;
-- fee or payment reference;
-- declaration;
-- processing target.
-
-#### Step 9: Confirm submission
-
-Server validates:
+Server validation checks:
 
 - applicant ownership;
+- organization context;
 - active service version;
 - required fields;
 - required documents;
-- duplicate-request rule;
-- organization context.
+- manual payment reference if required;
+- duplicate active request rule.
 
-One transaction should create or update:
+Duplicate active request rule:
+
+- warn and block another active Transcript Request unless staff override exists.
+
+Submission transaction creates or updates:
 
 - final request reference;
-- status `SUBMITTED`;
+- request status `SUBMITTED`;
 - response snapshot;
 - workflow instance;
 - Records Review work item;
-- assignment or unassigned queue entry;
+- assignment or unassigned department queue entry;
 - status history;
 - audit event `REQUEST_SUBMITTED`;
 - applicant notification;
-- product event `request_submitted`;
-- domain/outbox event when implemented.
+- product event `request_submitted`.
 
-Applicant sees:
+### Phase 4 — Records Review
 
-- confirmation;
-- reference;
-- Submitted status;
-- expected next step.
+Request appears in My Queue if assigned or Department Queue if unassigned.
 
-### Phase 4 — Records review
+Officer self-claim is allowed only for authorized officers within their own department.
 
-#### Step 10: Enter correct queue
-
-Request appears in My Queue if assigned, otherwise Department Queue.
-
-Authorization must prevent cross-organization and unauthorized cross-department access.
-
-#### Step 11: Officer opens request
-
-Display:
+Officer opens request and sees:
 
 - applicant information;
 - form responses;
 - documents;
-- public and internal status;
+- internal status;
+- applicant-safe public status;
 - work item;
 - current owner;
 - available actions;
 - applicant messages;
 - internal notes;
-- timeline;
 - permitted audit history.
 
-Record:
+Start review transition:
 
-- `request_opened_by_officer`;
-- `REQUEST_VIEWED` where sensitive-access logging is enabled.
+- request `IN_REVIEW`;
+- Records work item `IN_PROGRESS`;
+- public status In Review;
+- `first_action_at` and `review_started_at` captured;
+- audit event `REVIEW_STARTED`.
 
-#### Step 12: Start review
+### Phase 5 — Correction And Resubmission
 
-Transitions:
+Officer rejects one document with a clear reason.
 
-- request to `IN_REVIEW`;
-- Records work item to `IN_PROGRESS`;
-- public status to In Review;
-- capture `first_action_at`;
-- record `first_action_taken` and `REVIEW_STARTED`.
+Document status becomes `REJECTED`.
 
-### Phase 5 — Correction and resubmission
-
-#### Step 13: Reject one document
-
-Officer must choose the document and provide a clear rejection reason.
-
-Document becomes `REJECTED` or the approved equivalent.
-
-Audit:
-
-- `DOCUMENT_REJECTED`.
-
-#### Step 14: Request correction
-
-Officer defines:
+Correction request captures:
 
 - applicant-visible reason;
-- fields unlocked, if any;
 - documents to replace;
+- fields unlocked, if any;
 - optional deadline.
 
 Transitions:
 
-- request to `WAITING_ON_APPLICANT`;
-- work item to `WAITING_ON_APPLICANT`;
-- public status to Action Required.
+- request `WAITING_ON_APPLICANT`;
+- work item `WAITING_ON_APPLICANT`;
+- public status Action Required.
 
-Create:
+Applicant replaces only permitted documents or fields.
 
-- structured correction record;
-- status history;
-- `CORRECTION_REQUESTED`;
-- in-app notification;
-- email when enabled.
-
-#### Step 15: Applicant opens correction
-
-Show:
-
-- exact reason;
-- exact fields/files requiring action;
-- deadline;
-- resubmit action.
-
-Do not expose internal notes.
-
-#### Step 16: Replace rejected document
-
-Only permitted fields and documents are editable.
-
-Previous document remains linked for audit; replacement does not silently overwrite it.
-
-#### Step 17: Resubmit correction
-
-Transaction:
+Resubmission:
 
 - correction marked complete;
 - request returns to `IN_REVIEW`;
 - work item returns to `READY` or `IN_PROGRESS`;
-- status history;
-- `CORRECTION_RESUBMITTED`;
-- originating officer notification;
-- applicant response time.
+- audit event `CORRECTION_RESUBMITTED`;
+- originating officer notified;
+- correction response time recorded.
 
-### Phase 6 — Finance referral
+There is no dedicated parent request status for correction resubmission.
 
-#### Step 18: Create referral
+### Phase 6 — Finance Referral
 
-Originating officer enters:
+Student Records creates a Finance referral.
+
+Required referral fields:
 
 - receiving department: Finance;
 - type: Referral;
-- requested action;
+- requested action: confirm whether a Finance hold blocks transcript issuance;
 - reason;
-- expected output;
+- expected output: `CLEAR`, `HOLD`, or `CANNOT_VERIFY`, with reason and verification date;
 - due date;
 - priority;
-- relevant documents/references;
-- applicant visibility.
-
-Example action:
-
-> Confirm whether the applicant has a Finance hold that prevents transcript issuance.
-
-Example output:
-
-> Return CLEAR, HOLD or CANNOT_VERIFY, with a reason and verification date.
+- relevant references/documents;
+- applicant visibility setting.
 
 Transaction creates:
 
 - handoff;
 - handoff history;
 - Finance work item;
-- `HANDOFF_CREATED`;
+- audit event `HANDOFF_CREATED`;
 - Finance notification;
-- `handoff_created`.
+- product event `handoff_created`.
 
 Parent ownership remains with Student Records.
 
-Request becomes `WAITING_ON_DEPARTMENT`.
+Request status becomes `WAITING_ON_DEPARTMENT`.
 
 Public status becomes Additional Checks in Progress.
 
-#### Step 19: Finance views Pending Acceptance
+Finance accepts:
 
-Only permitted Finance staff may open it.
+- validate organization;
+- validate receiving department;
+- validate `handoffs.accept` permission;
+- validate handoff `PENDING_ACCEPTANCE`;
+- record acceptance timestamp;
+- audit event `HANDOFF_ACCEPTED`.
 
-#### Step 20: Finance accepts
+Finance completes:
 
-Validate:
-
-- current organization;
-- receiving department;
-- acceptance permission;
-- current handoff state;
-- idempotency.
-
-Transaction:
-
-- handoff `ACCEPTED`;
-- Finance work item ready or assigned;
-- acceptance timestamp;
-- status history;
-- `HANDOFF_ACCEPTED`;
-- originator notification;
-- `handoff_accepted`.
-
-#### Step 21: Start Finance work
-
-Handoff/work item move to `IN_PROGRESS`.
-
-Finance may add internal or department-only notes.
-
-#### Step 22: Record result
-
-Required structured result:
-
-- result code;
+- result code: `CLEAR`, `HOLD`, or `CANNOT_VERIFY`;
 - explanatory note;
 - verification date;
 - officer;
 - optional reference.
 
-#### Step 23: Complete referral
-
-Transaction:
+Completion transition:
 
 - Finance work item `COMPLETED`;
-- handoff `COMPLETED` or approved terminal state;
+- handoff `COMPLETED`;
 - completion timestamp;
-- history;
-- `HANDOFF_COMPLETED`;
-- originator notification;
-- `handoff_completed`.
+- audit event `HANDOFF_COMPLETED`;
+- originator notification.
 
-Parent request remains open.
+No `RETURNED_TO_ORIGINATOR` state is required.
 
-### Phase 7 — Records completion and approval
+### Phase 7 — Finance Result Handling
 
-#### Step 24: Review Finance result
+If Finance returns `CLEAR`, Records continues review.
 
-If Finance returns HOLD, follow the approved policy.
+If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible reason or next step. This normally uses `WAITING_ON_APPLICANT` and Action Required.
 
-**Decision required:** reject, return to applicant, pause or allow a supervisor exception.
+If Finance returns `CANNOT_VERIFY`, Records may clarify with Finance, ask the applicant for supporting evidence, or escalate to supervisor according to approved policy.
 
-#### Step 25: Complete Records work
+### Phase 8 — Records Completion And Registrar Approval
 
-Prerequisites:
+Records work can complete only when:
 
-- required documents accepted;
-- correction complete;
-- Finance result exists;
-- Records checks complete.
+- required documents are `ACCEPTED`;
+- correction is complete;
+- required Finance result exists;
+- Records checks are complete;
+- no mandatory unresolved work item remains.
 
 Records work item becomes `COMPLETED`.
 
-Request moves to `PENDING_APPROVAL`.
+Request becomes `PENDING_APPROVAL`.
 
 Public status becomes Awaiting Decision.
 
-#### Step 26: Open approval queue
+Registrar approval is required for every Transcript Request.
 
 Registrar sees:
 
@@ -431,151 +313,95 @@ Registrar sees:
 - recommendation;
 - approve/reject/return actions.
 
-#### Step 27: Approve
+Approval transaction:
 
-Validate:
-
-- permission;
-- organization;
-- valid request state;
-- required steps complete;
-- no unresolved mandatory work items;
-- idempotency.
-
-Transaction:
-
-- decision record;
+- validates permission;
+- validates organization;
+- validates request state;
+- validates required steps complete;
+- creates decision record;
 - request `APPROVED`;
 - approval timestamp;
 - status history;
-- `REQUEST_APPROVED`;
-- `request_approved`;
-- outcome-generation event.
+- audit event `REQUEST_APPROVED`;
+- product event `request_approved`;
+- outcome-generation/storage event.
 
-Public status becomes Approved or Preparing Outcome.
+Public status becomes Approved or Preparing Outcome. Preparing Outcome is shown only when there is a meaningful delay.
 
-### Phase 8 — Outcome and completion
-
-#### Step 28: Prepare controlled outcome
+### Phase 9 — Outcome And Completion
 
 V1 outcome:
 
 - Completion / Collection / Dispatch Notice;
-- optional controlled sample transcript PDF.
+- optional controlled sample transcript PDF in demo mode;
+- exact issued copy stored when institution provides it.
 
 Process:
 
 1. create pending issued-document record;
-2. generate on server or record externally produced outcome;
-3. calculate checksum where generated;
+2. generate controlled notice or record externally produced outcome;
+3. calculate checksum where available;
 4. upload to private storage;
 5. link exact issued file;
 6. mark issued;
 7. create `OUTCOME_GENERATED` and `DOCUMENT_ISSUED`.
 
-Repeated processing must not create duplicates.
+Applicant notification:
 
-#### Step 29: Notify applicant
+- in-app required;
+- email optional for demo and required before external pilot.
 
-Create:
-
-- in-app notification;
-- essential email when enabled;
-- delivery record.
-
-Public status becomes Ready.
-
-#### Step 30: Applicant accesses outcome
-
-Require:
+Applicant access requires:
 
 - authorization;
-- short-lived signed URL;
+- short-lived signed URL for downloads;
 - exact issued copy;
 - download/access event;
 - no permanent public file link.
 
-#### Step 31: Complete request
+Completion rule:
 
-**Decision required:** complete on issuance or on recorded download/collection.
+- request becomes `COMPLETED` only after recorded download, collection, delivery, or approved institutional closure rule.
 
-Transaction:
+Audit:
 
-- request `COMPLETED`;
-- remaining work closed;
-- completion timestamp;
-- final history;
-- `REQUEST_COMPLETED`;
-- `request_completed`.
+- `DOCUMENT_DOWNLOADED` where download happens;
+- `REQUEST_COMPLETED` when closure is recorded.
 
-Public status becomes Completed.
+## 7. Alternate Paths
 
-## 7. Alternate paths
+Finance declines: reason required; originator notified; parent remains with Records.
 
-### Finance declines
+Finance requests clarification: handoff moves to clarification state; originator provides missing information; history is preserved.
 
-- mandatory reason;
-- originator notification;
-- parent ownership stays with Records;
-- originator may clarify, resend or choose another action.
+Registrar rejects: applicant-visible reason required; request becomes `REJECTED`; applicant notified; decision/audit retained.
 
-### Finance returns for clarification
+Transfer: postponed from Stage 1 main path.
 
-- handoff enters clarification state;
-- originator adds missing information;
-- all changes create history;
-- original instructions are not silently overwritten.
+Draft abandonment: draft expires after 30 days unless policy changes.
 
-### Registrar rejects
+Concurrent staff actions: server validates current state and stale actions fail safely.
 
-- applicant-visible reason required;
-- optional internal reason;
-- active work closes appropriately;
-- request becomes `REJECTED`;
-- applicant is notified;
-- decision/audit record remains.
+## 8. Required Notifications
 
-### Transfer
-
-- used only when ownership genuinely changes;
-- ownership changes only after acceptance;
-- originator remains visible in history.
-
-### Draft abandonment
-
-- draft remains until expiry/deletion policy;
-- `request_abandoned` is recorded using a defined inactivity threshold.
-
-### Duplicate submission
-
-- warn or block when an active request exists, according to the final service rule.
-
-### Concurrent staff actions
-
-- server validates current state;
-- critical changes use transactions;
-- stale second action fails safely.
-
-## 8. Notifications
-
-Minimum:
+Minimum V1 notifications:
 
 - submission confirmation;
-- assignment;
+- assignment or claim;
 - correction request;
 - correction resubmission;
 - new Finance referral;
 - referral accepted;
 - referral declined/clarification;
 - referral completed;
+- Finance HOLD applicant action;
 - approval;
 - rejection;
 - outcome ready;
 - overdue warning.
 
-Applicants are notified on meaningful public changes, not every internal event.
-
-## 9. Audit events
+## 9. Required Audit Events
 
 - `REQUEST_CREATED`
 - `REQUEST_SUBMITTED`
@@ -583,6 +409,7 @@ Applicants are notified on meaningful public changes, not every internal event.
 - `REVIEW_STARTED`
 - `DOCUMENT_UPLOADED`
 - `DOCUMENT_REJECTED`
+- `DOCUMENT_ACCEPTED`
 - `CORRECTION_REQUESTED`
 - `CORRECTION_RESUBMITTED`
 - `HANDOFF_CREATED`
@@ -598,54 +425,7 @@ Applicants are notified on meaningful public changes, not every internal event.
 - `DOCUMENT_DOWNLOADED`
 - `REQUEST_COMPLETED`
 
-## 10. Required timestamps
-
-### Request
-
-- `created_at`
-- `submitted_at`
-- `first_opened_at`
-- `first_action_at`
-- `review_started_at`
-- `correction_requested_at`
-- `correction_resubmitted_at`
-- `approved_at`
-- `rejected_at`
-- `outcome_ready_at`
-- `completed_at`
-- `cancelled_at`
-
-### Work item
-
-- `created_at`
-- `assigned_at`
-- `started_at`
-- `due_at`
-- `completed_at`
-- `returned_at`
-
-### Handoff
-
-- `created_at`
-- `sent_at`
-- `accepted_at`
-- `declined_at`
-- `started_at`
-- `due_at`
-- `completed_at`
-- `returned_at`
-
-### Document
-
-- `uploaded_at`
-- `reviewed_at`
-- `accepted_at`
-- `rejected_at`
-- `replaced_at`
-- `issued_at`
-- `downloaded_at`
-
-## 11. Reporting acceptance
+## 10. Reporting Acceptance
 
 The completed scenario must produce real values for:
 
@@ -660,33 +440,19 @@ The completed scenario must produce real values for:
 - overdue state;
 - external coordination used.
 
-## 12. Security acceptance
+## 11. Security Acceptance
 
 - applicant cannot access another applicant's request or files;
 - officer cannot access another organization;
-- officer cannot access an unauthorized department;
+- officer cannot access unauthorized department work;
+- Finance sees referral work but not unrelated work;
+- Organization Admin does not automatically read sensitive request content;
 - internal notes never appear to applicants;
 - file access is permission-checked and time-limited;
-- critical actions validate membership on the server;
+- critical actions validate membership server-side;
 - audit events are append-only to ordinary users;
 - repeated actions do not create duplicate outcomes.
 
-## 13. Definition of complete
+## 12. Coding-Agent Instruction
 
-The vertical slice is complete only when:
-
-- it uses real database records;
-- no operational page uses hard-coded values;
-- every actor can complete their portion;
-- correction, referral and approval paths work;
-- statuses remain consistent;
-- notifications and audit events are created;
-- exact outcome is linked;
-- reports derive from timestamps/events;
-- tenant and department permissions are tested;
-- applicant flow works on mobile;
-- automated and manual end-to-end tests pass.
-
-## 14. Coding-agent instruction
-
-> Implement only the approved step in the current task. Do not redesign the workflow, invent statuses or mix internal notes with applicant communication. Preserve parent ownership during a referral and use server-side authorization, transactions and audit events for critical changes.
+Build only the approved Stage 1 path. Preserve parent ownership during referral. Do not implement transfer as active V1 scope. Do not invent statuses or routes.

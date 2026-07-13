@@ -1,20 +1,17 @@
 # FAIDIA Stage 0 — V1 Non-Goals
 
-Status: **DRAFT — requires product-owner approval**  
-Version: **0.1**  
-Last updated: **2026-07-12**  
-Product: **FAIDIA — Service Operations Platform**  
-
-> This Stage 0 document is based on the uploaded FAIDIA product description, V1 structure, full development structure, recommended stack and strict build-order documents. Recommended defaults are filled in, while unresolved items are explicitly marked.
-
+Status: **APPROVED_FOR_V1**  
+Version: **1.0**  
+Last updated: **2026-07-13**  
+Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document prevents V1 from expanding into the complete future FAIDIA platform. A non-goal is not deleted forever. It is intentionally excluded because it is not required to validate the first end-to-end institutional workflow.
+This document prevents V1 from expanding into the complete future FAIDIA platform. A non-goal is not deleted forever; it is intentionally excluded because it is not required to validate the first end-to-end institutional workflow.
 
-## 2. Scope principle
+## 2. Scope Principle
 
-> Build narrow and end-to-end, not broad and shallow.
+Build narrow and end-to-end, not broad and shallow.
 
 A feature is not part of V1 merely because:
 
@@ -25,170 +22,133 @@ A feature is not part of V1 merely because:
 - it makes the demo look larger;
 - an AI coding agent can generate a rough version quickly.
 
-## 3. Workflow and routing non-goals
+## 3. Approved Stage 1 Exclusions
 
-### Advanced visual workflow builder
+The following are not active Stage 1 scope:
+
+- transfer route in the main Transcript Request path;
+- standalone applicant payment workspace;
+- standalone admin payment configuration;
+- live M-PESA;
+- PayBill reconciliation;
+- Stripe;
+- refunds;
+- fee waivers;
+- public document verification;
+- visual workflow builder;
+- visual form builder;
+- homepage block builder;
+- template marketplace;
+- integration marketplace;
+- custom report builder;
+- AI routing;
+- AI document analysis;
+- OCR;
+- capacity-based assignment;
+- automatic round-robin;
+- cross-organization handoffs;
+- enterprise SSO;
+- native mobile apps;
+- offline officer workflows;
+- microservices;
+- GraphQL as primary API;
+- Kubernetes;
+- Kafka;
+- Camunda;
+- Temporal.
+
+## 4. Workflow And Routing Non-Goals
 
 Excluded:
 
-- drag-and-drop canvas;
-- arbitrary node creation;
-- free-form branch design;
-- visual condition editor.
+- advanced visual workflow builder;
+- BPMN compatibility;
+- arbitrary workflow scripting;
+- unrestricted conditional branching;
+- transfer as required Stage 1 path;
+- automatic routing;
+- automatic workload balancing;
+- automatic round-robin as core dependency;
+- multi-level escalation ladders;
+- cross-organization handoffs.
 
 V1 alternative:
 
 - versioned workflow records;
-- seed data;
 - controlled configuration;
-- sequential steps and only essential limited branching.
+- sequential Transcript Request path;
+- Finance referral only in main path;
+- manual assignment and department self-claim;
+- due dates and overdue visibility.
 
-### BPMN and unrestricted workflow scripting
-
-Excluded:
-
-- BPMN compatibility;
-- arbitrary scripts;
-- embedded code actions;
-- unrestricted expressions;
-- reusable subprocesses;
-- nested workflow branches.
-
-Reason: complexity, security risk and difficult AI maintenance.
-
-### Automatic routing and workload balancing
+## 5. Forms And Public Pages Non-Goals
 
 Excluded:
 
-- AI routing;
-- learned routing;
-- capacity-based assignment;
-- automatic round-robin as a core dependency;
-- automatic workload balancing.
-
-V1 alternative: manual assignment and controlled department routes.
-
-### Advanced escalation
-
-Excluded:
-
-- multi-level escalation ladders;
-- nested escalation policy builder;
-- automatic management escalation chains.
-
-V1 alternative: due dates, overdue visibility and manual supervisor intervention.
-
-### Cross-organization handoffs
-
-Excluded: routing a request between separate legal institutions or tenants.
-
-Reason: contractual, privacy, permission and data-sharing complexity.
-
-## 4. Forms and public pages
-
-### Visual form builder
-
-Excluded:
-
-- arbitrary drag-and-drop fields;
+- drag-and-drop form builder;
 - unrestricted conditional logic;
 - custom scripts;
-- deeply nested reusable components.
+- homepage block builder;
+- template marketplace.
 
-V1 alternative: supported field types and versioned form schemas.
+V1 alternative:
 
-### Homepage block builder
+- supported field types;
+- versioned form schemas;
+- fixed institution service portal structure;
+- controlled form configuration.
 
-Excluded:
-
-- free-form layout editing;
-- third-party blocks;
-- custom-code blocks;
-- a full website builder.
-
-V1 alternative: institution branding applied to a fixed service-portal structure.
-
-### Template marketplace
-
-Excluded:
-
-- public template publishing;
-- third-party developer marketplace;
-- paid template distribution;
-- arbitrary installable workflow packs.
-
-## 5. Permission and enterprise non-goals
-
-### Complex permission editor
+## 6. Permission And Enterprise Non-Goals
 
 Excluded:
 
 - arbitrary custom roles;
 - field-level permission builder;
 - visual permission matrix;
-- delegated policy administration.
-
-V1 alternative: fixed roles, permission keys and scopes.
-
-### Enterprise SSO
-
-Excluded:
-
+- delegated policy administration;
 - SAML;
 - custom identity providers;
 - directory synchronization;
-- automated provisioning.
+- full public API platform.
 
-V1 alternative: email/password, verification, reset and staff invitations.
+V1 alternative:
 
-### Full public API platform
+- fixed roles;
+- permission keys and scopes;
+- email/password;
+- verification, reset, and staff invitations;
+- server-side authorization helpers.
 
-Excluded:
-
-- public developer portal;
-- customer API keys;
-- broad versioned external API;
-- SDKs and marketplace webhooks.
-
-Internal route handlers and required provider webhooks are still allowed.
-
-### Dedicated database/deployment per ordinary institution
-
-V1 uses shared-database, shared-schema multi-tenancy with organization isolation.
-
-## 6. Communication non-goals
+## 7. Communication Non-Goals
 
 Excluded:
 
 - WhatsApp integration;
 - SMS integration;
 - omnichannel inbox;
-- call-centre integration;
-- advanced preference centre;
-- unrestricted institution notification builder.
+- call-center integration;
+- unrestricted notification template builder.
 
 V1 alternative:
 
-- in-app notifications;
-- essential email;
+- in-app notifications required;
+- email optional for internal demo and required before external pilot;
 - applicant messages;
 - internal notes;
 - structured handoff instructions.
 
-## 7. Document-intelligence non-goals
+## 8. Document-Intelligence Non-Goals
 
 Excluded:
 
 - OCR;
 - AI document analysis;
 - automatic classification;
-- automatic comparison;
-- AI fraud scoring;
+- fraud scoring;
 - biometric checks;
-- advanced electronic signatures;
+- advanced e-signatures;
 - blockchain verification;
-- advanced retention/legal holds;
-- full antivirus workflow during the earliest controlled demo.
+- advanced retention/legal holds.
 
 V1 alternative:
 
@@ -199,13 +159,15 @@ V1 alternative:
 - manual review;
 - exact issued-document storage.
 
-Malware scanning becomes necessary before sensitive production use at scale.
+Malware scanning should be added before sensitive production use at scale.
 
-## 8. Payment non-goals
+## 9. Payment Non-Goals
 
-Unless payment is the central pilot problem, exclude:
+V1 approved payment posture: manual payment reference inside the request flow.
 
-- live M-PESA STK Push as a launch dependency;
+Excluded unless future scope changes:
+
+- live M-PESA STK Push;
 - PayBill reconciliation automation;
 - Stripe;
 - multiple providers;
@@ -215,15 +177,7 @@ Unless payment is the central pilot problem, exclude:
 - fee-waiver workflow;
 - subscription billing.
 
-V1 alternative:
-
-- no fee;
-- manual payment reference;
-- officer verification;
-- payment confirmed or rejected;
-- provider abstraction preserved.
-
-## 9. Reporting and analytics non-goals
+## 10. Reporting Non-Goals
 
 Excluded:
 
@@ -231,78 +185,18 @@ Excluded:
 - arbitrary SQL reporting;
 - advanced executive dashboard suite;
 - data warehouse;
-- external BI platform;
 - predictive analytics;
 - officer league tables;
-- complex fairness-adjusted scoring;
-- large fact/dimension model as a V1 requirement;
 - scheduled report builder.
 
 V1 alternative:
 
-- real operational metrics;
-- officer, department, organization and handoff reports;
+- operational metrics;
+- officer, department, organization, and handoff reports;
 - product-validation events;
-- server-generated aggregate queries;
-- Recharts where useful.
+- server-generated aggregate queries.
 
-## 10. AI non-goals
-
-Excluded:
-
-- AI routing;
-- AI decision-making;
-- AI approval recommendation as a core dependency;
-- AI document analysis;
-- AI-generated rejection decisions;
-- autonomous staff actions;
-- predictive escalation.
-
-Useful AI requires historical data, clear rules, human override, trust and measurable error rates.
-
-## 11. Mobile non-goals
-
-Excluded:
-
-- native Android app;
-- native iOS app;
-- offline-first officer workflows;
-- push-notification infrastructure as a V1 requirement.
-
-V1 still requires a responsive web experience, especially for applicants.
-
-## 12. Infrastructure non-goals
-
-Excluded:
-
-- microservices;
-- separate frontend and Express/Nest backend;
-- Kubernetes;
-- Kafka;
-- GraphQL as primary API;
-- Camunda;
-- Temporal;
-- Elasticsearch/OpenSearch;
-- custom authentication;
-- custom file-storage infrastructure;
-- separate repository per dashboard;
-- separate database per ordinary institution;
-- real-time updates on every page.
-
-## 13. Service breadth non-goals
-
-V1 does not attempt:
-
-- every institutional service;
-- every industry;
-- 100 configured services;
-- every department structure;
-- arbitrary organization hierarchies;
-- all payment/document policies.
-
-V1 supports one fully functional service and two controlled demonstration services.
-
-## 14. Design non-goals
+## 11. Design Non-Goals
 
 Stage 0 does not finalize:
 
@@ -313,9 +207,9 @@ Stage 0 does not finalize:
 - multiple visual themes;
 - full white-label website freedom.
 
-Later design stages must still deliver a coherent, responsive and accessible V1.
+The current visual direction is approved, and missing screens may be designed during implementation.
 
-## 15. Enforcement test
+## 12. Enforcement Test
 
 When a new feature is proposed, ask:
 
@@ -327,23 +221,6 @@ When a new feature is proposed, ask:
 
 If the case is weak, move it to `POST-V1-BACKLOG.md`.
 
-## 16. Allowed extension points
+## 13. Coding-Agent Instruction
 
-V1 should preserve clean seams for:
-
-- additional services through versioned configuration;
-- more departments and memberships;
-- more workflow steps/transitions;
-- payment adapters;
-- notification channels;
-- PDF templates;
-- verification records;
-- aggregate reporting;
-- feature flags;
-- integration routes.
-
-An extension point is not permission to implement the feature now.
-
-## 17. Coding-agent instruction
-
-> Do not implement, activate navigation for or simulate completion of a non-goal unless the current release scope explicitly changes. Record future requirements in the backlog.
+Do not implement, activate navigation for, or simulate completion of a non-goal unless product scope explicitly changes.

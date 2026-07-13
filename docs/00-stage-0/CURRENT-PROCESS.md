@@ -1,328 +1,96 @@
 # FAIDIA Stage 0 — Current Transcript Request Process
 
-Status: **DRAFT — requires product-owner approval**  
-Version: **0.1**  
-Last updated: **2026-07-12**  
-Product: **FAIDIA — Service Operations Platform**  
-
-> This Stage 0 document is based on the uploaded FAIDIA product description, V1 structure, full development structure, recommended stack and strict build-order documents. Recommended defaults are filled in, while unresolved items are explicitly marked.
-
+Status: **APPROVED_FOR_V1_WITH_PILOT_VALIDATION_REQUIRED**  
+Version: **1.0**  
+Last updated: **2026-07-13**  
+Product: **FAIDIA — Service Operations Platform**
 
 ## 1. Purpose
 
-This document records the likely **current-state** or **as-is** Transcript Request process before FAIDIA. It identifies actors, tools, handoffs, delays, missing records and communication outside formal systems.
+This document records the likely current-state or as-is Transcript Request process before FAIDIA. It identifies actors, tools, handoffs, delays, missing records, and communication outside formal systems.
 
-No real pilot institution has yet confirmed every detail. Therefore:
+Approved Stage 0 decision: FAIDIA may proceed to Stage 1 using these documented assumptions for a synthetic demo. These assumptions must be validated before an external real-data pilot.
 
-- **Working assumption** means a reasonable baseline;
-- **Must validate** means it needs direct institutional confirmation;
-- **Confirmed** means evidence has been obtained.
+## 2. Current-State Validation Position
 
-Do not hard-code unconfirmed assumptions.
+Decision: **Proceed with documented assumptions for demo; validate before real pilot.**
 
-## 2. Generic current-state summary
+Consequences:
 
-A typical process may involve:
+- Stage 1 implementation is not blocked by missing current-process interviews.
+- Real pilot onboarding must validate the process areas listed below.
+- Coding agents must not hard-code unconfirmed institution-specific process details beyond approved V1 defaults.
 
-1. applicant learns about the service through word of mouth, a notice, website or physical office;
-2. applicant submits a paper form, email or informal message;
+## 3. Generic Current-State Summary
+
+A typical Transcript Request process may involve:
+
+1. applicant learns about the service through word of mouth, notice, website, or physical office;
+2. applicant submits paper form, email, WhatsApp message, or verbal request;
 3. Student Records manually records or forwards the request;
-4. staff check identity and academic details in another system, paper file or spreadsheet;
-5. Finance is contacted through a call, email, WhatsApp, paper note or in-person follow-up;
-6. Registrar approval is requested through a moved file, email or signature process;
+4. staff check identity and academic details in another system, paper file, or spreadsheet;
+5. Finance is contacted through call, email, WhatsApp, paper note, or in-person follow-up;
+6. Registrar approval is requested through moved file, email, or signature process;
 7. applicant repeatedly contacts staff for updates;
-8. final transcript or notice is collected physically or sent manually;
-9. stage duration, ownership and handoff delay are poorly measured.
+8. final transcript, notice, or collection instruction is delivered manually;
+9. stage duration, ownership, and handoff delay are poorly measured.
 
-## 3. Current actors
+## 4. Current Actors
 
 | Actor | Typical responsibility | Typical tools | Main risk |
 |---|---|---|---|
 | Applicant | Start request, provide information, follow up, collect outcome | Walk-in, paper, phone, email, WhatsApp | Repeated visits and unclear status |
 | Front desk | Explain requirements and direct applicant | Verbal instructions, printed checklist | Inconsistent guidance |
-| Student Records officer | Receive, review and coordinate | Paper file, email, spreadsheet, student system | Lost requests and unclear ownership |
-| Finance officer | Confirm fee, balance or clearance | Finance system, spreadsheet, email, call, WhatsApp | Informal confirmation |
+| Student Records officer | Receive, review, coordinate | Paper file, email, spreadsheet, student system | Lost requests and unclear ownership |
+| Finance officer | Confirm hold, fee, balance, payment reference, or clearance | Finance system, spreadsheet, email, call, WhatsApp | Informal confirmation |
 | Registrar / approver | Review and authorize final result | Paper file, email, signature | Approval delay and weak tracking |
 | Supervisor | Allocate work and resolve delay | Meetings, spreadsheet, phone | No reliable backlog view |
 | Support staff | Answer status enquiries | Phone, email, counter | Time spent finding updates |
 
-## 4. Generic as-is journey
-
-### 4.1 Service discovery
-
-**Working assumption:** applicant relies on a website, notice board, another student or a physical office.
-
-Likely problems:
-
-- requirements vary by staff member or channel;
-- fees and processing times are unclear;
-- document requirements are discovered too late;
-- applicant travels before knowing whether the request can be remote.
-
-Must validate:
-
-- where applicants obtain instructions;
-- whether one authoritative service description exists;
-- whether requirements are consistent;
-- how often applicants arrive unprepared.
-
-### 4.2 Request initiation
-
-**Working assumption:** paper form, email, WhatsApp or verbal request.
-
-Likely problems:
-
-- incomplete information;
-- no immediate confirmation;
-- no unique reference;
-- duplicate requests;
-- personal information scattered across channels;
-- manual re-entry.
-
-Must validate:
-
-- official submission channel;
-- standard form;
-- who creates the request record;
-- duplicate handling.
-
-### 4.3 Document collection
-
-**Working assumption:** documents arrive physically, by email or through WhatsApp.
-
-Likely problems:
-
-- poor quality files;
-- missing documents;
-- inconsistent names;
-- no document review status;
-- sensitive files in personal inboxes or phones;
-- full package resent when one file is rejected.
-
-Must validate:
-
-- mandatory documents;
-- accepted formats;
-- reviewer;
-- replacement process;
-- whether originals are required.
-
-### 4.4 Intake and registration
-
-**Working assumption:** Student Records enters the request in a paper register or spreadsheet and assigns it informally.
-
-Likely problems:
-
-- requests remain unassigned;
-- different registers show different totals;
-- timestamps are missing;
-- ownership is not visible;
-- old and new work is mixed.
-
-Must validate:
-
-- whether a register exists;
-- who owns it;
-- which fields it records;
-- how assignment happens;
-- whether supervisors see unassigned work.
-
-### 4.5 Records review
-
-**Working assumption:** officer checks applicant and academic details using a student system, internal records or paper file.
-
-Likely problems:
-
-- no standard review checklist;
-- no reliable first-action timestamp;
-- vague correction reasons;
-- internal notes mixed with applicant messages;
-- applicant cannot tell whether review has started.
-
-Must validate:
-
-- exact Records checks;
-- systems used;
-- common correction reasons;
-- who authorizes Records completion.
-
-### 4.6 Correction loop
-
-**Working assumption:** applicant is contacted by phone, email or WhatsApp.
-
-Likely problems:
-
-- correction request is vague;
-- applicant does not know which field or file is wrong;
-- whole request may be resent;
-- response time is not measured;
-- request may fall out of the active queue.
-
-Must validate:
-
-- who contacts applicant;
-- channels used;
-- deadlines;
-- how corrected work returns to the officer.
-
-### 4.7 Finance check
-
-**Working assumption:** Student Records asks Finance to confirm a balance, fee, payment or clearance state.
-
-Possible tools:
-
-- phone;
-- WhatsApp;
-- email;
-- physical file;
-- verbal confirmation;
-- finance-system lookup.
-
-Likely problems:
-
-- no formal acceptance;
-- vague instruction such as “Please confirm”;
-- no due date;
-- no structured result;
-- no visibility while waiting;
-- parent request is forgotten;
-- delay cannot be attributed.
-
-Must validate:
-
-- exact Finance check;
-- required documents or references;
-- receiving role;
-- decline/clarification behaviour;
-- required result.
-
-### 4.8 Approval
-
-**Working assumption:** complete request is moved or emailed to Registrar or another approver.
-
-Likely problems:
-
-- incomplete requests reach approver;
-- prerequisites are not enforced;
-- approval requires chasing;
-- rejection reasons are inconsistent;
-- signature may not be linked to request history.
-
-Must validate:
-
-- final authority;
-- whether approval is always required;
-- evidence required;
-- whether approver can return for clarification.
-
-### 4.9 Outcome preparation
-
-**Working assumption:** staff prepare a transcript, letter, collection notice or dispatch record using a separate template or system.
-
-Likely problems:
-
-- final file is not reliably linked;
-- versions differ;
-- exact issued copy is not retained;
-- applicant notification is inconsistent;
-- delivery is not logged.
-
-Must validate:
-
-- which system creates the official transcript;
-- who prepares and signs it;
-- delivery method.
-
-### 4.10 Follow-up and closure
-
-**Working assumption:** applicant calls, sends messages or visits until informed the outcome is ready.
-
-Likely problems:
-
-- staff repeatedly search for status;
-- approved and ready are confused;
-- requests remain open after delivery;
-- no feedback;
-- no reliable completion time.
-
-Must validate:
-
-- notification method;
-- closure condition;
-- collection/delivery acknowledgement;
-- number of status enquiries.
-
-## 5. Channels FAIDIA should replace or reduce
-
-### Calls
-
-- Has my request been received?
-- Who owns it?
-- Has Finance responded?
-- Is approval complete?
-- Is the outcome ready?
-
-### WhatsApp
-
-- applicant document submission;
-- payment-reference forwarding;
-- interdepartmental checks;
-- approval chasing;
-- informal assignment;
-- unofficial status updates.
-
-### Email
-
-- request submission;
-- departmental referral;
-- correction instructions;
-- approval requests;
-- status enquiries;
-- outcome delivery disconnected from the request.
-
-### Spreadsheets
-
-- request register;
-- assignment tracking;
-- status tracking;
-- due-date tracking;
-- monthly totals;
-- officer workload.
-
-### Paper
-
-- application form;
-- routing slip;
-- document checklist;
-- approval note;
-- collection register;
-- physical file-movement record.
-
-### Physical follow-ups
-
-- learning requirements;
-- checking status;
-- carrying documents between departments;
-- collecting signatures;
-- replacing one rejected file;
-- collecting the result.
-
-## 6. Pain inventory
-
-| Pain | Operational effect | Evidence to collect | Intended FAIDIA response |
-|---|---|---|---|
-| No unique reference | Difficult lookup and duplicates | Sample registers | Generated request reference |
-| Unclear owner | Requests stall | Review recent cases | Assignment and ownership |
-| Vague handoff | Rework and clarification | Real redacted messages | Structured referral fields |
-| Missing documents | Repeated visits | Correction count | Requirements and document states |
-| No tracking | Status enquiries | Call/walk-in estimate | Public status and timeline |
-| Missing timestamps | Bottlenecks invisible | Existing records | Status/work-item/handoff timestamps |
-| Informal approval | Weak auditability | Approval evidence | Decision and audit records |
-| Disconnected outcome | Broken end-to-end record | Storage process | Issued-document link |
-| Spreadsheet reports | Conflicting totals | Compare reports | Database reports |
-| External staff coordination | No audit trail | Staff logs/interviews | Handoffs, notes and events |
-
-## 7. Current artifacts to request
+## 5. Validated V1 Assumptions For Stage 1 Demo
+
+These are approved for Stage 1 demo implementation:
+
+- Student Records is the coordinating department.
+- Finance performs a structured referral check.
+- Finance result codes are `CLEAR`, `HOLD`, and `CANNOT_VERIFY`.
+- Manual payment reference may be captured in the request.
+- Registrar approval is required for every Transcript Request.
+- Applicant identity uses ID/passport required and student ID conditional.
+- Outcome is controlled notice plus demo transcript, not legally asserted official transcript generation.
+- Completion occurs at recorded download, collection, delivery, or approved closure.
+
+## 6. Process Areas To Validate Before Real Pilot
+
+| Process area | Status | Owner to confirm | Evidence | Stage 1 position |
+|---|---|---|---|---|
+| Submission channel | Must validate before real pilot | Service owner | Interview/form | Use digital request flow in demo |
+| Required fields | Must validate before real pilot | Student Records | Blank form | Use approved V1 form baseline |
+| Documents | Must validate before real pilot | Student Records | Checklist | ID/passport required; student ID conditional |
+| Fee | Must validate before real pilot | Finance | Fee schedule | Manual payment reference in demo |
+| Finance check | Must validate before real pilot | Finance | Example request/result | Finance hold blocking issuance |
+| Approval authority | Must validate before real pilot | Registrar | SOP/interview | Registrar approval required |
+| Outcome type | Must validate before real pilot | Records/Registrar | Sample output | Controlled notice plus demo transcript |
+| Processing target | Must validate before real pilot | Service owner | Published target | Five working days as demo target |
+| Notification channel | Must validate before real pilot | Service owner | Current template | In-app required; email before external pilot |
+| Closure condition | Must validate before real pilot | Student Records | Register/SOP | Download/collection/delivery/closure record |
+
+## 7. Pain Inventory And FAIDIA Response
+
+| Pain | Operational effect | Intended FAIDIA response |
+|---|---|---|
+| No unique reference | Difficult lookup and duplicates | Generated request reference and duplicate active request control |
+| Unclear owner | Requests stall | Work items, assignment, department queue, self-claim |
+| Vague handoff | Rework and clarification | Structured Finance referral |
+| Missing documents | Repeated visits | Requirements, document states, correction action |
+| No tracking | Status enquiries | Public status and applicant-safe timeline |
+| Missing timestamps | Bottlenecks invisible | Request/work-item/handoff timestamps |
+| Informal approval | Weak auditability | Registrar decision record and audit event |
+| Disconnected outcome | Broken end-to-end record | Issued outcome link and checksum where available |
+| Spreadsheet reports | Conflicting totals | Database reports from timestamps/events |
+| External coordination | No audit trail | Handoffs, notes, messages, notifications, events |
+
+## 8. Current Artifacts To Request Before Real Pilot
 
 Where permitted, request blank or redacted examples of:
 
@@ -332,7 +100,7 @@ Where permitted, request blank or redacted examples of:
 - fee schedule;
 - spreadsheet/register columns;
 - correction message;
-- Finance verification request;
+- Finance verification request/result;
 - approval note;
 - rejection reasons;
 - request receipt;
@@ -343,32 +111,9 @@ Where permitted, request blank or redacted examples of:
 
 Do not request sensitive student records merely to design V1.
 
-## 8. Discovery interview questions
+## 9. Baseline Measurements Before Pilot
 
-1. How does a request begin?
-2. What information is required?
-3. Which documents are required?
-4. Who receives it first?
-5. How is it assigned?
-6. What does the first officer check?
-7. What causes a correction?
-8. How is the applicant contacted?
-9. Which departments become involved?
-10. What exactly is asked of Finance?
-11. Who can approve or reject?
-12. How is the final outcome produced?
-13. How is the applicant notified?
-14. What closes the request?
-15. Where does it stall?
-16. What happens outside official tools?
-17. How are overdue requests identified?
-18. What reports exist?
-19. How many requests arrive per month?
-20. Which step creates the most frustration?
-
-## 9. Baseline measurements
-
-Before the pilot, estimate or measure:
+Estimate or measure:
 
 - monthly request volume;
 - end-to-end completion time;
@@ -384,21 +129,6 @@ Before the pilot, estimate or measure:
 - staff time updating spreadsheets;
 - staff time answering status enquiries.
 
-## 10. Confirmation table
+## 10. Coding-Agent Instruction
 
-| Process area | Status | Owner to confirm | Evidence | Final answer |
-|---|---|---|---|---|
-| Submission channel | Must validate | Service owner | Interview/form | TBD |
-| Required fields | Must validate | Student Records | Blank form | TBD |
-| Documents | Must validate | Student Records | Checklist | TBD |
-| Fee | Must validate | Finance | Fee schedule | TBD |
-| Finance check | Must validate | Finance | Example request/result | TBD |
-| Approval authority | Must validate | Registrar | SOP/interview | TBD |
-| Outcome type | Must validate | Records/Registrar | Sample output | TBD |
-| Processing target | Must validate | Service owner | Published target | TBD |
-| Notification channel | Must validate | Service owner | Current template | TBD |
-| Closure condition | Must validate | Student Records | Register/SOP | TBD |
-
-## 11. Coding-agent instruction
-
-> This file describes the current process and discovery assumptions. It does not automatically define the future workflow. Use `V1-VERTICAL-SLICE.md` for the approved future journey and do not turn unconfirmed assumptions into hard-coded rules.
+Use this file as context for the problem and pilot validation. Use `V1-VERTICAL-SLICE.md` for the approved future workflow.
