@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Page Inventory
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -97,7 +97,7 @@ The service versions required for Stage 1 may be seeded by migrations/seed scrip
 | OFF-012 | Outgoing handoffs | /officer/handoffs/outgoing | STAGE_1_REQUIRED | Track sent referrals |
 | OFF-013 | Handoff details | /officer/handoffs/[id] | STAGE_1_REQUIRED | Accept, clarify, complete |
 | OFF-014 | Work-item details | /officer/work-items/[id] | LATER_V1 | Dedicated task page |
-| OFF-015 | Approval/rejection | /officer/requests/[id]/approval | STAGE_1_REQUIRED | Registrar decision page |
+| OFF-015 | Registrar decision actions | Request-details action panel | STAGE_1_REQUIRED | Embedded in `/officer/requests/[id]`; visible only to a    Registrar-profile Supervisor and enforced server-side |
 | OFF-016 | Notifications | /officer/notifications | STAGE_1_REQUIRED | Assignment, handoff, overdue |
 | OFF-017 | Global search | /officer/search | DEMO_ONLY | Permission-scoped lookup |
 | OFF-018 | Correspondence | /officer/communications/correspondence | DEMO_ONLY | Formal communication |
@@ -113,11 +113,23 @@ The service versions required for Stage 1 may be seeded by migrations/seed scrip
 | SUP-003 | Officer assignments | /supervisor/assignments | LATER_V1 | Workload/reassignment |
 | SUP-004 | Pending handoffs | /supervisor/handoffs | LATER_V1 | Dedicated handoff monitor |
 | SUP-005 | Overdue work | /supervisor/overdue | LATER_V1 | Dedicated overdue view |
-| SUP-006 | Approval queue | /supervisor/approvals | STAGE_1_REQUIRED | Registrar approval queue |
+| SUP-006 | Approval queue | /supervisor/approvals | STAGE_1_REQUIRED | Registrar approval queue; selecting a request opens `/officer/requests/[id]` in the shared staff processing shell |
 | SUP-007 | Department report | /supervisor/reports | LATER_V1 | Detailed operational report |
 | SUP-008 | SLA monitor | /supervisor/sla | DEMO_ONLY | Focused SLA view |
 | SUP-009 | Escalations | /supervisor/escalations | POSTPONED | Advanced ladder |
 | SUP-010 | Officer ranking | /supervisor/officer-performance | POSTPONED | Advanced analytics |
+
+### Supervisor shell and route rule
+
+Supervisors use the shared Officer processing shell rather than a separate duplicate processing shell.
+
+Supervisor-only navigation items and controls may be displayed according to the active membership profile and permissions.
+
+The Registrar approval queue at `/supervisor/approvals` links to the shared request-details route:
+
+```text
+/supervisor/approvals
+→ /officer/requests/[id]
 
 ## 8. Organization Admin
 

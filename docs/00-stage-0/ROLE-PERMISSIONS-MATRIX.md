@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Roles And Permissions Matrix
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Last updated: **2026-07-13**  
 Product: **FAIDIA — Service Operations Platform**
 
@@ -61,7 +61,24 @@ May assign/reassign, monitor, intervene, reopen, and view department reports.
 
 A standard Supervisor does not automatically receive approval grants.
 
+### Supervisor shell model
+
+Supervisors use the shared Officer processing shell.
+
+They inherit the Officer processing experience and receive additional supervisor-only navigation items, dashboards, monitoring controls, assignment controls, reopening controls, manual-closure controls, and department-level reporting according to their exact permissions.
+
+Stage 1 must not create a second duplicate request-processing shell for Supervisors.
+
+Supervisor-only controls must be hidden when permission is absent, but hidden UI is not sufficient authorization. Every protected action must also be checked server-side.
+
 ### Registrar profile
+
+### Registrar request-decision route
+
+The Registrar profile uses the approval queue at:
+
+```text
+/supervisor/approvals
 
 Registrar is a `SUPERVISOR` membership profile labelled **Registrar**.
 
@@ -209,6 +226,15 @@ Reporting/audit:
 | Reporting/audit | `reports.view_self` | `reports.view_self`, `reports.view_department`, `audit.view_request` | Officer grants plus `reports.view_financial`, `reports.view_audit`, `reports.export`, `audit.view_department` | None | `reports.view_organization`, `reports.view_audit`, `reports.export`, `audit.view_organization` |
 
 ## 7. Hard constraints
+
+```md
+- Supervisors use the shared Officer processing shell with supervisor-only navigation and controls.
+- `/supervisor/approvals` is a queue route, not a separate processing workspace.
+- Approval-queue links open `/officer/requests/[id]`.
+- Registrar decision controls are embedded in `/officer/requests/[id]`.
+- Registrar decision controls are rendered only when the active membership has the required permissions.
+- Approval, rejection, and return-for-clarification must always be re-authorized server-side.
+- `/officer/requests/[id]/approval` must not be implemented.
 
 - Officer approval is denied even when the Officer can view the request.
 - Standard Supervisor approval is denied unless the membership has the Registrar profile additions.

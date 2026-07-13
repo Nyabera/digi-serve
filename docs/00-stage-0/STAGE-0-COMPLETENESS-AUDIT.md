@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Completeness Audit
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Audit date: **2026-07-13**  
 Audit result: **PASS**
 

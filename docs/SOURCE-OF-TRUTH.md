@@ -1,7 +1,7 @@
 # FAIDIA Source of Truth
 
 **Status:** APPROVED_FOR_STAGE_1  
-**Version:** 1.3  
+**Version:** 1.4  
 **Last updated:** 2026-07-13  
 **Canonical path:** `docs/SOURCE-OF-TRUTH.md`  
 **Applies to:** FAIDIA V1, beginning with the Stage 1 Transcript Request vertical slice  

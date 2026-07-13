@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Approved Decision Register
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Last updated: **2026-07-13**  
 Applies to: **FAIDIA V1 and Stage 1**
 
@@ -26,7 +26,12 @@ This is the concise implementation-control register. `DECISION-LOG.md` contains 
 | DEC-042 | Page classes are `STAGE_1_REQUIRED`, `LATER_V1`, `DEMO_ONLY`, `POSTPONED`. |
 | DEC-043 | `DECISION-LOG.md` replaces `UNRESOLVED-DECISIONS.md`. |
 | DEC-044 | `.DS_Store` files are removed and ignored. |
-| DEC-045 | Version 1.3 passes the final completeness audit. |
+| DEC-045 | Earlier v1.3 completeness result superseded by DEC-050. |
+| DEC-046 | Registrar decisions are embedded in `/officer/requests/[id]`; `/officer/requests/[id]/approval` must not exist. |
+| DEC-047 | Supervisors use the shared Officer processing shell with supervisor-only navigation and controls. |
+| DEC-048 | Delete `docs/00-stage-0/SOURCE-OF-TRUTH.md`; retain only `docs/SOURCE-OF-TRUTH.md`. |
+| DEC-049 | Store completed replacement instructions at `docs/migrations/REPLACEMENT-INSTRUCTIONS.md`. |
+| DEC-050 | Final Stage 0 approval requires all controlling documents to reflect DEC-046 through DEC-049 consistently. |
 
 ## 3. Frozen implementation controls
 
@@ -42,6 +47,14 @@ This is the concise implementation-control register. `DECISION-LOG.md` contains 
 - Use only approved completion and reopening rules.
 - Preserve append-only history.
 - Keep `Expired` in public mapping.
+
+- Supervisors use the shared Officer processing shell.
+- Supervisor-only navigation and controls are permission-driven.
+- `/supervisor/approvals` is the Registrar queue.
+- Queue selections open `/officer/requests/[id]`.
+- Registrar decisions are embedded in the shared request-details page.
+- Registrar decision actions require server-side authorization.
+- Do not implement `/officer/requests/[id]/approval`.
 
 ## 4. Approval state
 

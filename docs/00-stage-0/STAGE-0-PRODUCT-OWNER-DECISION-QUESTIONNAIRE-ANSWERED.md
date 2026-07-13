@@ -1,7 +1,7 @@
 # FAIDIA Stage 0 — Product Owner Decision Questionnaire, Answered
 
 Status: **APPROVED_FOR_STAGE_1**  
-Version: **1.3**  
+Version: **1.4**  
 Last updated: **2026-07-13**  
 Applies to: **FAIDIA V1 and Stage 1**
 
@@ -31,7 +31,12 @@ DEC-041: B - Update the register to match existing asset folders.
 DEC-042: B - V1 scope and Stage 1 scope are separate; use four page classes.
 DEC-043: APPROVED - Rename the resolved-decision file to DECISION-LOG.md.
 DEC-044: APPROVED - Delete and ignore .DS_Store.
-DEC-045: APPROVED - Stage 0 is ready after the synchronized v1.3 audit passes.
+DEC-045: SUPERSEDED - The earlier v1.3 audit result is replaced by the final synchronized audit under DEC-050.
+DEC-046: C - Use /officer/requests/[id] and show approval actions only to the Registrar-profile Supervisor.
+DEC-047: B - Supervisors use the shared Officer processing shell with supervisor-only navigation and controls.
+DEC-048: APPROVED - Delete docs/00-stage-0/SOURCE-OF-TRUTH.md immediately.
+DEC-049: B - Move replacement instructions to docs/migrations/REPLACEMENT-INSTRUCTIONS.md.
+DEC-050: APPROVED - Stage 0 approval requires all final decisions to be synchronized across the controlling documents.
 ```
 
 ## 4. Consequences
@@ -43,6 +48,13 @@ DEC-045: APPROVED - Stage 0 is ready after the synchronized v1.3 audit passes.
 - Completion and reopening are implementable without inventing rules.
 - There is one canonical Source of Truth.
 - No blocking Stage 0 decision remains.
+- `/officer/requests/[id]/approval` is retired and must not be implemented.
+- `/supervisor/approvals` opens `/officer/requests/[id]`.
+- Registrar decision actions are embedded in the shared request-details page.
+- Supervisors use the shared Officer processing shell.
+- Supervisor-only navigation and controls are permission-driven.
+- Only `docs/SOURCE-OF-TRUTH.md` remains canonical.
+- Replacement instructions are archived under `docs/migrations/`.
 
 ## 5. Result
 
