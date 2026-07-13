@@ -24,13 +24,13 @@ DEC-007: D - Complete at recorded download/collection or approved closure rule.
 DEC-008: C - ID/passport required; student ID conditional.
 DEC-009: A - Delivery methods are controlled download or physical collection.
 DEC-010: A - One copy only for Stage 1.
-DEC-011: A - Warn and block active duplicate unless staff override.
+DEC-011: A - Warn and block active duplicate unless Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason.
 DEC-012: A - Drafts expire after 30 days.
-DEC-013: B - Manual payment reference.
+DEC-013: B - Conditional manual payment reference controlled by service configuration; required for the Savannah demo.
 DEC-014: C - Payment stays inside request form/review flow only.
 DEC-015: A - Open email registration for demo; controlled applicant group for pilot.
 DEC-016: B - Supervisor assignment plus department self-claim.
-DEC-017: A - Registrar approves every Transcript Request.
+DEC-017: A - Registrar approves every Transcript Request as a Supervisor membership profile labelled Registrar with explicit approval permissions.
 DEC-018: A - Organization Admin does not automatically read sensitive request content.
 DEC-019: B - Parent request has no ASSIGNED status; assignment lives on work items.
 DEC-020: A - Applicant documents use ACCEPTED, not APPROVED.
@@ -61,13 +61,13 @@ DEC-031: A - Stage 0 can be approved after source docs are updated.
 | DEC-008 | Identity documents | ID/passport required; student ID conditional | RESOLVED |
 | DEC-009 | Delivery methods | Controlled download or physical collection | RESOLVED |
 | DEC-010 | Number of copies | One copy only for Stage 1 | RESOLVED |
-| DEC-011 | Duplicate active request | Warn and block unless staff override | RESOLVED |
+| DEC-011 | Duplicate active request | Warn and block unless Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason | RESOLVED |
 | DEC-012 | Draft expiry | 30 days | RESOLVED |
-| DEC-013 | Transcript Request fee | Manual payment reference | RESOLVED |
+| DEC-013 | Transcript Request fee | Conditional manual payment reference controlled by service configuration; required for Savannah demo | RESOLVED |
 | DEC-014 | Payment page classification | Payment stays inside request form/review flow | RESOLVED |
 | DEC-015 | Applicant registration model | Open email registration for demo; controlled group for pilot | RESOLVED |
 | DEC-016 | Officer self-assignment | Supervisor assignment plus department self-claim | RESOLVED |
-| DEC-017 | Registrar approval requirement | Every Transcript Request requires Registrar approval | RESOLVED |
+| DEC-017 | Registrar approval requirement | Every Transcript Request requires Registrar approval by Supervisor membership profile labelled Registrar | RESOLVED |
 | DEC-018 | Organization Admin request access | No automatic sensitive request-content access | RESOLVED |
 | DEC-019 | Parent request `ASSIGNED` | No parent `ASSIGNED`; assignment lives on work items | RESOLVED |
 | DEC-020 | Document status wording | Use `ACCEPTED` | RESOLVED |

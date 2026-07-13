@@ -22,13 +22,13 @@ DEC-007: D - Complete at recorded download/collection or approved closure rule.
 DEC-008: C - ID/passport required; student ID conditional.
 DEC-009: A - Delivery methods are controlled download or physical collection.
 DEC-010: A - One copy only for Stage 1.
-DEC-011: A - Warn and block active duplicate unless staff override.
+DEC-011: A - Warn and block active duplicate unless Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason.
 DEC-012: A - Drafts expire after 30 days.
-DEC-013: B - Manual payment reference.
+DEC-013: B - Conditional manual payment reference controlled by service configuration; required for the Savannah demo.
 DEC-014: C - Payment stays inside request form/review flow only.
 DEC-015: A - Open email registration for demo; controlled applicant group for pilot.
 DEC-016: B - Supervisor assignment plus department self-claim.
-DEC-017: A - Registrar approves every Transcript Request.
+DEC-017: A - Registrar approves every Transcript Request as a Supervisor membership profile labelled Registrar with explicit approval permissions.
 DEC-018: A - Organization Admin does not automatically read sensitive request content.
 DEC-019: B - Parent request has no ASSIGNED status; assignment lives on work items.
 DEC-020: A - Applicant documents use ACCEPTED, not APPROVED.
@@ -56,12 +56,12 @@ DEC-031: A - Stage 0 can be approved after source docs are updated.
 7. Completion occurs at recorded download, collection, delivery, or closure.
 8. ID/passport is required; student ID is conditional.
 9. Delivery methods are controlled download or physical collection.
-10. Duplicate active requests are blocked unless staff override.
-11. Transcript Request uses manual payment reference.
+10. Duplicate active requests are blocked unless Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason.
+11. Transcript Request uses conditional manual payment reference controlled by service configuration; Savannah demo requires it.
 12. Payment stays inside the request flow.
 13. Applicant registration uses open email registration for demo and controlled applicant group for pilot.
 14. Officers may self-claim department work.
-15. Registrar approval is required for every Transcript Request.
+15. Registrar approval is required for every Transcript Request and uses a Supervisor membership profile labelled Registrar.
 16. Organization Admin does not automatically read sensitive request content.
 17. Assignment lives on work items, not parent request status.
 18. Applicant documents use `ACCEPTED`.

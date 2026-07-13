@@ -143,24 +143,24 @@ Mobile:
 
 | Ref ID | Workspace | Suggested asset path | Status | Preserve | Not final |
 |---|---|---|---|---|---|
-| REF-PUB-001 | Public | `docs/assets/public/service-home-reference.png` | MISSING_ALLOWED | Service discovery hierarchy | Exact copy/dimensions |
+| REF-PUB-001 | Public | `docs/assets/public/service-home-reference.png` | MISSING | Service discovery hierarchy | Exact copy/dimensions |
 | REF-APP-001 | Applicant | `docs/assets/applicant/applicant-shell-reference.png` | PARTIAL_REFERENCE | Navigation grouping, white base, type direction | Exact width, future nav |
 | REF-APP-002 | Applicant | `docs/assets/applicant/applicant-dashboard-reference.png` | PARTIAL_REFERENCE | Content hierarchy, restrained cards | Filler metrics |
-| REF-APP-003 | Applicant | `docs/assets/applicant/request-details-reference.png` | MISSING_ALLOWED | Timeline/action-required hierarchy | Exact layout |
+| REF-APP-003 | Applicant | `docs/assets/applicant/request-details-reference.png` | MISSING | Timeline/action-required hierarchy | Exact layout |
 | REF-OFF-001 | Officer | `docs/assets/officer/officer-shell-reference.png` | PARTIAL_REFERENCE | Operational navigation and density | Exact spacing, old future nav |
 | REF-OFF-002 | Officer | `docs/assets/officer/officer-dashboard-reference.png` | PARTIAL_REFERENCE | Priority metrics and queue | Decorative/filler charts |
-| REF-OFF-003 | Officer | `docs/assets/officer/request-details-reference.png` | MISSING_ALLOWED | Tabs, review and actions | Final dimensions |
-| REF-SUP-001 | Supervisor | `docs/assets/supervisor/department-dashboard-reference.png` | MISSING_ALLOWED | Workload and approval hierarchy | Final report set |
+| REF-OFF-003 | Officer | `docs/assets/officer/request-details-reference.png` | MISSING | Tabs, review and actions | Final dimensions |
+| REF-SUP-001 | Supervisor | `docs/assets/supervisor/department-dashboard-reference.png` | MISSING | Workload and approval hierarchy | Final report set |
 | REF-SUP-002 | Supervisor | `docs/assets/supervisor/sla-monitor-reference.png` | PARTIAL_REFERENCE | Due-soon/overdue emphasis | Advanced SLA behavior |
 | REF-ADM-001 | Admin | `docs/assets/admin/admin-shell-reference.png` | PARTIAL_REFERENCE | Grouped navigation, clean white styling | Full future menu |
 | REF-ADM-002 | Admin | `docs/assets/admin/admin-dashboard-reference.png` | PARTIAL_REFERENCE | Organization overview hierarchy | Advanced executive analytics |
-| REF-ADM-003 | Admin | `docs/assets/admin/service-configuration-reference.png` | MISSING_ALLOWED | Controlled configuration/version state | Visual builder behavior |
+| REF-ADM-003 | Admin | `docs/assets/admin/service-configuration-reference.png` | MISSING | Controlled configuration/version state | Visual builder behavior |
 | REF-SHARED-001 | Shared | `docs/assets/shared/design-system-reference.png` | PARTIAL_REFERENCE | Type, borders, cards, tables, badges | Final token values |
 | REF-SHARED-002 | Shared / Applicant | `docs/assets/shared/modern-applicant-service-portal-reference.png` | APPROVED_REFERENCE | White foundation, grouped sidebar, navy/blue hierarchy, restrained cards, semantic badges, clean tables | Exact pixel values |
 
 ## 8. Missing Screens Allowed During Build
 
-The following screens may be designed during implementation rather than blocking Stage 1:
+The following screens may be designed during implementation rather than blocking Stage 1. Their reference status remains `MISSING`; the missing status is explicitly non-blocking where the approved visual direction is sufficient.
 
 - applicant correction response;
 - applicant outcome access;

@@ -13,7 +13,7 @@ The Stage 1 vertical slice is end-to-end. It is not a visual-only demo.
 
 ## 2. Approved Acceptance Scenario
 
-An applicant visits Savannah Technical College's service catalogue, selects Transcript Request, signs in or registers, completes the form, uploads required documents, enters a manual payment reference, and submits.
+An applicant visits Savannah Technical College's service catalogue, selects Transcript Request, signs in or registers, completes the form, uploads required documents, enters the required Savannah demo manual payment reference, and submits.
 
 Student Records reviews the request, rejects one document, and requests a correction. The applicant replaces the rejected document and resubmits.
 
@@ -70,7 +70,7 @@ Form data:
 - one copy;
 - delivery method: controlled download or physical collection;
 - recipient details where relevant;
-- manual payment reference;
+- manual payment reference, required for the Savannah demo and conditional in the generic V1 service model;
 - declaration.
 
 Documents:
@@ -139,12 +139,16 @@ Server validation checks:
 - active service version;
 - required fields;
 - required documents;
-- manual payment reference if required;
+- manual payment reference when required by the published service version;
 - duplicate active request rule.
 
 Duplicate active request rule:
 
-- warn and block another active Transcript Request unless staff override exists.
+- warn and block another active Transcript Request unless a Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason;
+- applicants cannot override the block themselves;
+- the applicant sees a staff-contact message when blocked;
+- override is performed only by Supervisor or Organization Admin users with `requests.override_duplicate_active`;
+- override requires a mandatory reason and records `DUPLICATE_REQUEST_OVERRIDE_GRANTED`.
 
 Submission transaction creates or updates:
 
@@ -283,7 +287,7 @@ If Finance returns `CLEAR`, Records continues review.
 
 If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible reason or next step. This normally uses `WAITING_ON_APPLICANT` and Action Required.
 
-If Finance returns `CANNOT_VERIFY`, Records may clarify with Finance, ask the applicant for supporting evidence, or escalate to supervisor according to approved policy.
+If Finance returns `CANNOT_VERIFY`, the referral returns to Student Records for clarification. Student Records keeps parent ownership and decides the next action: resend a clarified Finance referral or request applicant action if the missing information belongs to the applicant. The request must not proceed to approval while mandatory Finance verification remains unresolved.
 
 ### Phase 8 — Records Completion And Registrar Approval
 
@@ -301,7 +305,7 @@ Request becomes `PENDING_APPROVAL`.
 
 Public status becomes Awaiting Decision.
 
-Registrar approval is required for every Transcript Request.
+Registrar approval is required for every Transcript Request. Registrar is represented as a `SUPERVISOR` membership profile with membership label **Registrar** and explicit `requests.approve` / `requests.reject` permissions.
 
 Registrar sees:
 
@@ -405,6 +409,7 @@ Minimum V1 notifications:
 
 - `REQUEST_CREATED`
 - `REQUEST_SUBMITTED`
+- `DUPLICATE_REQUEST_OVERRIDE_GRANTED`
 - `REQUEST_VIEWED`
 - `REVIEW_STARTED`
 - `DOCUMENT_UPLOADED`

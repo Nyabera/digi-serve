@@ -14,7 +14,7 @@ Product: **FAIDIA — Service Operations Platform**
 Approved changes:
 
 - transfer route is no longer V1-required;
-- manual payment reference stays inside request flow;
+- manual payment reference stays inside request flow and is required only where the published service version requires it;
 - standalone payment pages remain demo-only;
 - organization selection is required only for staff with multiple memberships;
 - standalone admin audit page remains demo-only, while request-level audit/history is required in request details.
@@ -34,7 +34,7 @@ Approved changes:
 | AUTH-004 | Forgot password | `/forgot-password` | V1_REQUIRED | Start reset |
 | AUTH-005 | Reset password | `/reset-password` | V1_REQUIRED | Complete reset |
 | AUTH-006 | Invitation acceptance | `/invitation/[token]` | V1_REQUIRED | Staff joins organization |
-| AUTH-007 | Organization selection | `/select-organization` | V1_REQUIRED_CONDITIONAL | Required only for staff with multiple memberships |
+| AUTH-007 | Organization selection | `/select-organization` | V1_REQUIRED | Shown only when staff has multiple memberships |
 
 ## 3. Applicant Workspace
 

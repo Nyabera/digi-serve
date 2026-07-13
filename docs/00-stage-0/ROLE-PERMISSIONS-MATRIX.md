@@ -126,7 +126,7 @@ Can:
 - override selected actions with reason;
 - view permitted department audit information.
 
-Registrar approval is represented by explicit approval permission, usually attached to a Supervisor or authorized Registrar membership.
+Registrar approval is represented by a `SUPERVISOR` membership profile with membership label **Registrar** and explicit `requests.approve` / `requests.reject` permissions. Do not create a new top-level Registrar role.
 
 Cannot by default:
 
@@ -200,6 +200,7 @@ Requests:
 - `requests.cancel`
 - `requests.complete`
 - `requests.reopen`
+- `requests.override_duplicate_active`
 
 Assignment and work items:
 
@@ -302,6 +303,7 @@ Reporting and audit:
 | Claim unassigned work | No | Conditional own dept | Yes | No |
 | Assign/reassign officer | No | No | Yes | Conditional |
 | Approve/reject request | No | Conditional explicit permission | Yes | No |
+| Override duplicate active request block | No | No | Yes | Conditional explicit permission |
 | Complete request | No | Conditional | Yes | No |
 | Download own outcome | Yes | No | No | No |
 | Issue outcome | No | Conditional | Yes | Conditional explicit permission |
@@ -317,6 +319,7 @@ Reporting and audit:
 - Finance officer may access assigned Finance referral without owning the parent request.
 - Student Records remains coordinating owner during referral.
 - Registrar needs explicit approval permission.
+- Registrar is a Supervisor membership profile labelled Registrar, not a separate top-level role.
 - Cross-department access requires handoff, supervisory scope, or explicit multi-department permission.
 - Search must respect the same permissions as direct access.
 
@@ -344,7 +347,16 @@ Approved:
 - Repeat approval cannot issue duplicate outcomes.
 - Approved requests are normally read-only except outcome processing.
 
-## 10. Required Tests
+## 10. Duplicate Override Rules
+
+- Applicants cannot override duplicate active request blocking.
+- Default officers cannot override duplicate active request blocking.
+- Supervisors may override with `requests.override_duplicate_active`.
+- Organization Admin may override only with explicit `requests.override_duplicate_active`.
+- Override happens from staff-side request review/intervention, not applicant self-service.
+- Override requires a mandatory reason and records `DUPLICATE_REQUEST_OVERRIDE_GRANTED`.
+
+## 11. Required Tests
 
 - unauthenticated route access;
 - applicant ownership isolation;
@@ -355,11 +367,13 @@ Approved:
 - only permitted user accepts handoff;
 - only permitted user approves/rejects;
 - officer self-claim limited to own department;
+- duplicate override denied without `requests.override_duplicate_active`;
+- duplicate override creates audit event and mandatory reason;
 - admin cannot edit audit events;
 - admin cannot automatically access sensitive request content;
 - search does not leak;
 - signed file access requires authorization.
 
-## 11. Coding-Agent Instruction
+## 12. Coding-Agent Instruction
 
 Use shared server-side permission helpers. Do not add roles when department membership or permission scope can represent the distinction.

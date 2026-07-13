@@ -56,13 +56,13 @@ DEC-007: D - Complete at recorded download/collection or approved closure rule.
 DEC-008: C - ID/passport required; student ID conditional.
 DEC-009: A - Delivery methods are controlled download or physical collection.
 DEC-010: A - One copy only for Stage 1.
-DEC-011: A - Warn and block active duplicate unless staff override.
+DEC-011: A - Warn and block active duplicate unless Supervisor or Organization Admin with `requests.override_duplicate_active` records an override with reason.
 DEC-012: A - Drafts expire after 30 days.
-DEC-013: B - Manual payment reference.
+DEC-013: B - Conditional manual payment reference controlled by service configuration; required for the Savannah demo.
 DEC-014: C - Payment stays inside request form/review flow only.
 DEC-015: A - Open email registration for demo; controlled applicant group for pilot.
 DEC-016: B - Supervisor assignment plus department self-claim.
-DEC-017: A - Registrar approves every Transcript Request.
+DEC-017: A - Registrar approves every Transcript Request as a Supervisor membership profile labelled Registrar with explicit approval permissions.
 DEC-018: A - Organization Admin does not automatically read sensitive request content.
 DEC-019: B - Parent request has no ASSIGNED status; assignment lives on work items.
 DEC-020: A - Applicant documents use ACCEPTED, not APPROVED.
@@ -75,7 +75,7 @@ DEC-026: A - Proceed with documented current-process assumptions for demo; valid
 DEC-027: A - In-app required; email optional for demo and required before external pilot.
 DEC-028: A - Synthetic demo first; limited real pilot later with founder plus service-owner support and weekly feedback.
 DEC-029: A - Current visual direction is approved; missing screens can be designed during build.
-DEC-030: A - Create canonical docs/SOURCE-OF-TRUTH.md.
+DEC-030: A - Create canonical `docs/SOURCE-OF-TRUTH.md`.
 DEC-031: A - Stage 0 can be approved after source docs are updated.
 
 ## 5. Source-Of-Truth Map
@@ -104,9 +104,9 @@ The following are frozen for Stage 1 implementation unless the product owner upd
 - demonstration services: Student Clearance Request and Certificate Replacement Request;
 - departments: Student Records, Finance, Registrar;
 - handoff type in the main path: referral only;
-- payment model: manual payment reference inside request flow;
+- payment model: conditional manual payment reference inside request flow, required for Savannah demo;
 - Finance check: hold blocking issuance;
-- Registrar approval: required for every Transcript Request;
+- Registrar approval: required for every Transcript Request through Supervisor membership profile labelled Registrar;
 - parent request statuses: no parent `ASSIGNED` status;
 - document review status: `ACCEPTED`;
 - completion rule: recorded download, collection, or approved closure;

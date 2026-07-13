@@ -78,6 +78,7 @@ DRAFT
 | Handoff `ACCEPTED` or `IN_PROGRESS` | Additional Checks in Progress |
 | Request `WAITING_ON_DEPARTMENT` | Additional Checks in Progress |
 | Finance result `HOLD` requiring applicant action | Action Required |
+| Finance result `CANNOT_VERIFY` needing Records clarification | Additional Checks in Progress |
 | Request `PENDING_APPROVAL` | Awaiting Decision |
 | Request `APPROVED`, no meaningful outcome delay | Approved |
 | Request `OUTCOME_PREPARATION` | Preparing Outcome |

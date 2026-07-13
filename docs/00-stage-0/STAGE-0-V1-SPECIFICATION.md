@@ -110,7 +110,7 @@ Applicant-supplied documents use status `ACCEPTED`, not `APPROVED`, when they sa
 
 ## 8. Approved Fee Model
 
-V1 uses **manual payment reference**. Payment remains inside the request form/review flow.
+V1 supports a **conditional manual payment reference** controlled by service configuration. For the Savannah Technical College Transcript Request demo, manual payment reference is enabled and required. Payment remains inside the request form/review flow.
 
 V1 does not require:
 
@@ -132,6 +132,8 @@ Required Finance result codes:
 - `CANNOT_VERIFY`
 
 If Finance returns `HOLD`, the request returns to applicant action with a clear applicant-visible explanation or next step. It is not automatically rejected.
+
+If Finance returns `CANNOT_VERIFY`, the referral returns to Student Records for clarification. Student Records may resend a clarified Finance referral or request applicant action if the missing information belongs to the applicant.
 
 ## 10. Approved Outcome And Completion
 
@@ -160,7 +162,7 @@ Optional internal support role:
 
 - `PLATFORM_ADMIN`
 
-Registrar approval is required for every Transcript Request in Stage 1. The Registrar is represented through explicit approval permission, normally on the Supervisor role or an authorized staff membership.
+Registrar approval is required for every Transcript Request in Stage 1. Registrar is implemented as a `SUPERVISOR` membership profile with the membership label **Registrar** and explicit `requests.approve` / `requests.reject` permissions. Do not create a new top-level Registrar role.
 
 Organization Admin does not automatically receive access to sensitive request content.
 
@@ -172,7 +174,7 @@ Organization Admin does not automatically receive access to sensitive request co
 4. Applicant completes the form.
 5. Applicant uploads documents.
 6. Applicant reviews and submits.
-7. Duplicate active request is blocked unless staff override exists.
+7. Duplicate active request is blocked unless a supervisor or organization admin with `requests.override_duplicate_active` records an override with a mandatory reason.
 8. Student Records receives the request.
 9. Officer starts review.
 10. Officer requests correction where needed.
@@ -282,7 +284,7 @@ V1 is functionally successful when:
 
 - organization and departments can be configured;
 - an applicant can register, sign in, and submit a Transcript Request;
-- required documents and manual payment reference are captured;
+- required documents are captured and manual payment reference is captured where the service requires it;
 - duplicate active requests are controlled;
 - Student Records can review and request correction;
 - applicant can correct and resubmit;
