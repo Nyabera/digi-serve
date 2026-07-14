@@ -289,12 +289,41 @@ It must support:
 - draft, form, documents, review, submission, tracking, correction, messaging, notifications, and outcome access;
 - Student Records queue, request review, correction, Finance referral, and outcome processing;
 - Finance incoming referral acceptance, result recording, and clarification;
-- Registrar approval queue and decision page;
+- Registrar approval queue at `/supervisor/approvals`;
+- embedded Registrar decision controls inside `/officer/requests/[id]`;
 - supervisor stage-duration dashboard;
 - limited Organization Admin branding and service-metadata configuration;
 - real audit events, status history, timestamps, and permission checks.
 
 The complete V1 may add `LATER_V1` pages after the vertical slice passes acceptance.
+
+### Staff shell and Registrar decision model
+
+Officers and Supervisors use one shared staff processing shell.
+
+Supervisors receive additional supervisor-only navigation items, monitoring views, assignment controls, reopening controls, manual-closure controls, reporting views, and Registrar controls according to their active membership profile and exact permissions.
+
+The Registrar approval flow is:
+
+```text
+/supervisor/approvals
+→ /officer/requests/[id]
+→ embedded Registrar decision panel
+```
+
+The Stage 1 application must not implement:
+
+```text
+/officer/requests/[id]/approval
+```
+
+Approval, rejection, and return-for-clarification controls must be:
+
+- rendered only for a Registrar-profile Supervisor;
+- protected by exact permission checks;
+- authorized again server-side;
+- restricted to requests in valid workflow states;
+- recorded in the immutable audit trail.
 
 ## 17. Pilot posture
 
