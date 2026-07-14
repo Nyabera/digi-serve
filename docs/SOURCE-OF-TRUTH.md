@@ -90,8 +90,6 @@ The Registrar approval flow is:
 → /officer/requests/[id]
 → embedded Registrar decision panel
 
-## 5. Stage 1 configuration model
-
 Stage 1 uses a **seeded Transcript Request template with limited safe editing**.
 
 Seeded and fixed for Stage 1:
@@ -192,11 +190,12 @@ FAIDIA Stage 1 uses one shared staff processing shell for Officers and Superviso
 
 Supervisors receive additional navigation items and controls according to their exact permissions and membership profile. They do not receive a duplicated request-processing shell.
 
+```md
 The Registrar workflow is:
 
 ```text
 /supervisor/approvals
-→ /officer/requests/[id]
+/officer/requests/[id]/approval
 → embedded Registrar decision panel
 
 ## 10. Stage 0 approval
