@@ -1,7 +1,7 @@
 # FAIDIA Source of Truth
 
 **Status:** APPROVED_FOR_STAGE_1  
-**Version:** 1.4  
+**Version:** 1.5  
 **Last updated:** 2026-07-13  
 **Canonical path:** `docs/SOURCE-OF-TRUTH.md`  
 **Applies to:** FAIDIA V1, beginning with the Stage 1 Transcript Request vertical slice  
@@ -89,6 +89,19 @@ The Registrar approval flow is:
 /supervisor/approvals
 → /officer/requests/[id]
 → embedded Registrar decision panel
+```
+
+Only a Registrar-profile Supervisor may use the approval, rejection, and return-for-clarification actions.
+
+All Registrar decision actions must be authorized server-side.
+
+The application must not implement:
+
+```text
+/officer/requests/[id]/approval
+```
+
+## 5. Stage 1 configuration model
 
 Stage 1 uses a **seeded Transcript Request template with limited safe editing**.
 
@@ -144,6 +157,10 @@ Organization Admin may not add, remove, reorder, branch, script, or arbitrarily 
 | Concise controlling decision register | `docs/00-stage-0/STAGE-0-APPROVED-DECISION-REGISTER.md` |
 | Visual direction and exact asset paths | `docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md` |
 | Final completeness result | `docs/00-stage-0/STAGE-0-COMPLETENESS-AUDIT.md` |
+| Stage 1 documentation process and gates | `docs/01-stage-1/STAGE-1-PLAN.md` |
+| Approved Stage 1 observable acceptance behavior | `docs/01-stage-1/ACCEPTANCE-CRITERIA.md` |
+| Stage 1 source-to-implementation traceability | `docs/01-stage-1/STAGE-1-TRACEABILITY.md` |
+| Stage 1 implementation-document decisions | `docs/01-stage-1/governance/DECISIONS.md` |
 
 ## 8. Mandatory reading before implementation
 
@@ -156,6 +173,8 @@ Before any Stage 1 build task, read:
 - `docs/00-stage-0/STATUS-MAPPINGS.md`
 - `docs/00-stage-0/PAGE-INVENTORY.md`
 - `docs/00-stage-0/V1-NON-GOALS.md`
+- `docs/01-stage-1/ACCEPTANCE-CRITERIA.md`
+- `docs/01-stage-1/STAGE-1-TRACEABILITY.md`
 
 Read the remaining Stage 0 documents when relevant.
 
@@ -190,13 +209,23 @@ FAIDIA Stage 1 uses one shared staff processing shell for Officers and Superviso
 
 Supervisors receive additional navigation items and controls according to their exact permissions and membership profile. They do not receive a duplicated request-processing shell.
 
-```md
 The Registrar workflow is:
 
 ```text
 /supervisor/approvals
-/officer/requests/[id]/approval
+→ /officer/requests/[id]
 → embedded Registrar decision panel
+```
+
+Only a Registrar-profile Supervisor may approve, reject, or return a request for clarification.
+
+The application must enforce all Registrar decision permissions server-side.
+
+The application must not implement:
+
+```text
+/officer/requests/[id]/approval
+```
 
 ## 10. Stage 0 approval
 

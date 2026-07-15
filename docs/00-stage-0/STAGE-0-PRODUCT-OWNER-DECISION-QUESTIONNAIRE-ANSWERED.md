@@ -42,7 +42,7 @@ DEC-050: APPROVED — Stage 0 is approved only after all final decisions are syn
 ## 4. Consequences
 
 - The former 63-page Stage 1 interpretation is retired.
-- Stage 1 has 39 required inventory items across 33 distinct routes.
+- Stage 1 has 39 required inventory items: 32 distinct product routes and 7 embedded sections/actions.
 - Full configuration pages move to `LATER_V1`.
 - Permission ambiguity is removed.
 - Completion and reopening are implementable without inventing rules.

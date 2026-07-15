@@ -16,7 +16,9 @@ Product: **FAIDIA — Service Operations Platform**
 
 ## 2. Scope counts
 
-- `STAGE_1_REQUIRED`: **39 inventory items / 33 distinct routes**
+- `STAGE_1_REQUIRED`: **39 inventory items / 32 distinct routes**
+  - 32 distinct product routes
+  - 7 embedded sections/actions
 - `LATER_V1`: **24**
 - `DEMO_ONLY`: **12**
 - `POSTPONED`: **18**
@@ -130,6 +132,11 @@ The Registrar approval queue at `/supervisor/approvals` links to the shared requ
 ```text
 /supervisor/approvals
 → /officer/requests/[id]
+```
+
+There is no separate `/officer/requests/[id]/approval` route in Stage 1.
+
+Approval, rejection, and return-for-clarification controls are embedded in `/officer/requests/[id]` and are available only to a Registrar-profile Supervisor.
 
 ## 8. Organization Admin
 

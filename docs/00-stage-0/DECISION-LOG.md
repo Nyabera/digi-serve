@@ -59,11 +59,25 @@ It records approved Stage 0 decisions and later corrective decisions. No blockin
 | DEC-042 | Page classification | Use STAGE_1_REQUIRED, LATER_V1, DEMO_ONLY, POSTPONED. | APPROVED |
 | DEC-043 | Decision-file name | Replace UNRESOLVED-DECISIONS.md with DECISION-LOG.md. | APPROVED |
 | DEC-044 | macOS metadata | Delete .DS_Store files and ignore .DS_Store repository-wide. | APPROVED |
-| DEC-045 | Final completeness | Version 1.3 controlling documents pass the Stage 0 completeness audit. | APPROVED |
+| DEC-045 | Prior completeness result | The earlier version 1.3 completeness result is superseded by DEC-050 and the final synchronized version 1.4 audit. | SUPERSEDED |
+| DEC-046 | Registrar decision route | Registrar approval, rejection, and return-for-clarification actions are embedded in `/officer/requests/[id]`. The application must not implement `/officer/requests/[id]/approval`. | APPROVED |
+| DEC-047 | Shared staff shell | Supervisors use the shared Officer processing shell with additional supervisor-only navigation and controls determined by membership profile and exact permissions. | APPROVED |
+| DEC-048 | Canonical Source of Truth | `docs/SOURCE-OF-TRUTH.md` is the only canonical Source-of-Truth file. `docs/00-stage-0/SOURCE-OF-TRUTH.md` must not exist. | APPROVED |
+| DEC-049 | Migration-record location | Replacement and migration instructions are stored at `docs/migrations/REPLACEMENT-INSTRUCTIONS.md` as a non-controlling historical record. | APPROVED |
+| DEC-050 | Final Stage 0 synchronization | Stage 0 is approved only after DEC-046 through DEC-049 are reflected consistently across every controlling document and the final completeness audit passes. | APPROVED |
+| DEC-051 | Stage 1 route-count correction | Correct the Stage 1 inventory count from 33 to 32 distinct product routes. The 39 required inventory items remain unchanged and consist of 32 routes plus 7 embedded sections/actions. This is a clerical correction and does not add, remove, rename, or reclassify any product surface. | APPROVED |
 
 ## 3. Supersession rule
 
-Where two decisions address the same issue, the later decision controls. In particular, DEC-038 replaces the broader wording in DEC-007 and removes generic delivery as a Stage 1 completion trigger.
+Where two decisions address the same subject, the later decision controls.
+
+- DEC-038 replaces broader completion wording and removes generic delivery as a Stage 1 completion trigger.
+- DEC-045 is superseded by DEC-050.
+- DEC-046 supersedes any page, route, or workflow wording that creates `/officer/requests/[id]/approval`.
+- DEC-047 supersedes any interpretation requiring a separate Supervisor processing shell.
+- DEC-048 establishes `docs/SOURCE-OF-TRUTH.md` as the only canonical Source-of-Truth file.
+- DEC-049 establishes `docs/migrations/REPLACEMENT-INSTRUCTIONS.md` as the location of the non-controlling migration record.
+- DEC-050 controls the final Stage 0 approval result.
 
 ## 4. Non-blocking external-pilot validation
 

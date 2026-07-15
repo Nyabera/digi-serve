@@ -32,6 +32,7 @@ This is the concise implementation-control register. `DECISION-LOG.md` contains 
 | DEC-048 | Delete `docs/00-stage-0/SOURCE-OF-TRUTH.md`; retain only `docs/SOURCE-OF-TRUTH.md`. |
 | DEC-049 | Store completed replacement instructions at `docs/migrations/REPLACEMENT-INSTRUCTIONS.md`. |
 | DEC-050 | Final Stage 0 approval requires all controlling documents to reflect DEC-046 through DEC-049 consistently. |
+| DEC-051 | Correct the Stage 1 count to 39 required inventory items consisting of 32 distinct product routes and 7 embedded sections/actions; no scope item changes. |
 
 ## 3. Frozen implementation controls
 
@@ -47,6 +48,7 @@ This is the concise implementation-control register. `DECISION-LOG.md` contains 
 - Use only approved completion and reopening rules.
 - Preserve append-only history.
 - Keep `Expired` in public mapping.
+- Treat the Stage 1 product surface as 32 distinct routes plus 7 embedded sections/actions.
 
 - Supervisors use the shared Officer processing shell.
 - Supervisor-only navigation and controls are permission-driven.

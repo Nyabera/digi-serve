@@ -250,35 +250,120 @@ Then:
 
 ### Phase 8 — Registrar decision
 
-Only a Supervisor membership profile labelled Registrar with explicit grants may approve, reject, or return for clarification.
+After Student Records completes its required work and Finance has recorded `CLEAR`, the request transitions to `PENDING_APPROVAL` and becomes available in:
 
-Ordinary Officers cannot perform these actions.
+```text
+/supervisor/approvals
+```
 
-Approve:
+The Registrar-profile Supervisor selects the request and is taken to:
 
-- validate state and prerequisites;
-- create immutable decision record;
-- request `APPROVED`;
-- `REQUEST_APPROVED`;
+```text
+/officer/requests/[id]
+```
+
+The request-details page remains inside the shared Officer processing shell.
+
+Supervisors use the same processing shell as Officers, with additional supervisor-only navigation and controls determined by their active membership profile and exact permissions.
+
+For a Registrar-profile Supervisor, the request-details page displays an embedded decision panel containing:
+
+- approve;
+- reject;
+- return for clarification.
+
+Ordinary Officers and standard Supervisors must not see or execute these actions.
+
+The route flow is:
+
+```text
+Finance result CLEAR
+        ↓
+Student Records completes required work
+        ↓
+Request becomes PENDING_APPROVAL
+        ↓
+/supervisor/approvals
+        ↓
+Registrar-profile Supervisor selects request
+        ↓
+/officer/requests/[id]
+        ↓
+Embedded Registrar decision panel
+        ↓
+Approve | Reject | Return for clarification
+```
+
+The Stage 1 application must not implement:
+
+```text
+/officer/requests/[id]/approval
+```
+
+Every Registrar decision action must be authorized server-side using:
+
+- the active organization membership;
+- the active membership profile;
+- the exact permission grant;
+- the request organization;
+- the request department;
+- the current request status;
+- the Finance clearance result;
+- the active workflow version.
+
+Client-side rendering, hidden buttons, route naming, and navigation visibility are not authorization.
+
+#### Approve
+
+Approval requires:
+
+- Finance result `CLEAR`;
+- all required review work completed;
+- no unresolved mandatory work item;
+- request status `PENDING_APPROVAL`;
+- `requests.approve`;
+- the Registrar Supervisor profile.
+
+Approval must:
+
+- create an immutable decision record;
+- transition the request to `APPROVED`;
+- record `REQUEST_APPROVED`;
 - begin outcome processing.
 
-Reject:
+#### Reject
 
-- applicant-visible reason required;
-- immutable decision record;
-- request `REJECTED`;
-- applicant notification;
-- `REQUEST_REJECTED`.
+Rejection requires:
 
-Return for clarification:
+- a rejectable request state;
+- `requests.reject`;
+- the Registrar Supervisor profile;
+- an applicant-visible rejection reason.
 
-- internal reason required;
-- applicant-visible instruction where applicable;
-- decision `RETURNED_FOR_CLARIFICATION`;
-- request `IN_REVIEW`;
-- Records work item `READY`;
-- `REQUEST_RETURNED_FOR_CLARIFICATION`;
-- outcome processing blocked.
+Rejection must:
+
+- create an immutable decision record;
+- transition the request to `REJECTED`;
+- notify the applicant;
+- record `REQUEST_REJECTED`.
+
+#### Return for clarification
+
+Return for clarification requires:
+
+- `requests.return_for_clarification`;
+- the Registrar Supervisor profile;
+- an internal reason;
+- an applicant-visible instruction where applicable.
+
+The action must:
+
+- record decision `RETURNED_FOR_CLARIFICATION`;
+- transition the request to `IN_REVIEW`;
+- make the Student Records work item `READY`;
+- record `REQUEST_RETURNED_FOR_CLARIFICATION`;
+- block outcome processing;
+- preserve all previous workflow and decision history.
 
 ### Phase 9 — Outcome
 
