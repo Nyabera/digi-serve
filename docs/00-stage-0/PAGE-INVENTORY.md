@@ -16,7 +16,9 @@ Product: **FAIDIA — Service Operations Platform**
 
 ## 2. Scope counts
 
-- `STAGE_1_REQUIRED`: **39 inventory items / 33 distinct routes**
+- `STAGE_1_REQUIRED`: **39 inventory items / 32 distinct routes**
+  - 32 distinct product routes
+  - 7 embedded sections/actions
 - `LATER_V1`: **24**
 - `DEMO_ONLY`: **12**
 - `POSTPONED`: **18**

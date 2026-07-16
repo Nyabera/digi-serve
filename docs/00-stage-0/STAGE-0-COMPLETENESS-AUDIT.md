@@ -31,6 +31,7 @@ The following do not block the controlled Stage 1 vertical slice:
 | Canonical Source of Truth | PASS — only `docs/SOURCE-OF-TRUTH.md` is canonical |
 | Markdown fence integrity | PASS — all controlling Markdown fences are balanced |
 | Stage 1 versus complete V1 | PASS — Stage 1 is the Transcript Request vertical slice |
+| Stage 1 route-count arithmetic | PASS — 39 required inventory items consist of 32 distinct routes and 7 embedded sections/actions |
 | Page classifications | PASS — all four approved classifications are used |
 | Configuration model | PASS — seeded configuration with limited safe editing |
 | Published version behavior | PASS — published versions are immutable |

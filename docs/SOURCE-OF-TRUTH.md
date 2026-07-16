@@ -1,7 +1,7 @@
 # FAIDIA Source of Truth
 
 **Status:** APPROVED_FOR_STAGE_1  
-**Version:** 1.4  
+**Version:** 1.5  
 **Last updated:** 2026-07-13  
 **Canonical path:** `docs/SOURCE-OF-TRUTH.md`  
 **Applies to:** FAIDIA V1, beginning with the Stage 1 Transcript Request vertical slice  
@@ -157,6 +157,10 @@ Organization Admin may not add, remove, reorder, branch, script, or arbitrarily 
 | Concise controlling decision register | `docs/00-stage-0/STAGE-0-APPROVED-DECISION-REGISTER.md` |
 | Visual direction and exact asset paths | `docs/00-stage-0/DESIGN-REFERENCE-REGISTER.md` |
 | Final completeness result | `docs/00-stage-0/STAGE-0-COMPLETENESS-AUDIT.md` |
+| Stage 1 documentation process and gates | `docs/01-stage-1/STAGE-1-PLAN.md` |
+| Approved Stage 1 observable acceptance behavior | `docs/01-stage-1/ACCEPTANCE-CRITERIA.md` |
+| Stage 1 source-to-implementation traceability | `docs/01-stage-1/STAGE-1-TRACEABILITY.md` |
+| Stage 1 implementation-document decisions | `docs/01-stage-1/governance/DECISIONS.md` |
 
 ## 8. Mandatory reading before implementation
 
@@ -169,6 +173,8 @@ Before any Stage 1 build task, read:
 - `docs/00-stage-0/STATUS-MAPPINGS.md`
 - `docs/00-stage-0/PAGE-INVENTORY.md`
 - `docs/00-stage-0/V1-NON-GOALS.md`
+- `docs/01-stage-1/ACCEPTANCE-CRITERIA.md`
+- `docs/01-stage-1/STAGE-1-TRACEABILITY.md`
 
 Read the remaining Stage 0 documents when relevant.
 

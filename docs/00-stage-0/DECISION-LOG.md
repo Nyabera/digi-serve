@@ -65,6 +65,7 @@ It records approved Stage 0 decisions and later corrective decisions. No blockin
 | DEC-048 | Canonical Source of Truth | `docs/SOURCE-OF-TRUTH.md` is the only canonical Source-of-Truth file. `docs/00-stage-0/SOURCE-OF-TRUTH.md` must not exist. | APPROVED |
 | DEC-049 | Migration-record location | Replacement and migration instructions are stored at `docs/migrations/REPLACEMENT-INSTRUCTIONS.md` as a non-controlling historical record. | APPROVED |
 | DEC-050 | Final Stage 0 synchronization | Stage 0 is approved only after DEC-046 through DEC-049 are reflected consistently across every controlling document and the final completeness audit passes. | APPROVED |
+| DEC-051 | Stage 1 route-count correction | Correct the Stage 1 inventory count from 33 to 32 distinct product routes. The 39 required inventory items remain unchanged and consist of 32 routes plus 7 embedded sections/actions. This is a clerical correction and does not add, remove, rename, or reclassify any product surface. | APPROVED |
 
 ## 3. Supersession rule
 

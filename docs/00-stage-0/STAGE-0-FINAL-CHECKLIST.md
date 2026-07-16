@@ -17,6 +17,7 @@ Last updated: **2026-07-13**
 - [x] Full V1 scope is separated from Stage 1.
 - [x] Pages are classified as `STAGE_1_REQUIRED`, `LATER_V1`, `DEMO_ONLY`, or `POSTPONED`.
 - [x] Post-V1 scope is excluded.
+- [x] Stage 1 contains 39 required inventory items: 32 distinct routes and 7 embedded sections/actions.
 
 ## Roles and permissions
 
