@@ -41,3 +41,25 @@ Requires production domain/TLS, approved auth/email flows, rate limiting, backup
 
 Deployment governance is included in `S1-DEC-046`; production authorization remains a later explicit gate.
 
+## V1 deployment flow
+
+FAIDIA uses GitHub as the source of deployment truth and Vercel as the deployment platform.
+
+```text
+Local feature branch
+        ↓
+Push feature branch
+        ↓
+Vercel Preview deployment
+        ↓
+Lint, type checking, tests and build
+        ↓
+Pull request into staging
+        ↓
+Staging deployment and smoke test
+        ↓
+Pull request from staging into main
+        ↓
+Vercel Production deployment
+        ↓
+Production smoke test

@@ -37,3 +37,51 @@ Every event/log includes environment and release, never secrets/PII. Health chec
 
 `S1-DEC-046` must approve the four non-production/production boundaries and preview database strategy.
 
+## Deployment environments
+
+FAIDIA uses five controlled execution contexts.
+
+| Environment | Git source | Hosting/runtime | Purpose | Data policy |
+|---|---|---|---|---|
+| Local | Any local branch | Developer machine | Active development and debugging | Synthetic or development-only data |
+| Test | Test runner | Local or CI | Automated unit, component and integration tests | Isolated test data; external side effects mocked |
+| Preview | Any non-production feature branch | Vercel Preview | Review one proposed change before integration | Preview-only services and non-sensitive data |
+| Staging | `staging` | Vercel branch Preview or custom Staging environment | Persistent pre-production verification | Staging-only database, auth, storage and provider credentials |
+| Production | `main` | Vercel Production | Live approved application | Production-only services and authorized data |
+
+### Environment isolation rule
+
+Local, Test, Preview, Staging and Production must not share mutable operational resources.
+
+As each provider is configured, every environment must receive separate:
+
+- PostgreSQL database or schema target;
+- Supabase authentication configuration;
+- Supabase Storage buckets;
+- Inngest environment;
+- email configuration;
+- Sentry environment;
+- payment credentials;
+- service secrets and environment variables.
+
+Production credentials must never be placed in Local, Test, Preview or Staging.
+
+### Initial environment label
+
+The server-only `APP_ENV` variable uses:
+
+- `development`
+- `test`
+- `preview`
+- `staging`
+- `production`
+
+`NODE_ENV` is controlled by Next.js and the runtime and must not be manually redefined.
+
+### Secret handling
+
+- `.env.local` and other real environment files are not committed.
+- `.env.example` contains variable names and safe examples only.
+- Secrets must not use the `NEXT_PUBLIC_` prefix.
+- Vercel environment changes require a new deployment.
+- Fake credentials must not be created merely to pass validation.
