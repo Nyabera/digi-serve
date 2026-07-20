@@ -52,3 +52,28 @@ Before real data: approve retention/deletion policy, DPIA/privacy notices and su
 
 `S1-DEC-043` must approve this security baseline and the explicit synthetic-demo versus external-pilot boundary.
 
+## Row Level Security Requirement
+
+Every tenant-owned table in the `public` schema must have PostgreSQL Row
+Level Security enabled before it is exposed through the Supabase Data API.
+
+RLS is a defence-in-depth control and does not replace application-level
+authorization.
+
+Every tenant-owned operation must also validate:
+
+- the authenticated user;
+- the active organization;
+- organization membership;
+- the required role or permission;
+- department scope where applicable; and
+- ownership of the requested record where applicable.
+
+Tables created through Drizzle migrations must explicitly enable RLS in the
+corresponding versioned migration.
+
+No tenant-owned table may rely on RLS as its only authorization mechanism.
+
+No unrestricted policy using `using (true)` or `with check (true)` may be
+introduced for tenant-owned institutional data unless the public access is
+explicitly documented and approved.

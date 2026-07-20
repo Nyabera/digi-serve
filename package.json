@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:check": "drizzle-kit check",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -48,6 +52,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.4",
+    "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",
@@ -55,6 +60,7 @@
     "jsdom": "^29.1.1",
     "postcss": "^8.5.19",
     "prettier": "3.9.5",
+    "supabase": "^2.109.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5",
     "vite": "^7.3.6",

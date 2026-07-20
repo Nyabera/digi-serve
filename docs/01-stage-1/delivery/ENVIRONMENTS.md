@@ -85,3 +85,12 @@ The server-only `APP_ENV` variable uses:
 - Secrets must not use the `NEXT_PUBLIC_` prefix.
 - Vercel environment changes require a new deployment.
 - Fake credentials must not be created merely to pass validation.
+
+## Production Supabase
+
+- Planned project name: `faidia-production`
+- Status: `RESERVED_NOT_CREATED`
+- Region: Must match development and staging
+- Creation gate: Before any deployment involving real institutional or applicant data
+- Allowed use before creation: None
+- Staging credentials must never be reused as production credentials

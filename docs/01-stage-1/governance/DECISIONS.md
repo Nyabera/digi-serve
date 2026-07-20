@@ -6,6 +6,15 @@
 **Product:** FAIDIA — Service Operations Platform  
 **Authority:** Subordinate to approved Stage 0 decisions
 
+## Authentication decision: Magic links
+
+- Status: Approved
+- Decision: Magic-link and email-OTP login are excluded from V1.
+- V1 method: Email and password.
+- Supporting flows: Email confirmation, password reset and staff invitation.
+- Reason: Avoid a second authentication path and additional email-delivery dependency.
+- Reconsider after: Pilot authentication feedback.
+
 ## 1. Purpose
 
 This file records decisions made while translating the approved Stage 0 product into Stage 1 implementation contracts. It must not silently override a Stage 0 decision.
