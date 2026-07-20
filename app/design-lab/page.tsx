@@ -268,58 +268,66 @@ export default function DesignLabPage() {
             <div className="mt-8 space-y-8">
               <TypographyExample
                 label="Display"
-                className="text-4xl font-bold leading-[1.2] tracking-[-0.025em] sm:text-[44px]"
+                className="text-display"
               >
                 Institutional services without the operational confusion
               </TypographyExample>
 
               <TypographyExample
                 label="Page title"
-                className="text-[30px] font-bold leading-[38px] tracking-[-0.02em]"
+                className="text-page-title"
               >
                 Transcript request management
               </TypographyExample>
 
               <TypographyExample
                 label="Section title"
-                className="text-xl font-semibold leading-7"
+                className="text-section-title"
               >
                 Requests requiring attention
               </TypographyExample>
 
               <TypographyExample
                 label="Card title"
-                className="text-base font-semibold leading-6"
+                className="text-card-title"
               >
                 Finance verification
               </TypographyExample>
 
               <TypographyExample
                 label="Body"
-                className="max-w-3xl text-sm font-normal leading-[22px]"
-              >
+                className="text-body max-w-3xl"
+             >
                 Review the applicant&apos;s submitted information and verify that
                 the required institutional records are complete before advancing
                 the request to the next workflow step.
               </TypographyExample>
 
               <TypographyExample
+                label="Applicant body"
+                className="text-body-applicant max-w-3xl"
+            >
+                Follow the steps below to complete your request. You can save your
+                progress and return later before submitting the final application.
+              </TypographyExample>
+
+              <TypographyExample
                 label="Compact body"
-                className="text-[13px] font-normal leading-5"
+                className="text-body-compact"
               >
                 Assigned to Student Records · Updated 14 minutes ago
               </TypographyExample>
 
               <TypographyExample
                 label="Label"
-                className="text-[13px] font-semibold leading-[18px]"
+                className="text-label"
               >
                 Admission number
               </TypographyExample>
 
               <TypographyExample
                 label="Caption"
-                className="text-[11px] font-medium leading-[18px]"
+                className="text-caption"
               >
                 PDF, JPG or PNG · Maximum file size 10 MB
               </TypographyExample>
@@ -343,11 +351,8 @@ export default function DesignLabPage() {
                   Tabular numbers
                 </p>
 
-                <div
-                  className="mt-3 flex flex-wrap gap-x-8 gap-y-2 text-lg font-semibold"
-                  style={{ fontVariantNumeric: "tabular-nums" }}
-                >
-                  <span>REQ-2026-00421</span>
+                <div className="numbers-tabular mt-3 flex flex-wrap gap-x-8 gap-y-2 text-lg font-semibold">
+                <span className="text-reference">REQ-2026-00421</span>
                   <span>KES 123,456.00</span>
                   <span>08:42:19</span>
                   <span>97.4%</span>

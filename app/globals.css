@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Plus Jakarta Sans, sans-serif;
 }
 
 main {
@@ -23,46 +23,79 @@ main {
 }
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
+  /* Core semantic colours */
   --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Form, border and focus colours */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Chart colours */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar colours */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(
+    --sidebar-primary-foreground
+  );
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(
+    --sidebar-accent-foreground
+  );
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Fonts */
+  --font-sans:
+    var(--font-plus-jakarta-sans),
+    var(--font-inter),
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  --font-mono:
+    var(--font-source-code-pro),
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  /* Radius mappings */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
@@ -98,6 +131,17 @@ main {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+    /* Typography weights */
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+  
+    /* Typography tracking */
+    --heading-letter-spacing: -0.01em;
+    --body-letter-spacing: 0.0em;
+    --label-letter-spacing: 0.0em;
 }
 
 .dark {
@@ -138,10 +182,156 @@ main {
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    font-family:
+      var(--font-plus-jakarta-sans),
+      var(--font-inter),
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+  }
+
   body {
     @apply bg-background text-foreground;
+    min-height: 100%;
+    font-family: inherit;
   }
-  html {
-    @apply font-sans;
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family:
+      var(--font-source-code-pro),
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+  }
+}
+@layer utilities {
+  /*
+   * FAIDIA TYPOGRAPHY TOKENS
+   *
+   * Mobile values are the defaults.
+   * Desktop values begin at 640px.
+   */
+
+  .text-display {
+    font-size: 1.875rem;
+    line-height: 2.375rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
+  }
+
+  .text-page-title {
+    font-size: 1.625rem;
+    line-height: 2.125rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--heading-letter-spacing);
+  }
+
+  .text-section-title {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--heading-letter-spacing);
+  }
+
+  .text-card-title {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--heading-letter-spacing);
+  }
+
+  .text-body {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--body-letter-spacing);
+  }
+
+  /*
+   * Use this only for longer applicant-facing text that needs
+   * additional mobile readability.
+   */
+  .text-body-applicant {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--body-letter-spacing);
+  }
+
+  .text-body-compact {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--body-letter-spacing);
+  }
+
+  .text-label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--label-letter-spacing);
+  }
+
+  .text-caption {
+    font-size: 0.6875rem;
+    line-height: 1.125rem;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--body-letter-spacing);
+  }
+
+  .text-reference {
+    font-family:
+      var(--font-source-code-pro),
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .numbers-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (min-width: 640px) {
+    .text-display {
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+    }
+
+    .text-page-title {
+      font-size: 1.875rem;
+      line-height: 2.375rem;
+    }
+
+    .text-section-title {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+
+    .text-body-applicant {
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+
+    .text-body-compact {
+      font-size: 0.8125rem;
+      line-height: 1.25rem;
+    }
+
+    .text-label {
+      font-size: 0.8125rem;
+      line-height: 1.125rem;
+    }
   }
 }
