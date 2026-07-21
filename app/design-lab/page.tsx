@@ -1421,37 +1421,30 @@ function IconExample({
     children: React.ReactElement<{
       size?: number;
       strokeWidth?: number;
+      absoluteStrokeWidth?: boolean;
       "aria-hidden"?: boolean;
     }>;
   }) {
     return (
       <div
-        className="flex min-h-32 min-w-24 flex-col items-center justify-center gap-3 rounded-[10px] border p-4"
-        style={{
-          borderColor: cssVariable("--border", "#DCE4EF"),
-        }}
+        className="flex min-h-32 min-w-24 flex-col items-center justify-center gap-3 rounded-md border border-border p-4"
       >
         <span
-          className="flex shrink-0 items-center justify-center"
+          className="flex shrink-0 items-center justify-center text-primary"
           style={{
             width: `${size}px`,
             height: `${size}px`,
-            color: cssVariable("--primary", "#2337B8"),
           }}
         >
           {cloneElement(children, {
             size,
-            strokeWidth: 2,
+            strokeWidth: 1.4,
+            absoluteStrokeWidth: true,
             "aria-hidden": true,
           })}
         </span>
   
-        <span
-          className="text-xs font-medium"
-          style={{
-            color: cssVariable("--muted-foreground", "#64748B"),
-          }}
-        >
+        <span className="text-body-compact font-medium text-muted-foreground">
           {label}
         </span>
       </div>
