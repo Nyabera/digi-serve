@@ -52,6 +52,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-focus: var(--focus);
+  
+  --color-border-divider: var(--border-divider);
+  --color-border-control: var(--border-control);
+  --color-border-selected: var(--border-selected);
+  --color-border-destructive: var(--border-destructive);
 
   /* Status colours */
   --color-status-neutral-bg: var(--status-neutral-bg);
@@ -128,6 +133,45 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Existing radius mappings */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /*
+   * Spacing mappings
+   *
+   * These preserve familiar Tailwind classes such as:
+   * gap-4, p-6, mt-8 and px-10.
+   */
+   --spacing-1: var(--space-1);
+   --spacing-2: var(--space-2);
+   --spacing-3: var(--space-3);
+   --spacing-4: var(--space-4);
+   --spacing-5: var(--space-5);
+   --spacing-6: var(--space-6);
+   --spacing-8: var(--space-8);
+   --spacing-10: var(--space-10);
+   --spacing-12: var(--space-12);
+   --spacing-16: var(--space-16);
+ 
+   /*
+    * Radius mappings
+    */
+   --radius-sm: var(--radius-compact);
+   --radius-md: var(--radius-control);
+   --radius-lg: var(--radius-card);
+   --radius-xl: var(--radius-prominent);
+ 
+   /*
+    * Shadow mappings
+    */
+   --shadow-control: var(--elevation-control);
+   --shadow-card: var(--elevation-card);
+   --shadow-popover: var(--elevation-popover);
+   --shadow-dialog: var(--elevation-dialog);
 }
 
 /*
@@ -275,13 +319,88 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-  /*
-   * EXISTING RADIUS FOUNDATION
+    /*
+   * SPACING TOKENS
    *
-   * Final radius tokens are calibrated later in Stage 8.
+   * Approved spacing values:
+   * 4, 8, 12, 16, 20, 24, 32, 40, 48 and 64 pixels.
    */
 
-  --radius: 0.625rem;
+   --space-1: 0.25rem; /* 4px */
+   --space-2: 0.5rem; /* 8px */
+   --space-3: 0.75rem; /* 12px */
+   --space-4: 1rem; /* 16px */
+   --space-5: 1.25rem; /* 20px */
+   --space-6: 1.5rem; /* 24px */
+   --space-8: 2rem; /* 32px */
+   --space-10: 2.5rem; /* 40px */
+   --space-12: 3rem; /* 48px */
+   --space-16: 4rem; /* 64px */
+ 
+   /*
+    * RADIUS TOKENS
+    *
+    * Compact: badges and small controls.
+    * Control: inputs and buttons.
+    * Card: standard cards and panels.
+    * Prominent: large applicant-facing surfaces.
+    */
+ 
+   --radius-compact: 0.3125rem; /* 5px */
+   --radius-control: 0.625rem; /* 10px */
+   --radius-card: 1.125rem; /* 18px */
+   --radius-prominent: 1.625rem; /* 26px */
+ 
+   /*
+    * Retain the shadcn base radius variable.
+    * The default shadcn radius now equals the control radius.
+    */
+ 
+   --radius: var(--radius-control);
+ 
+   /*
+    * BORDER TOKENS
+    */
+ 
+   --border-size-thin: 1px;
+   --border-size-thick: 2px;
+ 
+   --border-divider: var(--border);
+   --border-control: var(--border-strong);
+   --border-selected: var(--primary);
+   --border-destructive: var(--destructive);
+ 
+   /*
+    * SHADOW TOKENS
+    *
+    * FAIDIA relies primarily on borders and surface contrast.
+    * Shadows are reserved for actual elevation.
+    */
+ 
+   --elevation-control:
+     0 1px 2px rgb(15 23 42 / 6%);
+ 
+   --elevation-card:
+     0 2px 8px rgb(15 23 42 / 8%);
+ 
+   --elevation-popover:
+     0 8px 24px rgb(15 23 42 / 12%);
+ 
+   --elevation-dialog:
+     0 20px 48px rgb(15 23 42 / 16%);
+ 
+   /*
+    * ICON SIZE TOKENS
+    *
+    * Intended primarily for Lucide icons.
+    */
+ 
+   --icon-14: 0.875rem;
+   --icon-16: 1rem;
+   --icon-18: 1.125rem;
+   --icon-20: 1.25rem;
+   --icon-24: 1.5rem;
+   --icon-32: 2rem;
 
   /*
    * TYPOGRAPHY WEIGHTS
@@ -345,6 +464,11 @@
 
   --ring: oklch(0.556 0 0);
   --focus: var(--ring);
+
+  --border-divider: var(--border);
+  --border-control: var(--border-strong);
+  --border-selected: var(--primary);
+  --border-destructive: var(--destructive);
 
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -510,6 +634,65 @@ body {
   .numbers-tabular {
     font-variant-numeric: tabular-nums;
   }
+
+    /*
+   * BORDER WIDTH UTILITIES
+   */
+
+   .border-thin {
+    border-width: var(--border-size-thin);
+  }
+
+  .border-thick {
+    border-width: var(--border-size-thick);
+  }
+
+  /*
+   * LUCIDE ICON SIZE UTILITIES
+   *
+   * Stroke weight is controlled through the Lucide component using:
+   * strokeWidth={1.4}
+   * absoluteStrokeWidth
+   */
+
+   .icon-14,
+   .icon-16,
+   .icon-18,
+   .icon-20,
+   .icon-24,
+   .icon-32 {
+     flex: none;
+   }
+ 
+   .icon-14 {
+     width: var(--icon-14);
+     height: var(--icon-14);
+   }
+ 
+   .icon-16 {
+     width: var(--icon-16);
+     height: var(--icon-16);
+   }
+ 
+   .icon-18 {
+     width: var(--icon-18);
+     height: var(--icon-18);
+   }
+ 
+   .icon-20 {
+     width: var(--icon-20);
+     height: var(--icon-20);
+   }
+ 
+   .icon-24 {
+     width: var(--icon-24);
+     height: var(--icon-24);
+   }
+ 
+   .icon-32 {
+     width: var(--icon-32);
+     height: var(--icon-32);
+   }
 
   @media (min-width: 640px) {
     .text-display {
