@@ -20,100 +20,150 @@ export const metadata = {
 };
 
 const colours = [
-  {
-    name: "Background",
-    variable: "--background",
-    fallback: "#F8FAFC",
-  },
-  {
-    name: "Surface",
-    variable: "--surface",
-    fallback: "#FFFFFF",
-  },
-  {
-    name: "Surface subtle",
-    variable: "--surface-subtle",
-    fallback: "#F1F5F9",
-  },
-  {
-    name: "Foreground",
-    variable: "--foreground",
-    fallback: "#0B1B4D",
-  },
-  {
-    name: "Text",
-    variable: "--text",
-    fallback: "#172554",
-  },
-  {
-    name: "Muted foreground",
-    variable: "--muted-foreground",
-    fallback: "#64748B",
-  },
-  {
-    name: "Border",
-    variable: "--border",
-    fallback: "#DCE4EF",
-  },
-  {
-    name: "Border strong",
-    variable: "--border-strong",
-    fallback: "#C5D1E2",
-  },
-  {
-    name: "Primary",
-    variable: "--primary",
-    fallback: "#2337B8",
-  },
-  {
-    name: "Primary hover",
-    variable: "--primary-hover",
-    fallback: "#1B2C97",
-  },
-  {
-    name: "Primary soft",
-    variable: "--primary-soft",
-    fallback: "#EEF0FB",
-  },
-];
+    {
+      name: "Background",
+      variable: "--background",
+      fallback: "#F8FAFC",
+    },
+    {
+      name: "Surface",
+      variable: "--surface",
+      fallback: "#FFFFFF",
+    },
+    {
+      name: "Surface subtle",
+      variable: "--surface-subtle",
+      fallback: "#F1F5F9",
+    },
+    {
+      name: "Foreground",
+      variable: "--foreground",
+      fallback: "#0B1B4D",
+    },
+    {
+      name: "Text",
+      variable: "--text",
+      fallback: "#172554",
+    },
+    {
+      name: "Muted foreground",
+      variable: "--muted-foreground",
+      fallback: "#64748B",
+    },
+    {
+      name: "Border",
+      variable: "--border",
+      fallback: "#DCE4EF",
+    },
+    {
+      name: "Border strong",
+      variable: "--border-strong",
+      fallback: "#C5D1E2",
+    },
+    {
+      name: "Primary",
+      variable: "--primary",
+      fallback: "#2337B8",
+    },
+    {
+      name: "Primary hover",
+      variable: "--primary-hover",
+      fallback: "#1B2C97",
+    },
+    {
+      name: "Primary soft",
+      variable: "--primary-soft",
+      fallback: "#EEF0FB",
+    },
+    {
+      name: "Focus",
+      variable: "--focus",
+      fallback: "#2337B8",
+    },
+  ];
 
-const statuses = [
-  {
-    name: "Neutral",
-    label: "Draft",
-    background: "#F1F5F9",
-    foreground: "#475569",
-    border: "#CBD5E1",
-  },
-  {
-    name: "Information",
-    label: "In review",
-    background: "#EEF0FB",
-    foreground: "#2337B8",
-    border: "#C7D2FE",
-  },
-  {
-    name: "Success",
-    label: "Completed",
-    background: "#ECFDF3",
-    foreground: "#067647",
-    border: "#ABEFC6",
-  },
-  {
-    name: "Warning",
-    label: "Due soon",
-    background: "#FFFAEB",
-    foreground: "#B54708",
-    border: "#FEDF89",
-  },
-  {
-    name: "Danger",
-    label: "Overdue",
-    background: "#FEF3F2",
-    foreground: "#B42318",
-    border: "#FECDCA",
-  },
-];
+  const statuses = [
+    {
+      name: "Neutral",
+      label: "Draft",
+      background: cssVariable(
+        "--status-neutral-bg",
+        "#F1F5F9",
+      ),
+      foreground: cssVariable(
+        "--status-neutral-text",
+        "#475569",
+      ),
+      border: cssVariable(
+        "--status-neutral-border",
+        "#CBD5E1",
+      ),
+    },
+    {
+      name: "Information",
+      label: "In review",
+      background: cssVariable(
+        "--status-info-bg",
+        "#EEF0FB",
+      ),
+      foreground: cssVariable(
+        "--status-info-text",
+        "#2337B8",
+      ),
+      border: cssVariable(
+        "--status-info-border",
+        "#C7D2FE",
+      ),
+    },
+    {
+      name: "Success",
+      label: "Completed",
+      background: cssVariable(
+        "--status-success-bg",
+        "#ECFDF3",
+      ),
+      foreground: cssVariable(
+        "--status-success-text",
+        "#067647",
+      ),
+      border: cssVariable(
+        "--status-success-border",
+        "#ABEFC6",
+      ),
+    },
+    {
+      name: "Warning",
+      label: "Due soon",
+      background: cssVariable(
+        "--status-warning-bg",
+        "#FFFAEB",
+      ),
+      foreground: cssVariable(
+        "--status-warning-text",
+        "#B54708",
+      ),
+      border: cssVariable(
+        "--status-warning-border",
+        "#FEDF89",
+      ),
+    },
+    {
+      name: "Danger",
+      label: "Overdue",
+      background: cssVariable(
+        "--status-danger-bg",
+        "#FEF3F2",
+      ),
+      foreground: cssVariable(
+        "--status-danger-text",
+        "#B42318",
+      ),
+      border: cssVariable(
+        "--status-danger-border",
+        "#FECDCA",
+      ),
+    },
+  ];
 
 const spacingTokens = [
   { name: "1", value: 4 },
@@ -164,38 +214,74 @@ function cssVariable(variable: string, fallback: string): string {
 }
 
 function statusStyle(status: string): CSSProperties {
-  if (status === "Completed") {
+    if (status === "Completed") {
+      return {
+        backgroundColor: cssVariable(
+          "--status-success-bg",
+          "#ECFDF3",
+        ),
+        color: cssVariable(
+          "--status-success-text",
+          "#067647",
+        ),
+        borderColor: cssVariable(
+          "--status-success-border",
+          "#ABEFC6",
+        ),
+      };
+    }
+    if (status === "Due soon") {
+      return {
+        backgroundColor: cssVariable(
+          "--status-warning-bg",
+          "#FFFAEB",
+        ),
+        color: cssVariable(
+          "--status-warning-text",
+          "#B54708",
+        ),
+        borderColor: cssVariable(
+          "--status-warning-border",
+          "#FEDF89",
+        ),
+      };
+    }
+    if (status === "Overdue") {
+      return {
+        backgroundColor: cssVariable(
+          "--status-danger-bg",
+          "#FEF3F2",
+        ),
+        color: cssVariable(
+          "--status-danger-text",
+          "#B42318",
+        ),
+        borderColor: cssVariable(
+          "--status-danger-border",
+          "#FECDCA",
+        ),
+      };
+    }
+
     return {
-      backgroundColor: "#ECFDF3",
-      color: "#067647",
-      borderColor: "#ABEFC6",
+      backgroundColor: cssVariable(
+        "--status-info-bg",
+        "#EEF0FB",
+      ),
+      color: cssVariable(
+        "--status-info-text",
+        "#2337B8",
+      ),
+      borderColor: cssVariable(
+        "--status-info-border",
+        "#C7D2FE",
+      ),
     };
   }
-
-  if (status === "Due soon") {
-    return {
-      backgroundColor: "#FFFAEB",
-      color: "#B54708",
-      borderColor: "#FEDF89",
-    };
-  }
-
-  return {
-    backgroundColor: "#EEF0FB",
-    color: "#2337B8",
-    borderColor: "#C7D2FE",
-  };
-}
 
 export default function DesignLabPage() {
   return (
-    <main
-      className="min-h-screen px-4 py-8 sm:px-6 lg:px-10"
-      style={{
-        backgroundColor: cssVariable("--background", "#F8FAFC"),
-        color: cssVariable("--text", "#172554"),
-      }}
-    >
+    <main className="min-h-screen bg-background px-4 py-8 text-text sm:px-6 lg:px-10">   
       <div className="mx-auto max-w-[1440px]">
         <header
           className="mb-10 rounded-[18px] border p-6 sm:p-8"

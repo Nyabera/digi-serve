@@ -1,31 +1,24 @@
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "tailwindcss";
-
-* {
-  box-sizing: border-box;
-}
 
 @custom-variant dark (&:is(.dark *));
 
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-}
-
-body {
-  font-family: Plus Jakarta Sans, sans-serif;
-}
-
-main {
-  padding: 2rem;
-}
-
+/*
+ * TAILWIND THEME MAPPINGS
+ *
+ * These declarations connect Tailwind utility names to the
+ * actual CSS variables defined inside :root.
+ */
 @theme inline {
-  /* Core semantic colours */
+  /* Core application colours */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-text: var(--text);
+
+  /* Surfaces */
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -33,8 +26,11 @@ main {
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
+  /* Brand and interaction */
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
 
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -46,31 +42,67 @@ main {
   --color-accent-foreground: var(--accent-foreground);
 
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-foreground: var(
+    --destructive-foreground
+  );
 
-  /* Form, border and focus colours */
+  /* Borders, controls and focus */
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-focus: var(--focus);
 
-  /* Chart colours */
+  /* Status colours */
+  --color-status-neutral-bg: var(--status-neutral-bg);
+  --color-status-neutral-text: var(--status-neutral-text);
+  --color-status-neutral-border: var(
+    --status-neutral-border
+  );
+
+  --color-status-info-bg: var(--status-info-bg);
+  --color-status-info-text: var(--status-info-text);
+  --color-status-info-border: var(--status-info-border);
+
+  --color-status-success-bg: var(--status-success-bg);
+  --color-status-success-text: var(--status-success-text);
+  --color-status-success-border: var(
+    --status-success-border
+  );
+
+  --color-status-warning-bg: var(--status-warning-bg);
+  --color-status-warning-text: var(--status-warning-text);
+  --color-status-warning-border: var(
+    --status-warning-border
+  );
+
+  --color-status-danger-bg: var(--status-danger-bg);
+  --color-status-danger-text: var(--status-danger-text);
+  --color-status-danger-border: var(
+    --status-danger-border
+  );
+
+  /* Chart mappings */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* Sidebar colours */
+  /* Sidebar mappings */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
+
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(
     --sidebar-primary-foreground
   );
+
   --color-sidebar-accent: var(--sidebar-accent);
   --color-sidebar-accent-foreground: var(
     --sidebar-accent-foreground
   );
+
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
@@ -91,93 +123,267 @@ main {
     Consolas,
     monospace;
 
-  /* Radius mappings */
+  /* Existing radius mappings */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/*
+ * LIGHT THEME
+ *
+ * Stage 8 is calibrating the light interface first.
+ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  /*
+   * FAIDIA PRIMITIVE COLOUR TOKENS
+   *
+   * These are fixed palette values.
+   * Components should normally consume semantic variables rather
+   * than referencing these primitives directly.
+   */
+
+  --palette-white: #ffffff;
+
+  --palette-slate-25: #f8fafc;
+  --palette-slate-50: #f1f5f9;
+  --palette-slate-300: #cbd5e1;
+  --palette-slate-500: #64748b;
+  --palette-slate-600: #475569;
+
+  --palette-navy-800: #172554;
+  --palette-navy-900: #0b1b4d;
+
+  --palette-border-200: #dce4ef;
+  --palette-border-300: #c5d1e2;
+
+  --palette-primary-50: #eef0fb;
+  --palette-primary-200: #c7d2fe;
+  --palette-primary-600: #2337b8;
+  --palette-primary-700: #1b2c97;
+
+  --palette-success-50: #ecfdf3;
+  --palette-success-200: #abefc6;
+  --palette-success-700: #067647;
+
+  --palette-warning-50: #fffaeb;
+  --palette-warning-200: #fedf89;
+  --palette-warning-700: #b54708;
+
+  --palette-danger-50: #fef3f2;
+  --palette-danger-200: #fecdca;
+  --palette-danger-700: #b42318;
+
+  /*
+   * FAIDIA SEMANTIC COLOUR TOKENS
+   *
+   * These names describe the purpose of a colour.
+   */
+
+  --background: var(--palette-slate-25);
+  --foreground: var(--palette-navy-900);
+  --text: var(--palette-navy-800);
+
+  --surface: var(--palette-white);
+  --surface-subtle: var(--palette-slate-50);
+
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+
+  --primary: var(--palette-primary-600);
+  --primary-foreground: var(--palette-white);
+  --primary-hover: var(--palette-primary-700);
+  --primary-soft: var(--palette-primary-50);
+
+  --secondary: var(--surface-subtle);
+  --secondary-foreground: var(--foreground);
+
+  --muted: var(--surface-subtle);
+  --muted-foreground: var(--palette-slate-500);
+
+  --accent: var(--primary-soft);
+  --accent-foreground: var(--primary);
+
+  --destructive: var(--palette-danger-700);
+  --destructive-foreground: var(--palette-white);
+
+  --border: var(--palette-border-200);
+  --border-strong: var(--palette-border-300);
+  --input: var(--border-strong);
+
+  --ring: var(--primary);
+  --focus: var(--primary);
+
+  /*
+   * FAIDIA STATUS COLOUR TOKENS
+   *
+   * Every status has a background, text and border value.
+   */
+
+  --status-neutral-bg: var(--palette-slate-50);
+  --status-neutral-text: var(--palette-slate-600);
+  --status-neutral-border: var(--palette-slate-300);
+
+  --status-info-bg: var(--palette-primary-50);
+  --status-info-text: var(--palette-primary-600);
+  --status-info-border: var(--palette-primary-200);
+
+  --status-success-bg: var(--palette-success-50);
+  --status-success-text: var(--palette-success-700);
+  --status-success-border: var(--palette-success-200);
+
+  --status-warning-bg: var(--palette-warning-50);
+  --status-warning-text: var(--palette-warning-700);
+  --status-warning-border: var(--palette-warning-200);
+
+  --status-danger-bg: var(--palette-danger-50);
+  --status-danger-text: var(--palette-danger-700);
+  --status-danger-border: var(--palette-danger-200);
+
+  /*
+   * CHART TOKENS
+   *
+   * These are temporary defaults.
+   * Final chart colours are defined later in Stage 8.
+   */
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
+  /*
+   * SIDEBAR TOKENS
+   */
+
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--foreground);
+
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(
+    --primary-foreground
+  );
+
+  --sidebar-accent: var(--primary-soft);
+  --sidebar-accent-foreground: var(--primary);
+
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /*
+   * EXISTING RADIUS FOUNDATION
+   *
+   * Final radius tokens are calibrated later in Stage 8.
+   */
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-    /* Typography weights */
-    --font-weight-light: 300;
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-  
-    /* Typography tracking */
-    --heading-letter-spacing: -0.01em;
-    --body-letter-spacing: 0.0em;
-    --label-letter-spacing: 0.0em;
+
+  /*
+   * TYPOGRAPHY WEIGHTS
+   */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /*
+   * TYPOGRAPHY TRACKING
+   */
+
+  --heading-letter-spacing: -0.01em;
+  --body-letter-spacing: 0em;
+  --label-letter-spacing: 0em;
 }
 
+/*
+ * PROVISIONAL DARK THEME
+ *
+ * Dark mode is not yet being visually approved during this Stage 8
+ * colour batch. These values preserve the existing shadcn dark-mode
+ * behaviour and prevent semantic variables from becoming undefined.
+ */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --text: oklch(0.922 0 0);
+
+  --surface: oklch(0.205 0 0);
+  --surface-subtle: oklch(0.269 0 0);
+
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
+  --primary-hover: var(--primary);
+  --primary-soft: var(--surface-subtle);
+
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
+
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
+
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
+
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+
   --border: oklch(1 0 0 / 10%);
+  --border-strong: oklch(1 0 0 / 18%);
   --input: oklch(1 0 0 / 15%);
+
   --ring: oklch(0.556 0 0);
+  --focus: var(--ring);
+
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
+
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
+
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
+
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/*
+ * GLOBAL RESET
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+/*
+ * BASE ELEMENT STYLES
+ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -212,10 +418,12 @@ main {
       monospace;
   }
 }
+
+/*
+ * FAIDIA TYPOGRAPHY UTILITIES
+ */
 @layer utilities {
   /*
-   * FAIDIA TYPOGRAPHY TOKENS
-   *
    * Mobile values are the defaults.
    * Desktop values begin at 640px.
    */
@@ -224,7 +432,7 @@ main {
     font-size: 1.875rem;
     line-height: 2.375rem;
     font-weight: var(--font-weight-bold);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--heading-letter-spacing);
   }
 
   .text-page-title {
