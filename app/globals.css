@@ -4,12 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * TAILWIND THEME MAPPINGS
- *
- * These declarations connect Tailwind utility names to the
- * actual CSS variables defined inside :root.
- */
 @theme inline {
   /* Core application colours */
   --color-background: var(--background);
@@ -19,10 +13,8 @@
   /* Surfaces */
   --color-surface: var(--surface);
   --color-surface-subtle: var(--surface-subtle);
-
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
@@ -31,61 +23,42 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-hover: var(--primary-hover);
   --color-primary-soft: var(--primary-soft);
-
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(
-    --destructive-foreground
-  );
+  --color-destructive-foreground: var(--destructive-foreground);
 
   /* Borders, controls and focus */
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-focus: var(--focus);
-  
   --color-border-divider: var(--border-divider);
   --color-border-control: var(--border-control);
   --color-border-selected: var(--border-selected);
   --color-border-destructive: var(--border-destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-focus: var(--focus);
 
   /* Status colours */
   --color-status-neutral-bg: var(--status-neutral-bg);
   --color-status-neutral-text: var(--status-neutral-text);
-  --color-status-neutral-border: var(
-    --status-neutral-border
-  );
-
+  --color-status-neutral-border: var(--status-neutral-border);
   --color-status-info-bg: var(--status-info-bg);
   --color-status-info-text: var(--status-info-text);
   --color-status-info-border: var(--status-info-border);
-
   --color-status-success-bg: var(--status-success-bg);
   --color-status-success-text: var(--status-success-text);
-  --color-status-success-border: var(
-    --status-success-border
-  );
-
+  --color-status-success-border: var(--status-success-border);
   --color-status-warning-bg: var(--status-warning-bg);
   --color-status-warning-text: var(--status-warning-text);
-  --color-status-warning-border: var(
-    --status-warning-border
-  );
-
+  --color-status-warning-border: var(--status-warning-border);
   --color-status-danger-bg: var(--status-danger-bg);
   --color-status-danger-text: var(--status-danger-text);
-  --color-status-danger-border: var(
-    --status-danger-border
-  );
+  --color-status-danger-border: var(--status-danger-border);
 
   /* Chart mappings */
   --color-chart-1: var(--chart-1);
@@ -93,21 +66,17 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis: var(--chart-axis);
+  --color-chart-cursor: var(--chart-cursor);
 
   /* Sidebar mappings */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
-
   --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(
-    --sidebar-primary-foreground
-  );
-
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
   --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(
-    --sidebar-accent-foreground
-  );
-
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
@@ -128,370 +97,314 @@
     Consolas,
     monospace;
 
-  /* Existing radius mappings */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Radius mappings */
+  --radius-sm: var(--radius-compact);
+  --radius-md: var(--radius-control);
+  --radius-lg: var(--radius-card);
+  --radius-xl: var(--radius-prominent);
 
-  /* Existing radius mappings */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Shadow mappings */
+  --shadow-control: var(--elevation-control);
+  --shadow-card: var(--elevation-card);
+  --shadow-popover: var(--elevation-popover);
+  --shadow-dialog: var(--elevation-dialog);
 
-  /*
-   * Spacing mappings
-   *
-   * These preserve familiar Tailwind classes such as:
-   * gap-4, p-6, mt-8 and px-10.
-   */
-   --spacing-1: var(--space-1);
-   --spacing-2: var(--space-2);
-   --spacing-3: var(--space-3);
-   --spacing-4: var(--space-4);
-   --spacing-5: var(--space-5);
-   --spacing-6: var(--space-6);
-   --spacing-8: var(--space-8);
-   --spacing-10: var(--space-10);
-   --spacing-12: var(--space-12);
-   --spacing-16: var(--space-16);
- 
-   /*
-    * Radius mappings
-    */
-   --radius-sm: var(--radius-compact);
-   --radius-md: var(--radius-control);
-   --radius-lg: var(--radius-card);
-   --radius-xl: var(--radius-prominent);
- 
-   /*
-    * Shadow mappings
-    */
-   --shadow-control: var(--elevation-control);
-   --shadow-card: var(--elevation-card);
-   --shadow-popover: var(--elevation-popover);
-   --shadow-dialog: var(--elevation-dialog);
+  /* Step 12 — content-width utilities */
+  --container-content-narrow: 40rem;
+  --container-content-form: 48rem;
+  --container-content-standard: 72rem;
+  --container-content-wide: 90rem;
+
+  /* Step 13 — responsive breakpoints */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 90rem;
 }
 
-/*
- * LIGHT THEME
- *
- * Stage 8 is calibrating the light interface first.
- */
 :root {
-  /*
-   * FAIDIA PRIMITIVE COLOUR TOKENS
-   *
-   * These are fixed palette values.
-   * Components should normally consume semantic variables rather
-   * than referencing these primitives directly.
-   */
-
+  /* Primitive colours */
   --palette-white: #ffffff;
-
   --palette-slate-25: #f8fafc;
   --palette-slate-50: #f1f5f9;
   --palette-slate-300: #cbd5e1;
   --palette-slate-500: #64748b;
   --palette-slate-600: #475569;
-
   --palette-navy-800: #172554;
   --palette-navy-900: #0b1b4d;
-
   --palette-border-200: #dce4ef;
   --palette-border-300: #c5d1e2;
-
   --palette-primary-50: #eef0fb;
   --palette-primary-200: #c7d2fe;
   --palette-primary-600: #2337b8;
   --palette-primary-700: #1b2c97;
-
   --palette-success-50: #ecfdf3;
   --palette-success-200: #abefc6;
   --palette-success-700: #067647;
-
   --palette-warning-50: #fffaeb;
   --palette-warning-200: #fedf89;
   --palette-warning-700: #b54708;
-
   --palette-danger-50: #fef3f2;
   --palette-danger-200: #fecdca;
   --palette-danger-700: #b42318;
 
-  /*
-   * FAIDIA SEMANTIC COLOUR TOKENS
-   *
-   * These names describe the purpose of a colour.
-   */
-
+  /* Semantic colours */
   --background: var(--palette-slate-25);
   --foreground: var(--palette-navy-900);
   --text: var(--palette-navy-800);
-
   --surface: var(--palette-white);
   --surface-subtle: var(--palette-slate-50);
-
   --card: var(--surface);
   --card-foreground: var(--foreground);
-
   --popover: var(--surface);
   --popover-foreground: var(--foreground);
-
   --primary: var(--palette-primary-600);
   --primary-foreground: var(--palette-white);
   --primary-hover: var(--palette-primary-700);
   --primary-soft: var(--palette-primary-50);
-
   --secondary: var(--surface-subtle);
   --secondary-foreground: var(--foreground);
-
   --muted: var(--surface-subtle);
   --muted-foreground: var(--palette-slate-500);
-
   --accent: var(--primary-soft);
   --accent-foreground: var(--primary);
-
   --destructive: var(--palette-danger-700);
   --destructive-foreground: var(--palette-white);
-
   --border: var(--palette-border-200);
   --border-strong: var(--palette-border-300);
   --input: var(--border-strong);
-
   --ring: var(--primary);
   --focus: var(--primary);
 
-  /*
-   * FAIDIA STATUS COLOUR TOKENS
-   *
-   * Every status has a background, text and border value.
-   */
-
+  /* Status colours */
   --status-neutral-bg: var(--palette-slate-50);
   --status-neutral-text: var(--palette-slate-600);
   --status-neutral-border: var(--palette-slate-300);
-
   --status-info-bg: var(--palette-primary-50);
   --status-info-text: var(--palette-primary-600);
   --status-info-border: var(--palette-primary-200);
-
   --status-success-bg: var(--palette-success-50);
   --status-success-text: var(--palette-success-700);
   --status-success-border: var(--palette-success-200);
-
   --status-warning-bg: var(--palette-warning-50);
   --status-warning-text: var(--palette-warning-700);
   --status-warning-border: var(--palette-warning-200);
-
   --status-danger-bg: var(--palette-danger-50);
   --status-danger-text: var(--palette-danger-700);
   --status-danger-border: var(--palette-danger-200);
 
-  /*
-   * CHART TOKENS
-   *
-   * These are temporary defaults.
-   * Final chart colours are defined later in Stage 8.
-   */
+  /* Steps 27–33 — Recharts colour system */
+  --chart-1: #2337b8;
+  --chart-2: #0f766e;
+  --chart-3: #7c3aed;
+  --chart-4: #b54708;
+  --chart-5: #475569;
+  --chart-grid: #e7edf5;
+  --chart-axis: var(--muted-foreground);
+  --chart-cursor: var(--border-strong);
+  --chart-tooltip-background: var(--surface);
+  --chart-tooltip-border: var(--border);
+  --chart-tooltip-label: var(--foreground);
+  --chart-tooltip-value: var(--text);
 
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-
-  /*
-   * SIDEBAR TOKENS
-   */
-
+  /* Sidebar colour values */
   --sidebar: var(--surface);
   --sidebar-foreground: var(--foreground);
-
   --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(
-    --primary-foreground
-  );
-
+  --sidebar-primary-foreground: var(--primary-foreground);
   --sidebar-accent: var(--primary-soft);
   --sidebar-accent-foreground: var(--primary);
-
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
 
-    /*
-   * SPACING TOKENS
-   *
-   * Approved spacing values:
-   * 4, 8, 12, 16, 20, 24, 32, 40, 48 and 64 pixels.
-   */
-
-   --space-1: 0.25rem; /* 4px */
-   --space-2: 0.5rem; /* 8px */
-   --space-3: 0.75rem; /* 12px */
-   --space-4: 1rem; /* 16px */
-   --space-5: 1.25rem; /* 20px */
-   --space-6: 1.5rem; /* 24px */
-   --space-8: 2rem; /* 32px */
-   --space-10: 2.5rem; /* 40px */
-   --space-12: 3rem; /* 48px */
-   --space-16: 4rem; /* 64px */
- 
-   /*
-    * RADIUS TOKENS
-    *
-    * Compact: badges and small controls.
-    * Control: inputs and buttons.
-    * Card: standard cards and panels.
-    * Prominent: large applicant-facing surfaces.
-    */
- 
-   --radius-compact: 0.3125rem; /* 5px */
-   --radius-control: 0.625rem; /* 10px */
-   --radius-card: 1.125rem; /* 18px */
-   --radius-prominent: 1.625rem; /* 26px */
- 
-   /*
-    * Retain the shadcn base radius variable.
-    * The default shadcn radius now equals the control radius.
-    */
- 
-   --radius: var(--radius-control);
- 
-   /*
-    * BORDER TOKENS
-    */
- 
-   --border-size-thin: 1px;
-   --border-size-thick: 2px;
- 
-   --border-divider: var(--border);
-   --border-control: var(--border-strong);
-   --border-selected: var(--primary);
-   --border-destructive: var(--destructive);
- 
-   /*
-    * SHADOW TOKENS
-    *
-    * FAIDIA relies primarily on borders and surface contrast.
-    * Shadows are reserved for actual elevation.
-    */
- 
-   --elevation-control:
-     0 1px 2px rgb(15 23 42 / 6%);
- 
-   --elevation-card:
-     0 2px 8px rgb(15 23 42 / 8%);
- 
-   --elevation-popover:
-     0 8px 24px rgb(15 23 42 / 12%);
- 
-   --elevation-dialog:
-     0 20px 48px rgb(15 23 42 / 16%);
- 
-   /*
-    * ICON SIZE TOKENS
-    *
-    * Intended primarily for Lucide icons.
-    */
- 
-   --icon-14: 0.875rem;
-   --icon-16: 1rem;
-   --icon-18: 1.125rem;
-   --icon-20: 1.25rem;
-   --icon-24: 1.5rem;
-   --icon-32: 2rem;
-
-  /*
-   * TYPOGRAPHY WEIGHTS
-   */
-
+  /* Typography */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-
-  /*
-   * TYPOGRAPHY TRACKING
-   */
-
   --heading-letter-spacing: -0.01em;
   --body-letter-spacing: 0em;
   --label-letter-spacing: 0em;
-}
 
-/*
- * PROVISIONAL DARK THEME
- *
- * Dark mode is not yet being visually approved during this Stage 8
- * colour batch. These values preserve the existing shadcn dark-mode
- * behaviour and prevent semantic variables from becoming undefined.
- */
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --text: oklch(0.922 0 0);
+  /* Step 7 — spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
 
-  --surface: oklch(0.205 0 0);
-  --surface-subtle: oklch(0.269 0 0);
+  /* Step 8 — radii */
+  --radius-compact: 0.3125rem;
+  --radius-control: 0.625rem;
+  --radius-card: 1.125rem;
+  --radius-prominent: 1.625rem;
+  --radius: var(--radius-control);
 
-  --card: var(--surface);
-  --card-foreground: var(--foreground);
-
-  --popover: var(--surface);
-  --popover-foreground: var(--foreground);
-
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --primary-hover: var(--primary);
-  --primary-soft: var(--surface-subtle);
-
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-
-  --border: oklch(1 0 0 / 10%);
-  --border-strong: oklch(1 0 0 / 18%);
-  --input: oklch(1 0 0 / 15%);
-
-  --ring: oklch(0.556 0 0);
-  --focus: var(--ring);
-
+  /* Step 9 — borders */
+  --border-size-thin: 1px;
+  --border-size-thick: 2px;
   --border-divider: var(--border);
   --border-control: var(--border-strong);
   --border-selected: var(--primary);
   --border-destructive: var(--destructive);
 
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  /* Step 10 — shadows */
+  --elevation-control: 0 1px 2px rgb(15 23 42 / 6%);
+  --elevation-card: 0 2px 8px rgb(15 23 42 / 8%);
+  --elevation-popover: 0 8px 24px rgb(15 23 42 / 12%);
+  --elevation-dialog: 0 20px 48px rgb(15 23 42 / 16%);
 
+  /* Step 11 — icon sizes */
+  --icon-14: 0.875rem;
+  --icon-16: 1rem;
+  --icon-18: 1.125rem;
+  --icon-20: 1.25rem;
+  --icon-24: 1.5rem;
+  --icon-32: 2rem;
+
+  /* Step 12 — content layout */
+  --content-gutter-mobile: 1rem;
+  --content-gutter-tablet: 1.5rem;
+  --content-gutter-desktop: 2rem;
+
+  /* Step 14 — sidebar dimensions */
+  --sidebar-width-staff: 16.5rem;
+  --sidebar-width-applicant: 15.5rem;
+  --sidebar-width-collapsed: 4.5rem;
+  --sidebar-width-mobile: min(20rem, 86vw);
+
+  /* Step 15 — top-bar dimensions */
+  --topbar-height-mobile: 3.5rem;
+  --topbar-height-desktop: 4rem;
+  --topbar-padding-mobile: 1rem;
+  --topbar-padding-desktop: 1.5rem;
+
+  /* Step 16 — form-control dimensions */
+  --control-height-dense: 2.25rem;
+  --control-height-compact: 2.5rem;
+  --control-height-comfortable: 2.75rem;
+  --control-height-applicant: 3.125rem;
+  --control-padding-inline-dense: 0.75rem;
+  --control-padding-inline-default: 1rem;
+  --control-content-gap: 0.5rem;
+
+  /* Step 17 — table density */
+  --table-header-height: 2.75rem;
+  --table-row-dense: 2.5rem;
+  --table-row-compact: 3rem;
+  --table-row-comfortable: 3.5rem;
+  --table-cell-inline-dense: 0.75rem;
+  --table-cell-inline-compact: 1rem;
+  --table-cell-inline-comfortable: 1.25rem;
+
+  /* Step 18 — card styles */
+  --card-padding-compact: 1rem;
+  --card-padding-default: 1.25rem;
+  --card-padding-comfortable: 1.5rem;
+  --card-transition-duration: 160ms;
+
+  /* Step 19 — badge styles */
+  --badge-height-compact: 1.25rem;
+  --badge-height-default: 1.5rem;
+  --badge-padding-inline-compact: 0.5rem;
+  --badge-padding-inline-default: 0.625rem;
+  --badge-dot-size: 0.375rem;
+
+  /* Step 20 — button variants */
+  --button-transition-duration: 140ms;
+  --button-disabled-opacity: 0.52;
+
+  /* Step 21 — input variants */
+  --input-transition-duration: 140ms;
+  --input-icon-offset: 2.5rem;
+
+  /* Step 23 — focus states */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: rgb(35 55 184 / 28%);
+  --focus-ring-danger-color: rgb(180 35 24 / 24%);
+
+  /* Steps 24–26 — empty, error and loading states */
+  --state-min-height-default: 17rem;
+  --state-min-height-compact: 11rem;
+  --state-icon-size-default: 3.5rem;
+  --state-icon-size-compact: 2.75rem;
+  --skeleton-base: #e7edf5;
+  --skeleton-highlight: rgb(255 255 255 / 74%);
+  --skeleton-animation-duration: 1.4s;
+
+  /* Steps 27–33 — chart dimensions and typography */
+  --chart-height-default: 20rem;
+  --chart-height-compact: 14rem;
+  --chart-title-size: 1rem;
+  --chart-title-line-height: 1.5rem;
+  --chart-label-size: 0.75rem;
+  --chart-label-line-height: 1rem;
+  --chart-legend-gap: 1rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --text: oklch(0.922 0 0);
+  --surface: oklch(0.205 0 0);
+  --surface-subtle: oklch(0.269 0 0);
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --primary-hover: var(--primary);
+  --primary-soft: var(--surface-subtle);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --border-strong: oklch(1 0 0 / 18%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --focus: var(--ring);
+  --focus-ring-color: oklch(0.708 0 0 / 36%);
+  --focus-ring-danger-color: oklch(0.704 0.191 22.216 / 30%);
+  --border-divider: var(--border);
+  --border-control: var(--border-strong);
+  --border-selected: var(--primary);
+  --border-destructive: var(--destructive);
+  --chart-1: #a5b4fc;
+  --chart-2: #5eead4;
+  --chart-3: #c4b5fd;
+  --chart-4: #fbbf24;
+  --chart-5: #cbd5e1;
+  --chart-grid: oklch(1 0 0 / 10%);
+  --chart-axis: oklch(0.708 0 0);
+  --chart-cursor: oklch(1 0 0 / 18%);
+  --chart-tooltip-background: var(--surface);
+  --chart-tooltip-border: var(--border);
+  --chart-tooltip-label: var(--foreground);
+  --chart-tooltip-value: var(--text);
+  --skeleton-base: oklch(1 0 0 / 10%);
+  --skeleton-highlight: oklch(1 0 0 / 14%);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
-
-/*
- * GLOBAL RESET
- */
 
 *,
 *::before,
@@ -505,9 +418,6 @@ body {
   min-height: 100%;
 }
 
-/*
- * BASE ELEMENT STYLES
- */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -543,15 +453,8 @@ body {
   }
 }
 
-/*
- * FAIDIA TYPOGRAPHY UTILITIES
- */
 @layer utilities {
-  /*
-   * Mobile values are the defaults.
-   * Desktop values begin at 640px.
-   */
-
+  /* Typography */
   .text-display {
     font-size: 1.875rem;
     line-height: 2.375rem;
@@ -587,10 +490,6 @@ body {
     letter-spacing: var(--body-letter-spacing);
   }
 
-  /*
-   * Use this only for longer applicant-facing text that needs
-   * additional mobile readability.
-   */
   .text-body-applicant {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -635,11 +534,8 @@ body {
     font-variant-numeric: tabular-nums;
   }
 
-    /*
-   * BORDER WIDTH UTILITIES
-   */
-
-   .border-thin {
+  /* Borders */
+  .border-thin {
     border-width: var(--border-size-thin);
   }
 
@@ -647,54 +543,995 @@ body {
     border-width: var(--border-size-thick);
   }
 
-  /*
-   * LUCIDE ICON SIZE UTILITIES
-   *
-   * Stroke weight is controlled through the Lucide component using:
-   * strokeWidth={1.4}
-   * absoluteStrokeWidth
-   */
+  /* Icons */
+  .icon-14,
+  .icon-16,
+  .icon-18,
+  .icon-20,
+  .icon-24,
+  .icon-32 {
+    flex: none;
+  }
 
-   .icon-14,
-   .icon-16,
-   .icon-18,
-   .icon-20,
-   .icon-24,
-   .icon-32 {
-     flex: none;
-   }
- 
-   .icon-14 {
-     width: var(--icon-14);
-     height: var(--icon-14);
-   }
- 
-   .icon-16 {
-     width: var(--icon-16);
-     height: var(--icon-16);
-   }
- 
-   .icon-18 {
-     width: var(--icon-18);
-     height: var(--icon-18);
-   }
- 
-   .icon-20 {
-     width: var(--icon-20);
-     height: var(--icon-20);
-   }
- 
-   .icon-24 {
-     width: var(--icon-24);
-     height: var(--icon-24);
-   }
- 
-   .icon-32 {
-     width: var(--icon-32);
-     height: var(--icon-32);
-   }
+  .icon-14 {
+    width: var(--icon-14);
+    height: var(--icon-14);
+  }
 
-  @media (min-width: 640px) {
+  .icon-16 {
+    width: var(--icon-16);
+    height: var(--icon-16);
+  }
+
+  .icon-18 {
+    width: var(--icon-18);
+    height: var(--icon-18);
+  }
+
+  .icon-20 {
+    width: var(--icon-20);
+    height: var(--icon-20);
+  }
+
+  .icon-24 {
+    width: var(--icon-24);
+    height: var(--icon-24);
+  }
+
+  .icon-32 {
+    width: var(--icon-32);
+    height: var(--icon-32);
+  }
+
+  /* Steps 12–15 — layout geometry */
+  .content-shell {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--content-gutter-mobile);
+  }
+
+  .content-narrow {
+    width: 100%;
+    max-width: var(--container-content-narrow);
+    margin-inline: auto;
+  }
+
+  .content-form {
+    width: 100%;
+    max-width: var(--container-content-form);
+    margin-inline: auto;
+  }
+
+  .content-standard {
+    width: 100%;
+    max-width: var(--container-content-standard);
+    margin-inline: auto;
+  }
+
+  .content-wide {
+    width: 100%;
+    max-width: var(--container-content-wide);
+    margin-inline: auto;
+  }
+
+  .sidebar-staff {
+    width: var(--sidebar-width-staff);
+    flex: 0 0 var(--sidebar-width-staff);
+  }
+
+  .sidebar-applicant {
+    width: var(--sidebar-width-applicant);
+    flex: 0 0 var(--sidebar-width-applicant);
+  }
+
+  .sidebar-collapsed {
+    width: var(--sidebar-width-collapsed);
+    flex: 0 0 var(--sidebar-width-collapsed);
+  }
+
+  .sidebar-mobile {
+    width: var(--sidebar-width-mobile);
+    max-width: 100%;
+  }
+
+  .topbar-frame {
+    min-height: var(--topbar-height-mobile);
+    padding-inline: var(--topbar-padding-mobile);
+  }
+
+  /* Step 16 — form controls */
+  .control-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--control-content-gap);
+  }
+
+  .control-dense {
+    height: var(--control-height-dense);
+    padding-inline: var(--control-padding-inline-dense);
+  }
+
+  .control-compact {
+    height: var(--control-height-compact);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .control-comfortable {
+    height: var(--control-height-comfortable);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .control-applicant {
+    height: var(--control-height-applicant);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  /* Step 17 — table density */
+  .table-density-dense,
+  .table-density-compact,
+  .table-density-comfortable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table-density-dense th,
+  .table-density-compact th,
+  .table-density-comfortable th {
+    height: var(--table-header-height);
+    border-bottom: var(--border-size-thin) solid var(--border-divider);
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: var(--font-weight-semibold);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .table-density-dense td,
+  .table-density-compact td,
+  .table-density-comfortable td {
+    border-bottom: var(--border-size-thin) solid var(--border-divider);
+    vertical-align: middle;
+  }
+
+  .table-density-dense th,
+  .table-density-dense td {
+    padding-inline: var(--table-cell-inline-dense);
+  }
+
+  .table-density-dense td {
+    height: var(--table-row-dense);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  .table-density-compact th,
+  .table-density-compact td {
+    padding-inline: var(--table-cell-inline-compact);
+  }
+
+  .table-density-compact td {
+    height: var(--table-row-compact);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  .table-density-comfortable th,
+  .table-density-comfortable td {
+    padding-inline: var(--table-cell-inline-comfortable);
+  }
+
+  .table-density-comfortable td {
+    height: var(--table-row-comfortable);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+
+  /* Step 18 — card styles */
+  .card-base {
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--card);
+    color: var(--card-foreground);
+  }
+
+  .card-compact {
+    padding: var(--card-padding-compact);
+  }
+
+  .card-default {
+    padding: var(--card-padding-default);
+  }
+
+  .card-comfortable {
+    padding: var(--card-padding-comfortable);
+  }
+
+  .card-subtle {
+    background: var(--surface-subtle);
+  }
+
+  .card-elevated {
+    box-shadow: var(--elevation-card);
+  }
+
+  .card-interactive {
+    cursor: pointer;
+    transition:
+      border-color var(--card-transition-duration) ease,
+      background-color var(--card-transition-duration) ease,
+      box-shadow var(--card-transition-duration) ease;
+  }
+
+  .card-interactive:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--elevation-card);
+  }
+
+  .card-selected {
+    border-width: var(--border-size-thick);
+    border-color: var(--border-selected);
+    background: var(--primary-soft);
+  }
+
+  .card-warning {
+    border-color: var(--status-warning-border);
+    background: var(--status-warning-bg);
+    color: var(--status-warning-text);
+  }
+
+  .card-danger {
+    border-color: var(--status-danger-border);
+    background: var(--status-danger-bg);
+    color: var(--status-danger-text);
+  }
+
+  /* Step 19 — badge styles */
+  .badge-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: fit-content;
+    white-space: nowrap;
+    border: var(--border-size-thin) solid transparent;
+    border-radius: var(--radius-compact);
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .badge-compact {
+    min-height: var(--badge-height-compact);
+    padding-inline: var(--badge-padding-inline-compact);
+  }
+
+  .badge-default {
+    min-height: var(--badge-height-default);
+    padding-inline: var(--badge-padding-inline-default);
+  }
+
+  .badge-dot::before {
+    content: "";
+    width: var(--badge-dot-size);
+    height: var(--badge-dot-size);
+    flex: none;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  .badge-neutral {
+    border-color: var(--status-neutral-border);
+    background: var(--status-neutral-bg);
+    color: var(--status-neutral-text);
+  }
+
+  .badge-info {
+    border-color: var(--status-info-border);
+    background: var(--status-info-bg);
+    color: var(--status-info-text);
+  }
+
+  .badge-success {
+    border-color: var(--status-success-border);
+    background: var(--status-success-bg);
+    color: var(--status-success-text);
+  }
+
+  .badge-warning {
+    border-color: var(--status-warning-border);
+    background: var(--status-warning-bg);
+    color: var(--status-warning-text);
+  }
+
+  .badge-danger {
+    border-color: var(--status-danger-border);
+    background: var(--status-danger-bg);
+    color: var(--status-danger-text);
+  }
+
+  .badge-outline {
+    border-color: var(--border-control);
+    background: transparent;
+    color: var(--foreground);
+  }
+
+  .badge-count {
+    min-width: var(--badge-height-default);
+    border-radius: 9999px;
+    padding-inline: var(--space-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Step 20 — button variants */
+  .button-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--control-content-gap);
+    border: var(--border-size-thin) solid transparent;
+    border-radius: var(--radius-control);
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    transition:
+      background-color var(--button-transition-duration) ease,
+      border-color var(--button-transition-duration) ease,
+      color var(--button-transition-duration) ease,
+      box-shadow var(--button-transition-duration) ease;
+  }
+
+  .button-dense {
+    height: var(--control-height-dense);
+    padding-inline: var(--control-padding-inline-dense);
+  }
+
+  .button-compact {
+    height: var(--control-height-compact);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .button-comfortable {
+    height: var(--control-height-comfortable);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .button-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: var(--elevation-control);
+  }
+
+  .button-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+  }
+
+  .button-primary:active:not(:disabled) {
+    background: var(--primary-hover);
+    box-shadow: none;
+  }
+
+  .button-secondary {
+    border-color: var(--border-control);
+    background: var(--surface);
+    color: var(--foreground);
+  }
+
+  .button-secondary:hover:not(:disabled) {
+    border-color: var(--border-strong);
+    background: var(--surface-subtle);
+  }
+
+  .button-secondary:active:not(:disabled) {
+    background: var(--muted);
+  }
+
+  .button-ghost {
+    background: transparent;
+    color: var(--primary);
+  }
+
+  .button-ghost:hover:not(:disabled) {
+    background: var(--primary-soft);
+  }
+
+  .button-ghost:active:not(:disabled) {
+    background: var(--accent);
+  }
+
+  .button-destructive {
+    background: var(--destructive);
+    color: var(--destructive-foreground);
+  }
+
+  .button-destructive:hover:not(:disabled) {
+    filter: brightness(0.92);
+  }
+
+  .button-destructive:active:not(:disabled) {
+    filter: brightness(0.86);
+  }
+
+  .button-icon {
+    width: var(--control-height-compact);
+    height: var(--control-height-compact);
+    padding: 0;
+  }
+
+  .button-base:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: var(--button-disabled-opacity);
+    box-shadow: none;
+  }
+
+  .button-base[aria-busy="true"] {
+    cursor: wait;
+  }
+
+  /* Step 21 — input variants */
+  .input-base {
+    width: 100%;
+    border: var(--border-size-thin) solid var(--border-control);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    outline: none;
+    transition:
+      border-color var(--input-transition-duration) ease,
+      background-color var(--input-transition-duration) ease,
+      box-shadow var(--input-transition-duration) ease;
+  }
+
+  .input-base::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
+  }
+
+  .input-base:hover:not(:disabled):not([aria-invalid="true"]) {
+    border-color: var(--border-strong);
+  }
+
+  .input-dense {
+    height: var(--control-height-dense);
+    padding-inline: var(--control-padding-inline-dense);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+
+  .input-compact {
+    height: var(--control-height-compact);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .input-applicant {
+    height: var(--control-height-applicant);
+    padding-inline: var(--control-padding-inline-default);
+  }
+
+  .input-icon-start {
+    padding-left: var(--input-icon-offset);
+  }
+
+  .input-base[aria-invalid="true"] {
+    border-color: var(--border-destructive);
+    background: var(--status-danger-bg);
+    color: var(--status-danger-text);
+  }
+
+  .input-base:disabled {
+    cursor: not-allowed;
+    background: var(--muted);
+    color: var(--muted-foreground);
+    opacity: 0.72;
+  }
+
+  .input-base[readonly] {
+    background: var(--surface-subtle);
+    color: var(--text);
+  }
+
+  .field-label {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--foreground);
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .field-help {
+    display: block;
+    margin-top: var(--space-2);
+    color: var(--muted-foreground);
+    font-size: 0.6875rem;
+    line-height: 1.125rem;
+  }
+
+  .field-error {
+    display: block;
+    margin-top: var(--space-2);
+    color: var(--status-danger-text);
+    font-size: 0.6875rem;
+    line-height: 1.125rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Step 22 — navigation states */
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .nav-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: var(--control-height-compact);
+    align-items: center;
+    gap: var(--space-3);
+    padding-inline: var(--space-3);
+    border: var(--border-size-thin) solid transparent;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color var(--button-transition-duration) ease,
+      border-color var(--button-transition-duration) ease,
+      color var(--button-transition-duration) ease;
+  }
+
+  .nav-item:hover:not(:disabled):not([aria-current="page"]) {
+    background: var(--surface-subtle);
+    color: var(--foreground);
+  }
+
+  .nav-item:active:not(:disabled):not([aria-current="page"]) {
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+
+  .nav-item-preview-hover {
+    background: var(--surface-subtle);
+    color: var(--foreground);
+  }
+
+  .nav-item-preview-pressed {
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+
+  .nav-item[aria-current="page"] {
+    border-color: var(--status-info-border);
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+
+  .nav-item[aria-current="page"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 3px;
+    border-radius: 9999px;
+    background: var(--primary);
+  }
+
+  .nav-item:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+
+  .nav-item-icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-item-label {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-item-count {
+    display: inline-flex;
+    min-width: 1.5rem;
+    height: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding-inline: var(--space-2);
+    background: var(--surface-subtle);
+    color: var(--muted-foreground);
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .nav-item[aria-current="page"] .nav-item-count {
+    background: var(--surface);
+    color: var(--primary);
+  }
+
+  /* Step 23 — focus states */
+  .focus-ring:focus-visible,
+  .button-base:focus-visible,
+  .card-interactive:focus-visible,
+  .nav-item:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .input-base:focus {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+  }
+
+  .input-base[aria-invalid="true"]:focus {
+    border-color: var(--border-destructive);
+    box-shadow:
+      0 0 0 var(--focus-ring-width)
+      var(--focus-ring-danger-color);
+  }
+
+  .focus-preview {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .input-focus-preview {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
+  }
+
+  .input-error-focus-preview {
+    border-color: var(--border-destructive);
+    box-shadow:
+      0 0 0 var(--focus-ring-width)
+      var(--focus-ring-danger-color);
+  }
+
+  /* Step 24 — empty states */
+  .state-panel {
+    display: flex;
+    min-height: var(--state-min-height-default);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .state-panel-compact {
+    min-height: var(--state-min-height-compact);
+    padding: var(--space-5);
+  }
+
+  .state-icon {
+    display: inline-flex;
+    width: var(--state-icon-size-default);
+    height: var(--state-icon-size-default);
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: var(--primary-soft);
+    color: var(--primary);
+  }
+
+  .state-panel-compact .state-icon {
+    width: var(--state-icon-size-compact);
+    height: var(--state-icon-size-compact);
+  }
+
+  .state-title {
+    margin-top: var(--space-4);
+    color: var(--foreground);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .state-description {
+    max-width: 28rem;
+    margin-top: var(--space-2);
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+
+  .state-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .state-inline {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-control);
+    padding: var(--space-4);
+    background: var(--surface-subtle);
+  }
+
+  /* Step 25 — error states */
+  .state-panel-error {
+    border-color: var(--status-danger-border);
+    background: var(--status-danger-bg);
+  }
+
+  .state-panel-error .state-icon {
+    background: var(--palette-white);
+    color: var(--status-danger-text);
+  }
+
+  .state-panel-error .state-title,
+  .state-panel-error .state-description {
+    color: var(--status-danger-text);
+  }
+
+  .state-inline-error {
+    border-color: var(--status-danger-border);
+    background: var(--status-danger-bg);
+    color: var(--status-danger-text);
+  }
+
+  /* Step 26 — loading and skeleton states */
+  .loading-panel {
+    min-height: var(--state-min-height-default);
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-6);
+    background: var(--surface);
+  }
+
+  .loading-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-compact);
+    background: var(--skeleton-base);
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--skeleton-highlight),
+      transparent
+    );
+    animation: faidia-skeleton-shimmer
+      var(--skeleton-animation-duration) ease-in-out infinite;
+  }
+
+  .skeleton-title {
+    width: 9rem;
+    height: 1.25rem;
+  }
+
+  .skeleton-line {
+    width: 100%;
+    height: 0.875rem;
+  }
+
+  .skeleton-line-short {
+    width: 62%;
+  }
+
+  .skeleton-control {
+    width: 7rem;
+    height: var(--control-height-compact);
+    border-radius: var(--radius-control);
+  }
+
+  /* Steps 27–31 — Recharts styling */
+  .chart-panel {
+    min-width: 0;
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+    background: var(--surface);
+  }
+
+  .chart-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .chart-title {
+    color: var(--foreground);
+    font-size: var(--chart-title-size);
+    line-height: var(--chart-title-line-height);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .chart-subtitle {
+    margin-top: var(--space-1);
+    color: var(--muted-foreground);
+    font-size: var(--chart-label-size);
+    line-height: var(--chart-label-line-height);
+  }
+
+  .chart-canvas {
+    width: 100%;
+    height: var(--chart-height-default);
+    min-width: 0;
+    margin-top: var(--space-5);
+  }
+
+  .chart-tooltip {
+    min-width: 10rem;
+    border: var(--border-size-thin) solid var(--chart-tooltip-border);
+    border-radius: var(--radius-control);
+    padding: var(--space-3);
+    background: var(--chart-tooltip-background);
+    box-shadow: var(--elevation-popover);
+  }
+
+  .chart-tooltip-label {
+    color: var(--chart-tooltip-label);
+    font-size: var(--chart-label-size);
+    line-height: var(--chart-label-line-height);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .chart-tooltip-list {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .chart-tooltip-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--chart-tooltip-value);
+    font-size: var(--chart-label-size);
+    line-height: var(--chart-label-line-height);
+  }
+
+  .chart-tooltip-marker,
+  .chart-legend-marker {
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: none;
+    border-radius: 9999px;
+  }
+
+  .chart-tooltip-name {
+    color: var(--muted-foreground);
+  }
+
+  .chart-tooltip-value {
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-2) var(--chart-legend-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chart-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--muted-foreground);
+    font-size: var(--chart-label-size);
+    line-height: var(--chart-label-line-height);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .chart-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-3);
+  }
+
+  .chart-palette-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-control);
+    padding: var(--space-3);
+    background: var(--surface);
+    color: var(--muted-foreground);
+    font-size: var(--chart-label-size);
+    line-height: var(--chart-label-line-height);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .chart-palette-swatch {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    border-radius: var(--radius-compact);
+  }
+
+  /* Steps 32–33 — chart empty and loading states */
+  .chart-state {
+    display: flex;
+    min-height: var(--chart-height-compact);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-size-thin) dashed var(--border-strong);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+    background: var(--surface-subtle);
+    text-align: center;
+  }
+
+  .chart-loading {
+    min-height: var(--chart-height-compact);
+    border: var(--border-size-thin) solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+    background: var(--surface);
+  }
+
+  .chart-loading-plot {
+    height: 8rem;
+    margin-top: var(--space-5);
+    border-radius: var(--radius-control);
+  }
+
+  @keyframes faidia-skeleton-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (min-width: 40rem) {
     .text-display {
       font-size: 2.25rem;
       line-height: 2.75rem;
@@ -723,6 +1560,36 @@ body {
     .text-label {
       font-size: 0.8125rem;
       line-height: 1.125rem;
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .content-shell {
+      padding-inline: var(--content-gutter-tablet);
+    }
+
+    .topbar-frame {
+      min-height: var(--topbar-height-desktop);
+      padding-inline: var(--topbar-padding-desktop);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .content-shell {
+      padding-inline: var(--content-gutter-desktop);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-interactive,
+    .button-base,
+    .input-base,
+    .nav-item {
+      transition-duration: 0.01ms;
+    }
+
+    .skeleton::after {
+      animation: none;
     }
   }
 }
