@@ -1,13 +1,37 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { notFound } from "next/navigation";
 
-export default function Page() {
+import { SupervisorApprovalWorkspace } from "@/components/demo/supervisor/supervisor-approval-workspace";
+import { getDefaultDemoClient } from "@/config/demo";
+
+export default function DemoSupervisorPage() {
+  const client = getDefaultDemoClient();
+
+  const service =
+    client.services.find(
+      (candidate) =>
+        candidate.active &&
+        candidate.slug === "transcript-request",
+    ) ??
+    client.services.find((candidate) => candidate.active);
+
+  if (!service) {
+    notFound();
+  }
+
+  const registrarDepartment =
+    client.departments.find(
+      (department) => department.name === "Registrar",
+    ) ?? client.departments[0];
+
   return (
-    <DemoRoutePlaceholder
-      title="Supervisor dashboard"
-      route="/demo/supervisor"
-      description="This route will show departmental workload, pending handoffs, overdue work and requests awaiting approval."
-      nextHref="/demo/supervisor/approvals/REQ-DEMO-001"
-      nextLabel="Open approval"
+    <SupervisorApprovalWorkspace
+      requestId="REQ-DEMO-001"
+      organizationName={client.organization.name}
+      service={service}
+      registrarDepartment={{
+        id: registrarDepartment.id,
+        name: registrarDepartment.name,
+      }}
     />
   );
 }
