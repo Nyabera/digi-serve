@@ -1,13 +1,27 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { OfficerDashboard } from "@/components/demo/officer/officer-dashboard";
+import { getDefaultDemoClient } from "@/config/demo";
 
-export default function Page() {
+export default function DemoOfficerPage() {
+  const client = getDefaultDemoClient();
+
+  const services = client.services
+    .filter((service) => service.active)
+    .map((service) => ({
+      id: service.id,
+      slug: service.slug,
+      name: service.name,
+    }));
+
+  const departments = client.departments.map((department) => ({
+    id: department.id,
+    name: department.name,
+  }));
+
   return (
-    <DemoRoutePlaceholder
-      title="Officer dashboard"
-      route="/demo/officer"
-      description="This route will show assigned requests, due work, overdue work and requests waiting on another department."
-      nextHref="/demo/officer/requests/REQ-DEMO-001"
-      nextLabel="Open request"
+    <OfficerDashboard
+      organizationName={client.organization.name}
+      services={services}
+      departments={departments}
     />
   );
 }
