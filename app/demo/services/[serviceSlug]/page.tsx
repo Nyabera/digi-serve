@@ -1,14 +1,52 @@
-import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
+import { notFound } from "next/navigation";
 
-export default function Page() {
+import { ServiceInformationPage } from "@/components/demo/public/service-information-page";
+import { getDefaultDemoClient } from "@/config/demo";
+
+type ServiceInformationRouteProps = {
+  readonly params: Promise<{
+    readonly serviceSlug: string;
+  }>;
+};
+
+export function generateStaticParams() {
+  const client = getDefaultDemoClient();
+
+  return client.services
+    .filter((service) => service.active)
+    .map((service) => ({
+      serviceSlug: service.slug,
+    }));
+}
+
+export default async function ServiceInformationRoute({
+  params,
+}: ServiceInformationRouteProps) {
+  const { serviceSlug } = await params;
+  const client = getDefaultDemoClient();
+
+  const service = client.services.find(
+    (candidate) => candidate.slug === serviceSlug && candidate.active,
+  );
+
+  if (!service) {
+    notFound();
+  }
+
+  const workflow = client.workflows.find(
+    (candidate) => candidate.id === service.workflowId,
+  );
+
+  const relatedServices = client.services.filter(
+    (candidate) => candidate.active && candidate.id !== service.id,
+  );
+
   return (
-    <DemoPublicRoutePlaceholder
-      eyebrow="Service information"
-      title="Understand the service before applying"
-      route="/demo/services/[serviceSlug]"
-      description="This route will explain eligibility, requirements, documents, fees, processing time and the expected institutional outcome."
-      nextHref="/demo/sign-up"
-      nextLabel="Continue to sign-up"
+    <ServiceInformationPage
+      client={client}
+      service={service}
+      workflowVersion={workflow?.version ?? 1}
+      relatedServices={relatedServices}
     />
   );
 }

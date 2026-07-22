@@ -43,22 +43,22 @@ const quickActions = [
   },
   {
     label: "Upload documents",
-    href: "/demo/apply",
+    href: "/demo/apply/transcript-request",
     icon: Upload,
   },
   {
     label: "Check requirements",
-    href: "/demo/services",
+    href: "/demo/services/transcript-request",
     icon: ClipboardList,
   },
   {
     label: "Make a payment",
-    href: "/demo/apply",
+    href: "/demo/apply/transcript-request",
     icon: CreditCard,
   },
   {
     label: "Track request",
-    href: "/demo/track",
+    href: "/demo/track/REQ-DEMO-001",
     icon: FileText,
   },
 ] as const;
@@ -92,7 +92,7 @@ const services: readonly HomepageServiceItem[] = [
     title: "Request a transcript",
     description:
       "Get an official academic transcript for further studies or employment.",
-    href: "/demo/services",
+    href: "/demo/services/transcript-request",
     icon: FileText,
     numberClassName: "text-[#2557ff]",
     iconClassName: "text-[#2557ff]",
@@ -103,7 +103,7 @@ const services: readonly HomepageServiceItem[] = [
     title: "Student clearance request",
     description:
       "Complete your clearance checks before graduation or final release.",
-    href: "/demo/services",
+    href: "/demo/services/student-clearance",
     icon: ClipboardList,
     numberClassName: "text-[#ff7b39]",
     iconClassName: "text-[#ff7b39]",
@@ -114,7 +114,7 @@ const services: readonly HomepageServiceItem[] = [
     title: "Certificate replacement",
     description:
       "Request a replacement certificate and validate supporting details.",
-    href: "/demo/services",
+    href: "/demo/services/certificate-replacement",
     icon: FileBadge2,
     numberClassName: "text-[#9dc300]",
     iconClassName: "text-[#86aa00]",
@@ -125,7 +125,7 @@ const services: readonly HomepageServiceItem[] = [
     title: "Track an existing request",
     description:
       "See your current status, next step and the most recent updates.",
-    href: "/demo/track",
+    href: "/demo/track/REQ-DEMO-001",
     icon: Search,
     numberClassName: "text-slate-400",
     iconClassName: "text-slate-500",
@@ -249,13 +249,13 @@ export function PrimaryHomepage() {
             </div>
 
             <div className="hidden items-center gap-10 lg:flex">
-              <Link href="/demo/services" className="text-[14px] text-white/85 transition hover:text-white">
+              <Link href="/demo/services/transcript-request" className="text-[14px] text-white/85 transition hover:text-white">
                 Services
               </Link>
-              <Link href="/demo/requests" className="text-[14px] text-white/85 transition hover:text-white">
+              <Link href="/demo/track/REQ-DEMO-001" className="text-[14px] text-white/85 transition hover:text-white">
                 My requests
               </Link>
-              <Link href="/demo/services" className="text-[14px] text-white/85 transition hover:text-white">
+              <Link href="/demo/services/transcript-request" className="text-[14px] text-white/85 transition hover:text-white">
                 Help
               </Link>
               <Link href="/demo/officer" className="text-[14px] text-white/85 transition hover:text-white">
@@ -285,7 +285,7 @@ export function PrimaryHomepage() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href="/demo/services"
+                  href="/demo/services/transcript-request"
                   className="inline-flex h-14 items-center justify-center rounded-xl bg-[#2557ff] px-7 text-[16px] font-medium text-white transition hover:bg-[#1945de]"
                 >
                   Browse services
@@ -293,7 +293,7 @@ export function PrimaryHomepage() {
                 </Link>
 
                 <Link
-                  href="/demo/track"
+                  href="/demo/track/REQ-DEMO-001"
                   className="inline-flex h-14 items-center justify-center rounded-xl border border-white/20 px-7 text-[16px] font-medium text-white transition hover:bg-white/5"
                 >
                   Track request
@@ -498,7 +498,7 @@ export function PrimaryHomepage() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/demo/services"
+              href="/demo/services/transcript-request"
               className="inline-flex h-14 items-center justify-center rounded-xl bg-[#f1ef00] px-7 text-[16px] font-medium text-slate-950 transition hover:bg-[#e7e500]"
             >
               Browse services
@@ -506,7 +506,7 @@ export function PrimaryHomepage() {
             </Link>
 
             <Link
-              href="/demo/track"
+              href="/demo/track/REQ-DEMO-001"
               className="inline-flex h-14 items-center justify-center rounded-xl border border-white/30 px-7 text-[16px] font-medium text-white transition hover:bg-white/10"
             >
               Track a request
