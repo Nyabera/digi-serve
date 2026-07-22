@@ -114,9 +114,7 @@ export function ConfiguredServiceForm({
       at,
     });
 
-    router.push(
-      `/demo/requests/${state.activeRequestId}/confirmation?service=${service.slug}`,
-    );
+    router.push(`/demo/apply/${service.slug}?step=documents`);
   }
 
   return (
