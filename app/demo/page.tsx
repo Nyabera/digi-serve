@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { DemoClientConfigSummary } from "@/components/demo/shared/demo-client-config-summary";
+import { DemoStateSummary } from "@/components/demo/shared/demo-state-summary";
 import { getDefaultDemoClient } from "@/config/demo";
 
 const routes = [
@@ -96,6 +97,8 @@ export default function DemoRouteIndexPage() {
         </p>
 
         <DemoClientConfigSummary client={client} />
+
+        <DemoStateSummary />
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {routes.map((route) => (
