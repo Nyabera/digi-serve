@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { getDefaultDemoClient } from "@/config/demo";
+
 type DemoRoutePlaceholderProps = {
   title: string;
   route: string;
@@ -15,11 +17,17 @@ export function DemoRoutePlaceholder({
   nextHref,
   nextLabel,
 }: DemoRoutePlaceholderProps) {
+  const client = getDefaultDemoClient();
+
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-950">
       <section className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
           FAIDIA Demo Engine
+        </p>
+
+        <p className="mt-2 text-sm font-medium text-slate-600">
+          {client.organization.name}
         </p>
 
         <h1 className="mt-3 text-3xl font-semibold tracking-tight">

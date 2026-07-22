@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { DemoClientConfigSummary } from "@/components/demo/shared/demo-client-config-summary";
+import { getDefaultDemoClient } from "@/config/demo";
+
 const routes = [
   {
     label: "Homepage",
@@ -74,6 +77,8 @@ const routes = [
 ] as const;
 
 export default function DemoRouteIndexPage() {
+  const client = getDefaultDemoClient();
+
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-950">
       <section className="mx-auto max-w-5xl">
@@ -82,13 +87,15 @@ export default function DemoRouteIndexPage() {
         </p>
 
         <h1 className="mt-3 text-4xl font-semibold tracking-tight">
-          D5 route verification
+          D6 client configuration
         </h1>
 
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-          These are temporary route placeholders. Each link must open without
-          leaving the isolated /demo namespace.
+          The route tree now reads institution, service, department, workflow
+          and presentation information from one typed configuration object.
         </p>
+
+        <DemoClientConfigSummary client={client} />
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {routes.map((route) => (
