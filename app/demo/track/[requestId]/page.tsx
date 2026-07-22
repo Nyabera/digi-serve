@@ -1,13 +1,14 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
 
 export default function Page() {
   return (
-    <DemoRoutePlaceholder
-      title="Applicant progress tracking"
+    <DemoPublicRoutePlaceholder
+      eyebrow="Request tracking"
+      title="Follow progress without internal bureaucracy"
       route="/demo/track/[requestId]"
-      description="This route will show applicant-safe status information and the public request timeline."
+      description="This route will show applicant-safe status information, important messages and a controlled public timeline."
       nextHref="/demo/officer"
-      nextLabel="Open officer dashboard"
+      nextLabel="Continue to officer demonstration"
     />
   );
 }

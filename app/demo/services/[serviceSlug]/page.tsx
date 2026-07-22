@@ -1,11 +1,12 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
 
 export default function Page() {
   return (
-    <DemoRoutePlaceholder
-      title="Service information"
+    <DemoPublicRoutePlaceholder
+      eyebrow="Service information"
+      title="Understand the service before applying"
       route="/demo/services/[serviceSlug]"
-      description="This route will explain the selected institutional service, its eligibility rules, requirements, documents, fees and expected processing time."
+      description="This route will explain eligibility, requirements, documents, fees, processing time and the expected institutional outcome."
       nextHref="/demo/sign-up"
       nextLabel="Continue to sign-up"
     />

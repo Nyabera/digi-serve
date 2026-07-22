@@ -1,11 +1,12 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
 
 export default function Page() {
   return (
-    <DemoRoutePlaceholder
-      title="Simulated applicant sign-up"
+    <DemoPublicRoutePlaceholder
+      eyebrow="Applicant access"
+      title="Create a simulated applicant profile"
       route="/demo/sign-up"
-      description="This route will simulate applicant account creation without creating a production Supabase Auth user."
+      description="This route will collect the minimum applicant details required to continue the demonstration without creating a production authentication user."
       nextHref="/demo/apply/transcript-request"
       nextLabel="Continue to application"
     />
