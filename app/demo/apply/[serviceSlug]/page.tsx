@@ -1,14 +1,27 @@
-import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
+import { notFound } from "next/navigation";
 
-export default function Page() {
-  return (
-    <DemoPublicRoutePlaceholder
-      eyebrow="Application form"
-      title="Complete the configured service request"
-      route="/demo/apply/[serviceSlug]"
-      description="This route will render the selected service form, document requirements, draft state and simulated file-selection controls."
-      nextHref="/demo/requests/REQ-DEMO-001/confirmation"
-      nextLabel="Review simulated submission"
-    />
+import { ServiceApplicationPage } from "@/components/demo/public/service-application-page";
+import { getDefaultDemoClient } from "@/config/demo";
+
+type DemoApplicationPageProps = {
+  readonly params: Promise<{
+    readonly serviceSlug: string;
+  }>;
+};
+
+export default async function DemoApplicationPage({
+  params,
+}: DemoApplicationPageProps) {
+  const client = getDefaultDemoClient();
+  const { serviceSlug } = await params;
+
+  const service = client.services.find(
+    (candidate) => candidate.active && candidate.slug === serviceSlug,
   );
+
+  if (!service) {
+    notFound();
+  }
+
+  return <ServiceApplicationPage service={service} />;
 }
