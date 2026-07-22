@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { DemoControlBar } from "@/components/demo/controls";
 import { DemoStateProvider } from "@/features/demo/state";
 
 export default function DemoLayout({
@@ -7,5 +8,10 @@ export default function DemoLayout({
 }: {
   readonly children: ReactNode;
 }) {
-  return <DemoStateProvider>{children}</DemoStateProvider>;
+  return (
+    <DemoStateProvider>
+      <DemoControlBar />
+      {children}
+    </DemoStateProvider>
+  );
 }
