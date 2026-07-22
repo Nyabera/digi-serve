@@ -156,3 +156,5 @@ D19 is complete when:
 - the production build passes;
 - D19 verification passes;
 - D19 is committed separately.
+
+The stage also appends one request_submitted activity event.

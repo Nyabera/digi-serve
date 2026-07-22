@@ -103,7 +103,7 @@ done
 
 REQUIRED_DOCUMENT_TEXT=(
   "D19 replaces the confirmation placeholder with a review-before-submission page"
-  "The stage also appends one `request_submitted` activity event."
+  "The stage also appends one request_submitted activity event."
   "The existing seeded active request identifier becomes the controlled demonstration reference."
   "D19 does not generate a production database reference or workflow record."
   "## 11. D19 definition of done"
