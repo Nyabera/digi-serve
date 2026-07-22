@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HomepageReferencePreview } from "@/components/demo/homepages/homepage-reference-preview";
 import { DemoClientConfigSummary } from "@/components/demo/shared/demo-client-config-summary";
 import { DemoStateSummary } from "@/components/demo/shared/demo-state-summary";
 import { DemoPublicShell } from "@/components/demo/shell";
@@ -121,6 +122,8 @@ export default function DemoRouteIndexPage() {
       </section>
 
       <section className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <HomepageReferencePreview />
+
         <DemoClientConfigSummary client={client} />
 
         <DemoStateSummary />
