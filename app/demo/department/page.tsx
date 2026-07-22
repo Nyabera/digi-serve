@@ -1,13 +1,30 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { DepartmentProcessingDashboard } from "@/components/demo/department/department-processing-dashboard";
+import { getDefaultDemoClient } from "@/config/demo";
 
-export default function Page() {
+export default function DemoDepartmentPage() {
+  const client = getDefaultDemoClient();
+
+  const financeDepartment =
+    client.departments.find(
+      (department) => department.name === "Finance",
+    ) ?? client.departments[0];
+
+  const services = client.services
+    .filter((service) => service.active)
+    .map((service) => ({
+      id: service.id,
+      slug: service.slug,
+      name: service.name,
+    }));
+
   return (
-    <DemoRoutePlaceholder
-      title="Receiving department dashboard"
-      route="/demo/department"
-      description="This route will show incoming referrals, pending acceptance, assigned work and completed departmental checks."
-      nextHref="/demo/department/handoffs/HND-DEMO-001"
-      nextLabel="Open handoff"
+    <DepartmentProcessingDashboard
+      organizationName={client.organization.name}
+      department={{
+        id: financeDepartment.id,
+        name: financeDepartment.name,
+      }}
+      services={services}
     />
   );
 }

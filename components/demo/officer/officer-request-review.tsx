@@ -70,7 +70,12 @@ type ReferralRecord = {
   readonly reason: string;
   readonly expectedOutput: string;
   readonly dueDate: string;
-  readonly status: "PENDING_ACCEPTANCE";
+  readonly status:
+    | "PENDING_ACCEPTANCE"
+    | "ACCEPTED"
+    | "COMPLETED"
+    | "DECLINED"
+    | "RETURNED_FOR_CLARIFICATION";
   readonly originatingOfficer: string;
   readonly createdAt: string;
 };
@@ -217,7 +222,13 @@ function parseReferral(
       typeof candidate.reason !== "string" ||
       typeof candidate.expectedOutput !== "string" ||
       typeof candidate.dueDate !== "string" ||
-      candidate.status !== "PENDING_ACCEPTANCE" ||
+      ![
+        "PENDING_ACCEPTANCE",
+        "ACCEPTED",
+        "COMPLETED",
+        "DECLINED",
+        "RETURNED_FOR_CLARIFICATION",
+      ].includes(String(candidate.status)) ||
       typeof candidate.createdAt !== "string"
     ) {
       return null;
@@ -354,6 +365,21 @@ function createTimelineItems(
 }
 
 function statusBadgeClassName(status: string): string {
+  if (status === "FINANCE_COMPLETE") {
+    return "border-emerald-200 bg-emerald-50 text-emerald-700";
+  }
+
+  if (
+    status === "FINANCE_CLARIFICATION_REQUIRED" ||
+    status === "REFERRAL_DECLINED"
+  ) {
+    return "border-amber-200 bg-amber-50 text-amber-700";
+  }
+
+  if (status === "IN_FINANCE_REVIEW") {
+    return "border-blue-200 bg-blue-50 text-blue-700";
+  }
+
   if (status === "WAITING_ON_FINANCE") {
     return "border-amber-200 bg-amber-50 text-amber-700";
   }
@@ -371,6 +397,14 @@ function statusBadgeClassName(status: string): string {
 
 function statusLabel(status: string): string {
   switch (status) {
+    case "FINANCE_COMPLETE":
+      return "Finance complete";
+    case "IN_FINANCE_REVIEW":
+      return "Finance review in progress";
+    case "FINANCE_CLARIFICATION_REQUIRED":
+      return "Finance clarification required";
+    case "REFERRAL_DECLINED":
+      return "Referral declined";
     case "WAITING_ON_FINANCE":
       return "Waiting on Finance";
     case "CORRECTION_REQUESTED":
@@ -1299,7 +1333,16 @@ export function OfficerRequestReview({
                   />
                   <div>
                     <p className="text-sm font-bold text-emerald-900">
-                      Referral pending acceptance
+                      {referral.status === "COMPLETED"
+                        ? "Referral completed and returned"
+                        : referral.status === "ACCEPTED"
+                          ? "Referral accepted by Finance"
+                          : referral.status === "DECLINED"
+                            ? "Referral declined"
+                            : referral.status ===
+                                "RETURNED_FOR_CLARIFICATION"
+                              ? "Referral returned for clarification"
+                              : "Referral pending acceptance"}
                     </p>
                     <p className="mt-1 text-sm leading-6 text-emerald-800">
                       {referral.receivingDepartmentName} · due{" "}
