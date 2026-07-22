@@ -54,10 +54,10 @@ export function DemoClientConfigSummary({
 
         <div className="rounded-xl bg-slate-50 p-4">
           <dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Homepage variants
+            Homepage design
           </dt>
           <dd className="mt-2 text-base font-semibold text-slate-950">
-            {client.homepage.availableVariants.join(" / ")}
+            Single homepage
           </dd>
         </div>
 

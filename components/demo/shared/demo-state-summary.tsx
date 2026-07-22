@@ -49,8 +49,7 @@ export function DemoStateSummary() {
         </h2>
 
         <p className="text-sm leading-6 text-slate-600">
-          Active role: {state.activeRole} · Homepage variant:{" "}
-          {state.activeHomepageVariant} · State revision:{" "}
+          Active role: {state.activeRole} · Homepage: Primary · State revision:{" "}
           {summary.revision}
         </p>
       </div>

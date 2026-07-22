@@ -31,8 +31,8 @@ export const savannahTechnicalCollegeConfig = {
 
   homepage: {
     defaultVariant: "A",
-    availableVariants: ["A", "B", "C"],
-    showVariantSwitcher: true,
+    availableVariants: ["A"],
+    showVariantSwitcher: false,
   },
 
   presentation: {

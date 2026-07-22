@@ -141,7 +141,7 @@ D6 does not implement:
 - Workflow actions.
 - Real applicant submission.
 - Real document upload.
-- Homepage A, B or C.
+- Final homepage implementation.
 - Homepage switching.
 - Recharts rendering.
 - Production Supabase integration.
@@ -163,7 +163,7 @@ D6 is complete when:
 - Document requirements are configured.
 - Service workflows are configured.
 - Internal and applicant-visible statuses are configured.
-- Homepage variants A, B and C are configured.
+- One homepage design is configured and the homepage switcher is disabled.
 - Report definitions and chart seed data are configured.
 - A client registry exists.
 - `/demo` visibly consumes the default client.
