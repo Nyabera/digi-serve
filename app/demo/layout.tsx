@@ -1,19 +1,26 @@
-import "./demo-calibration.css";
-
 import type { ReactNode } from "react";
 
 import { DemoControlBar } from "@/components/demo/controls";
+import { DemoPresentationFrame } from "@/components/demo/presentation";
 import { DemoStateProvider } from "@/features/demo/state";
+
+import "./demo-calibration.css";
+import "./demo-presentation.css";
+
+type DemoLayoutProps = {
+  readonly children: ReactNode;
+};
 
 export default function DemoLayout({
   children,
-}: {
-  readonly children: ReactNode;
-}) {
+}: DemoLayoutProps) {
   return (
     <DemoStateProvider>
-      <DemoControlBar />
-      {children}
+      <DemoPresentationFrame
+        controls={<DemoControlBar />}
+      >
+        {children}
+      </DemoPresentationFrame>
     </DemoStateProvider>
   );
 }
