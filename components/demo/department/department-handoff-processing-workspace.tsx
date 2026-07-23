@@ -82,7 +82,7 @@ export function DepartmentHandoffProcessingWorkspace({
     dispatch({
       type: "ADD_ACTIVITY_EVENT",
       event: {
-        id: `ACT-${name.toUpperCase()}-${Date.now()}`,
+        id: `ACT-${name.toUpperCase()}-${at.replace(/\D/g, "")}`,
         name,
         requestId: context.row.requestId,
         occurredAt: at,
