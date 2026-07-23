@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   ArrowRight,
+  BarChart3,
   Building2,
   CheckCircle2,
   Clock3,
@@ -365,6 +366,14 @@ export function OfficerDashboard({
                 {organizationName}
               </p>
             </div>
+
+            <Link
+              href="/demo/reports"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 px-5 text-sm font-bold text-white transition hover:bg-white/10"
+            >
+              Reports
+              <BarChart3 className="ml-3 h-4 w-4" aria-hidden="true" />
+            </Link>
 
             <Link
               href="/demo"

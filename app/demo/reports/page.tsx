@@ -1,13 +1,29 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { OperationalReportsDashboard } from "@/components/demo/reports/operational-reports-dashboard";
+import { getDefaultDemoClient } from "@/config/demo";
 
-export default function Page() {
+export default function DemoReportsPage() {
+  const client = getDefaultDemoClient();
+
+  const services = client.services
+    .filter((service) => service.active)
+    .map((service) => ({
+      id: service.id,
+      slug: service.slug,
+      name: service.name,
+    }));
+
+  const departments = client.departments.map(
+    (department) => ({
+      id: department.id,
+      name: department.name,
+    }),
+  );
+
   return (
-    <DemoRoutePlaceholder
-      title="Demo Engine reports"
-      route="/demo/reports"
-      description="This route will contain Recharts reporting for requests, departments, handoffs, turnaround time and workflow completion."
-      nextHref="/demo"
-      nextLabel="Return to route index"
+    <OperationalReportsDashboard
+      organizationName={client.organization.name}
+      services={services}
+      departments={departments}
     />
   );
 }
