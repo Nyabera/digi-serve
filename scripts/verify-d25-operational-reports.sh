@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# D29R-7 supersession bridge
+if [[ -x "scripts/verify-d29r7-reports-outcomes-shell.sh" ]]; then
+  exec ./scripts/verify-d29r7-reports-outcomes-shell.sh
+fi
+
 EXPECTED_ROOT="/Users/blaq/Downloads/faidia"
 EXPECTED_BRANCH="feat/demo-engine-base"
 

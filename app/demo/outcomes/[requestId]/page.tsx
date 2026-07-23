@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { ControlledOutcomeWorkspace } from "@/components/demo/outcomes/controlled-outcome-workspace";
+import { ControlledOutcomeShell } from "@/components/demo/outcomes/controlled-outcome-shell";
 import { getDefaultDemoClient } from "@/config/demo";
 
 type DemoOutcomePageProps = {
@@ -8,7 +8,9 @@ type DemoOutcomePageProps = {
     readonly requestId: string;
   }>;
   readonly searchParams: Promise<{
-    readonly service?: string | readonly string[];
+    readonly service?:
+      | string
+      | readonly string[];
   }>;
 };
 
@@ -18,31 +20,43 @@ export default async function DemoOutcomePage({
 }: DemoOutcomePageProps) {
   const client = getDefaultDemoClient();
   const { requestId } = await params;
-  const resolvedSearchParams = await searchParams;
+  const resolvedSearchParams =
+    await searchParams;
 
-  const requestedService = Array.isArray(
-    resolvedSearchParams.service,
-  )
-    ? resolvedSearchParams.service[0]
-    : resolvedSearchParams.service;
+  const requestedService =
+    Array.isArray(
+      resolvedSearchParams.service,
+    )
+      ? resolvedSearchParams.service[0]
+      : resolvedSearchParams.service;
 
   const serviceSlug =
-    requestedService ?? "transcript-request";
+    requestedService ??
+    "transcript-request";
 
-  const service = client.services.find(
-    (candidate) =>
-      candidate.active &&
-      candidate.slug === serviceSlug,
-  );
+  const service =
+    client.services.find(
+      (candidate) =>
+        candidate.active &&
+        candidate.slug === serviceSlug,
+    ) ??
+    client.services.find(
+      (candidate) =>
+        candidate.active &&
+        candidate.slug ===
+          "transcript-request",
+    );
 
   if (!service) {
     notFound();
   }
 
   return (
-    <ControlledOutcomeWorkspace
+    <ControlledOutcomeShell
       requestId={requestId}
-      organizationName={client.organization.name}
+      organizationName={
+        client.organization.name
+      }
       service={service}
     />
   );

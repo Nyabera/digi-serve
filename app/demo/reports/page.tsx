@@ -1,4 +1,4 @@
-import { OperationalReportsDashboard } from "@/components/demo/reports/operational-reports-dashboard";
+import { OperationalReportsShell } from "@/components/demo/reports/operational-reports-shell";
 import { getDefaultDemoClient } from "@/config/demo";
 
 export default function DemoReportsPage() {
@@ -20,8 +20,10 @@ export default function DemoReportsPage() {
   );
 
   return (
-    <OperationalReportsDashboard
-      organizationName={client.organization.name}
+    <OperationalReportsShell
+      organizationName={
+        client.organization.name
+      }
       services={services}
       departments={departments}
     />
