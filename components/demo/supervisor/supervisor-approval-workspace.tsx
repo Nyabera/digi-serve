@@ -1033,7 +1033,7 @@ export function SupervisorApprovalWorkspace({
                 {existingDecision.decision ===
                 "APPROVED" ? (
                   <Link
-                    href={`/demo/outcome/${requestId}`}
+                    href={`/demo/outcomes/${requestId}`}
                     className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-700 px-5 text-sm font-bold text-white"
                   >
                     Continue to outcome issuance
