@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# D29R-5 supersession bridge
+if [[ -x "scripts/verify-d29r5-department-handoffs.sh" ]]; then
+  exec ./scripts/verify-d29r5-department-handoffs.sh
+fi
+
 EXPECTED_ROOT="/Users/blaq/Downloads/faidia"
 EXPECTED_BRANCH="feat/demo-engine-base"
 

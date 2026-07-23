@@ -1,13 +1,29 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { DepartmentHandoffProcessingWorkspace } from "@/components/demo/department/department-handoff-processing-workspace";
+import { getDefaultDemoClient } from "@/config/demo";
 
-export default function Page() {
+type DemoDepartmentHandoffPageProps = {
+  readonly params: Promise<{
+    readonly handoffId: string;
+  }>;
+};
+
+export default async function DemoDepartmentHandoffPage({
+  params,
+}: DemoDepartmentHandoffPageProps) {
+  const { handoffId } = await params;
+  const client = getDefaultDemoClient();
+
   return (
-    <DemoRoutePlaceholder
-      title="Department handoff processing"
-      route="/demo/department/handoffs/[handoffId]"
-      description="This route will demonstrate accepting a referral, performing the requested check and returning the result to the originating officer."
-      nextHref="/demo/supervisor"
-      nextLabel="Open supervisor dashboard"
+    <DepartmentHandoffProcessingWorkspace
+      handoffId={handoffId}
+      organizationName={client.organization.name}
+      departments={client.departments.map((department) => ({
+        id: department.id,
+        name: department.name,
+      }))}
+      serviceSlugs={client.services
+        .filter((service) => service.active)
+        .map((service) => service.slug)}
     />
   );
 }
