@@ -3,7 +3,6 @@ import {
   ArrowRight,
   BellRing,
   Building2,
-  CalendarDays,
   Check,
   CircleUserRound,
   ClipboardList,

@@ -164,7 +164,13 @@ export function RequestReviewSubmission({
   const [confirmed, setConfirmed] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const draft = state.formDrafts[service.slug] ?? {};
+  const draft = useMemo(
+
+    () => state.formDrafts[service.slug] ?? {},
+
+    [service.slug, state.formDrafts],
+
+  );
   const submittedAt = readString(draft[SUBMITTED_AT_FIELD]);
   const submissionReference =
     readString(draft[REFERENCE_FIELD]) ?? requestId;

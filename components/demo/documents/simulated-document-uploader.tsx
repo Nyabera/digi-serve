@@ -114,7 +114,13 @@ export function SimulatedDocumentUploader({
   const { state, dispatch, isHydrated } = useDemoState();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const draft = state.formDrafts[service.slug] ?? {};
+  const draft = useMemo(
+
+    () => state.formDrafts[service.slug] ?? {},
+
+    [service.slug, state.formDrafts],
+
+  );
 
   const selectedDocuments = useMemo(
     () =>
