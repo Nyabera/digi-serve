@@ -1,3 +1,5 @@
+import "./demo-calibration.css";
+
 import type { ReactNode } from "react";
 
 import { DemoControlBar } from "@/components/demo/controls";

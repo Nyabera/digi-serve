@@ -1,0 +1,490 @@
+/*
+ * FAIDIA Demo Engine — D26 visual calibration
+ *
+ * This stylesheet is imported only by app/demo/layout.tsx.
+ * It calibrates presentation without changing workflow logic,
+ * route structure, state, configuration or production data.
+ */
+
+main {
+  --demo-background: var(--background, #f4f6f9);
+  --demo-surface: var(--surface, #ffffff);
+  --demo-surface-muted: var(--surface-muted, #f8fafc);
+  --demo-foreground: var(--foreground, #0b1b4d);
+  --demo-text: var(--text, #172033);
+  --demo-muted: var(--muted-foreground, #64748b);
+  --demo-border: var(--border, #dce4ef);
+  --demo-border-strong: var(--border-control, #c8d2df);
+  --demo-primary: var(--primary, #2337b8);
+  --demo-primary-hover: var(--primary-hover, #1c2d99);
+  --demo-focus: var(--focus-ring, #7c8df5);
+  --demo-radius-sm: var(--radius-sm, 0.625rem);
+  --demo-radius-md: var(--radius-md, 0.875rem);
+  --demo-radius-lg: var(--radius-lg, 1.125rem);
+  --demo-shadow-card:
+    0 1px 2px rgb(15 23 42 / 4%),
+    0 8px 24px rgb(15 23 42 / 5%);
+  --demo-shadow-raised:
+    0 2px 4px rgb(15 23 42 / 5%),
+    0 18px 44px rgb(15 23 42 / 9%);
+
+  min-width: 0;
+  background: var(--demo-background);
+  color: var(--demo-text);
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Structural rhythm                                                          */
+/* -------------------------------------------------------------------------- */
+
+main > :where(header, section, div) {
+  min-width: 0;
+}
+
+main :where(h1, h2, h3) {
+  color: var(--demo-foreground);
+  text-wrap: balance;
+}
+
+main :where(p, dd, li) {
+  text-wrap: pretty;
+}
+
+main :where([class*="max-w-"]) {
+  width: min(100%, var(--calibrated-content-width, 1440px));
+}
+
+main :where(section, article, aside, form, dl, div) {
+  min-width: 0;
+}
+
+main :where([class*="gap-8"]) {
+  row-gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+main :where([class*="py-8"], [class*="py-10"]) {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cards and operational surfaces                                             */
+/* -------------------------------------------------------------------------- */
+
+main
+  :where(article, section, aside, form)
+  [class*="rounded-3xl"],
+main
+  :where(article, section, aside, form)[class*="rounded-3xl"] {
+  border-radius: var(--demo-radius-lg);
+}
+
+main
+  :where(article, section, aside, form)
+  [class*="rounded-2xl"],
+main
+  :where(article, section, aside, form)[class*="rounded-2xl"] {
+  border-radius: var(--demo-radius-md);
+}
+
+main
+  :where(article, section, aside, form)[class*="border-slate-200"][class*="bg-white"],
+main
+  :where(article, section, aside, form)[class*="border"][class*="bg-white"] {
+  border-color: var(--demo-border);
+  box-shadow: var(--demo-shadow-card);
+}
+
+main
+  :where(article, section, aside, form)[class*="shadow-sm"] {
+  box-shadow: var(--demo-shadow-card);
+}
+
+main
+  :where(article, section, aside, form)[class*="bg-slate-50"] {
+  background-color: var(--demo-surface-muted);
+}
+
+main
+  :where(article, section, aside, form)[class*="bg-white"] {
+  background-color: var(--demo-surface);
+}
+
+/* Keep dark operational headers restrained and consistent. */
+main > header[class*="bg-[#"],
+main > header[class*="bg-slate-9"],
+main > header[class*="bg-black"] {
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  box-shadow: 0 8px 28px rgb(2 6 23 / 12%);
+}
+
+main > header > div {
+  min-height: 5.25rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons and action hierarchy                                               */
+/* -------------------------------------------------------------------------- */
+
+main :where(button, a)[class*="rounded-xl"] {
+  border-radius: var(--demo-radius-sm);
+}
+
+main :where(button, a)[class*="min-h-11"] {
+  min-height: 2.75rem;
+}
+
+main :where(button, a)[class*="min-h-12"] {
+  min-height: 3rem;
+}
+
+main :where(button, a)[class*="font-bold"] {
+  letter-spacing: -0.01em;
+}
+
+main
+  :where(button, a)[class*="bg-[#2557ff]"],
+main
+  :where(button, a)[class*="bg-blue-"] {
+  box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
+}
+
+main
+  :where(button, a)[class*="bg-[#2557ff]"]:hover,
+main
+  :where(button, a)[class*="bg-blue-"]:hover {
+  filter: saturate(0.95) brightness(0.96);
+}
+
+main :where(button, a):focus-visible,
+main :where(input, select, textarea):focus-visible {
+  outline: 3px solid color-mix(
+    in srgb,
+    var(--demo-focus) 46%,
+    transparent
+  );
+  outline-offset: 2px;
+}
+
+main :where(button, a)[aria-disabled="true"],
+main :where(button, input, select, textarea):disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Forms                                                                      */
+/* -------------------------------------------------------------------------- */
+
+main :where(input, select, textarea) {
+  border-color: var(--demo-border-strong);
+  border-radius: var(--demo-radius-sm);
+  background: var(--demo-surface);
+  color: var(--demo-text);
+  caret-color: var(--demo-primary);
+}
+
+main :where(input, select) {
+  min-height: 2.875rem;
+}
+
+main textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+main :where(input, textarea)::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+main :where(input, select, textarea):hover:not(:disabled) {
+  border-color: #aebaca;
+}
+
+main :where(input, select, textarea):focus {
+  border-color: var(--demo-primary);
+  box-shadow:
+    0 0 0 3px
+      color-mix(
+        in srgb,
+        var(--demo-primary) 13%,
+        transparent
+      );
+}
+
+main input[type="checkbox"],
+main input[type="radio"] {
+  min-height: auto;
+  accent-color: var(--demo-primary);
+}
+
+main label > span:first-child {
+  color: var(--demo-text);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Queues, tables and dense staff interfaces                                  */
+/* -------------------------------------------------------------------------- */
+
+main :where(table) {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+main :where(th) {
+  height: 2.75rem;
+  border-bottom: 1px solid var(--demo-border);
+  background: var(--demo-surface-muted);
+  color: var(--demo-muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+main :where(td) {
+  min-height: 3.5rem;
+  border-bottom: 1px solid var(--demo-border);
+  color: var(--demo-text);
+}
+
+main :where(tr:last-child td) {
+  border-bottom: 0;
+}
+
+main :where(tr):hover td {
+  background: #fbfcfe;
+}
+
+main :where([class*="font-mono"]) {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Dense queue rows should feel interactive without looking decorative. */
+main
+  :where(article, div)[class*="hover:bg-slate-50"] {
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+main
+  :where(article, div)[class*="hover:bg-slate-50"]:hover {
+  background-color: #f8fafc;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Status and semantic feedback                                               */
+/* -------------------------------------------------------------------------- */
+
+main
+  :where([class*="rounded-full"])[class*="text-xs"],
+main
+  :where([class*="rounded-full"])[class*="text-sm"] {
+  align-items: center;
+  gap: 0.375rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+main
+  :where([class*="bg-emerald-50"]) {
+  border-color: var(--status-success-border, #abefc6);
+}
+
+main
+  :where([class*="bg-amber-50"]) {
+  border-color: var(--status-warning-border, #fedf89);
+}
+
+main
+  :where([class*="bg-red-50"]) {
+  border-color: var(--status-danger-border, #fecdca);
+}
+
+main
+  :where([class*="bg-blue-50"], [class*="bg-violet-50"]) {
+  border-color: var(--status-info-border, #c7d2fe);
+}
+
+main [role="alert"],
+main [role="status"] {
+  border-radius: var(--demo-radius-md);
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Charts                                                                     */
+/* -------------------------------------------------------------------------- */
+
+main .recharts-responsive-container {
+  min-height: 16rem;
+}
+
+main .recharts-cartesian-grid-horizontal line,
+main .recharts-cartesian-grid-vertical line {
+  stroke: var(--chart-grid, #e7edf4);
+  stroke-width: 1;
+}
+
+main .recharts-text {
+  fill: var(--chart-axis, #64748b);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+main .recharts-legend-item-text {
+  color: var(--demo-muted) !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+main .recharts-default-tooltip {
+  border: 1px solid
+    var(--chart-tooltip-border, #dce4ef) !important;
+  border-radius: 0.75rem !important;
+  background:
+    var(--chart-tooltip-background, #ffffff) !important;
+  box-shadow: var(--demo-shadow-raised) !important;
+}
+
+main .recharts-tooltip-label {
+  color: var(--demo-foreground);
+  font-weight: 700;
+}
+
+main .recharts-tooltip-item {
+  font-size: 0.75rem !important;
+  font-weight: 600;
+}
+
+main .recharts-surface {
+  overflow: visible;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Outcome and controlled-document surfaces                                   */
+/* -------------------------------------------------------------------------- */
+
+main iframe[title*="issued demonstration"] {
+  border-color: var(--demo-border);
+  box-shadow: inset 0 0 0 1px rgb(15 23 42 / 3%);
+}
+
+main
+  :where([class*="font-mono"])[class*="text-blue"],
+main
+  :where([class*="font-mono"])[class*="text-slate"] {
+  overflow-wrap: anywhere;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive calibration                                                     */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  main > header > div {
+    min-height: auto;
+  }
+
+  main :where([class*="xl:sticky"]) {
+    position: static;
+  }
+
+  main .recharts-responsive-container {
+    min-height: 15rem;
+  }
+}
+
+@media (max-width: 767px) {
+  main {
+    overflow-x: clip;
+  }
+
+  main :where(h1) {
+    font-size: clamp(1.875rem, 9vw, 2.5rem);
+    line-height: 1.08;
+  }
+
+  main :where(h2) {
+    line-height: 1.15;
+  }
+
+  main
+    :where(article, section, aside, form)[class*="p-8"] {
+    padding: 1.25rem;
+  }
+
+  main
+    :where(article, section, aside, form)[class*="p-6"] {
+    padding: 1.125rem;
+  }
+
+  main :where(button, a)[class*="w-full"] {
+    white-space: normal;
+  }
+
+  main .recharts-responsive-container {
+    min-height: 14rem;
+  }
+
+  main .recharts-legend-wrapper {
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 479px) {
+  main :where([class*="px-5"]) {
+    padding-inline: 1rem;
+  }
+
+  main
+    :where([class*="rounded-3xl"]) {
+    border-radius: var(--demo-radius-md);
+  }
+
+  main :where([class*="text-4xl"]) {
+    font-size: 2rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Motion and printing                                                        */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  main *,
+  main *::before,
+  main *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  main {
+    background: #ffffff;
+  }
+
+  main > header,
+  main :where(button, [role="status"], [role="alert"]) {
+    display: none !important;
+  }
+
+  main
+    :where(article, section, aside, form)[class*="shadow"] {
+    box-shadow: none !important;
+  }
+}
