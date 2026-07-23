@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# D29R-3P supersession bridge
+if [[ -x "scripts/verify-d29r3p-officer-dashboard-parity.sh" ]]; then
+  exec ./scripts/verify-d29r3p-officer-dashboard-parity.sh
+fi
+
 EXPECTED_ROOT="/Users/blaq/Downloads/faidia"
 EXPECTED_BRANCH="feat/demo-engine-base"
 PAGE_FILE="app/demo/officer/page.tsx"
