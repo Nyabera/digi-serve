@@ -1,13 +1,52 @@
-import { DemoRoutePlaceholder } from "@/components/demo/shared/demo-route-placeholder";
+import { notFound } from "next/navigation";
 
-export default function Page() {
+import { SupervisorApprovalWorkspace } from "@/components/demo/supervisor/supervisor-approval-workspace";
+import { getDefaultDemoClient } from "@/config/demo";
+
+type DemoSupervisorApprovalPageProps = {
+  readonly params: Promise<{
+    readonly requestId: string;
+  }>;
+};
+
+export default async function DemoSupervisorApprovalPage({
+  params,
+}: DemoSupervisorApprovalPageProps) {
+  const { requestId } = await params;
+  const client = getDefaultDemoClient();
+
+  const service =
+    client.services.find(
+      (candidate) =>
+        candidate.active &&
+        candidate.slug ===
+          "transcript-request",
+    ) ??
+    client.services.find(
+      (candidate) => candidate.active,
+    );
+
+  if (!service) {
+    notFound();
+  }
+
+  const registrarDepartment =
+    client.departments.find(
+      (department) =>
+        department.name === "Registrar",
+    ) ?? client.departments[0];
+
   return (
-    <DemoRoutePlaceholder
-      title="Supervisor approval"
-      route="/demo/supervisor/approvals/[requestId]"
-      description="This route will demonstrate final review, approval or rejection before controlled outcome issuance."
-      nextHref="/demo/outcomes/REQ-DEMO-001"
-      nextLabel="View issued outcome"
+    <SupervisorApprovalWorkspace
+      requestId={requestId}
+      organizationName={
+        client.organization.name
+      }
+      service={service}
+      registrarDepartment={{
+        id: registrarDepartment.id,
+        name: registrarDepartment.name,
+      }}
     />
   );
 }

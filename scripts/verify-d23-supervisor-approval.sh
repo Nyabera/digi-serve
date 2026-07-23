@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+# D29R-6 supersession bridge
+if [[ -x "scripts/verify-d29r6-supervisor-dashboard-approval.sh" ]]; then
+  exec ./scripts/verify-d29r6-supervisor-dashboard-approval.sh
+fi
+
 EXPECTED_ROOT="/Users/blaq/Downloads/faidia"
 EXPECTED_BRANCH="feat/demo-engine-base"
 

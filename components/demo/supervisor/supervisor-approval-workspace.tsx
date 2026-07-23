@@ -1,21 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
-  ArrowLeft,
-  ArrowRight,
-  BadgeCheck,
-  Building2,
-  CheckCircle2,
-  CircleAlert,
-  ClipboardCheck,
-  Clock3,
-  FileCheck2,
-  FileText,
-  RotateCcw,
-  ShieldCheck,
-  UserRoundCheck,
-  XCircle,
+  Maximize2,
+  RefreshCw,
 } from "lucide-react";
 import {
   useMemo,
@@ -23,13 +11,22 @@ import {
   type FormEvent,
 } from "react";
 
+import { InternalAppShell } from "@/components/demo/internal-shell";
+import { getDemoSupervisorApprovalsReference } from "@/features/demo-engine/adapters/get-demo-supervisor-approvals-reference";
 import { useDemoState } from "@/features/demo/state";
+import { SupervisorApprovalBody } from "@/features/supervisor-approvals/components/supervisor-approval-body";
+import type {
+  SupervisorApprovalDetailModel,
+  SupervisorDecision,
+} from "@/features/supervisor-approvals/model/supervisor-approval-model";
 import type {
   DemoDocumentRequirementConfig,
   DemoFormFieldConfig,
   DemoServiceConfig,
 } from "@/types/demo/client-config";
-import type { DemoFormValue } from "@/types/demo/demo-state";
+import type {
+  DemoFormValue,
+} from "@/types/demo/demo-state";
 
 type DepartmentOption = {
   readonly id: string;
@@ -58,33 +55,10 @@ type FinanceResultRecord = {
   readonly returnedTo: string;
 };
 
-type ReferralRecord = {
-  readonly id: string;
-  readonly requestId: string;
-  readonly originatingDepartmentName: string;
-  readonly receivingDepartmentName: string;
-  readonly requestedAction: string;
-  readonly expectedOutput: string;
-  readonly dueDate: string;
-  readonly status:
-    | "PENDING_ACCEPTANCE"
-    | "ACCEPTED"
-    | "COMPLETED"
-    | "DECLINED"
-    | "RETURNED_FOR_CLARIFICATION";
-  readonly result?: FinanceResultCode;
-  readonly resultNote?: string;
-};
-
-type RegistrarDecisionType =
-  | "APPROVED"
-  | "REJECTED"
-  | "RETURNED_FOR_CLARIFICATION";
-
 type RegistrarDecisionRecord = {
   readonly id: string;
   readonly requestId: string;
-  readonly decision: RegistrarDecisionType;
+  readonly decision: SupervisorDecision;
   readonly internalNote: string;
   readonly applicantReason: string;
   readonly decidedBy: string;
@@ -106,9 +80,7 @@ const OFFICER_DOCUMENTS_CHECKED_FIELD =
   "__officerReview:documentsChecked";
 const OFFICER_IDENTITY_CHECKED_FIELD =
   "__officerReview:identityChecked";
-const OFFICER_REFERRAL_FIELD =
-  "__officerReview:referral";
-const DEPARTMENT_RESULT_FIELD =
+const LEGACY_DEPARTMENT_RESULT_FIELD =
   "__departmentProcessing:financeResult";
 const DECISION_RECORD_FIELD =
   "__supervisorDecision:record";
@@ -119,11 +91,15 @@ const DECISION_PUBLIC_STATUS_FIELD =
 
 const REGISTRAR_NAME = "Dr. Miriam Wekesa";
 
-function documentFieldKey(requirementId: string): string {
+function documentFieldKey(
+  requirementId: string,
+): string {
   return `${DOCUMENT_FIELD_PREFIX}${requirementId}`;
 }
 
-function asRecord(value: unknown): UnknownRecord {
+function asRecord(
+  value: unknown,
+): UnknownRecord {
   if (
     typeof value === "object" &&
     value !== null &&
@@ -135,26 +111,36 @@ function asRecord(value: unknown): UnknownRecord {
   return {};
 }
 
-function parseFinanceResult(
+function parseLegacyFinanceResult(
   value: DemoFormValue | undefined,
 ): FinanceResultRecord | null {
-  if (typeof value !== "string" || !value.trim()) {
+  if (
+    typeof value !== "string" ||
+    !value.trim()
+  ) {
     return null;
   }
 
   try {
-    const parsed: unknown = JSON.parse(value);
+    const parsed: unknown = JSON.parse(
+      value,
+    );
     const candidate = asRecord(parsed);
 
     if (
       typeof candidate.requestId !== "string" ||
-      typeof candidate.departmentName !== "string" ||
-      !["CLEAR", "HOLD", "CANNOT_VERIFY"].includes(
-        String(candidate.result),
-      ) ||
+      typeof candidate.departmentName !==
+        "string" ||
+      ![
+        "CLEAR",
+        "HOLD",
+        "CANNOT_VERIFY",
+      ].includes(String(candidate.result)) ||
       typeof candidate.note !== "string" ||
-      typeof candidate.completedBy !== "string" ||
-      typeof candidate.completedAt !== "string" ||
+      typeof candidate.completedBy !==
+        "string" ||
+      typeof candidate.completedAt !==
+        "string" ||
       typeof candidate.returnedTo !== "string"
     ) {
       return null;
@@ -166,53 +152,101 @@ function parseFinanceResult(
   }
 }
 
-function parseReferral(
-  value: DemoFormValue | undefined,
-): ReferralRecord | null {
-  if (typeof value !== "string" || !value.trim()) {
-    return null;
-  }
+function parseModernFinanceResult(
+  draft: Readonly<
+    Record<string, DemoFormValue>
+  >,
+  requestId: string,
+): FinanceResultRecord | null {
+  const referralValue =
+    draft["__officerReview:referral"];
+  let preferredHandoffId: string | null = null;
 
-  try {
-    const parsed: unknown = JSON.parse(value);
-    const candidate = asRecord(parsed);
+  if (
+    typeof referralValue === "string" &&
+    referralValue.trim()
+  ) {
+    try {
+      const referral = asRecord(
+        JSON.parse(referralValue),
+      );
 
-    if (
-      typeof candidate.id !== "string" ||
-      typeof candidate.requestId !== "string" ||
-      typeof candidate.originatingDepartmentName !==
-        "string" ||
-      typeof candidate.receivingDepartmentName !==
-        "string" ||
-      typeof candidate.requestedAction !== "string" ||
-      typeof candidate.expectedOutput !== "string" ||
-      typeof candidate.dueDate !== "string" ||
-      ![
-        "PENDING_ACCEPTANCE",
-        "ACCEPTED",
-        "COMPLETED",
-        "DECLINED",
-        "RETURNED_FOR_CLARIFICATION",
-      ].includes(String(candidate.status))
-    ) {
-      return null;
+      if (
+        referral.requestId === requestId &&
+        typeof referral.id === "string"
+      ) {
+        preferredHandoffId = referral.id;
+      }
+    } catch {
+      preferredHandoffId = null;
     }
+  }
 
-    return parsed as ReferralRecord;
-  } catch {
+  if (!preferredHandoffId) {
+    const requestNumber = requestId.match(
+      /REQ-DEMO-(\d+)$/,
+    )?.[1];
+
+    if (requestNumber) {
+      preferredHandoffId =
+        `HND-DEMO-${requestNumber}`;
+    }
+  }
+
+  if (!preferredHandoffId) {
     return null;
   }
+
+  const handoffPrefix =
+    `__departmentHandoff:${preferredHandoffId}`;
+  const resultValue =
+    draft[`${handoffPrefix}:result`];
+  const status =
+    draft[`${handoffPrefix}:status`];
+  const note =
+    draft[`${handoffPrefix}:resultNote`];
+  const completedAt =
+    draft[`${handoffPrefix}:completedAt`];
+
+  if (
+    status !== "COMPLETED" ||
+    typeof resultValue !== "string"
+  ) {
+    return null;
+  }
+
+  return {
+    requestId,
+    departmentName: "Finance",
+    result:
+      resultValue as FinanceResultCode,
+    note:
+      typeof note === "string"
+        ? note
+        : "Finance completed the departmental verification.",
+    completedBy: "Amina Hassan",
+    completedAt:
+      typeof completedAt === "string"
+        ? completedAt
+        : new Date(0).toISOString(),
+    returnedTo: "Student Records",
+  };
 }
 
 function parseDecision(
   value: DemoFormValue | undefined,
 ): RegistrarDecisionRecord | null {
-  if (typeof value !== "string" || !value.trim()) {
+  if (
+    typeof value !== "string" ||
+    !value.trim()
+  ) {
     return null;
   }
 
   try {
-    const parsed: unknown = JSON.parse(value);
+    const parsed: unknown = JSON.parse(
+      value,
+    );
     const candidate = asRecord(parsed);
 
     if (
@@ -223,11 +257,14 @@ function parseDecision(
         "REJECTED",
         "RETURNED_FOR_CLARIFICATION",
       ].includes(String(candidate.decision)) ||
-      typeof candidate.internalNote !== "string" ||
-      typeof candidate.applicantReason !== "string" ||
+      typeof candidate.internalNote !==
+        "string" ||
+      typeof candidate.applicantReason !==
+        "string" ||
       typeof candidate.decidedBy !== "string" ||
       candidate.profile !== "Registrar" ||
-      typeof candidate.departmentName !== "string" ||
+      typeof candidate.departmentName !==
+        "string" ||
       typeof candidate.decidedAt !== "string" ||
       typeof candidate.immutable !== "boolean"
     ) {
@@ -240,8 +277,13 @@ function parseDecision(
   }
 }
 
-function hasValue(value: DemoFormValue | undefined): boolean {
-  if (value === undefined || value === null) {
+function hasValue(
+  value: DemoFormValue | undefined,
+): boolean {
+  if (
+    value === undefined ||
+    value === null
+  ) {
     return false;
   }
 
@@ -272,10 +314,14 @@ function formatFieldValue(
     return value ? "Confirmed" : "No";
   }
 
-  if (field.options && typeof value === "string") {
+  if (
+    field.options &&
+    typeof value === "string"
+  ) {
     return (
       field.options.find(
-        (option) => option.value === value,
+        (option) =>
+          option.value === value,
       )?.label ?? value
     );
   }
@@ -296,31 +342,56 @@ function documentLevelLabel(
   }
 }
 
-function decisionClassName(
-  decision: RegistrarDecisionType,
+function formatTimestamp(
+  value: string,
 ): string {
-  if (decision === "APPROVED") {
-    return "border-emerald-200 bg-emerald-50 text-emerald-800";
-  }
-
-  if (decision === "REJECTED") {
-    return "border-red-200 bg-red-50 text-red-800";
-  }
-
-  return "border-violet-200 bg-violet-50 text-violet-800";
-}
-
-function formatTimestamp(value: string): string {
   const date = new Date(value);
 
   if (Number.isNaN(date.getTime())) {
     return value;
   }
 
-  return new Intl.DateTimeFormat("en-KE", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(date);
+  return new Intl.DateTimeFormat(
+    "en-KE",
+    {
+      dateStyle: "medium",
+      timeStyle: "short",
+    },
+  ).format(date);
+}
+
+function initials(
+  name: string,
+): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(
+      (part) =>
+        part[0]?.toUpperCase() ?? "",
+    )
+    .join("");
+}
+
+function triggerPresentationShortcut() {
+  window.dispatchEvent(
+    new KeyboardEvent("keydown", {
+      key: "p",
+      shiftKey: true,
+      bubbles: true,
+    }),
+  );
+}
+
+function triggerResetShortcut() {
+  window.dispatchEvent(
+    new KeyboardEvent("keydown", {
+      key: "r",
+      shiftKey: true,
+      bubbles: true,
+    }),
+  );
 }
 
 export function SupervisorApprovalWorkspace({
@@ -329,24 +400,43 @@ export function SupervisorApprovalWorkspace({
   service,
   registrarDepartment,
 }: SupervisorApprovalWorkspaceProps) {
-  const { state, dispatch, isHydrated } = useDemoState();
+  const router = useRouter();
+  const {
+    state,
+    dispatch,
+    isHydrated,
+  } = useDemoState();
+  const reference =
+    getDemoSupervisorApprovalsReference();
 
-  const [internalNote, setInternalNote] = useState(
-    "All required operational checks have been reviewed by the Registrar.",
-  );
-  const [rejectionReason, setRejectionReason] =
-    useState("");
-  const [clarificationReason, setClarificationReason] =
-    useState("");
-  const [decisionConfirmed, setDecisionConfirmed] =
-    useState(false);
-  const [message, setMessage] =
-    useState<string | null>(null);
-  const [error, setError] =
-    useState<string | null>(null);
+  const [internalNote, setInternalNote] =
+    useState(
+      "All required operational checks have been reviewed by the Registrar.",
+    );
+  const [
+    rejectionReason,
+    setRejectionReason,
+  ] = useState("");
+  const [
+    clarificationReason,
+    setClarificationReason,
+  ] = useState("");
+  const [
+    decisionConfirmed,
+    setDecisionConfirmed,
+  ] = useState(false);
+  const [
+    feedbackMessage,
+    setFeedbackMessage,
+  ] = useState<string | null>(null);
+  const [
+    errorMessage,
+    setErrorMessage,
+  ] = useState<string | null>(null);
 
   const draft = useMemo(
-    () => state.formDrafts[service.slug] ?? {},
+    () =>
+      state.formDrafts[service.slug] ?? {},
     [service.slug, state.formDrafts],
   );
 
@@ -354,7 +444,9 @@ export function SupervisorApprovalWorkspace({
     () =>
       service.form.sections.flatMap(
         (section) =>
-          section.fields.filter((field) => field.required),
+          section.fields.filter(
+            (field) => field.required,
+          ),
       ),
     [service.form.sections],
   );
@@ -363,45 +455,63 @@ export function SupervisorApprovalWorkspace({
     () =>
       service.requiredDocuments.filter(
         (requirement) =>
-          requirement.level === "REQUIRED",
+          requirement.level ===
+          "REQUIRED",
       ),
     [service.requiredDocuments],
   );
 
   const financeResult = useMemo(
     () =>
-      parseFinanceResult(
-        draft[DEPARTMENT_RESULT_FIELD],
+      parseModernFinanceResult(
+        draft,
+        requestId,
+      ) ??
+      parseLegacyFinanceResult(
+        draft[
+          LEGACY_DEPARTMENT_RESULT_FIELD
+        ],
+      ),
+    [draft, requestId],
+  );
+
+  const existingDecision = useMemo(
+    () =>
+      parseDecision(
+        draft[DECISION_RECORD_FIELD],
       ),
     [draft],
   );
 
-  const referral = useMemo(
-    () => parseReferral(draft[OFFICER_REFERRAL_FIELD]),
-    [draft],
-  );
-
-  const existingDecision = useMemo(
-    () => parseDecision(draft[DECISION_RECORD_FIELD]),
-    [draft],
-  );
-
-  const applicationComplete = requiredFields.every(
-    (field) => hasValue(draft[field.key]),
-  );
+  const applicationComplete =
+    requiredFields.every((field) =>
+      hasValue(draft[field.key]),
+    );
 
   const requiredDocumentsComplete =
-    requiredDocuments.every((requirement) =>
-      hasValue(draft[documentFieldKey(requirement.id)]),
+    requiredDocuments.every(
+      (requirement) =>
+        hasValue(
+          draft[
+            documentFieldKey(
+              requirement.id,
+            )
+          ],
+        ),
     );
 
   const officerReviewComplete =
-    draft[OFFICER_APPLICATION_CHECKED_FIELD] === true &&
-    draft[OFFICER_DOCUMENTS_CHECKED_FIELD] === true &&
-    draft[OFFICER_IDENTITY_CHECKED_FIELD] === true;
+    draft[
+      OFFICER_APPLICATION_CHECKED_FIELD
+    ] === true &&
+    draft[
+      OFFICER_DOCUMENTS_CHECKED_FIELD
+    ] === true &&
+    draft[
+      OFFICER_IDENTITY_CHECKED_FIELD
+    ] === true;
 
   const financeWorkComplete =
-    referral?.status === "COMPLETED" &&
     financeResult !== null;
 
   const financeClear =
@@ -411,8 +521,13 @@ export function SupervisorApprovalWorkspace({
     "CORRECTION_REQUESTED",
     "FINANCE_CLARIFICATION_REQUIRED",
     "REFERRAL_DECLINED",
+    "SUPERVISOR_CLARIFICATION_REQUIRED",
   ].includes(
-    String(draft[OFFICER_REVIEW_STATUS_FIELD] ?? ""),
+    String(
+      draft[
+        OFFICER_REVIEW_STATUS_FIELD
+      ] ?? "",
+    ),
   );
 
   const approvalReady =
@@ -430,28 +545,38 @@ export function SupervisorApprovalWorkspace({
 
   const prerequisites = [
     {
-      label: "Required application fields are complete",
+      id: "application",
+      label:
+        "Required application fields are complete",
       passed: applicationComplete,
       detail: `${requiredFields.length} required configured fields checked`,
     },
     {
-      label: "Required documents are available",
+      id: "documents",
+      label:
+        "Required documents are available",
       passed: requiredDocumentsComplete,
       detail: `${requiredDocuments.length} required document records checked`,
     },
     {
-      label: "Originating officer review is complete",
+      id: "officer",
+      label:
+        "Originating officer review is complete",
       passed: officerReviewComplete,
-      detail: "Application, documents and identity checks",
+      detail:
+        "Application, documents and identity checks",
     },
     {
-      label: "Finance work item is complete",
+      id: "finance-complete",
+      label:
+        "Finance work item is complete",
       passed: financeWorkComplete,
-      detail: referral
-        ? `Referral status: ${referral.status}`
-        : "No completed Finance referral found",
+      detail: financeResult
+        ? `Completed by ${financeResult.completedBy}`
+        : "No completed Finance result found",
     },
     {
+      id: "finance-clear",
       label: "Finance returned CLEAR",
       passed: financeClear,
       detail: financeResult
@@ -459,10 +584,14 @@ export function SupervisorApprovalWorkspace({
         : "No structured Finance result found",
     },
     {
-      label: "No unresolved correction or clarification",
+      id: "unresolved",
+      label:
+        "No unresolved correction or clarification",
       passed: !unresolvedOfficerState,
       detail: String(
-        draft[OFFICER_REVIEW_STATUS_FIELD] ??
+        draft[
+          OFFICER_REVIEW_STATUS_FIELD
+        ] ??
           "No blocking officer state",
       ),
     },
@@ -482,7 +611,10 @@ export function SupervisorApprovalWorkspace({
     });
   }
 
-  function addActivity(name: string, at: string) {
+  function addActivity(
+    name: string,
+    at: string,
+  ) {
     dispatch({
       type: "ADD_ACTIVITY_EVENT",
       event: {
@@ -499,38 +631,45 @@ export function SupervisorApprovalWorkspace({
   }
 
   function saveDecision(
-    decision: RegistrarDecisionType,
+    decision: SupervisorDecision,
     applicantReason: string,
     internalStatus: string,
     publicStatus: string,
     eventName: string,
   ) {
     if (existingDecision) {
-      setError(
+      setErrorMessage(
         "A Registrar decision has already been recorded for this demonstration request.",
       );
       return;
     }
 
     if (!decisionConfirmed) {
-      setError(
+      setErrorMessage(
         "Confirm the Registrar declaration before recording a decision.",
       );
       return;
     }
 
-    const at = new Date().toISOString();
+    const at =
+      new Date().toISOString();
     const record: RegistrarDecisionRecord = {
-      id: `DEC-REG-${at.replace(/\D/g, "")}`,
+      id: `DEC-REG-${at.replace(
+        /\D/g,
+        "",
+      )}`,
       requestId,
       decision,
-      internalNote: internalNote.trim(),
+      internalNote:
+        internalNote.trim(),
       applicantReason,
       decidedBy: REGISTRAR_NAME,
       profile: "Registrar",
-      departmentName: registrarDepartment.name,
+      departmentName:
+        registrarDepartment.name,
       decidedAt: at,
-      financeResult: financeResult?.result ?? null,
+      financeResult:
+        financeResult?.result ?? null,
       immutable:
         decision === "APPROVED" ||
         decision === "REJECTED",
@@ -558,8 +697,8 @@ export function SupervisorApprovalWorkspace({
     );
     addActivity(eventName, at);
 
-    setError(null);
-    setMessage(
+    setErrorMessage(null);
+    setFeedbackMessage(
       `${decision.replaceAll(
         "_",
         " ",
@@ -569,7 +708,7 @@ export function SupervisorApprovalWorkspace({
 
   function approveRequest() {
     if (!approvalReady) {
-      setError(
+      setErrorMessage(
         "Approval is blocked until every approval prerequisite passes.",
       );
       return;
@@ -588,18 +727,18 @@ export function SupervisorApprovalWorkspace({
     event: FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
-
-    const reason = rejectionReason.trim();
+    const reason =
+      rejectionReason.trim();
 
     if (!rejectionReady) {
-      setError(
+      setErrorMessage(
         "Rejection requires a reviewed application, required documents and a Finance result.",
       );
       return;
     }
 
     if (!reason) {
-      setError(
+      setErrorMessage(
         "Enter an applicant-visible rejection reason.",
       );
       return;
@@ -618,11 +757,11 @@ export function SupervisorApprovalWorkspace({
     event: FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
-
-    const reason = clarificationReason.trim();
+    const reason =
+      clarificationReason.trim();
 
     if (!reason) {
-      setError(
+      setErrorMessage(
         "Enter the clarification required from Student Records.",
       );
       return;
@@ -637,596 +776,262 @@ export function SupervisorApprovalWorkspace({
     );
   }
 
+  const applicantName =
+    state.applicant.fullName ||
+    "Demo applicant";
+
+  const currentStatus =
+    existingDecision?.decision ??
+    (approvalReady
+      ? "PENDING_APPROVAL"
+      : "BLOCKED");
+
+  const model: SupervisorApprovalDetailModel = {
+    requestId,
+    serviceName: service.name,
+    applicantName,
+    applicantInitials:
+      initials(applicantName) || "DA",
+    applicantEmail:
+      state.applicant.email ||
+      "applicant@example.com",
+    applicantPhone:
+      state.applicant.phone ||
+      "+254 700 000 000",
+    submittedLabel:
+      "14 May 2026, 10:43 AM",
+    parentOwnerName:
+      "Student Records",
+    registrarDepartmentName:
+      registrarDepartment.name,
+    decisionAuthorityName:
+      REGISTRAR_NAME,
+    currentStatusLabel:
+      currentStatus.replaceAll(
+        "_",
+        " ",
+      ),
+    currentStatusTone:
+      currentStatus === "APPROVED"
+        ? "green"
+        : currentStatus === "REJECTED"
+          ? "red"
+          : currentStatus ===
+              "RETURNED_FOR_CLARIFICATION"
+            ? "purple"
+            : approvalReady
+              ? "green"
+              : "orange",
+    financeResult:
+      financeResult?.result ?? null,
+    financeNote:
+      financeResult?.note ??
+      "Complete the Finance work item before approval.",
+    financeCompletedBy:
+      financeResult?.completedBy ?? "",
+    financeCompletedAtLabel:
+      financeResult
+        ? formatTimestamp(
+            financeResult.completedAt,
+          )
+        : "",
+    prerequisites,
+    applicationItems:
+      requiredFields.slice(0, 6).map(
+        (field) => ({
+          id: field.key,
+          label: field.label,
+          value: formatFieldValue(
+            field,
+            draft[field.key],
+          ),
+        }),
+      ),
+    documents:
+      service.requiredDocuments.map(
+        (requirement) => {
+          const available = hasValue(
+            draft[
+              documentFieldKey(
+                requirement.id,
+              )
+            ],
+          );
+
+          return {
+            id: requirement.id,
+            name: requirement.name,
+            levelLabel:
+              documentLevelLabel(
+                requirement,
+              ),
+            statusLabel: available
+              ? "Available"
+              : "Not selected",
+            available,
+          };
+        },
+      ),
+    existingDecision:
+      existingDecision
+        ? {
+            decision:
+              existingDecision.decision,
+            internalNote:
+              existingDecision.internalNote,
+            applicantReason:
+              existingDecision.applicantReason,
+            decidedBy:
+              existingDecision.decidedBy,
+            decidedAtLabel:
+              formatTimestamp(
+                existingDecision.decidedAt,
+              ),
+          }
+        : null,
+  };
+
   if (!isHydrated) {
     return (
-      <main className="min-h-screen bg-slate-100 p-8">
-        <p className="mx-auto max-w-3xl rounded-2xl bg-white p-6 text-sm font-bold">
-          Restoring Registrar approval workspace…
-        </p>
+      <main className="min-h-screen bg-slate-50 px-5 py-12">
+        <section className="mx-auto max-w-xl rounded-xl border border-slate-200 bg-white p-6">
+          <p className="text-sm font-bold text-slate-950">
+            Restoring Registrar approval workspace…
+          </p>
+        </section>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-[#f4f5f7] text-slate-950">
-      <header className="bg-[#100b18] text-white">
-        <div className="mx-auto max-w-[1380px] px-5 py-7 sm:px-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600">
-                <BadgeCheck
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                />
-              </span>
-
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50">
-                  Supervisor approval workspace
-                </p>
-                <h1 className="mt-1 text-2xl font-bold">
-                  Registrar decision
-                </h1>
-                <p className="mt-1 text-sm text-white/60">
-                  {organizationName}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={`/demo/officer/requests/${requestId}`}
-                className="inline-flex min-h-11 items-center rounded-xl border border-white/15 px-5 text-sm font-bold"
-              >
-                <ArrowLeft
-                  className="mr-2 h-4 w-4"
-                  aria-hidden="true"
-                />
-                Officer review
-              </Link>
-
-              <Link
-                href="/demo/department"
-                className="inline-flex min-h-11 items-center rounded-xl bg-white px-5 text-sm font-bold text-slate-950"
-              >
-                Finance workspace
-                <ArrowRight
-                  className="ml-2 h-4 w-4"
-                  aria-hidden="true"
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-[1380px] px-5 py-8 sm:px-8">
-        <section className="grid gap-4 md:grid-cols-4">
-          {[
-            {
-              label: "Pending approval",
-              value:
-                !existingDecision && approvalReady ? 1 : 0,
-              icon: ClipboardCheck,
-            },
-            {
-              label: "Blocked",
-              value:
-                !existingDecision && !approvalReady ? 1 : 0,
-              icon: Clock3,
-            },
-            {
-              label: "Approved",
-              value:
-                existingDecision?.decision === "APPROVED"
-                  ? 1
-                  : 0,
-              icon: CheckCircle2,
-            },
-            {
-              label: "Rejected",
-              value:
-                existingDecision?.decision === "REJECTED"
-                  ? 1
-                  : 0,
-              icon: XCircle,
-            },
-          ].map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.label}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-sm font-bold text-slate-600">
-                      {item.label}
-                    </p>
-                    <p className="mt-3 text-4xl font-bold">
-                      {item.value}
-                    </p>
-                  </div>
-                  <Icon
-                    className="h-5 w-5 text-slate-500"
-                    aria-hidden="true"
-                  />
-                </div>
-              </article>
-            );
-          })}
-        </section>
-
-        <section className="mt-8 grid gap-8 xl:grid-cols-[minmax(0,1fr)_410px] xl:items-start">
-          <div className="grid gap-6">
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-              <div className="flex flex-col gap-5 border-b border-slate-200 pb-6 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <p className="font-mono text-sm font-bold text-slate-500">
-                    {requestId}
-                  </p>
-                  <h2 className="mt-2 text-3xl font-bold tracking-tight">
-                    {service.name}
-                  </h2>
-                  <p className="mt-3 text-sm text-slate-600">
-                    Applicant:{" "}
-                    <span className="font-bold text-slate-900">
-                      {state.applicant.fullName ||
-                        "Demo applicant"}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    Decision authority
-                  </p>
-                  <p className="mt-2 text-sm font-bold">
-                    {REGISTRAR_NAME}
-                  </p>
-                  <p className="mt-1 text-sm text-slate-600">
-                    Registrar-profile Supervisor
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-7 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl bg-slate-50 p-5">
-                  <div className="flex items-center gap-3">
-                    <Building2
-                      className="h-5 w-5 text-slate-500"
-                      aria-hidden="true"
-                    />
-                    <p className="text-sm font-bold">
-                      Parent owner
-                    </p>
-                  </div>
-                  <p className="mt-3 text-lg font-bold">
-                    {referral?.originatingDepartmentName ??
-                      "Student Records"}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-slate-50 p-5">
-                  <div className="flex items-center gap-3">
-                    <UserRoundCheck
-                      className="h-5 w-5 text-slate-500"
-                      aria-hidden="true"
-                    />
-                    <p className="text-sm font-bold">
-                      Approval department
-                    </p>
-                  </div>
-                  <p className="mt-3 text-lg font-bold">
-                    {registrarDepartment.name}
-                  </p>
-                </div>
-              </div>
-            </article>
-
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-                Approval gate
-              </p>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight">
-                Required checks
-              </h2>
-
-              <div className="mt-6 grid gap-4">
-                {prerequisites.map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-start gap-4 rounded-2xl border border-slate-200 p-5"
+    <div
+      data-d29r3-officer-shell="true"
+      data-internal-shell-role="SUPERVISOR"
+    >
+      <InternalAppShell
+        role="SUPERVISOR"
+        institutionName={organizationName}
+        institutionSubtitle="Student Services"
+        institutionInitials="STC"
+        staffName={REGISTRAR_NAME}
+        staffRoleLabel="Registrar Supervisor"
+        requestSelector={
+          <label>
+            <span className="sr-only">
+              Open approval
+            </span>
+            <select
+              className="input-base input-compact"
+              value={
+                `/demo/supervisor/approvals/${requestId}`
+              }
+              onChange={(event) =>
+                router.push(
+                  event.target.value,
+                )
+              }
+            >
+              {reference.approvals.map(
+                (approval) => (
+                  <option
+                    key={approval.requestId}
+                    value={approval.href}
                   >
-                    <span
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${
-                        item.passed
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-amber-50 text-amber-700"
-                      }`}
-                    >
-                      {item.passed ? (
-                        <CheckCircle2
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <CircleAlert
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold">
-                        {item.label}
-                      </p>
-                      <p className="mt-1 text-sm leading-6 text-slate-600">
-                        {item.detail}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </article>
-
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100">
-                  <FileCheck2
-                    className="h-5 w-5 text-slate-600"
-                    aria-hidden="true"
-                  />
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    Finance result
-                  </p>
-                  <h2 className="mt-2 text-2xl font-bold">
-                    {financeResult?.result ??
-                      "Not available"}
-                  </h2>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {financeResult?.note ??
-                      "Complete the Finance work item before approval."}
-                  </p>
-                  {financeResult ? (
-                    <p className="mt-3 text-sm font-bold text-slate-700">
-                      Completed by{" "}
-                      {financeResult.completedBy} ·{" "}
-                      {formatTimestamp(
-                        financeResult.completedAt,
-                      )}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-
-            <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-                Submitted record
-              </p>
-              <h2 className="mt-2 text-2xl font-bold">
-                Application and documents
-              </h2>
-
-              <div className="mt-6 grid gap-6">
-                {service.form.sections.map((section) => (
-                  <div key={section.id}>
-                    <h3 className="text-lg font-bold">
-                      {section.title}
-                    </h3>
-                    <dl className="mt-3 grid gap-3 sm:grid-cols-2">
-                      {section.fields
-                        .filter((field) => field.required)
-                        .map((field) => (
-                          <div
-                            key={field.key}
-                            className="rounded-xl bg-slate-50 p-4"
-                          >
-                            <dt className="text-xs font-bold uppercase text-slate-500">
-                              {field.label}
-                            </dt>
-                            <dd className="mt-2 text-sm leading-6">
-                              {formatFieldValue(
-                                field,
-                                draft[field.key],
-                              )}
-                            </dd>
-                          </div>
-                        ))}
-                    </dl>
-                  </div>
-                ))}
-
-                <div>
-                  <h3 className="text-lg font-bold">
-                    Required documents
-                  </h3>
-                  <div className="mt-3 grid gap-3">
-                    {service.requiredDocuments.map(
-                      (requirement) => (
-                        <div
-                          key={requirement.id}
-                          className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 p-4"
-                        >
-                          <div className="flex items-center gap-3">
-                            <FileText
-                              className="h-4 w-4 text-slate-500"
-                              aria-hidden="true"
-                            />
-                            <div>
-                              <p className="text-sm font-bold">
-                                {requirement.name}
-                              </p>
-                              <p className="mt-1 text-xs text-slate-500">
-                                {documentLevelLabel(
-                                  requirement,
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                          <span
-                            className={`text-xs font-bold ${
-                              hasValue(
-                                draft[
-                                  documentFieldKey(
-                                    requirement.id,
-                                  )
-                                ],
-                              )
-                                ? "text-emerald-700"
-                                : "text-amber-700"
-                            }`}
-                          >
-                            {hasValue(
-                              draft[
-                                documentFieldKey(
-                                  requirement.id,
-                                )
-                              ],
-                            )
-                              ? "Available"
-                              : "Not selected"}
-                          </span>
-                        </div>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <aside className="grid h-fit gap-5 xl:sticky xl:top-6">
-            {existingDecision ? (
-              <section
-                className={`rounded-3xl border p-6 shadow-sm ${decisionClassName(
-                  existingDecision.decision,
-                )}`}
-              >
-                <BadgeCheck
-                  className="h-7 w-7"
-                  aria-hidden="true"
-                />
-                <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em]">
-                  Registrar decision recorded
-                </p>
-                <h2 className="mt-2 text-2xl font-bold">
-                  {existingDecision.decision.replaceAll(
-                    "_",
-                    " ",
-                  )}
-                </h2>
-                <p className="mt-3 text-sm leading-7">
-                  {existingDecision.applicantReason}
-                </p>
-                <p className="mt-4 text-sm font-bold">
-                  {existingDecision.decidedBy} ·{" "}
-                  {formatTimestamp(
-                    existingDecision.decidedAt,
-                  )}
-                </p>
-
-                {existingDecision.decision ===
-                "APPROVED" ? (
-                  <Link
-                    href={`/demo/outcomes/${requestId}`}
-                    className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-700 px-5 text-sm font-bold text-white"
-                  >
-                    Continue to outcome issuance
-                    <ArrowRight
-                      className="ml-2 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                ) : null}
-              </section>
-            ) : (
-              <>
-                <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <ShieldCheck
-                      className="h-5 w-5 text-violet-600"
-                      aria-hidden="true"
-                    />
-                    <h2 className="text-lg font-bold">
-                      Registrar declaration
-                    </h2>
-                  </div>
-
-                  <label className="mt-5 grid gap-2">
-                    <span className="text-sm font-bold">
-                      Internal decision note
-                    </span>
-                    <textarea
-                      value={internalNote}
-                      onChange={(event) =>
-                        setInternalNote(
-                          event.target.value,
-                        )
-                      }
-                      rows={4}
-                      className="rounded-xl border border-slate-300 p-3 text-sm"
-                    />
-                  </label>
-
-                  <label className="mt-4 flex items-start gap-3 rounded-2xl bg-slate-50 p-4">
-                    <input
-                      type="checkbox"
-                      checked={decisionConfirmed}
-                      onChange={(event) =>
-                        setDecisionConfirmed(
-                          event.target.checked,
-                        )
-                      }
-                      className="mt-1 h-4 w-4"
-                    />
-                    <span className="text-sm leading-6 text-slate-700">
-                      I confirm that I am acting as the
-                      Registrar-profile Supervisor and have
-                      reviewed the available request record.
-                    </span>
-                  </label>
-
-                  <button
-                    type="button"
-                    onClick={approveRequest}
-                    disabled={!approvalReady}
-                    className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-600 px-5 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <CheckCircle2
-                      className="mr-2 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                    Approve request
-                  </button>
-
-                  {!approvalReady ? (
-                    <p className="mt-3 text-xs leading-5 text-amber-700">
-                      Approval remains blocked until all six
-                      prerequisite checks pass.
-                    </p>
-                  ) : null}
-                </section>
-
-                <form
-                  onSubmit={rejectRequest}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-center gap-3">
-                    <XCircle
-                      className="h-5 w-5 text-red-600"
-                      aria-hidden="true"
-                    />
-                    <h2 className="text-lg font-bold">
-                      Final rejection
-                    </h2>
-                  </div>
-
-                  <label className="mt-5 grid gap-2">
-                    <span className="text-sm font-bold">
-                      Applicant-visible rejection reason
-                    </span>
-                    <textarea
-                      value={rejectionReason}
-                      onChange={(event) =>
-                        setRejectionReason(
-                          event.target.value,
-                        )
-                      }
-                      rows={4}
-                      placeholder="Explain why the request cannot be approved"
-                      className="rounded-xl border border-slate-300 p-3 text-sm"
-                    />
-                  </label>
-
-                  <button
-                    type="submit"
-                    disabled={!rejectionReady}
-                    className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-red-200 bg-red-50 px-5 text-sm font-bold text-red-700 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    Record rejection
-                  </button>
-                </form>
-
-                <form
-                  onSubmit={returnForClarification}
-                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-center gap-3">
-                    <RotateCcw
-                      className="h-5 w-5 text-violet-600"
-                      aria-hidden="true"
-                    />
-                    <h2 className="text-lg font-bold">
-                      Return for clarification
-                    </h2>
-                  </div>
-
-                  <label className="mt-5 grid gap-2">
-                    <span className="text-sm font-bold">
-                      Clarification required
-                    </span>
-                    <textarea
-                      value={clarificationReason}
-                      onChange={(event) =>
-                        setClarificationReason(
-                          event.target.value,
-                        )
-                      }
-                      rows={4}
-                      placeholder="Explain what Student Records must resolve"
-                      className="rounded-xl border border-slate-300 p-3 text-sm"
-                    />
-                  </label>
-
-                  <button
-                    type="submit"
-                    className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-violet-200 bg-violet-50 px-5 text-sm font-bold text-violet-700"
-                  >
-                    Return to Student Records
-                  </button>
-                </form>
-              </>
-            )}
-
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-                D23 boundary
-              </p>
-              <h2 className="mt-2 text-lg font-bold">
-                Decision only
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                Approval authorizes the next stage. D23 does
-                not generate, upload or issue the controlled
-                outcome document.
-              </p>
-            </section>
-
-            {error ? (
-              <p
-                role="alert"
-                className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
-              >
-                {error}
-              </p>
-            ) : null}
-
-            {message ? (
-              <p
-                role="status"
-                className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800"
-              >
-                {message}
-              </p>
-            ) : null}
-          </aside>
-        </section>
-      </div>
-    </main>
+                    {approval.requestId}
+                  </option>
+                ),
+              )}
+            </select>
+          </label>
+        }
+        roleSelector={
+          <label>
+            <span className="sr-only">
+              Switch workspace
+            </span>
+            <select
+              className="input-base input-compact"
+              value="/demo/supervisor"
+              onChange={(event) =>
+                router.push(
+                  event.target.value,
+                )
+              }
+            >
+              <option value="/demo/officer">
+                Officer
+              </option>
+              <option value="/demo/department">
+                Finance
+              </option>
+              <option value="/demo/supervisor">
+                Supervisor
+              </option>
+            </select>
+          </label>
+        }
+        presentationAction={
+          <button
+            type="button"
+            onClick={
+              triggerPresentationShortcut
+            }
+            className="button-base button-compact button-secondary"
+          >
+            <Maximize2 aria-hidden="true" />
+            Present
+          </button>
+        }
+        resetAction={
+          <button
+            type="button"
+            onClick={
+              triggerResetShortcut
+            }
+            className="button-base button-compact button-destructive"
+          >
+            <RefreshCw aria-hidden="true" />
+            Reset
+          </button>
+        }
+      >
+        <SupervisorApprovalBody
+          model={model}
+          approvalReady={approvalReady}
+          rejectionReady={rejectionReady}
+          decisionConfirmed={
+            decisionConfirmed
+          }
+          internalNote={internalNote}
+          rejectionReason={
+            rejectionReason
+          }
+          clarificationReason={
+            clarificationReason
+          }
+          feedbackMessage={
+            feedbackMessage
+          }
+          errorMessage={errorMessage}
+          onDecisionConfirmedChange={
+            setDecisionConfirmed
+          }
+          onInternalNoteChange={
+            setInternalNote
+          }
+          onRejectionReasonChange={
+            setRejectionReason
+          }
+          onClarificationReasonChange={
+            setClarificationReason
+          }
+          onApprove={approveRequest}
+          onReject={rejectRequest}
+          onReturn={
+            returnForClarification
+          }
+        />
+      </InternalAppShell>
+    </div>
   );
 }
