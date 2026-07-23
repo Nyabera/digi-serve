@@ -1,0 +1,316 @@
+/*
+ * FAIDIA Demo Engine — D28 responsive and accessibility hardening
+ *
+ * Imported only by app/demo/layout.tsx.
+ * This layer adds keyboard, contrast, touch-target and small-screen
+ * protections without changing workflow behavior.
+ */
+
+.demo-skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary, #2337b8);
+  border-radius: 0.625rem;
+  padding-inline: 1rem;
+  background: #ffffff;
+  box-shadow:
+    0 2px 4px rgb(15 23 42 / 8%),
+    0 12px 32px rgb(15 23 42 / 16%);
+  color: var(--foreground, #0b1b4d);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 140ms ease;
+}
+
+.demo-skip-link:focus,
+.demo-skip-link:focus-visible {
+  outline: 3px solid rgb(124 141 245 / 46%);
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
+#demo-main-content {
+  min-width: 0;
+}
+
+#demo-main-content:focus {
+  outline: none;
+}
+
+#demo-main-content
+  :where(
+    p,
+    dd,
+    dt,
+    li,
+    span,
+    strong,
+    code,
+    pre,
+    [class*="font-mono"]
+  ) {
+  overflow-wrap: anywhere;
+}
+
+#demo-main-content :where(table) {
+  min-width: 42rem;
+}
+
+#demo-main-content
+  :where([class*="overflow-x-auto"], [class*="overflow-auto"]) {
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+#demo-main-content
+  :where(
+    button,
+    [role="button"],
+    a[class*="inline-flex"],
+    a[class*="flex"]
+  ) {
+  min-block-size: 2.75rem;
+}
+
+#demo-main-content
+  :where(
+    input:not([type="checkbox"]):not([type="radio"]),
+    select
+  ) {
+  min-block-size: 2.75rem;
+}
+
+#demo-main-content
+  :where(
+    input[type="checkbox"],
+    input[type="radio"]
+  ) {
+  inline-size: 1rem;
+  block-size: 1rem;
+  flex: none;
+}
+
+#demo-main-content
+  :where(
+    button,
+    a[href],
+    input,
+    select,
+    textarea,
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+  outline: 3px solid
+    color-mix(
+      in srgb,
+      var(--focus-ring, #7c8df5) 52%,
+      transparent
+    );
+  outline-offset: 3px;
+}
+
+#demo-main-content
+  :where(
+    [role="alert"],
+    [role="status"],
+    [class*="bg-emerald-50"],
+    [class*="bg-amber-50"],
+    [class*="bg-red-50"],
+    [class*="bg-blue-50"],
+    [class*="bg-violet-50"]
+  ) {
+  border-style: solid;
+  border-width: 1px;
+}
+
+#demo-main-content .recharts-wrapper,
+#demo-main-content .recharts-surface {
+  max-width: 100%;
+}
+
+#demo-main-content .recharts-legend-wrapper {
+  line-height: 1.45;
+}
+
+#demo-main-content .recharts-default-tooltip {
+  max-width: min(18rem, calc(100vw - 2rem));
+}
+
+@media (pointer: coarse) {
+  #demo-main-content
+    :where(
+      button,
+      [role="button"],
+      a[class*="inline-flex"],
+      a[class*="flex"],
+      input:not([type="checkbox"]):not([type="radio"]),
+      select
+    ) {
+    min-block-size: 3rem;
+  }
+
+  .demo-presenter-exit,
+  .demo-reset-dialog-close,
+  .demo-presentation-action {
+    min-block-size: 3rem;
+    min-inline-size: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #demo-main-content {
+    overflow-x: clip;
+  }
+
+  #demo-main-content
+    :where(
+      [class*="grid-cols-2"],
+      [class*="grid-cols-3"],
+      [class*="grid-cols-4"]
+    ) {
+    min-width: 0;
+  }
+
+  #demo-main-content
+    :where(
+      button,
+      a[class*="inline-flex"],
+      a[class*="flex"]
+    ) {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  #demo-main-content
+    :where(input, select, textarea) {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  #demo-main-content
+    :where([class*="font-mono"]) {
+    word-break: break-word;
+  }
+
+  #demo-main-content .recharts-responsive-container {
+    min-height: 16rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .demo-reset-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .demo-reset-dialog {
+    width: 100%;
+    max-height: 92dvh;
+    overflow-y: auto;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 1.125rem 1.125rem 0 0;
+  }
+
+  .demo-presenter-route-label {
+    top: 0.625rem;
+    left: 0.625rem;
+  }
+
+  .demo-presenter-exit {
+    top: 0.625rem;
+    right: 0.625rem;
+  }
+}
+
+@media (prefers-contrast: more) {
+  #demo-main-content
+    :where(article, section, aside, form) {
+    border-color: #64748b;
+  }
+
+  #demo-main-content
+    :where(input, select, textarea) {
+    border-width: 2px;
+    border-color: #475569;
+  }
+
+  #demo-main-content
+    :where(
+      button,
+      a[href],
+      input,
+      select,
+      textarea,
+      [tabindex]:not([tabindex="-1"])
+    ):focus-visible {
+    outline-width: 4px;
+    outline-color: currentColor;
+  }
+}
+
+@media (forced-colors: active) {
+  .demo-skip-link,
+  .demo-presenter-exit,
+  .demo-presentation-action,
+  .demo-reset-dialog,
+  .demo-reset-cancel,
+  .demo-reset-confirm {
+    border: 2px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+
+  #demo-main-content
+    :where(
+      [role="alert"],
+      [role="status"],
+      [class*="rounded-full"]
+    ) {
+    border: 1px solid CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  #demo-main-content
+    :where(
+      button,
+      a[href],
+      input,
+      select,
+      textarea,
+      [tabindex]:not([tabindex="-1"])
+    ):focus-visible {
+    outline: 3px solid Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-skip-link {
+    transition: none;
+  }
+
+  #demo-main-content {
+    scroll-behavior: auto;
+  }
+}
+
+@media print {
+  .demo-skip-link {
+    display: none !important;
+  }
+
+  #demo-main-content {
+    overflow: visible;
+  }
+
+  #demo-main-content :where(table) {
+    min-width: 0;
+  }
+}

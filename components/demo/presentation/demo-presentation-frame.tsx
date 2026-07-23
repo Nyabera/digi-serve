@@ -356,10 +356,14 @@ export function DemoPresentationFrame({
         PRESENTATION_STORAGE_KEY,
       ) === "true";
 
-    setIsPresenting(restored);
     applyPresentationAttribute(restored);
 
+    const frame = window.requestAnimationFrame(() => {
+      setIsPresenting(restored);
+    });
+
     return () => {
+      window.cancelAnimationFrame(frame);
       applyPresentationAttribute(false);
     };
   }, [applyPresentationAttribute]);
@@ -681,6 +685,8 @@ export function DemoPresentationFrame({
       </div>
 
       <div
+        id="demo-main-content"
+        tabIndex={-1}
         className="demo-presentation-content"
         data-demo-content="true"
       >
