@@ -7,6 +7,7 @@ import { DemoStateProvider } from "@/features/demo/state";
 import "./demo-calibration.css";
 import "./demo-presentation.css";
 import "./demo-accessibility.css";
+import "./demo-internal-shell.css";
 
 type DemoLayoutProps = {
   readonly children: ReactNode;

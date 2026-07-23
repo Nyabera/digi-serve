@@ -1,0 +1,5 @@
+/* D29R route integration: hide the legacy full-width bar only where the new internal shell is mounted. */
+body:has([data-d29r3-officer-shell="true"]) .demo-control-zone { display: none; }
+body:has([data-d29r3-officer-shell="true"]) .demo-presentation-shortcut-hint { bottom: 1rem; }
+html[data-demo-presentation="true"] [data-d29r3-officer-shell="true"] [data-internal-demo-action="true"] { display: none; }
+@media (max-width: 63.99rem) { body:has([data-d29r3-officer-shell="true"]) .demo-presentation-shortcut-hint { display: none; } }

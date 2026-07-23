@@ -12,10 +12,12 @@ export default function DemoOfficerPage() {
       name: service.name,
     }));
 
-  const departments = client.departments.map((department) => ({
-    id: department.id,
-    name: department.name,
-  }));
+  const departments = client.departments.map(
+    (department) => ({
+      id: department.id,
+      name: department.name,
+    }),
+  );
 
   return (
     <OfficerDashboard
