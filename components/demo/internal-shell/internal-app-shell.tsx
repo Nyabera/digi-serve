@@ -5,6 +5,8 @@ import {
   type ReactNode,
 } from "react";
 
+import { DemoWorkspaceSwitcher } from "@/components/demo/role-switcher";
+
 import { InternalSidebar } from "./internal-sidebar";
 import { InternalTopbar } from "./internal-topbar";
 import type { InternalShellRole } from "./internal-navigation";
@@ -25,20 +27,23 @@ type InternalAppShellProps = {
   readonly children: ReactNode;
 };
 
-export function InternalAppShell({
-  role,
-  institutionName,
-  institutionSubtitle = "Student Services",
-  institutionInitials,
-  staffName,
-  staffRoleLabel,
-  staffAvatarUrl,
-  requestSelector,
-  roleSelector,
-  presentationAction,
-  resetAction,
-  children,
-}: InternalAppShellProps) {
+export function InternalAppShell(
+  props: InternalAppShellProps,
+) {
+  const {
+    role,
+    institutionName,
+    institutionSubtitle = "Student Services",
+    institutionInitials,
+    staffName,
+    staffRoleLabel,
+    staffAvatarUrl,
+    requestSelector,
+    presentationAction,
+    resetAction,
+    children,
+  } = props;
+
   const [sidebarCollapsed, setSidebarCollapsed] =
     useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] =
@@ -61,9 +66,7 @@ export function InternalAppShell({
         collapsed={sidebarCollapsed}
         mobileOpen={mobileSidebarOpen}
         onCollapseToggle={() =>
-          setSidebarCollapsed(
-            (currentValue) => !currentValue,
-          )
+          setSidebarCollapsed((current) => !current)
         }
         onMobileClose={() =>
           setMobileSidebarOpen(false)
@@ -76,7 +79,7 @@ export function InternalAppShell({
           staffRoleLabel={staffRoleLabel}
           staffAvatarUrl={staffAvatarUrl}
           requestSelector={requestSelector}
-          roleSelector={roleSelector}
+          roleSelector={<DemoWorkspaceSwitcher />}
           presentationAction={presentationAction}
           resetAction={resetAction}
           onMobileMenuOpen={() =>

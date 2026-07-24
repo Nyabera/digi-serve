@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { DemoControlBar } from "@/components/demo/controls";
 import { DemoPresentationFrame } from "@/components/demo/presentation";
 import { DemoStateProvider } from "@/features/demo/state";
+import { DemoWorkspaceRoleProvider } from "@/features/demo/roles";
 
 import "./demo-calibration.css";
 import "./demo-presentation.css";
@@ -18,6 +19,7 @@ export default function DemoLayout({
 }: DemoLayoutProps) {
   return (
     <DemoStateProvider>
+      <DemoWorkspaceRoleProvider>
       <a
         href="#demo-main-content"
         className="demo-skip-link"
@@ -29,6 +31,7 @@ export default function DemoLayout({
       >
         {children}
       </DemoPresentationFrame>
+          </DemoWorkspaceRoleProvider>
     </DemoStateProvider>
   );
 }
