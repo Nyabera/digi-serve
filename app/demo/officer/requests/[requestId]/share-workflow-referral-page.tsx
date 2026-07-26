@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { OfficerRequestReview } from "@/components/demo/officer/officer-request-review";
 import { getDefaultDemoClient } from "@/config/demo";
 
-import { ExternalRecipientSharePanel } from "@/components/demo/officer/referral";
+import { ExternalRecipientSharePanel } from "@/components/demo/officer/referral/external-recipient-share-panel";
 type DemoOfficerRequestPageProps = {
   readonly params: Promise<{
     readonly requestId: string;
@@ -54,7 +54,7 @@ export default async function DemoOfficerRequestPage({
   return (
     <>
       <ExternalRecipientSharePanel />
-      <OfficerRequestReview
+<OfficerRequestReview
       requestId={requestId}
       organizationName={client.organization.name}
       service={service}

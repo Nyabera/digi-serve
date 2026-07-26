@@ -1,16 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   CartesianGrid,
   Cell,
-  Legend,
   Line,
   LineChart,
   Pie,
   PieChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -695,6 +693,60 @@ function makeTrendData(values: number[]) {
   }));
 }
 
+
+function MeasuredChart({
+  className,
+  height,
+  children,
+}: {
+  className?: string;
+  height: number;
+  children: (size: { width: number; height: number }) => React.ReactNode;
+}) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) {
+      return;
+    }
+
+    const update = () => {
+      const nextWidth = Math.floor(host.getBoundingClientRect().width);
+      setWidth(nextWidth > 0 ? nextWidth : 0);
+    };
+
+    update();
+
+    const observer = new ResizeObserver(update);
+    observer.observe(host);
+    window.addEventListener("resize", update);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <div
+      className={`${styles.chartCanvas} ${className ?? ""}`}
+      data-chart-width={width}
+      ref={hostRef}
+      style={{ height, minHeight: height }}
+    >
+      {width >= 160 ? (
+        children({ width, height })
+      ) : (
+        <div className={styles.chartLoading} role="status">
+          Preparing chart…
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SlaDonut({
   data,
   centreValue,
@@ -707,59 +759,69 @@ function SlaDonut({
   ariaLabel: string;
 }) {
   return (
-    <figure aria-label={ariaLabel}>
-      <div
-        className={`${styles.chartCanvas} ${styles.chartCanvasSmall}`}
-      >
-        <ResponsiveContainer height="100%" width="100%">
-          <PieChart>
-            <Tooltip />
-            <Legend
-              align="right"
-              layout="vertical"
-              verticalAlign="middle"
-            />
-            <Pie
-              cx="38%"
-              cy="50%"
-              data={data}
-              dataKey="value"
-              innerRadius={55}
-              nameKey="name"
-              outerRadius={82}
-              paddingAngle={1}
-            >
-              {data.map((entry) => (
-                <Cell fill={entry.color} key={entry.name} />
-              ))}
-            </Pie>
-            <text
-              dominantBaseline="middle"
-              fill={CHART_COLORS.blue}
-              fontSize="24"
-              fontWeight="700"
-              textAnchor="middle"
-              x="38%"
-              y="46%"
-            >
-              {centreValue}
-            </text>
-            <text
-              dominantBaseline="middle"
-              fill={CHART_COLORS.text}
-              fontSize="10"
-              textAnchor="middle"
-              x="38%"
-              y="57%"
-            >
-              {centreLabel}
-            </text>
-          </PieChart>
-        </ResponsiveContainer>
+    <figure aria-label={ariaLabel} className={styles.slaFigure}>
+      <div className={styles.slaDonutLayout}>
+        <MeasuredChart className={styles.chartCanvasSmall} height={220}>
+          {({ width, height }) => (
+            <PieChart height={height} width={width}>
+              <Tooltip />
+              <Pie
+                cx="50%"
+                cy="50%"
+                data={data}
+                dataKey="value"
+                innerRadius={55}
+                nameKey="name"
+                outerRadius={82}
+                paddingAngle={1}
+                isAnimationActive={false}
+              >
+                {data.map((entry) => (
+                  <Cell fill={entry.color} key={entry.name} />
+                ))}
+              </Pie>
+              <text
+                dominantBaseline="middle"
+                fill={CHART_COLORS.blue}
+                fontSize="24"
+                fontWeight="700"
+                textAnchor="middle"
+                x="50%"
+                y="46%"
+              >
+                {centreValue}
+              </text>
+              <text
+                dominantBaseline="middle"
+                fill={CHART_COLORS.text}
+                fontSize="10"
+                textAnchor="middle"
+                x="50%"
+                y="57%"
+              >
+                {centreLabel}
+              </text>
+            </PieChart>
+          )}
+        </MeasuredChart>
+
+        <dl className={styles.slaHtmlLegend}>
+          {data.map((entry) => (
+            <div key={entry.name}>
+              <dt>
+                <span
+                  aria-hidden="true"
+                  style={{ background: entry.color }}
+                />
+                {entry.name}
+              </dt>
+              <dd>{entry.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
-      <figcaption className={styles.srOnly}>
-        {ariaLabel}
-      </figcaption>
+
+      <figcaption className={styles.srOnly}>{ariaLabel}</figcaption>
     </figure>
   );
 }
@@ -775,11 +837,13 @@ function TrendChart({
 
   return (
     <figure aria-label={ariaLabel}>
-      <div className={styles.chartCanvas}>
-        <ResponsiveContainer height="100%" width="100%">
+      <MeasuredChart height={250}>
+        {({ width, height }) => (
           <LineChart
             data={data}
+            height={height}
             margin={{ bottom: 8, left: 0, right: 12, top: 8 }}
+            width={width}
           >
             <CartesianGrid
               stroke={CHART_COLORS.grid}
@@ -800,22 +864,22 @@ function TrendChart({
               tick={{ fill: CHART_COLORS.text }}
               tickFormatter={(value) => `${value}%`}
               tickLine={false}
+              width={34}
             />
             <Tooltip />
             <Line
               dataKey="compliance"
               dot={{ r: 3 }}
+              isAnimationActive={false}
               name="Compliance"
               stroke={CHART_COLORS.green}
               strokeWidth={3}
               type="monotone"
             />
           </LineChart>
-        </ResponsiveContainer>
-      </div>
-      <figcaption className={styles.srOnly}>
-        {ariaLabel}
-      </figcaption>
+        )}
+      </MeasuredChart>
+      <figcaption className={styles.srOnly}>{ariaLabel}</figcaption>
     </figure>
   );
 }

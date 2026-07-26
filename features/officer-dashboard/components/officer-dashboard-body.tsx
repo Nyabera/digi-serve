@@ -19,14 +19,14 @@ import {
 
 import type {
   DashboardIcon,
-  DashboardMetric,
   DashboardTone,
   HandoffPreviewRow,
   MessagePreviewRow,
   OfficerDashboardModel,
   QueuePreviewRow,
 } from "../model/officer-dashboard-model";
-import { SlaDonut } from "./sla-donut";
+import { OverviewMetricStrip } from "./overview-metric-strip";
+import { SlaWorkloadDonut } from "./sla-workload-donut";
 import styles from "./officer-dashboard-body.module.css";
 
 const ICONS: Record<DashboardIcon, LucideIcon> = {
@@ -125,28 +125,6 @@ function ToneIcon({
     >
       <Icon aria-hidden="true" size={small ? 17 : 23} strokeWidth={2} />
     </span>
-  );
-}
-
-function MetricCard({ metric }: { metric: DashboardMetric }) {
-  return (
-    <article className={styles.metricCard}>
-      <ToneIcon icon={metric.icon} tone={metric.tone} />
-
-      <div className={styles.metricCopy}>
-        <p>{metric.label}</p>
-        <strong>{metric.value}</strong>
-      </div>
-
-      <div className={styles.metricAction}>
-        <ActionLink
-          href={metric.action.href}
-          ariaLabel={metric.action.ariaLabel}
-        >
-          {metric.action.label}
-        </ActionLink>
-      </div>
-    </article>
   );
 }
 
@@ -404,6 +382,7 @@ function LegendDot({ tone }: { tone: "green" | "orange" | "red" }) {
   );
 }
 
+
 function SlaWorkload({ model }: { model: OfficerDashboardModel }) {
   const { sla, workload } = model;
 
@@ -422,46 +401,53 @@ function SlaWorkload({ model }: { model: OfficerDashboardModel }) {
         </p>
       }
     >
-      <div className={styles.slaContent}>
+      <div className={styles.slaWorkloadGrid}>
         <section
-          className={styles.slaAnalytics}
-          aria-labelledby="sla-performance-heading"
+          className={styles.slaChartCard}
+          aria-labelledby="sla-chart-heading"
         >
-          <h3 id="sla-performance-heading">SLA Performance (This Month)</h3>
+          <h3 id="sla-chart-heading">SLA Performance</h3>
+          <SlaWorkloadDonut data={sla} />
+        </section>
 
-          <div className={styles.slaAnalyticsBody}>
-            <SlaDonut data={sla} />
-
-            <dl className={styles.slaLegend}>
-              <div>
-                <dt>
-                  <LegendDot tone="green" />
-                  On-time
-                </dt>
-                <dd>
-                  {sla.onTime.percent}% ({sla.onTime.count})
-                </dd>
-              </div>
-              <div>
-                <dt>
-                  <LegendDot tone="orange" />
-                  Due soon (≤2 days)
-                </dt>
-                <dd>
-                  {sla.dueSoon.percent}% ({sla.dueSoon.count})
-                </dd>
-              </div>
-              <div>
-                <dt>
-                  <LegendDot tone="red" />
-                  Overdue
-                </dt>
-                <dd>
-                  {sla.overdue.percent}% ({sla.overdue.count})
-                </dd>
-              </div>
-            </dl>
-          </div>
+        <section
+          className={styles.slaBreakdownCard}
+          aria-labelledby="sla-breakdown-heading"
+        >
+          <h3 id="sla-breakdown-heading">Service Status</h3>
+          <dl className={styles.slaLegend}>
+            <div>
+              <dt>
+                <LegendDot tone="green" />
+                On time
+              </dt>
+              <dd>
+                {sla.onTime.percent}% ({sla.onTime.count})
+              </dd>
+            </div>
+            <div>
+              <dt>
+                <LegendDot tone="orange" />
+                Due soon (≤2 days)
+              </dt>
+              <dd>
+                {sla.dueSoon.percent}% ({sla.dueSoon.count})
+              </dd>
+            </div>
+            <div>
+              <dt>
+                <LegendDot tone="red" />
+                Overdue
+              </dt>
+              <dd>
+                {sla.overdue.percent}% ({sla.overdue.count})
+              </dd>
+            </div>
+          </dl>
+          <p className={styles.slaBreakdownHint}>
+            The outer ring shows SLA status. The inner ring shows request
+            counts resolved within target, resolved late and still overdue.
+          </p>
         </section>
 
         <section
@@ -508,11 +494,7 @@ export function OfficerDashboardBody({
         <p>{model.subtitle}</p>
       </div>
 
-      <section className={styles.metricGrid} aria-label="Today’s work summary">
-        {model.metrics.map((metric) => (
-          <MetricCard key={metric.id} metric={metric} />
-        ))}
-      </section>
+      <OverviewMetricStrip metrics={model.metrics} />
 
       <div className={styles.dashboardGrid}>
         <div className={styles.dashboardStack}>

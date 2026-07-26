@@ -277,5 +277,5 @@ export const officerDashboardReference = {
     overdue: 3,
   },
 
-  detailedReportHref: "/demo/reports",
+  detailedReportHref: "/demo/officer/sla-monitor",
 } satisfies OfficerDashboardModel;

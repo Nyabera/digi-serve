@@ -1,5 +1,5 @@
-import { OfficerSlaWorkspace } from "@/features/demo-operations";
+import { redirect } from "next/navigation";
 
 export default function OfficerLegacySlaPage() {
-  return <OfficerSlaWorkspace />;
+  redirect("/demo/officer/sla-monitor");
 }

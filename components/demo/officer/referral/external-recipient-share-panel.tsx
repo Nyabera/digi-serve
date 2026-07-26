@@ -1,206 +1,235 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import {
-  CheckCircle2,
-  Mail,
-  Phone,
-  Send,
-  UsersRound,
-} from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import styles from "./external-recipient-share-panel.module.css";
 
-type ShareMode = "department" | "external";
+type RecipientMode = "department" | "external";
+type ExternalChannel = "email" | "phone";
 
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-    value.trim(),
-  );
+function isEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
-function isValidPhone(value: string) {
-  return /^\+?[0-9][0-9\s-]{7,}$/.test(
-    value.trim(),
-  );
+function isPhone(value: string) {
+  return /^\+?[0-9][0-9\s()-]{7,18}$/.test(value.trim());
 }
 
 export function ExternalRecipientSharePanel() {
-  const [mode, setMode] =
-    useState<ShareMode>("department");
-  const [recipientName, setRecipientName] =
-    useState("");
-  const [recipientValue, setRecipientValue] =
-    useState("");
-  const [message, setMessage] = useState(
-    "Please review the shared case information and provide your response.",
-  );
-  const [sent, setSent] = useState(false);
+  const panelRef = useRef<HTMLElement>(null);
+  const [mode, setMode] = useState<RecipientMode>("department");
+  const [channel, setChannel] = useState<ExternalChannel>("email");
+  const [recipientName, setRecipientName] = useState("");
+  const [recipient, setRecipient] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
-  const recipientType = useMemo(() => {
-    if (isValidEmail(recipientValue)) {
-      return "email";
-    }
-
-    if (isValidPhone(recipientValue)) {
-      return "phone";
-    }
-
-    return null;
-  }, [recipientValue]);
-
-  const canSend =
-    mode === "external" &&
-    recipientName.trim().length > 1 &&
-    recipientType !== null;
-
-  function sendExternalShare() {
-    if (!canSend) {
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) {
       return;
     }
 
-    setSent(true);
-  }
+    let host: HTMLElement | null = panel.parentElement;
+    let labels: HTMLLabelElement[] = [];
+
+    while (host) {
+      labels = Array.from(host.querySelectorAll("label"));
+      const hasRecipientFields = labels.some((label) => {
+        const value = label.textContent?.trim().toLowerCase() ?? "";
+        return (
+          value.includes("share with") ||
+          value === "officer" ||
+          value.startsWith("officer ")
+        );
+      });
+
+      if (hasRecipientFields) {
+        break;
+      }
+
+      host = host.parentElement;
+    }
+
+    if (!host) {
+      return;
+    }
+
+    host.dataset.recipientHost = "true";
+    host.dataset.recipientMode = mode;
+
+    const recipientLabels = labels.filter((label) => {
+      const value = label.textContent?.trim().toLowerCase() ?? "";
+      return (
+        value.includes("share with") ||
+        value === "officer" ||
+        value.startsWith("officer ")
+      );
+    });
+
+    const marked = recipientLabels
+      .map((label) => {
+        const candidate = label.closest(
+          "[class*='field'], [class*='Field'], div, section, fieldset",
+        );
+        return candidate === host ? label.parentElement : candidate;
+      })
+      .filter((element): element is HTMLElement => element instanceof HTMLElement);
+
+    marked.forEach((element) => {
+      element.dataset.internalRecipientFields = "true";
+    });
+
+    return () => {
+      delete host.dataset.recipientHost;
+      delete host.dataset.recipientMode;
+      marked.forEach((element) => {
+        delete element.dataset.internalRecipientFields;
+      });
+    };
+  }, [mode]);
+
+  const validRecipient = useMemo(
+    () => (channel === "email" ? isEmail(recipient) : isPhone(recipient)),
+    [channel, recipient],
+  );
+
+  const prepareShare = () => {
+    if (!validRecipient) {
+      setStatus(
+        channel === "email"
+          ? "Enter a valid email address."
+          : "Enter a valid phone number, including the country code.",
+      );
+      return;
+    }
+
+    setStatus(
+      `Demo referral link prepared for ${recipientName.trim() || recipient.trim()}. No message was sent outside the browser.`,
+    );
+  };
 
   return (
     <section
       className={styles.panel}
-      data-external-recipient-share="true"
-      aria-labelledby="share-destination-title"
+      data-external-recipient-panel="true"
+      ref={panelRef}
     >
-      <div className={styles.heading}>
+      <header className={styles.header}>
         <div>
-          <h3 id="share-destination-title">
-            Share destination
-          </h3>
+          <h3>Recipient type</h3>
           <p>
-            Refer internally or send a controlled case
-            link to an email address or phone number.
+            Refer internally to a department or share a secure demo link with
+            an external email address or phone number.
           </p>
         </div>
-
-        {sent ? (
-          <span className={styles.sentBadge}>
-            <CheckCircle2 aria-hidden="true" />
-            Demo link sent
-          </span>
-        ) : null}
-      </div>
+      </header>
 
       <div
+        aria-label="Choose referral recipient type"
         className={styles.modeSelector}
         role="group"
-        aria-label="Choose share destination"
       >
         <button
-          type="button"
-          data-active={
-            mode === "department"
-              ? "true"
-              : undefined
-          }
+          data-active={mode === "department" ? "true" : undefined}
           onClick={() => {
             setMode("department");
-            setSent(false);
+            setStatus("");
           }}
-        >
-          <UsersRound aria-hidden="true" />
-          College department
-        </button>
-
-        <button
           type="button"
-          data-active={
-            mode === "external"
-              ? "true"
-              : undefined
-          }
+        >
+          Department or officer
+        </button>
+        <button
+          data-active={mode === "external" ? "true" : undefined}
           onClick={() => {
             setMode("external");
-            setSent(false);
+            setStatus("");
           }}
+          type="button"
         >
-          <Mail aria-hidden="true" />
           Email or phone number
         </button>
       </div>
 
+      <input name="recipientMode" type="hidden" value={mode} />
+
       {mode === "department" ? (
-        <div className={styles.internalNotice}>
-          Continue with the department and officer
-          selectors below. Parent ownership remains with
-          the current department.
-        </div>
+        <p className={styles.internalNotice}>
+          Use the department and officer inputs below.
+        </p>
       ) : (
         <div className={styles.externalFields}>
-          <label>
-            <span>Recipient name</span>
-            <input
-              type="text"
-              value={recipientName}
+          <div className={styles.field}>
+            <label htmlFor="external-recipient-channel">Share through</label>
+            <select
+              id="external-recipient-channel"
+              name="externalRecipientChannel"
               onChange={(event) => {
-                setRecipientName(event.target.value);
-                setSent(false);
+                setChannel(event.target.value as ExternalChannel);
+                setRecipient("");
+                setStatus("");
               }}
-              placeholder="e.g. Jane Wanjiku"
+              value={channel}
+            >
+              <option value="email">Email address</option>
+              <option value="phone">Phone number</option>
+            </select>
+          </div>
+
+          <div className={styles.field}>
+            <label htmlFor="external-recipient-name">
+              Recipient name <span>Optional</span>
+            </label>
+            <input
+              id="external-recipient-name"
+              name="externalRecipientName"
+              onChange={(event) => setRecipientName(event.target.value)}
+              placeholder="Enter the recipient’s name"
+              value={recipientName}
             />
-          </label>
+          </div>
 
-          <label>
-            <span>Email or phone number</span>
-            <div className={styles.recipientInput}>
-              {recipientType === "phone" ? (
-                <Phone aria-hidden="true" />
-              ) : (
-                <Mail aria-hidden="true" />
-              )}
-              <input
-                type="text"
-                inputMode="email"
-                value={recipientValue}
-                onChange={(event) => {
-                  setRecipientValue(event.target.value);
-                  setSent(false);
-                }}
-                placeholder="name@example.com or +254 7..."
-              />
-            </div>
-            {recipientValue &&
-            recipientType === null ? (
-              <small>
-                Enter a valid email address or phone
-                number.
-              </small>
-            ) : null}
-          </label>
-
-          <label className={styles.messageField}>
-            <span>External share message</span>
-            <textarea
-              rows={3}
-              value={message}
-              onChange={(event) =>
-                setMessage(event.target.value)
+          <div className={`${styles.field} ${styles.recipientField}`}>
+            <label htmlFor="external-recipient-value">
+              {channel === "email" ? "Email address" : "Phone number"}
+            </label>
+            <input
+              aria-invalid={recipient.length > 0 && !validRecipient}
+              id="external-recipient-value"
+              inputMode={channel === "email" ? "email" : "tel"}
+              name="externalRecipient"
+              onChange={(event) => {
+                setRecipient(event.target.value);
+                setStatus("");
+              }}
+              placeholder={
+                channel === "email"
+                  ? "name@example.com"
+                  : "+254 7XX XXX XXX"
               }
+              type={channel === "email" ? "email" : "tel"}
+              value={recipient}
             />
-          </label>
+          </div>
+
+          <div className={`${styles.field} ${styles.messageField}`}>
+            <label htmlFor="external-recipient-message">
+              Message to recipient <span>Optional</span>
+            </label>
+            <textarea
+              id="external-recipient-message"
+              name="externalRecipientMessage"
+              onChange={(event) => setMessage(event.target.value)}
+              placeholder="Explain why the workflow is being shared and what response is needed."
+              value={message}
+            />
+          </div>
 
           <div className={styles.externalActions}>
-            <div>
-              <strong>Demo access controls</strong>
-              <span>
-                Read-only link · expires after 7 days ·
-                activity logged
-              </span>
-            </div>
-
-            <button
-              type="button"
-              disabled={!canSend}
-              onClick={sendExternalShare}
-            >
-              <Send aria-hidden="true" />
-              Send secure link
+            <p role="status">{status}</p>
+            <button onClick={prepareShare} type="button">
+              Prepare secure link
             </button>
           </div>
         </div>
