@@ -106,7 +106,7 @@ const officerNavigation: readonly InternalNavigationGroup[] = [
         icon: LayoutDashboard,
         exact: true,
       },
-      { label: "My tasks", href: "/demo/officer#my-tasks", icon: ListChecks },
+      { label: "My tasks", href: "/demo/officer/tasks", icon: ListChecks },
       {
         label: "Application queue",
         href: "/demo/officer#application-queue",
@@ -175,7 +175,7 @@ const officerNavigation: readonly InternalNavigationGroup[] = [
   {
     label: "SLA",
     items: [
-      { label: "SLA monitor", href: "/demo/officer#sla", icon: Clock3 },
+      { label: "SLA monitor", href: "/demo/officer/sla-monitor", icon: Clock3 },
       { label: "Due soon tasks", href: "/demo/officer#due-soon", icon: Clock3 },
       { label: "Overdue tasks", href: "/demo/officer#overdue", icon: Clock3 },
     ],
@@ -245,6 +245,8 @@ const supervisorNavigation: readonly InternalNavigationGroup[] = [
   {
     label: "Operations",
     items: [
+      { label: "Audit trail", href: "/demo/supervisor/audit-trail", icon: LayoutDashboard },
+      { label: "SLA monitor", href: "/demo/supervisor/sla-monitor", icon: LayoutDashboard },
       {
         label: "Dashboard",
         href: "/demo/supervisor",

@@ -7,7 +7,7 @@ import type { OfficerDashboardModel } from "../../officer-dashboard/model/office
  * instead of mutating this fixture.
  */
 export const officerDashboardReference = {
-  greeting: "Good morning, Grace 👋",
+  greeting: "Good morning, Grace",
   subtitle: "Here’s an overview of your work and priorities today.",
 
   metrics: [
