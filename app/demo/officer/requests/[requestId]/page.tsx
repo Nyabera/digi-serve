@@ -1,61 +1,68 @@
-import { notFound } from "next/navigation";
+import type {
+  JSXElementConstructor,
+} from "react";
 
-import { OfficerRequestReview } from "@/components/demo/officer/officer-request-review";
-import { getDefaultDemoClient } from "@/config/demo";
+import {
+  OfficerIndividualCaseShell,
+} from "@/components/demo/officer/individual-case";
 
-type DemoOfficerRequestPageProps = {
+import ShareWorkflowReferralPage from "./share-workflow-referral-page";
+
+type OfficerRequestSearchParams = Record<
+  string,
+  string | string[] | undefined
+>;
+
+type OfficerRequestPageProps = {
   readonly params: Promise<{
-    readonly requestId: string;
+    requestId: string;
   }>;
-  readonly searchParams: Promise<{
-    readonly service?: string | readonly string[];
-  }>;
+  readonly searchParams?: Promise<
+    OfficerRequestSearchParams
+  >;
 };
 
-const SERVICE_BY_REQUEST_ID: Readonly<Record<string, string>> = {
-  "REQ-DEMO-001": "transcript-request",
-  "REQ-DEMO-002": "student-clearance",
-  "REQ-DEMO-003": "certificate-replacement",
-  "REQ-DEMO-004": "transcript-request",
+type ReferralPageProps = {
+  readonly params: Promise<{
+    requestId: string;
+  }>;
+  readonly searchParams: Promise<
+    OfficerRequestSearchParams
+  >;
 };
 
-export default async function DemoOfficerRequestPage({
+export default async function OfficerRequestPage({
   params,
   searchParams,
-}: DemoOfficerRequestPageProps) {
-  const client = getDefaultDemoClient();
-  const { requestId } = await params;
-  const resolvedSearchParams = await searchParams;
+}: OfficerRequestPageProps) {
+  const resolvedParams = await params;
+  const resolvedSearchParams = searchParams
+    ? await searchParams
+    : {};
 
-  const requestedService = Array.isArray(resolvedSearchParams.service)
-    ? resolvedSearchParams.service[0]
-    : resolvedSearchParams.service;
+  const viewValue = resolvedSearchParams.view;
+  const view = Array.isArray(viewValue)
+    ? viewValue[0]
+    : viewValue;
 
-  const serviceSlug =
-    requestedService ??
-    SERVICE_BY_REQUEST_ID[requestId] ??
-    "transcript-request";
+  if (view === "refer") {
+    const ReferralPage =
+      ShareWorkflowReferralPage as unknown as
+        JSXElementConstructor<ReferralPageProps>;
 
-  const service = client.services.find(
-    (candidate) =>
-      candidate.active && candidate.slug === serviceSlug,
-  );
-
-  if (!service) {
-    notFound();
+    return (
+      <ReferralPage
+        params={Promise.resolve(resolvedParams)}
+        searchParams={Promise.resolve(
+          resolvedSearchParams,
+        )}
+      />
+    );
   }
 
-  const departments = client.departments.map((department) => ({
-    id: department.id,
-    name: department.name,
-  }));
-
   return (
-    <OfficerRequestReview
-      requestId={requestId}
-      organizationName={client.organization.name}
-      service={service}
-      departments={departments}
+    <OfficerIndividualCaseShell
+      requestId={resolvedParams.requestId}
     />
   );
 }

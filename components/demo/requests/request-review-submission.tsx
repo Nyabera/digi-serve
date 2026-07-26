@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
   ArrowLeft,
-  ArrowRight,
   Check,
   CheckCircle2,
   Clock3,
@@ -363,15 +362,14 @@ export function RequestReviewSubmission({
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href={`/demo/track/${submissionReference}`}
-              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-bold text-white transition hover:bg-slate-800"
+              className="inline-flex min-h-12 shrink-0 whitespace-nowrap items-center justify-center rounded-xl bg-slate-950 px-5 text-sm font-bold text-white transition hover:bg-slate-800"
             >
               Track request
-              <ArrowRight className="ml-3 h-4 w-4" aria-hidden="true" />
             </Link>
 
             <Link
               href="/demo/officer"
-              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-5 text-sm font-bold text-slate-800 transition hover:bg-slate-50"
+              className="inline-flex min-h-12 shrink-0 whitespace-nowrap items-center justify-center rounded-xl border border-slate-300 bg-white px-5 text-sm font-bold text-slate-800 transition hover:bg-slate-50"
             >
               Open officer workspace
             </Link>
@@ -644,10 +642,9 @@ export function RequestReviewSubmission({
             type="button"
             onClick={submitRequest}
             disabled={!applicationComplete || !isHydrated}
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-slate-950 px-6 text-sm font-bold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex min-h-12 shrink-0 whitespace-nowrap items-center justify-center rounded-xl bg-slate-950 px-6 text-sm font-bold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Submit request
-            <ArrowRight className="ml-3 h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       </section>

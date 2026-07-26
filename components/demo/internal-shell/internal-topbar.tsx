@@ -51,7 +51,9 @@ export function InternalTopbar({
 
       <div className={styles.topbarControls}>
         {requestSelector ? (
-          <div className={styles.topbarSlot}>
+          <div
+            className={`${styles.topbarSlot} ${styles.requestSelectorSlot}`}
+          >
             {requestSelector}
           </div>
         ) : null}

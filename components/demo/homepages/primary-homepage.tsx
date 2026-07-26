@@ -415,7 +415,7 @@ export function PrimaryHomepage() {
                 Real impact
               </p>
 
-              <h2 className="mt-4 max-w-[580px] font-serif text-[58px] leading-[0.98] tracking-tight text-slate-950">
+              <h2 className="mt-4 max-w-[580px] font-sans text-[58px] leading-[0.98] tracking-tight text-slate-950">
                 From application to approval—
                 <br />
                 without the runaround.
@@ -435,7 +435,7 @@ export function PrimaryHomepage() {
                 </p>
               </div>
 
-              <blockquote className="max-w-[320px] justify-self-start font-serif text-[28px] italic leading-[1.22] text-slate-700 lg:justify-self-end">
+              <blockquote className="max-w-[320px] justify-self-start font-sans text-[28px] italic leading-[1.22] text-slate-700 lg:justify-self-end">
                 “FAIDIA made the process simple and kept me informed at every step.”
               </blockquote>
         </div>

@@ -1,0 +1,251 @@
+.panel {
+  margin-bottom: 1rem;
+  border: 1px solid #dce5f4;
+  border-radius: 0.7rem;
+  background: #ffffff;
+  padding: 0.9rem;
+  color: #17233f;
+  font-family: var(
+    --font-plus-jakarta-sans,
+    "Plus Jakarta Sans"
+  ), Arial, sans-serif;
+}
+
+.heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.heading h3,
+.heading p {
+  margin: 0;
+}
+
+.heading h3 {
+  font-size: 0.82rem;
+}
+
+.heading p {
+  margin-top: 0.28rem;
+  color: #64748b;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.sentBadge {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  background: #edf9f3;
+  padding: 0 0.7rem;
+  color: #087a51;
+  font-size: 0.65rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sentBadge svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.modeSelector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+
+.modeSelector button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid #d5deeb;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #52617b;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modeSelector button[data-active="true"] {
+  border-color: #7fa2ff;
+  background: #eef4ff;
+  color: #174bd4;
+}
+
+.modeSelector svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.internalNotice {
+  margin-top: 0.7rem;
+  border-radius: 0.48rem;
+  background: #f5f8fd;
+  padding: 0.65rem 0.75rem;
+  color: #5f6f89;
+  font-size: 0.67rem;
+  line-height: 1.45;
+}
+
+.externalFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+}
+
+.externalFields label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.externalFields label > span {
+  color: #273858;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.externalFields input,
+.externalFields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d4deeb;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #233350;
+  font: inherit;
+  font-size: 0.7rem;
+}
+
+.externalFields input {
+  min-height: 2.6rem;
+  padding: 0 0.7rem;
+}
+
+.externalFields textarea {
+  resize: vertical;
+  padding: 0.65rem 0.7rem;
+  line-height: 1.45;
+}
+
+.externalFields small {
+  color: #ba1a1a;
+  font-size: 0.6rem;
+}
+
+.recipientInput {
+  position: relative;
+}
+
+.recipientInput svg {
+  position: absolute;
+  top: 50%;
+  left: 0.7rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: #7a879c;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.recipientInput input {
+  padding-left: 2rem;
+}
+
+.messageField,
+.externalActions {
+  grid-column: 1 / -1;
+}
+
+.externalActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid #e4eaf2;
+  padding-top: 0.75rem;
+}
+
+.externalActions > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.externalActions strong {
+  color: #273858;
+  font-size: 0.66rem;
+}
+
+.externalActions span {
+  color: #6b7890;
+  font-size: 0.61rem;
+}
+
+.externalActions button {
+  display: inline-flex;
+  min-height: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid #2457e6;
+  border-radius: 0.48rem;
+  background: #2457e6;
+  padding: 0 0.85rem;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.externalActions button:disabled {
+  border-color: #c8d4ea;
+  background: #c8d4ea;
+  cursor: not-allowed;
+}
+
+.externalActions svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.panel :where(button, input, textarea):focus-visible {
+  outline: 3px solid #2457e6;
+  outline-offset: 2px;
+}
+
+@media (max-width: 47.99rem) {
+  .heading,
+  .externalActions {
+    display: grid;
+  }
+
+  .sentBadge {
+    justify-self: start;
+  }
+
+  .modeSelector,
+  .externalFields {
+    grid-template-columns: 1fr;
+  }
+
+  .messageField,
+  .externalActions {
+    grid-column: auto;
+  }
+
+  .externalActions button {
+    width: 100%;
+  }
+}

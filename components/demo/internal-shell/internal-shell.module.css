@@ -671,3 +671,66 @@
     transition-duration: 0.01ms;
   }
 }
+
+/* D29R-19: request selector alignment
+ *
+ * The request selector receives a local geometry contract. This avoids
+ * changing role selectors, filters and form selects elsewhere in the Demo.
+ */
+.requestSelectorSlot {
+  min-width: 0;
+  align-items: center;
+}
+
+.requestSelectorSlot :global(label) {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.requestSelectorSlot :global(label > span:not(.sr-only)) {
+  flex: 0 0 auto;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.requestSelectorSlot :global(select) {
+  box-sizing: border-box;
+  width: min(29rem, 42vw);
+  min-width: 18rem;
+  height: var(--control-height-compact, 2.75rem);
+  padding-block: 0;
+  padding-left: 1rem;
+  padding-right: 3rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+@media (max-width: 74.99rem) {
+  .requestSelectorSlot :global(select) {
+    width: min(23rem, 34vw);
+    min-width: 14rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .requestSelectorSlot,
+  .requestSelectorSlot :global(label) {
+    width: 100%;
+  }
+
+  .requestSelectorSlot :global(label) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.375rem;
+  }
+
+  .requestSelectorSlot :global(select) {
+    width: 100%;
+    min-width: 0;
+  }
+}
+/* END D29R-19 request selector */

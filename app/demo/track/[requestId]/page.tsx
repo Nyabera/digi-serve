@@ -1,14 +1,19 @@
-import { DemoPublicRoutePlaceholder } from "@/components/demo/shell";
+import { DemoRequestTrackingPage } from "@/components/demo/tracking";
 
-export default function Page() {
+type TrackRequestPageProps = {
+  params: Promise<{
+    requestId: string;
+  }>;
+};
+
+export default async function TrackRequestPage({
+  params,
+}: TrackRequestPageProps) {
+  const { requestId } = await params;
+
   return (
-    <DemoPublicRoutePlaceholder
-      eyebrow="Request tracking"
-      title="Follow progress without internal bureaucracy"
-      route="/demo/track/[requestId]"
-      description="This route will show applicant-safe status information, important messages and a controlled public timeline."
-      nextHref="/demo/officer"
-      nextLabel="Continue to officer demonstration"
+    <DemoRequestTrackingPage
+      requestId={decodeURIComponent(requestId)}
     />
   );
 }

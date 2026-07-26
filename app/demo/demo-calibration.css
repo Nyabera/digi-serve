@@ -6,7 +6,7 @@
  * route structure, state, configuration or production data.
  */
 
-main {
+:where(.demo-presentation-content) {
   --demo-background: var(--background, #f4f6f9);
   --demo-surface: var(--surface, #ffffff);
   --demo-surface-muted: var(--surface-muted, #f8fafc);
@@ -28,9 +28,16 @@ main {
     0 2px 4px rgb(15 23 42 / 5%),
     0 18px 44px rgb(15 23 42 / 9%);
 
+  /* D29R-11 — surface-aware foreground contracts */
+  --demo-light-foreground: #101827;
+  --demo-light-muted: #5f6775;
+  --demo-dark-foreground: #f8fafc;
+  --demo-dark-muted: #b9c0cd;
+  --demo-dark-card-foreground: #e7eaf0;
+  --demo-dark-card-muted: #aeb5c4;
+  --demo-primary-action-foreground: #ffffff;
+
   min-width: 0;
-  background: var(--demo-background);
-  color: var(--demo-text);
   font-feature-settings:
     "kern" 1,
     "liga" 1,
@@ -38,36 +45,76 @@ main {
   text-rendering: optimizeLegibility;
 }
 
+
+
+/* -------------------------------------------------------------------------- */
+/* D29R-11 surface-aware foreground contracts                                 */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) :where(.demo-surface-light) {
+  --demo-local-foreground: var(--demo-light-foreground);
+  --demo-local-muted: var(--demo-light-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-dark) {
+  --demo-local-foreground: var(--demo-dark-foreground);
+  --demo-local-muted: var(--demo-dark-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-dark-card) {
+  --demo-local-foreground: var(--demo-dark-card-foreground);
+  --demo-local-muted: var(--demo-dark-card-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-primary) {
+  --demo-local-foreground: var(--demo-primary-action-foreground);
+  --demo-local-muted: rgb(255 255 255 / 82%);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-muted-text) {
+  color: var(--demo-local-muted, var(--demo-muted));
+}
+
+:where(.demo-presentation-content)
+  :where(.demo-surface-light, .demo-surface-dark, .demo-surface-dark-card, .demo-surface-primary)
+  :where(svg:not([class*="text-"])) {
+  color: currentColor;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Structural rhythm                                                          */
 /* -------------------------------------------------------------------------- */
 
-main > :where(header, section, div) {
+:where(.demo-presentation-content) > :where(header, section, div) {
   min-width: 0;
 }
 
-main :where(h1, h2, h3) {
-  color: var(--demo-foreground);
+:where(.demo-presentation-content) :where(h1, h2, h3) {
+  color: inherit;
   text-wrap: balance;
 }
 
-main :where(p, dd, li) {
+:where(.demo-presentation-content) :where(p, dd, li) {
   text-wrap: pretty;
 }
 
-main :where([class*="max-w-"]) {
+:where(.demo-presentation-content) :where([class*="max-w-"]) {
   width: min(100%, var(--calibrated-content-width, 1440px));
 }
 
-main :where(section, article, aside, form, dl, div) {
+:where(.demo-presentation-content) :where(section, article, aside, form, dl, div) {
   min-width: 0;
 }
 
-main :where([class*="gap-8"]) {
+:where(.demo-presentation-content) :where([class*="gap-8"]) {
   row-gap: clamp(1.5rem, 3vw, 2rem);
 }
 
-main :where([class*="py-8"], [class*="py-10"]) {
+:where(.demo-presentation-content) :where([class*="py-8"], [class*="py-10"]) {
   padding-block: clamp(1.5rem, 3vw, 2.5rem);
 }
 
@@ -75,54 +122,54 @@ main :where([class*="py-8"], [class*="py-10"]) {
 /* Cards and operational surfaces                                             */
 /* -------------------------------------------------------------------------- */
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)
   [class*="rounded-3xl"],
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="rounded-3xl"] {
   border-radius: var(--demo-radius-lg);
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)
   [class*="rounded-2xl"],
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="rounded-2xl"] {
   border-radius: var(--demo-radius-md);
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="border-slate-200"][class*="bg-white"],
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="border"][class*="bg-white"] {
   border-color: var(--demo-border);
   box-shadow: var(--demo-shadow-card);
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="shadow-sm"] {
   box-shadow: var(--demo-shadow-card);
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="bg-slate-50"] {
   background-color: var(--demo-surface-muted);
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, section, aside, form)[class*="bg-white"] {
   background-color: var(--demo-surface);
 }
 
 /* Keep dark operational headers restrained and consistent. */
-main > header[class*="bg-[#"],
-main > header[class*="bg-slate-9"],
-main > header[class*="bg-black"] {
+:where(.demo-presentation-content) > header[class*="bg-[#"],
+:where(.demo-presentation-content) > header[class*="bg-slate-9"],
+:where(.demo-presentation-content) > header[class*="bg-black"] {
   border-bottom: 1px solid rgb(255 255 255 / 10%);
   box-shadow: 0 8px 28px rgb(2 6 23 / 12%);
 }
 
-main > header > div {
+:where(.demo-presentation-content) > header > div {
   min-height: 5.25rem;
 }
 
@@ -130,38 +177,38 @@ main > header > div {
 /* Buttons and action hierarchy                                               */
 /* -------------------------------------------------------------------------- */
 
-main :where(button, a)[class*="rounded-xl"] {
+:where(.demo-presentation-content) :where(button, a)[class*="rounded-xl"] {
   border-radius: var(--demo-radius-sm);
 }
 
-main :where(button, a)[class*="min-h-11"] {
+:where(.demo-presentation-content) :where(button, a)[class*="min-h-11"] {
   min-height: 2.75rem;
 }
 
-main :where(button, a)[class*="min-h-12"] {
+:where(.demo-presentation-content) :where(button, a)[class*="min-h-12"] {
   min-height: 3rem;
 }
 
-main :where(button, a)[class*="font-bold"] {
+:where(.demo-presentation-content) :where(button, a)[class*="font-bold"] {
   letter-spacing: -0.01em;
 }
 
-main
+:where(.demo-presentation-content)
   :where(button, a)[class*="bg-[#2557ff]"],
-main
+:where(.demo-presentation-content)
   :where(button, a)[class*="bg-blue-"] {
   box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
 }
 
-main
+:where(.demo-presentation-content)
   :where(button, a)[class*="bg-[#2557ff]"]:hover,
-main
+:where(.demo-presentation-content)
   :where(button, a)[class*="bg-blue-"]:hover {
   filter: saturate(0.95) brightness(0.96);
 }
 
-main :where(button, a):focus-visible,
-main :where(input, select, textarea):focus-visible {
+:where(.demo-presentation-content) :where(button, a):focus-visible,
+:where(.demo-presentation-content) :where(input, select, textarea):focus-visible {
   outline: 3px solid color-mix(
     in srgb,
     var(--demo-focus) 46%,
@@ -170,8 +217,8 @@ main :where(input, select, textarea):focus-visible {
   outline-offset: 2px;
 }
 
-main :where(button, a)[aria-disabled="true"],
-main :where(button, input, select, textarea):disabled {
+:where(.demo-presentation-content) :where(button, a)[aria-disabled="true"],
+:where(.demo-presentation-content) :where(button, input, select, textarea):disabled {
   cursor: not-allowed;
   opacity: 0.58;
 }
@@ -180,7 +227,7 @@ main :where(button, input, select, textarea):disabled {
 /* Forms                                                                      */
 /* -------------------------------------------------------------------------- */
 
-main :where(input, select, textarea) {
+:where(.demo-presentation-content) :where(input, select, textarea) {
   border-color: var(--demo-border-strong);
   border-radius: var(--demo-radius-sm);
   background: var(--demo-surface);
@@ -188,25 +235,25 @@ main :where(input, select, textarea) {
   caret-color: var(--demo-primary);
 }
 
-main :where(input, select) {
+:where(.demo-presentation-content) :where(input, select) {
   min-height: 2.875rem;
 }
 
-main textarea {
+:where(.demo-presentation-content) textarea {
   min-height: 7rem;
   resize: vertical;
 }
 
-main :where(input, textarea)::placeholder {
+:where(.demo-presentation-content) :where(input, textarea)::placeholder {
   color: #94a3b8;
   opacity: 1;
 }
 
-main :where(input, select, textarea):hover:not(:disabled) {
+:where(.demo-presentation-content) :where(input, select, textarea):hover:not(:disabled) {
   border-color: #aebaca;
 }
 
-main :where(input, select, textarea):focus {
+:where(.demo-presentation-content) :where(input, select, textarea):focus {
   border-color: var(--demo-primary);
   box-shadow:
     0 0 0 3px
@@ -217,28 +264,28 @@ main :where(input, select, textarea):focus {
       );
 }
 
-main input[type="checkbox"],
-main input[type="radio"] {
+:where(.demo-presentation-content) input[type="checkbox"],
+:where(.demo-presentation-content) input[type="radio"] {
   min-height: auto;
   accent-color: var(--demo-primary);
 }
 
-main label > span:first-child {
-  color: var(--demo-text);
+:where(.demo-presentation-content) label > span:first-child {
+  color: inherit;
 }
 
 /* -------------------------------------------------------------------------- */
 /* Queues, tables and dense staff interfaces                                  */
 /* -------------------------------------------------------------------------- */
 
-main :where(table) {
+:where(.demo-presentation-content) :where(table) {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 0.875rem;
 }
 
-main :where(th) {
+:where(.demo-presentation-content) :where(th) {
   height: 2.75rem;
   border-bottom: 1px solid var(--demo-border);
   background: var(--demo-surface-muted);
@@ -249,27 +296,27 @@ main :where(th) {
   text-transform: uppercase;
 }
 
-main :where(td) {
+:where(.demo-presentation-content) :where(td) {
   min-height: 3.5rem;
   border-bottom: 1px solid var(--demo-border);
   color: var(--demo-text);
 }
 
-main :where(tr:last-child td) {
+:where(.demo-presentation-content) :where(tr:last-child td) {
   border-bottom: 0;
 }
 
-main :where(tr):hover td {
+:where(.demo-presentation-content) :where(tr):hover td {
   background: #fbfcfe;
 }
 
-main :where([class*="font-mono"]) {
+:where(.demo-presentation-content) :where([class*="font-mono"]) {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
 
 /* Dense queue rows should feel interactive without looking decorative. */
-main
+:where(.demo-presentation-content)
   :where(article, div)[class*="hover:bg-slate-50"] {
   transition:
     background-color 140ms ease,
@@ -277,7 +324,7 @@ main
     box-shadow 140ms ease;
 }
 
-main
+:where(.demo-presentation-content)
   :where(article, div)[class*="hover:bg-slate-50"]:hover {
   background-color: #f8fafc;
 }
@@ -286,9 +333,9 @@ main
 /* Status and semantic feedback                                               */
 /* -------------------------------------------------------------------------- */
 
-main
+:where(.demo-presentation-content)
   :where([class*="rounded-full"])[class*="text-xs"],
-main
+:where(.demo-presentation-content)
   :where([class*="rounded-full"])[class*="text-sm"] {
   align-items: center;
   gap: 0.375rem;
@@ -296,28 +343,28 @@ main
   white-space: nowrap;
 }
 
-main
+:where(.demo-presentation-content)
   :where([class*="bg-emerald-50"]) {
   border-color: var(--status-success-border, #abefc6);
 }
 
-main
+:where(.demo-presentation-content)
   :where([class*="bg-amber-50"]) {
   border-color: var(--status-warning-border, #fedf89);
 }
 
-main
+:where(.demo-presentation-content)
   :where([class*="bg-red-50"]) {
   border-color: var(--status-danger-border, #fecdca);
 }
 
-main
+:where(.demo-presentation-content)
   :where([class*="bg-blue-50"], [class*="bg-violet-50"]) {
   border-color: var(--status-info-border, #c7d2fe);
 }
 
-main [role="alert"],
-main [role="status"] {
+:where(.demo-presentation-content) [role="alert"],
+:where(.demo-presentation-content) [role="status"] {
   border-radius: var(--demo-radius-md);
   box-shadow: none;
 }
@@ -326,30 +373,30 @@ main [role="status"] {
 /* Charts                                                                     */
 /* -------------------------------------------------------------------------- */
 
-main .recharts-responsive-container {
+:where(.demo-presentation-content) .recharts-responsive-container {
   min-height: 16rem;
 }
 
-main .recharts-cartesian-grid-horizontal line,
-main .recharts-cartesian-grid-vertical line {
+:where(.demo-presentation-content) .recharts-cartesian-grid-horizontal line,
+:where(.demo-presentation-content) .recharts-cartesian-grid-vertical line {
   stroke: var(--chart-grid, #e7edf4);
   stroke-width: 1;
 }
 
-main .recharts-text {
+:where(.demo-presentation-content) .recharts-text {
   fill: var(--chart-axis, #64748b);
   font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-main .recharts-legend-item-text {
+:where(.demo-presentation-content) .recharts-legend-item-text {
   color: var(--demo-muted) !important;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-main .recharts-default-tooltip {
+:where(.demo-presentation-content) .recharts-default-tooltip {
   border: 1px solid
     var(--chart-tooltip-border, #dce4ef) !important;
   border-radius: 0.75rem !important;
@@ -358,17 +405,17 @@ main .recharts-default-tooltip {
   box-shadow: var(--demo-shadow-raised) !important;
 }
 
-main .recharts-tooltip-label {
+:where(.demo-presentation-content) .recharts-tooltip-label {
   color: var(--demo-foreground);
   font-weight: 700;
 }
 
-main .recharts-tooltip-item {
+:where(.demo-presentation-content) .recharts-tooltip-item {
   font-size: 0.75rem !important;
   font-weight: 600;
 }
 
-main .recharts-surface {
+:where(.demo-presentation-content) .recharts-surface {
   overflow: visible;
 }
 
@@ -376,14 +423,14 @@ main .recharts-surface {
 /* Outcome and controlled-document surfaces                                   */
 /* -------------------------------------------------------------------------- */
 
-main iframe[title*="issued demonstration"] {
+:where(.demo-presentation-content) iframe[title*="issued demonstration"] {
   border-color: var(--demo-border);
   box-shadow: inset 0 0 0 1px rgb(15 23 42 / 3%);
 }
 
-main
+:where(.demo-presentation-content)
   :where([class*="font-mono"])[class*="text-blue"],
-main
+:where(.demo-presentation-content)
   :where([class*="font-mono"])[class*="text-slate"] {
   overflow-wrap: anywhere;
 }
@@ -393,67 +440,67 @@ main
 /* -------------------------------------------------------------------------- */
 
 @media (max-width: 1023px) {
-  main > header > div {
+  :where(.demo-presentation-content) > header > div {
     min-height: auto;
   }
 
-  main :where([class*="xl:sticky"]) {
+  :where(.demo-presentation-content) :where([class*="xl:sticky"]) {
     position: static;
   }
 
-  main .recharts-responsive-container {
+  :where(.demo-presentation-content) .recharts-responsive-container {
     min-height: 15rem;
   }
 }
 
 @media (max-width: 767px) {
-  main {
+  :where(.demo-presentation-content) {
     overflow-x: clip;
   }
 
-  main :where(h1) {
+  :where(.demo-presentation-content) :where(h1) {
     font-size: clamp(1.875rem, 9vw, 2.5rem);
     line-height: 1.08;
   }
 
-  main :where(h2) {
+  :where(.demo-presentation-content) :where(h2) {
     line-height: 1.15;
   }
 
-  main
+  :where(.demo-presentation-content)
     :where(article, section, aside, form)[class*="p-8"] {
     padding: 1.25rem;
   }
 
-  main
+  :where(.demo-presentation-content)
     :where(article, section, aside, form)[class*="p-6"] {
     padding: 1.125rem;
   }
 
-  main :where(button, a)[class*="w-full"] {
+  :where(.demo-presentation-content) :where(button, a)[class*="w-full"] {
     white-space: normal;
   }
 
-  main .recharts-responsive-container {
+  :where(.demo-presentation-content) .recharts-responsive-container {
     min-height: 14rem;
   }
 
-  main .recharts-legend-wrapper {
+  :where(.demo-presentation-content) .recharts-legend-wrapper {
     font-size: 0.6875rem;
   }
 }
 
 @media (max-width: 479px) {
-  main :where([class*="px-5"]) {
+  :where(.demo-presentation-content) :where([class*="px-5"]) {
     padding-inline: 1rem;
   }
 
-  main
+  :where(.demo-presentation-content)
     :where([class*="rounded-3xl"]) {
     border-radius: var(--demo-radius-md);
   }
 
-  main :where([class*="text-4xl"]) {
+  :where(.demo-presentation-content) :where([class*="text-4xl"]) {
     font-size: 2rem;
   }
 }
@@ -463,9 +510,9 @@ main
 /* -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  main *,
-  main *::before,
-  main *::after {
+  :where(.demo-presentation-content) *,
+  :where(.demo-presentation-content) *::before,
+  :where(.demo-presentation-content) *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
@@ -474,16 +521,16 @@ main
 }
 
 @media print {
-  main {
+  :where(.demo-presentation-content) {
     background: #ffffff;
   }
 
-  main > header,
-  main :where(button, [role="status"], [role="alert"]) {
+  :where(.demo-presentation-content) > header,
+  :where(.demo-presentation-content) :where(button, [role="status"], [role="alert"]) {
     display: none !important;
   }
 
-  main
+  :where(.demo-presentation-content)
     :where(article, section, aside, form)[class*="shadow"] {
     box-shadow: none !important;
   }

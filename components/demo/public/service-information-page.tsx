@@ -77,7 +77,7 @@ export function ServiceInformationPage({
 
   return (
     <DemoPublicShell>
-      <section className="bg-[#05060c] text-white">
+      <section className="demo-surface-dark bg-[#05060c] text-white">
         <div className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <Link
             href="/demo"
@@ -149,7 +149,7 @@ export function ServiceInformationPage({
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 About this service
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="mt-3 font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 What this request provides
               </h2>
               <p className="mt-5 text-base leading-8 text-slate-600">
@@ -175,7 +175,7 @@ export function ServiceInformationPage({
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 Eligibility
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="mt-3 font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 Who can apply
               </h2>
 
@@ -200,7 +200,7 @@ export function ServiceInformationPage({
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 Requirements
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="mt-3 font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 What you need before starting
               </h2>
 
@@ -225,7 +225,7 @@ export function ServiceInformationPage({
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 Supporting documents
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="mt-3 font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 Documents to prepare
               </h2>
 
@@ -301,7 +301,7 @@ export function ServiceInformationPage({
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
                 Process
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="mt-3 font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 What happens after you start
               </h2>
 
@@ -342,7 +342,7 @@ export function ServiceInformationPage({
               Other services
             </p>
             <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <h2 className="max-w-2xl font-serif text-4xl leading-tight tracking-tight text-slate-950">
+              <h2 className="max-w-2xl font-sans text-4xl leading-tight tracking-tight text-slate-950">
                 Continue exploring {client.organization.shortName}
               </h2>
               <Link

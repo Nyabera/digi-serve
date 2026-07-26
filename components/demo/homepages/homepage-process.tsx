@@ -27,7 +27,7 @@ export function HomepageProcess({
             How it works
           </p>
 
-          <h2 className="mt-4 max-w-[220px] font-serif text-[48px] leading-[0.98] tracking-tight text-slate-950">
+          <h2 className="mt-4 max-w-[220px] font-sans text-[48px] leading-[0.98] tracking-tight text-slate-950">
             How your
             <br />
             request moves
