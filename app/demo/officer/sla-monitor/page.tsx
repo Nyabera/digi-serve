@@ -1,13 +1,5 @@
-import { DemoControlBar } from "@/components/demo/controls";
-import { DemoPresentationFrame } from "@/components/demo/presentation";
-import { OfficerSlaWorkspace } from "@/features/demo-operations";
+import { OfficerSlaWorkspaceFixed } from "@/features/demo-operations/components/officer-sla-workspace-fixed";
 
 export default function OfficerSlaMonitorPage() {
-  return (
-    <DemoPresentationFrame
-        controls={<DemoControlBar />}
-      >
-      <OfficerSlaWorkspace />
-    </DemoPresentationFrame>
-  );
+  return <OfficerSlaWorkspaceFixed />;
 }

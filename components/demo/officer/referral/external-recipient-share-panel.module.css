@@ -1,39 +1,49 @@
-.panel {
-  margin: 0 0 14px;
-  border: 1px solid #dce5f4;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 12px;
-  color: #17233f;
-  font-family:
-    var(--font-plus-jakarta-sans), var(--font-plus-jakarta),
-    "Plus Jakarta Sans", system-ui, sans-serif;
+.portalTarget {
+  grid-column: 1 / -1;
+  min-width: 0;
 }
 
-.header h3,
-.header p {
+.panel {
+  margin: 0 0 16px;
+  border-bottom: 1px solid #dce4f0;
+  padding: 0 0 16px;
+  color: #17233f;
+  font-family:
+    var(--font-plus-jakarta-sans),
+    var(--font-plus-jakarta),
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+}
+
+.heading h3,
+.heading p {
   margin: 0;
 }
 
-.header h3 {
-  color: #111c52;
+.heading h3 {
+  color: #101b52;
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
 }
 
-.header p {
+.heading p {
   margin-top: 3px;
-  color: #65718d;
+  color: #68748e;
   font-size: 10px;
   line-height: 15px;
 }
 
 .modeSelector {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 10px;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-top: 11px;
 }
 
 .modeSelector button,
@@ -57,6 +67,13 @@
   color: #174bd4;
 }
 
+.orLabel {
+  color: #8993a8;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .internalNotice {
   margin: 9px 0 0;
   border-radius: 7px;
@@ -69,7 +86,10 @@
 
 .externalFields {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 1.3fr);
+  grid-template-columns:
+    minmax(0, 0.7fr)
+    minmax(0, 1fr)
+    minmax(0, 1.3fr);
   gap: 10px;
   margin-top: 12px;
 }
@@ -148,21 +168,11 @@
   color: #ffffff;
 }
 
-.externalActions button:hover {
-  background: #0f4fd0;
-}
-
-:global([data-recipient-host="true"][data-recipient-mode="external"])
-  [data-internal-recipient-fields="true"] {
-  display: none;
-}
-
 @media (max-width: 68rem) {
   .externalFields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .recipientField,
   .messageField {
     grid-column: 1 / -1;
   }
@@ -174,7 +184,10 @@
     grid-template-columns: 1fr;
   }
 
-  .recipientField,
+  .orLabel {
+    text-align: center;
+  }
+
   .messageField {
     grid-column: auto;
   }

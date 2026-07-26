@@ -20,11 +20,9 @@ import {
   OFFICER_SLA_SERIES,
   OFFICER_TASKS,
   SUPERVISOR_SLA_SERIES,
-  type AuditEvent,
   type DepartmentSlaRow,
   type OfficerTask,
-  type OfficerTaskStatus,
-} from "../fixtures/operational-data";
+  type OfficerTaskStatus } from "../fixtures/operational-data";
 
 import styles from "./operational-workspaces.module.css";
 

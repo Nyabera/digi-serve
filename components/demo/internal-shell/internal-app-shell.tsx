@@ -11,6 +11,8 @@ import { InternalSidebar } from "./internal-sidebar";
 import { InternalTopbar } from "./internal-topbar";
 import type { InternalShellRole } from "./internal-navigation";
 import styles from "./internal-shell.module.css";
+import { InternalShellBoundaryProvider, useInternalShellBoundary } from "./internal-shell-boundary";
+
 
 type InternalAppShellProps = {
   readonly role: InternalShellRole;
@@ -30,6 +32,7 @@ type InternalAppShellProps = {
 export function InternalAppShell(
   props: InternalAppShellProps,
 ) {
+
   const {
     role,
     institutionName,
@@ -44,12 +47,21 @@ export function InternalAppShell(
     children,
   } = props;
 
+
   const [sidebarCollapsed, setSidebarCollapsed] =
     useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] =
     useState(false);
 
+  const d29r23dShellBoundaryActive = useInternalShellBoundary();
+
+  if (d29r23dShellBoundaryActive) {
+    return <>{children}</>;
+  }
+
   return (
+        <InternalShellBoundaryProvider>
+(
     <div
       className={`${styles.shell} ${
         sidebarCollapsed
@@ -92,5 +104,7 @@ export function InternalAppShell(
         </div>
       </div>
     </div>
-  );
+  )
+        </InternalShellBoundaryProvider>
+      );
 }
