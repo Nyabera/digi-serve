@@ -78,7 +78,7 @@ const searchItems: SearchItem[] = [
     category: "Clearance and Graduation",
     title: "Student clearance",
     description: "Clear Finance, Library, your department and Registrar.",
-    href: "/demo/services/student-clearance-request",
+    href: "/demo/services/student-clearance",
   },
   {
     category: "Certificates and Documents",
@@ -90,7 +90,7 @@ const searchItems: SearchItem[] = [
     category: "Industrial Attachment",
     title: "Industrial attachment letter",
     description: "Request an introduction, placement or completion letter.",
-    href: "/demo/services/industrial-attachment-letter",
+    href: "/demo/services/industrial-attachment-letter-letter",
   },
   {
     category: "Fees and Payments",
@@ -114,7 +114,7 @@ const quickActions: ActionItem[] = [
   },
   {
     label: "Start student clearance",
-    href: "/demo/services/student-clearance-request",
+    href: "/demo/services/student-clearance",
     icon: FileCheck,
   },
   {
@@ -129,7 +129,7 @@ const quickActions: ActionItem[] = [
   },
   {
     label: "Get an attachment letter",
-    href: "/demo/services/industrial-attachment-letter",
+    href: "/demo/services/industrial-attachment-letter-letter",
     icon: Briefcase,
   },
 ];
@@ -149,7 +149,7 @@ const services: ServiceItem[] = [
     title: "Complete student clearance",
     description:
       "Clear Finance, Library, your academic department and the Registrar through one tracked request.",
-    href: "/demo/services/student-clearance-request",
+    href: "/demo/services/student-clearance",
     icon: FileCheck,
     accent: "orange",
   },
@@ -167,7 +167,7 @@ const services: ServiceItem[] = [
     title: "Get an industrial attachment letter",
     description:
       "Request an introduction, placement or completion letter for your industrial attachment.",
-    href: "/demo/services/industrial-attachment-letter",
+    href: "/demo/services/industrial-attachment-letter-letter",
     icon: Briefcase,
     accent: "neutral",
   },
