@@ -68,7 +68,10 @@ export type DemoTrendDirection =
 export type DemoPrimitive = string | number | boolean | null;
 
 export type DemoRecord = Readonly<
-  Record<string, DemoPrimitive | readonly DemoPrimitive[]>
+  Record<
+    string,
+    DemoPrimitive | readonly DemoPrimitive[] | undefined
+  >
 >;
 
 export interface DemoOrganizationConfig {
