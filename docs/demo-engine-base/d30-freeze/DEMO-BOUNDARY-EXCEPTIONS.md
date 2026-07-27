@@ -71,3 +71,16 @@ For each candidate:
 - Update this register whenever an exception is resolved.
 - Shared components must eventually consume neutral configuration.
 - A reusable component must not import directly from `demo-packs/tvet`.
+
+
+## D30-4 extraction status
+
+Savannah-specific organization identity, branding, homepage content,
+departments, users, services, workflow definitions, seeded requests, reports
+and SLA values now have typed destinations under `demo-packs/tvet`.
+
+The original hard-coded and fixture-based sources remain active until the
+runtime provider and active-pack cutover are completed.
+
+The corresponding exceptions therefore remain open, but their extraction
+destination is now implemented.

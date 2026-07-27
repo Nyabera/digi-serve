@@ -6,8 +6,8 @@ export const tvetOrganizationDraft = {
   shortName: "Savannah",
   initials: "STC",
   organizationType: "technical-college",
-  address: "Demo address",
-  email: "demo@savannah.example",
+  address: "Nairobi, Kenya",
+  email: "services@savannah.example",
   telephone: "+254 700 000 000",
-  website: "https://example.invalid",
+  website: "https://savannah.example",
 } satisfies DemoOrganizationConfig;

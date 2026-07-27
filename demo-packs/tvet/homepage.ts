@@ -2,9 +2,9 @@ import type { DemoHomepageConfig } from "../../features/demo-engine/config";
 
 export const tvetHomepageDraft = {
   eyebrow: "Savannah Technical College",
-  title: "Student services, requests and approvals in one place",
+  title: "Student services without unnecessary queues or uncertainty",
   description:
-    "A seeded public-service homepage for the TVET Demo Pack.",
+    "Apply for services, submit supporting information and track each request from one clear digital workspace.",
   primaryActionLabel: "Explore services",
   secondaryActionLabel: "Track a request",
 } satisfies DemoHomepageConfig;

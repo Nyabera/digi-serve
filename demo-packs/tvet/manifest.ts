@@ -14,7 +14,7 @@ import { tvetWorkflowsDraft } from "./workflows";
 export const tvetDemoPackDraft = {
   id: "tvet",
   name: "TVET Demo Pack",
-  version: "0.2.0-draft",
+  version: "0.3.0-draft",
   status: "draft",
   engineCompatibility: "^1.0.0",
   defaultRoute: "/demo",

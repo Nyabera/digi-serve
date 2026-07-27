@@ -3,9 +3,12 @@ import type { DemoUserConfig } from "../../features/demo-engine/config";
 export const tvetUsersDraft = [
   {
     id: "applicant-demo",
-    name: "Demo Applicant",
+    name: "John Kamau",
     role: "applicant",
     departmentId: null,
+    title: "Student Applicant",
+    email: "john.kamau@example.invalid",
+    telephone: "+254 711 000 027",
     active: true,
   },
   {
@@ -14,6 +17,25 @@ export const tvetUsersDraft = [
     role: "officer",
     departmentId: "student-records",
     title: "Student Records Officer",
+    email: "grace.wanjiku@savannah.example",
+    active: true,
+  },
+  {
+    id: "officer-finance-demo",
+    name: "Peter Mwangi",
+    role: "officer",
+    departmentId: "finance",
+    title: "Finance Officer",
+    email: "peter.mwangi@savannah.example",
+    active: true,
+  },
+  {
+    id: "officer-admissions-demo",
+    name: "Amina Hassan",
+    role: "officer",
+    departmentId: "admissions",
+    title: "Admissions Officer",
+    email: "amina.hassan@savannah.example",
     active: true,
   },
   {
@@ -22,14 +44,16 @@ export const tvetUsersDraft = [
     role: "supervisor",
     departmentId: "registrar",
     title: "Registrar Supervisor",
+    email: "miriam.wekesa@savannah.example",
     active: true,
   },
   {
     id: "admin-demo",
-    name: "System Administrator",
+    name: "Jane Admin",
     role: "admin",
     departmentId: null,
     title: "Institution Administrator",
+    email: "admin@savannah.example",
     active: true,
   },
 ] satisfies readonly DemoUserConfig[];
