@@ -1,0 +1,576 @@
+# Current Likely TVET-Specific References
+
+Generated: Mon Jul 27 15:47:03 EAT 2026
+
+These are candidates for review. A match is not automatically a boundary violation.
+
+app/demo/apply/certificate-replacement/page.tsx:9:      workflow={getWorkflowBySlug("certificate-replacement")}
+app/demo/sign-up/page.tsx:22:  const serviceSlug = requestedService ?? "transcript-request";
+app/demo/track/CERT-2026-0061/page.tsx:9:      workflow={getWorkflowBySlug("certificate-replacement")}
+app/demo/admin/workflows/builder/page.tsx:19:      initialTemplateId={template ?? "certificate-issuance"}
+app/demo/demo-journey/route.ts:6:    description: "Savannah Technical College student-services homepage.",
+app/demo/demo-journey/route.ts:11:    description: "Transcript requirements, eligibility, documents and timing.",
+app/demo/demo-journey/route.ts:12:    href: "/demo/services/transcript-request",
+app/demo/demo-journey/route.ts:21:    description: "Complete the transcript request form and upload demo documents.",
+app/demo/demo-journey/route.ts:22:    href: "/demo/apply/transcript-request",
+app/demo/demo-journey/route.ts:36:    description: "Open the Student Records operational queue.",
+app/demo/demo-journey/route.ts:56:    description: "Review the Registrar approval queue and workload.",
+app/demo/demo-journey/route.ts:60:    title: "Registrar approval",
+app/demo/demo-journey/route.ts:305:        Open any stage directly or move through the full Savannah Technical College
+app/demo/demo-journey/route.ts:306:        transcript-request story from student discovery to controlled outcome.
+app/demo/requests/[requestId]/confirmation/page.tsx:30:  const serviceSlug = requestedService ?? "transcript-request";
+app/demo/outcomes/[requestId]/page.tsx:35:    "transcript-request";
+app/demo/outcomes/[requestId]/page.tsx:47:          "transcript-request",
+app/demo/officer/requests/[requestId]/share-workflow-referral-page.tsx:17:  "REQ-DEMO-001": "transcript-request",
+app/demo/officer/requests/[requestId]/share-workflow-referral-page.tsx:19:  "REQ-DEMO-003": "certificate-replacement",
+app/demo/officer/requests/[requestId]/share-workflow-referral-page.tsx:20:  "REQ-DEMO-004": "transcript-request",
+app/demo/officer/requests/[requestId]/share-workflow-referral-page.tsx:38:    "transcript-request";
+app/demo/page.tsx:2:import { SavannahHomepage } from "@/components/demo/homepage";
+app/demo/page.tsx:4:    return <div className={homepageFontStyles.homepageFontScope}>{<SavannahHomepage />}</div>;
+app/demo/services/certificate-replacement/page.tsx:9:      workflow={getWorkflowBySlug("certificate-replacement")}
+app/demo/supervisor/approvals/[requestId]/page.tsx:23:          "transcript-request",
+app/demo/supervisor/approvals/[requestId]/page.tsx:33:  const registrarDepartment =
+app/demo/supervisor/approvals/[requestId]/page.tsx:36:        department.name === "Registrar",
+app/demo/supervisor/approvals/[requestId]/page.tsx:46:      registrarDepartment={{
+app/demo/supervisor/approvals/[requestId]/page.tsx:47:        id: registrarDepartment.id,
+app/demo/supervisor/approvals/[requestId]/page.tsx:48:        name: registrarDepartment.name,
+app/demo/supervisor/page.tsx:14:          "transcript-request",
+components/demo/homepage/savannah-homepage.tsx:32:import styles from "./savannah-homepage.module.css";
+components/demo/homepage/savannah-homepage.tsx:67:    title: "Academic transcript request",
+components/demo/homepage/savannah-homepage.tsx:69:    href: "/demo/services/transcript-request",
+components/demo/homepage/savannah-homepage.tsx:74:    description: "Ask Student Records to review a missing result.",
+components/demo/homepage/savannah-homepage.tsx:79:    title: "Student clearance",
+components/demo/homepage/savannah-homepage.tsx:80:    description: "Clear Finance, Library, your department and Registrar.",
+components/demo/homepage/savannah-homepage.tsx:84:    category: "Certificates and Documents",
+components/demo/homepage/savannah-homepage.tsx:85:    title: "Certificate replacement",
+components/demo/homepage/savannah-homepage.tsx:86:    description: "Replace a lost or damaged college certificate.",
+components/demo/homepage/savannah-homepage.tsx:87:    href: "/demo/services/certificate-replacement-request",
+components/demo/homepage/savannah-homepage.tsx:90:    category: "Industrial Attachment",
+components/demo/homepage/savannah-homepage.tsx:91:    title: "Industrial attachment letter",
+components/demo/homepage/savannah-homepage.tsx:105:    href: "/demo/apply/transcript-request",
+components/demo/homepage/savannah-homepage.tsx:111:    label: "Request a transcript",
+components/demo/homepage/savannah-homepage.tsx:112:    href: "/demo/services/transcript-request",
+components/demo/homepage/savannah-homepage.tsx:116:    label: "Start student clearance",
+components/demo/homepage/savannah-homepage.tsx:122:    href: "/demo/apply/transcript-request",
+components/demo/homepage/savannah-homepage.tsx:140:    title: "Request an academic transcript",
+components/demo/homepage/savannah-homepage.tsx:143:    href: "/demo/services/transcript-request",
+components/demo/homepage/savannah-homepage.tsx:149:    title: "Complete student clearance",
+components/demo/homepage/savannah-homepage.tsx:151:      "Clear Finance, Library, your academic department and the Registrar through one tracked request.",
+components/demo/homepage/savannah-homepage.tsx:158:    title: "Replace a lost certificate",
+components/demo/homepage/savannah-homepage.tsx:160:      "Apply for a replacement certificate and upload the required identification and supporting documents.",
+components/demo/homepage/savannah-homepage.tsx:161:    href: "/demo/services/certificate-replacement-request",
+components/demo/homepage/savannah-homepage.tsx:167:    title: "Get an industrial attachment letter",
+components/demo/homepage/savannah-homepage.tsx:169:      "Request an introduction, placement or completion letter for your industrial attachment.",
+components/demo/homepage/savannah-homepage.tsx:236:    question: "Which documents do I need for a transcript request?",
+components/demo/homepage/savannah-homepage.tsx:238:      "The seeded transcript demonstration requires an identity document and may request a student identifier, payment-reference evidence or name-change evidence where applicable.",
+components/demo/homepage/savannah-homepage.tsx:251:    question: "How long does certificate replacement take?",
+components/demo/homepage/savannah-homepage.tsx:279:    label: "Registrar approval",
+components/demo/homepage/savannah-homepage.tsx:284:    label: "Transcript issued",
+components/demo/homepage/savannah-homepage.tsx:305:    label: "Average transcript turnaround",
+components/demo/homepage/savannah-homepage.tsx:311:    label: "Core offices in the transcript route",
+components/demo/homepage/savannah-homepage.tsx:348:export function SavannahHomepage() {
+components/demo/homepage/savannah-homepage.tsx:389:    <div className={styles.page} data-savannah-homepage="true">
+components/demo/homepage/savannah-homepage.tsx:394:              <Link className={styles.brand} href="/demo" aria-label="Savannah Technical College home">
+components/demo/homepage/savannah-homepage.tsx:398:                <span className={styles.brandName}>Savannah Technical College</span>
+components/demo/homepage/savannah-homepage.tsx:425:                  aria-controls="savannah-mobile-navigation"
+components/demo/homepage/savannah-homepage.tsx:435:                id="savannah-mobile-navigation"
+components/demo/homepage/savannah-homepage.tsx:458:                <p className={styles.darkEyebrow}>Savannah Technical College</p>
+components/demo/homepage/savannah-homepage.tsx:465:                  Request transcripts, complete clearance, replace certificates and track
+components/demo/homepage/savannah-homepage.tsx:480:                <label className={styles.srOnly} htmlFor="savannah-service-search">
+components/demo/homepage/savannah-homepage.tsx:481:                  Search Savannah Technical College student services
+components/demo/homepage/savannah-homepage.tsx:492:                    id="savannah-service-search"
+components/demo/homepage/savannah-homepage.tsx:495:                    placeholder="Search transcripts, clearance, attachment letters, fees…"
+components/demo/homepage/savannah-homepage.tsx:498:                    aria-controls="savannah-search-results"
+components/demo/homepage/savannah-homepage.tsx:510:                    id="savannah-search-results"
+components/demo/homepage/savannah-homepage.tsx:532:                        No matching service. Try “transcript”, “clearance” or “fees”.
+components/demo/homepage/savannah-homepage.tsx:560:                  <p>Average transcript turnaround</p>
+components/demo/homepage/savannah-homepage.tsx:570:                  src="/demo/homepage/savannah-campus-placeholder.jpeg"
+components/demo/homepage/savannah-homepage.tsx:571:                  alt="Campus building used as a Savannah Technical College demonstration placeholder"
+components/demo/homepage/savannah-homepage.tsx:604:                  <p className={styles.requestService}>Academic transcript request</p>
+components/demo/homepage/savannah-homepage.tsx:617:                        <strong>Registrar approval</strong>
+components/demo/homepage/savannah-homepage.tsx:686:            <Link href="/demo/services/transcript-request">
+components/demo/homepage/savannah-homepage.tsx:715:            src="/demo/homepage/savannah-students-placeholder.jpg"
+components/demo/homepage/savannah-homepage.tsx:720:          <span>Approved Savannah student image to replace this placeholder</span>
+components/demo/homepage/savannah-homepage.tsx:727:            Amina requested her transcript online, uploaded her identification and followed
+components/demo/homepage/savannah-homepage.tsx:729:            clear collection update instead of making repeated visits to Student Records.
+components/demo/homepage/savannah-homepage.tsx:742:            consented Savannah Technical College story before public launch.
+components/demo/homepage/savannah-homepage.tsx:786:              const answerId = `savannah-faq-answer-${index}`;
+components/demo/homepage/savannah-homepage.tsx:839:                <strong>Savannah Technical College</strong>
+components/demo/homepage/savannah-homepage.tsx:851:            <Link href="/demo/services/transcript-request">Transcript request</Link>
+components/demo/homepage/savannah-homepage.module.css:2:  --savannah-night: #070a12;
+components/demo/homepage/savannah-homepage.module.css:5:  --savannah-cobalt: #2f5bff;
+components/demo/homepage/savannah-homepage.module.css:38:  outline: 2px solid var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:59:  background: var(--savannah-night);
+components/demo/homepage/savannah-homepage.module.css:66:  background: var(--savannah-night);
+components/demo/homepage/savannah-homepage.module.css:154:  background: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:279:  background: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:328:  border-color: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:749:  background: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:974:  color: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:1350:  background: var(--savannah-cobalt);
+components/demo/homepage/savannah-homepage.module.css:1372:  color: var(--savannah-cobalt);
+components/demo/homepage/index.ts:1:export { SavannahHomepage } from "./savannah-homepage";
+components/demo/shell/demo-public-header.tsx:25:    primaryService?.slug ?? "transcript-request"
+components/demo/shell/demo-public-header.tsx:29:    primaryService?.slug ?? "transcript-request"
+components/demo/shell/demo-public-footer.tsx:13:    primaryService?.slug ?? "transcript-request"
+components/demo/shared/demo-client-config-summary.tsx:10:  const transcriptService = client.services.find(
+components/demo/shared/demo-client-config-summary.tsx:11:    (service) => service.slug === "transcript-request",
+components/demo/shared/demo-client-config-summary.tsx:69:            {transcriptService?.name ?? "Not configured"}
+components/demo/department/department-inbox-workspace.tsx:139:        ? "Handoff returned to Student Records for clarification."
+components/demo/department/department-inbox-workspace.tsx:159:        staffRoleLabel="Finance Officer"
+components/demo/department/department-processing-dashboard.tsx:94:  originatingDepartmentName: "Student Records",
+components/demo/department/department-processing-dashboard.tsx:100:    "Finance verification is required before the transcript request can proceed.",
+components/demo/department/department-processing-dashboard.tsx:193:        candidate.slug === "transcript-request",
+components/demo/department/department-processing-dashboard.tsx:197:    serviceSlug: service?.slug ?? "transcript-request",
+components/demo/department/department-processing-dashboard.tsx:198:    serviceName: service?.name ?? "Transcript Request",
+components/demo/department/department-processing-dashboard.tsx:342:      "Finance accepted the work item. Student Records still owns the parent request.",
+components/demo/department/department-processing-dashboard.tsx:457:      "The referral was returned to Student Records for clarification.",
+components/demo/department/department-processing-dashboard.tsx:873:                    Return to Student Records
+components/demo/department/department-processing-dashboard.tsx:889:                  The result is back with Student Records.
+components/demo/department/department-processing-dashboard.tsx:895:                  Continue in Student Records
+components/demo/department/department-handoff-state.ts:115:  const defaultServiceSlug = serviceSlugs[0] ?? "transcript-request";
+components/demo/department/department-handoff-state.ts:143:        requestTitle: "Transcript Request",
+components/demo/department/department-handoff-state.ts:145:        fromDepartment: referral.originatingDepartmentName || "Student Records",
+components/demo/department/department-handoff-state.ts:159:        documents: [{ id: `${referral.id}-notes`, name: "Transcript Request Notes.pdf", summary: "Shared request document" }],
+components/demo/department/department-handoff-state.ts:201:    serviceSlug: "transcript-request",
+components/demo/department/department-handoff-state.ts:205:      requestTitle: "Transcript Request",
+components/demo/department/department-handoff-state.ts:207:      fromDepartment: "Student Records",
+components/demo/department/department-handoff-processing-workspace.tsx:130:    setFeedbackMessage(`${selectedResult.replaceAll("_", " ")} recorded. The Finance result was returned to Student Records.`);
+components/demo/department/department-handoff-processing-workspace.tsx:147:    setFeedbackMessage("Handoff returned to Student Records for clarification.");
+components/demo/department/department-handoff-processing-workspace.tsx:179:        staffRoleLabel="Finance Officer"
+components/demo/department/department-handoff-processing-workspace.tsx:204:            parentOwnerName: "Student Records",
+components/demo/outcomes/controlled-outcome-shell.tsx:60:        staffRoleLabel="Registrar Supervisor"
+components/demo/outcomes/controlled-outcome-shell.tsx:137:          eyebrow="Registrar issuance"
+components/demo/outcomes/controlled-outcome-shell.tsx:147:                Registrar decision
+components/demo/outcomes/controlled-outcome-workspace.tsx:34:type RegistrarDecisionRecord = {
+components/demo/outcomes/controlled-outcome-workspace.tsx:43:  readonly profile: "Registrar";
+components/demo/outcomes/controlled-outcome-workspace.tsx:68:  readonly documentType: "DEMO_TRANSCRIPT";
+components/demo/outcomes/controlled-outcome-workspace.tsx:112:): RegistrarDecisionRecord | null {
+components/demo/outcomes/controlled-outcome-workspace.tsx:131:      candidate.profile !== "Registrar" ||
+components/demo/outcomes/controlled-outcome-workspace.tsx:139:    return parsed as RegistrarDecisionRecord;
+components/demo/outcomes/controlled-outcome-workspace.tsx:161:      candidate.documentType !== "DEMO_TRANSCRIPT" ||
+components/demo/outcomes/controlled-outcome-workspace.tsx:243:function buildTranscriptHtml({
+components/demo/outcomes/controlled-outcome-workspace.tsx:279:<title>Demo Transcript ${safePublicReference}</title>
+components/demo/outcomes/controlled-outcome-workspace.tsx:364:        <div class="muted">Registrar · Controlled Outcome</div>
+components/demo/outcomes/controlled-outcome-workspace.tsx:373:    <h1>Demonstration Academic Transcript</h1>
+components/demo/outcomes/controlled-outcome-workspace.tsx:380:      official academic transcript and must not be used as evidence of
+components/demo/outcomes/controlled-outcome-workspace.tsx:399:        <td>Transcript request approved</td>
+components/demo/outcomes/controlled-outcome-workspace.tsx:408:      DEMONSTRATION RECORD — NOT AN OFFICIAL TRANSCRIPT
+components/demo/outcomes/controlled-outcome-workspace.tsx:474:    "STC-DEMO-001",
+components/demo/outcomes/controlled-outcome-workspace.tsx:522:        "A Registrar APPROVED decision is required before issuance.",
+components/demo/outcomes/controlled-outcome-workspace.tsx:539:      `STC-${requestId.replace(/\W/g, "")}-${referenceSuffix}`;
+components/demo/outcomes/controlled-outcome-workspace.tsx:541:    const documentHtml = buildTranscriptHtml({
+components/demo/outcomes/controlled-outcome-workspace.tsx:557:      documentType: "DEMO_TRANSCRIPT",
+components/demo/outcomes/controlled-outcome-workspace.tsx:558:      title: "Demonstration Academic Transcript",
+components/demo/outcomes/controlled-outcome-workspace.tsx:599:        ? "The exact demonstration transcript copy is ready for controlled download."
+components/demo/outcomes/controlled-outcome-workspace.tsx:600:        : "The demonstration transcript is ready for recorded physical collection.",
+components/demo/outcomes/controlled-outcome-workspace.tsx:684:      `${outcome.publicReference}-demo-transcript.html`;
+components/demo/outcomes/controlled-outcome-workspace.tsx:760:                Registrar decision
+components/demo/outcomes/controlled-outcome-workspace.tsx:782:              label: "Registrar decision",
+components/demo/outcomes/controlled-outcome-workspace.tsx:864:                    Registrar
+components/demo/outcomes/controlled-outcome-workspace.tsx:942:                      ? "Registrar approval confirmed"
+components/demo/outcomes/controlled-outcome-workspace.tsx:948:                      : "Complete the Registrar decision before issuing an outcome."}
+components/demo/outcomes/controlled-outcome-workspace.tsx:1041:                    title="Exact issued demonstration transcript"
+components/demo/outcomes/controlled-outcome-workspace.tsx:1061:                    transcript in browser session state. It
+components/demo/outcomes/controlled-outcome-workspace.tsx:1062:                    does not create an official transcript,
+components/demo/outcomes/controlled-outcome-workspace.tsx:1153:                  Issue exact demo transcript
+components/demo/outcomes/controlled-outcome-workspace.tsx:1186:                    Download exact demo transcript
+components/demo/internal-shell/internal-navigation.ts:64:        href: "/demo/services/transcript-request",
+components/demo/internal-shell/role-workspace-shell.tsx:21:    staffRoleLabel: "Student Records Officer",
+components/demo/internal-shell/role-workspace-shell.tsx:26:    staffRoleLabel: "Registrar Supervisor",
+components/demo/internal-shell/role-workspace-shell.tsx:46:      institutionName="Savannah Technical College"
+components/demo/tracking/demo-request-tracking-page.tsx:49:    title: "Student Records review",
+components/demo/tracking/demo-request-tracking-page.tsx:51:      "Student Records is checking the request details and academic record.",
+components/demo/tracking/demo-request-tracking-page.tsx:53:      "records.review.started · transcript requirements loaded · identity match queued",
+components/demo/tracking/demo-request-tracking-page.tsx:67:    title: "Registrar approval",
+components/demo/tracking/demo-request-tracking-page.tsx:69:      "The Registrar is reviewing the verified request for final approval.",
+components/demo/tracking/demo-request-tracking-page.tsx:71:      "registrar.approval.started · prerequisites confirmed · outcome generation queued",
+components/demo/tracking/demo-request-tracking-page.tsx:76:    title: "Transcript ready",
+components/demo/tracking/demo-request-tracking-page.tsx:78:      "The controlled demo transcript is ready for download or collection.",
+components/demo/tracking/demo-request-tracking-page.tsx:80:      "outcome.issued · transcript generated · applicant notification recorded",
+components/demo/tracking/demo-request-tracking-page.tsx:90:  { stage: "Registrar", completion: 82 },
+components/demo/tracking/demo-request-tracking-page.tsx:151:            <p className={styles.eyebrow}>Savannah Technical College</p>
+components/demo/tracking/demo-request-tracking-page.tsx:155:              simulates Student Records, Finance and Registrar processing.
+components/demo/tracking/demo-request-tracking-page.tsx:166:              <strong>Academic transcript request</strong>
+components/demo/tracking/demo-request-tracking-page.tsx:250:              in the transcript workflow.
+components/demo/tracking/demo-request-tracking-page.tsx:334:                {isComplete ? "Transcript ready" : "Processing in progress"}
+components/demo/officer/officer-request-review.tsx:109:  "Student Records";
+components/demo/officer/officer-request-review.tsx:427:        "Application submitted and added to the Student Records queue.",
+components/demo/officer/officer-request-review.tsx:966:      `${receivingDepartment.name} referral created. Student Records remains the parent-request owner.`,
+components/demo/officer/officer-request-review.tsx:1107:        staffRoleLabel="Student Records Officer"
+components/demo/officer/officer-dashboard.tsx:72:        staffRoleLabel="Student Records Officer"
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:124:  return decoded || "STC-TR-2026-0031";
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:227:      institutionName="Savannah Technical College"
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:249:            <option value="STC-TR-2026-0038">
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:250:              STC-TR-2026-0038 — Additional check
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:253:              REQ-DEMO-001 — Transcript request
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:291:            Transcript Requests
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:301:                Transcript Request
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:468:                  <div><dt>Department</dt><dd>Student Records</dd></div>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:479:                  <div><dt>Owner</dt><dd>Student Records</dd></div>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:485:                  <div><dt>Type</dt><dd>Official academic transcript</dd></div>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:503:                <p>Payment reference MP-48291 matched to the transcript service fee.</p>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:511:              <li><strong>Records review</strong><span>Assigned to Kevin Mwangi in Student Records.</span><time>Today, 9:14 AM</time></li>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:519:              <h3>Official academic transcript</h3>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:520:              <p>The final output will be generated after Registrar approval and stored against this case.</p>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:523:                <div><dt>Template</dt><dd>Transcript v1</dd></div>
+components/demo/officer/individual-case/officer-individual-case-shell.tsx:768:                to the Registrar for approval.
+components/demo/homepages/primary-homepage.tsx:45:    href: "/demo/apply/transcript-request",
+components/demo/homepages/primary-homepage.tsx:50:    href: "/demo/services/transcript-request",
+components/demo/homepages/primary-homepage.tsx:55:    href: "/demo/apply/transcript-request",
+components/demo/homepages/primary-homepage.tsx:91:    title: "Request a transcript",
+components/demo/homepages/primary-homepage.tsx:93:      "Get an official academic transcript for further studies or employment.",
+components/demo/homepages/primary-homepage.tsx:94:    href: "/demo/services/transcript-request",
+components/demo/homepages/primary-homepage.tsx:102:    title: "Student clearance request",
+components/demo/homepages/primary-homepage.tsx:113:    title: "Certificate replacement",
+components/demo/homepages/primary-homepage.tsx:115:      "Request a replacement certificate and validate supporting details.",
+components/demo/homepages/primary-homepage.tsx:116:    href: "/demo/services/certificate-replacement",
+components/demo/homepages/primary-homepage.tsx:251:              <Link href="/demo/services/transcript-request" className="text-[14px] text-white/85 transition hover:text-white">
+components/demo/homepages/primary-homepage.tsx:257:              <Link href="/demo/services/transcript-request" className="text-[14px] text-white/85 transition hover:text-white">
+components/demo/homepages/primary-homepage.tsx:287:                  href="/demo/services/transcript-request"
+components/demo/homepages/primary-homepage.tsx:425:                Grace applied for her transcript online and received clear updates at every stage.
+components/demo/homepages/primary-homepage.tsx:500:              href="/demo/services/transcript-request"
+components/demo/presentation/demo-presentation-frame.tsx:159:      label: "Registrar approval",
+components/demo/presentation/demo-presentation-frame.tsx:789:              results, Registrar decisions, issued
+components/demo/supervisor/supervisor-dashboard-workspace.tsx:172:        staffRoleLabel="Registrar Supervisor"
+components/demo/supervisor/supervisor-approval-workspace.tsx:40:  readonly registrarDepartment: DepartmentOption;
+components/demo/supervisor/supervisor-approval-workspace.tsx:58:type RegistrarDecisionRecord = {
+components/demo/supervisor/supervisor-approval-workspace.tsx:65:  readonly profile: "Registrar";
+components/demo/supervisor/supervisor-approval-workspace.tsx:92:const REGISTRAR_NAME = "Dr. Miriam Wekesa";
+components/demo/supervisor/supervisor-approval-workspace.tsx:232:    returnedTo: "Student Records",
+components/demo/supervisor/supervisor-approval-workspace.tsx:238:): RegistrarDecisionRecord | null {
+components/demo/supervisor/supervisor-approval-workspace.tsx:265:      candidate.profile !== "Registrar" ||
+components/demo/supervisor/supervisor-approval-workspace.tsx:274:    return parsed as RegistrarDecisionRecord;
+components/demo/supervisor/supervisor-approval-workspace.tsx:401:  registrarDepartment,
+components/demo/supervisor/supervisor-approval-workspace.tsx:414:      "All required operational checks have been reviewed by the Registrar.",
+components/demo/supervisor/supervisor-approval-workspace.tsx:642:        "A Registrar decision has already been recorded for this demonstration request.",
+components/demo/supervisor/supervisor-approval-workspace.tsx:649:        "Confirm the Registrar declaration before recording a decision.",
+components/demo/supervisor/supervisor-approval-workspace.tsx:656:    const record: RegistrarDecisionRecord = {
+components/demo/supervisor/supervisor-approval-workspace.tsx:666:      decidedBy: REGISTRAR_NAME,
+components/demo/supervisor/supervisor-approval-workspace.tsx:667:      profile: "Registrar",
+components/demo/supervisor/supervisor-approval-workspace.tsx:669:        registrarDepartment.name,
+components/demo/supervisor/supervisor-approval-workspace.tsx:705:      )} recorded by the Registrar profile.`,
+components/demo/supervisor/supervisor-approval-workspace.tsx:719:      "Your transcript request has been approved. The controlled outcome is now being prepared.",
+components/demo/supervisor/supervisor-approval-workspace.tsx:765:        "Enter the clarification required from Student Records.",
+components/demo/supervisor/supervisor-approval-workspace.tsx:804:      "Student Records",
+components/demo/supervisor/supervisor-approval-workspace.tsx:805:    registrarDepartmentName:
+components/demo/supervisor/supervisor-approval-workspace.tsx:806:      registrarDepartment.name,
+components/demo/supervisor/supervisor-approval-workspace.tsx:808:      REGISTRAR_NAME,
+components/demo/supervisor/supervisor-approval-workspace.tsx:899:            Restoring Registrar approval workspace…
+components/demo/supervisor/supervisor-approval-workspace.tsx:916:        staffName={REGISTRAR_NAME}
+components/demo/supervisor/supervisor-approval-workspace.tsx:917:        staffRoleLabel="Registrar Supervisor"
+components/demo/reports/reports-dashboard.tsx:337:  const departments = ["Student Records", "Finance", "Registrar"];
+components/demo/reports/reports-dashboard.tsx:420:  organizationName = "Savannah Technical College",
+components/demo/reports/reports-dashboard.tsx:424:  scopeLabel = "Student Records",
+components/demo/reports/reports-dashboard.tsx:660:            "Student Records has 84% of its backlog under six days old.",
+components/demo/reports/reports-dashboard.tsx:688:          description="Tracks requests remaining at each stage from submission through Records, Finance, Registrar approval and completion."
+components/demo/reports/reports-dashboard.tsx:692:            "Registrar converts 96% of approved requests into completed outcomes.",
+components/demo/reports/reports-dashboard.tsx:715:            "Transcript turnaround improved from 4.8 to 3.2 days.",
+components/demo/reports/reports-dashboard.tsx:716:            "Student clearance moved below the five-day target in week six.",
+components/demo/reports/reports-dashboard.tsx:717:            "Certificate replacement remains above target at 6.9 days.",
+components/demo/reports/reports-dashboard.tsx:723:            { label: "Transcript", color: MATERIAL.indigo },
+components/demo/reports/reports-dashboard.tsx:725:            { label: "Certificate", color: MATERIAL.blueGrey },
+components/demo/reports/reports-dashboard.tsx:735:                <Line dataKey="transcript" stroke={MATERIAL.indigo} strokeWidth={2} dot={false} />
+components/demo/reports/reports-dashboard.tsx:737:                <Line dataKey="certificate" stroke={MATERIAL.blueGrey} strokeWidth={2} dot={false} />
+components/demo/reports/reports-dashboard.tsx:749:            "Academic transcripts are the highest-volume service with 82 requests.",
+components/demo/reports/reports-dashboard.tsx:750:            "Transcripts and missing marks account for 54% of listed demand.",
+components/demo/reports/reports-dashboard.tsx:776:            "Finance to Registrar is the slowest handoff at 2.6 hours.",
+components/demo/reports/reports-dashboard.tsx:777:            "Student Records to Finance averages 1.8 hours.",
+components/demo/reports/reports-dashboard.tsx:778:            "Registrar handoffs remain below one hour in both directions.",
+components/demo/reports/reports-dashboard.tsx:819:            "Certificate replacement has the highest rejected or cancelled share at 15%.",
+components/demo/reports/operational-reports-dashboard.tsx:136:  { stage: "Registrar", requests: 7, conversion: 50 },
+components/demo/reports/operational-reports-dashboard.tsx:143:    department: "Student Records",
+components/demo/reports/operational-reports-dashboard.tsx:155:    department: "Registrar",
+components/demo/reports/operational-reports-dashboard.tsx:166:  { stage: "Registrar", averageHours: 5.4, targetHours: 8 },
+components/demo/reports/operational-reports-dashboard.tsx:180:  { service: "Transcript Request", requests: 34 },
+components/demo/reports/operational-reports-dashboard.tsx:181:  { service: "Student Clearance", requests: 18 },
+components/demo/reports/operational-reports-dashboard.tsx:182:  { service: "Certificate Replacement", requests: 8 },
+components/demo/reports/operational-reports-dashboard.tsx:592:        item.stage === "Registrar" &&
+components/demo/reports/operational-reports-dashboard.tsx:703:              "Transcript Request"
+components/demo/reports/operational-reports-dashboard.tsx:1185:                value: "Student Records",
+components/demo/reports/operational-reports-dashboard.tsx:1422:                value: "Transcript Request",
+components/demo/reports/operational-reports-dashboard.tsx:1428:                value: "Student Clearance",
+components/demo/reports/operational-reports-dashboard.tsx:1434:                value: "Certificate Replacement",
+components/demo/reports/report-data.ts:72:  { department: "Student Records", percentage: 79 },
+components/demo/reports/report-data.ts:74:  { department: "Registrar", percentage: 71 },
+components/demo/reports/report-data.ts:78:  { department: "Student Records", fresh: 16, ageing: 10, old: 5, total: 31 },
+components/demo/reports/report-data.ts:80:  { department: "Registrar", fresh: 11, ageing: 7, old: 3, total: 21 },
+components/demo/reports/report-data.ts:87:  { stage: "Registrar approval", value: 161, fill: "#66BB6A" },
+components/demo/reports/report-data.ts:92:  { period: "W1", transcript: 4.8, clearance: 6.2, certificate: 8.4, target: 5 },
+components/demo/reports/report-data.ts:93:  { period: "W2", transcript: 4.4, clearance: 5.9, certificate: 8.2, target: 5 },
+components/demo/reports/report-data.ts:94:  { period: "W3", transcript: 4.1, clearance: 5.6, certificate: 7.9, target: 5 },
+components/demo/reports/report-data.ts:95:  { period: "W4", transcript: 3.9, clearance: 5.3, certificate: 7.6, target: 5 },
+components/demo/reports/report-data.ts:96:  { period: "W5", transcript: 3.7, clearance: 5.0, certificate: 7.5, target: 5 },
+components/demo/reports/report-data.ts:97:  { period: "W6", transcript: 3.5, clearance: 4.8, certificate: 7.3, target: 5 },
+components/demo/reports/report-data.ts:98:  { period: "W7", transcript: 3.4, clearance: 4.7, certificate: 7.1, target: 5 },
+components/demo/reports/report-data.ts:99:  { period: "W8", transcript: 3.2, clearance: 4.5, certificate: 6.9, target: 5 },
+components/demo/reports/report-data.ts:103:  { service: "Academic transcripts", requests: 82 },
+components/demo/reports/report-data.ts:105:  { service: "Student clearance", requests: 46 },
+components/demo/reports/report-data.ts:106:  { service: "Certificate replacement", requests: 31 },
+components/demo/reports/report-data.ts:112:  { from: "Student Records", to: "Student Records", hours: 0 },
+components/demo/reports/report-data.ts:113:  { from: "Student Records", to: "Finance", hours: 1.8 },
+components/demo/reports/report-data.ts:114:  { from: "Student Records", to: "Registrar", hours: 0.8 },
+components/demo/reports/report-data.ts:115:  { from: "Finance", to: "Student Records", hours: 1.2 },
+components/demo/reports/report-data.ts:117:  { from: "Finance", to: "Registrar", hours: 2.6 },
+components/demo/reports/report-data.ts:118:  { from: "Registrar", to: "Student Records", hours: 0.6 },
+components/demo/reports/report-data.ts:119:  { from: "Registrar", to: "Finance", hours: 0.9 },
+components/demo/reports/report-data.ts:120:  { from: "Registrar", to: "Registrar", hours: 0 },
+components/demo/reports/report-data.ts:133:  { service: "Transcripts", completed: 68, rejected: 5, returned: 12, cancelled: 3, open: 12 },
+components/demo/reports/report-data.ts:135:  { service: "Certificates", completed: 55, rejected: 8, returned: 20, cancelled: 7, open: 10 },
+components/demo/reports/operational-reports-shell.tsx:92:    "Student Records";
+components/demo/reports/operational-reports-shell.tsx:121:            : "Registrar Supervisor"
+components/demo/reports/operational-reports-shell.tsx:141:                Registrar oversight
+features/demo/state/demo-seed.ts:26:    "Student Records officer",
+features/demo/state/demo-seed.ts:34:    "Finance officer",
+features/demo/state/demo-seed.ts:42:  const transcriptService = requireValue(
+features/demo/state/demo-seed.ts:44:      (service) => service.slug === "transcript-request",
+features/demo/state/demo-seed.ts:46:    "Transcript Request service",
+features/demo/state/demo-seed.ts:53:    "Student Clearance service",
+features/demo/state/demo-seed.ts:75:      "transcript-request": {
+features/demo/state/demo-seed.ts:128:        reference: "STC-TR-2026-0042",
+features/demo/state/demo-seed.ts:129:        serviceId: transcriptService.id,
+features/demo/state/demo-seed.ts:130:        serviceSlug: transcriptService.slug,
+features/demo/state/demo-seed.ts:136:        currentWorkflowStepId: "transcript-records-review",
+features/demo/state/demo-seed.ts:152:        reference: "STC-TR-2026-0038",
+features/demo/state/demo-seed.ts:153:        serviceId: transcriptService.id,
+features/demo/state/demo-seed.ts:154:        serviceSlug: transcriptService.slug,
+features/demo/state/demo-seed.ts:160:        currentWorkflowStepId: "transcript-finance-referral",
+features/demo/state/demo-seed.ts:173:        reference: "STC-TR-2026-0031",
+features/demo/state/demo-seed.ts:174:        serviceId: transcriptService.id,
+features/demo/state/demo-seed.ts:175:        serviceSlug: transcriptService.slug,
+features/demo/state/demo-seed.ts:179:        currentDepartmentId: "registrar",
+features/demo/state/demo-seed.ts:181:        currentWorkflowStepId: "transcript-registrar-approval",
+features/demo/state/demo-seed.ts:193:        reference: "STC-CL-2026-0027",
+features/demo/state/demo-seed.ts:199:        currentDepartmentId: "registrar",
+features/demo/state/demo-seed.ts:218:        title: "Review transcript application",
+features/demo/state/demo-seed.ts:232:          "Confirm whether a Finance hold prevents transcript issuance.",
+features/demo/state/demo-seed.ts:241:        title: "Registrar approval",
+features/demo/state/demo-seed.ts:244:        departmentId: "registrar",
+features/demo/state/demo-seed.ts:254:        description: "Complete the student clearance request.",
+features/demo/state/demo-seed.ts:255:        departmentId: "registrar",
+features/demo/state/demo-seed.ts:273:          "Confirm whether a Finance hold prevents transcript issuance.",
+features/demo/state/demo-seed.ts:275:          "Student Records requires Finance clearance before continuing.",
+features/demo/state/demo-seed.ts:292:        reason: "Required transcript workflow check.",
+features/demo/state/demo-seed.ts:310:          "Approve. Student Records and Finance checks are complete.",
+features/demo/state/demo-seed.ts:318:        recommendation: "Approve student clearance.",
+features/demo/state/demo-seed.ts:329:        label: "Student Clearance Notice",
+features/demo/state/demo-seed.ts:331:        reference: "STC-OUT-2026-0027",
+features/demo/state/demo-seed.ts:333:          "The student clearance request was approved and completed.",
+features/demo/state/demo-seed.ts:345:          "Your Transcript Request is currently being reviewed by Student Records.",
+features/demo/state/demo-seed.ts:356:          "Student Records has requested a Finance clearance check.",
+features/demo/state/demo-seed.ts:367:          "A Transcript Request is ready for Registrar approval.",
+features/demo/state/demo-seed.ts:380:          "The Transcript Request was received successfully.",
+features/demo/state/demo-seed.ts:389:          "Student Records started reviewing the request.",
+features/demo/state/demo-seed.ts:398:          "Student Records requested a Finance clearance check.",
+features/demo/state/demo-seed.ts:446:        departmentId: "registrar",
+features/demo/view-models/officer-dashboard-view-model.ts:69:  { id: "REQ-DEMO-001", applicantName: "Grace Wanjiku", serviceName: "Transcript Request", status: "Submitted", statusTone: "info", departmentName: "Student Records", submittedLabel: "Today, 10:24", dueLabel: "Due today", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-001" },
+features/demo/view-models/officer-dashboard-view-model.ts:70:  { id: "REQ-DEMO-002", applicantName: "Brian Otieno", serviceName: "Student Clearance", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "Yesterday, 15:42", dueLabel: "Due tomorrow", priority: "MEDIUM", href: "/demo/officer/requests/REQ-DEMO-002" },
+features/demo/view-models/officer-dashboard-view-model.ts:71:  { id: "REQ-DEMO-003", applicantName: "Amina Hassan", serviceName: "Certificate Replacement", status: "Waiting on department", statusTone: "warning", departmentName: "Finance", submittedLabel: "Yesterday, 09:18", dueLabel: "2 days remaining", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-003" },
+features/demo/view-models/officer-dashboard-view-model.ts:72:  { id: "REQ-DEMO-004", applicantName: "Daniel Kamau", serviceName: "Transcript Request", status: "Completed", statusTone: "success", departmentName: "Student Records", submittedLabel: "18 Jul, 14:06", dueLabel: "Completed today", priority: "LOW", href: "/demo/officer/requests/REQ-DEMO-004" },
+features/demo/view-models/officer-dashboard-view-model.ts:73:  { id: "REQ-DEMO-005", applicantName: "Mercy Njeri", serviceName: "Student Clearance", status: "Waiting on applicant", statusTone: "warning", departmentName: "Student Records", submittedLabel: "17 Jul, 11:38", dueLabel: "Overdue by 1 day", priority: "CRITICAL", href: "/demo/officer/requests/REQ-DEMO-005" },
+features/demo/view-models/officer-dashboard-view-model.ts:74:  { id: "REQ-DEMO-006", applicantName: "Kelvin Mutiso", serviceName: "Transcript Request", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "16 Jul, 08:52", dueLabel: "Due today", priority: "MEDIUM", href: "/demo/officer/requests/REQ-DEMO-006" },
+features/demo/view-models/officer-dashboard-view-model.ts:79:  { id: "HND-DEMO-002", requestId: "REQ-DEMO-003", departmentName: "Registrar", requestedAction: "Confirm certificate reissue authority", status: "In progress", statusTone: "info", href: "/demo/department" },
+features/demo/view-models/officer-dashboard-view-model.ts:84:  { id: "MSG-DEMO-001", senderName: "Brian Otieno", senderRole: "Applicant", subject: "Clearance request document", message: "I have uploaded the missing library clearance confirmation.", timestamp: "12 min", href: "/demo/officer/requests/REQ-DEMO-002", unread: true },
+features/demo/view-models/officer-dashboard-view-model.ts:85:  { id: "MSG-DEMO-002", senderName: "Miriam Wekesa", senderRole: "Registrar", subject: "Approval requirement", message: "Please confirm the Finance result before forwarding the request.", timestamp: "48 min", href: "/demo/officer/requests/REQ-DEMO-001", unread: false },
+features/demo/view-models/officer-dashboard-view-model.ts:90:  { id: "DDL-DEMO-001", day: "23", month: "Jul", title: "Complete initial transcript review", reference: "REQ-DEMO-001", dueLabel: "Due today", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-001" },
+features/demo/view-models/officer-dashboard-view-model.ts:154:    departmentName: firstText(request, ["departmentName", "currentDepartmentName"]) ?? departments.find((department) => department.id === departmentKey || department.name === departmentKey)?.name ?? "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:18:    | "certificate-replacement"
+features/demo-service-workflows/fixtures/service-workflows.ts:46:    title: "Complete student clearance",
+features/demo-service-workflows/fixtures/service-workflows.ts:47:    shortTitle: "Student Clearance",
+features/demo-service-workflows/fixtures/service-workflows.ts:49:      "Clear Finance, Library, your academic department and the Registrar through one tracked request.",
+features/demo-service-workflows/fixtures/service-workflows.ts:50:    category: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:54:    ownerDepartment: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:58:      "Finance clearance is complete. The Library is confirming that no materials remain outstanding.",
+features/demo-service-workflows/fixtures/service-workflows.ts:62:      "Library return receipt where applicable",
+features/demo-service-workflows/fixtures/service-workflows.ts:93:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:102:        label: "Library clearance",
+features/demo-service-workflows/fixtures/service-workflows.ts:103:        department: "Library",
+features/demo-service-workflows/fixtures/service-workflows.ts:104:        description: "Borrowed materials and library obligations are checked.",
+features/demo-service-workflows/fixtures/service-workflows.ts:112:        label: "Registrar approval",
+features/demo-service-workflows/fixtures/service-workflows.ts:113:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:117:        label: "Clearance certificate issued",
+features/demo-service-workflows/fixtures/service-workflows.ts:118:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:119:        description: "The approved clearance certificate becomes available.",
+features/demo-service-workflows/fixtures/service-workflows.ts:123:      "Student clearance certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:133:    slug: "certificate-replacement",
+features/demo-service-workflows/fixtures/service-workflows.ts:134:    title: "Replace a lost certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:135:    shortTitle: "Certificate Replacement",
+features/demo-service-workflows/fixtures/service-workflows.ts:137:      "Apply for a replacement certificate and submit identification and evidence of loss or damage.",
+features/demo-service-workflows/fixtures/service-workflows.ts:138:    category: "Certificates and Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:142:    ownerDepartment: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:146:      "The archived certificate record has been found. Student Records is validating the original issue details.",
+features/demo-service-workflows/fixtures/service-workflows.ts:150:      "Copy or photograph of the damaged certificate where available",
+features/demo-service-workflows/fixtures/service-workflows.ts:155:        id: "certificateType",
+features/demo-service-workflows/fixtures/service-workflows.ts:156:        label: "Certificate type",
+features/demo-service-workflows/fixtures/service-workflows.ts:157:        placeholder: "Select the certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:160:          "Certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:163:          "Short-course certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:167:        id: "certificateNumber",
+features/demo-service-workflows/fixtures/service-workflows.ts:168:        label: "Original certificate number",
+features/demo-service-workflows/fixtures/service-workflows.ts:174:        placeholder: "Explain what happened to the original certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:181:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:186:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:192:        description: "The original certificate record is located and compared.",
+features/demo-service-workflows/fixtures/service-workflows.ts:200:        label: "Registrar approval",
+features/demo-service-workflows/fixtures/service-workflows.ts:201:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:206:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:211:      "Replacement certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:216:    serviceHref: "/demo/services/certificate-replacement",
+features/demo-service-workflows/fixtures/service-workflows.ts:217:    applyHref: "/demo/apply/certificate-replacement",
+features/demo-service-workflows/fixtures/service-workflows.ts:222:    title: "Get an industrial attachment letter",
+features/demo-service-workflows/fixtures/service-workflows.ts:225:      "Request an introduction, placement or completion letter for your industrial attachment.",
+features/demo-service-workflows/fixtures/service-workflows.ts:272:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:309:    shortTitle: "Course Application",
+features/demo-service-workflows/fixtures/service-workflows.ts:312:    category: "Admissions",
+features/demo-service-workflows/fixtures/service-workflows.ts:316:    ownerDepartment: "Admissions",
+features/demo-service-workflows/fixtures/service-workflows.ts:322:      "National ID or birth certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:324:      "KCSE result slip or certificate",
+features/demo-service-workflows/fixtures/service-workflows.ts:325:      "Previous academic certificates",
+features/demo-service-workflows/fixtures/service-workflows.ts:338:          "Certificate in Building Technology",
+features/demo-service-workflows/fixtures/service-workflows.ts:368:        department: "Admissions",
+features/demo-service-workflows/fixtures/service-workflows.ts:373:        department: "Admissions",
+features/demo-service-workflows/fixtures/service-workflows.ts:387:        label: "Registrar approval",
+features/demo-service-workflows/fixtures/service-workflows.ts:388:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:393:        department: "Admissions",
+features/demo-service-workflows/fixtures/service-workflows.ts:419:    ownerDepartment: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:461:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:466:        department: "Student Records",
+features/demo-service-workflows/fixtures/service-workflows.ts:480:        label: "Registrar confirmation",
+features/demo-service-workflows/fixtures/service-workflows.ts:481:        department: "Registrar",
+features/demo-service-workflows/fixtures/service-workflows.ts:486:        department: "Registrar",
+features/demo-operations/components/operational-workspaces.tsx:892:      "Certificate Replacement",
+features/demo-operations/components/operational-workspaces.tsx:893:      "Registrar approval",
+features/demo-operations/components/operational-workspaces.tsx:899:      "Transcript Request",
+features/demo-operations/components/operational-workspaces.tsx:906:      "Student Clearance",
+features/demo-operations/components/operational-workspaces.tsx:1159:          <strong>REQ-2026-0715 · Transcript Request</strong>
+features/demo-operations/components/operational-workspaces.tsx:1208:          <option>Student Records</option>
+features/demo-operations/components/operational-workspaces.tsx:1210:          <option>Registrar</option>
+features/demo-operations/components/operational-workspaces.tsx:1400:      "Transcript Request",
+features/demo-operations/components/operational-workspaces.tsx:1401:      "Student Records",
+features/demo-operations/components/operational-workspaces.tsx:1407:      "Student Clearance",
+features/demo-operations/components/operational-workspaces.tsx:1414:      "Course Application",
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:81:    ["REQ-2026-0703", "Certificate Replacement", "Registrar approval", "2h 15m", "26 Jul 2026, 10:00 AM"],
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:82:    ["REQ-2026-0689", "Transcript Request", "Document review", "56m", "26 Jul 2026, 9:00 AM"],
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:83:    ["REQ-2026-0671", "Student Clearance", "Finance clearance", "35m", "27 Jul 2026, 11:00 AM"],
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:120:      service: "Certificate Replacement",
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:121:      step: "Registrar approval",
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:127:      service: "Transcript Request",
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:134:      service: "Student Clearance",
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:178:          <option>Certificate Replacement</option>
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:179:          <option>Transcript Request</option>
+features/demo-operations/components/officer-sla-workspace-fixed.tsx:180:          <option>Student Clearance</option>
+features/demo-operations/fixtures/operational-data.ts:28:    service: "Transcript Request",
+features/demo-operations/fixtures/operational-data.ts:41:    service: "Certificate Replacement",
+features/demo-operations/fixtures/operational-data.ts:54:    service: "Student Clearance",
+features/demo-operations/fixtures/operational-data.ts:67:    service: "Course Application",
+features/demo-operations/fixtures/operational-data.ts:93:    service: "Industrial Attachment Letter",
+features/demo-operations/fixtures/operational-data.ts:106:    service: "Certificate Replacement",
+features/demo-operations/fixtures/operational-data.ts:110:    step: "Registrar approval",
+features/demo-operations/fixtures/operational-data.ts:119:    service: "Transcript Request",
+features/demo-operations/fixtures/operational-data.ts:132:    service: "Student Clearance",
+features/demo-operations/fixtures/operational-data.ts:136:    step: "Library clearance",
+features/demo-operations/fixtures/operational-data.ts:176:    description: "The transcript request was submitted successfully.",
+features/demo-operations/fixtures/operational-data.ts:204:    role: "Finance Officer",
+features/demo-operations/fixtures/operational-data.ts:221:    department: "Student Records",
+features/demo-operations/fixtures/operational-data.ts:237:    department: "Student Records",
+features/demo-operations/fixtures/operational-data.ts:250:    title: "Registrar approval requested",
+features/demo-operations/fixtures/operational-data.ts:253:    department: "Student Records",
+features/demo-operations/fixtures/operational-data.ts:256:    description: "The completed records review was forwarded for Registrar approval.",
+features/demo-operations/fixtures/operational-data.ts:268:    role: "Registrar Supervisor",
+features/demo-operations/fixtures/operational-data.ts:269:    department: "Registrar",
+features/demo-operations/fixtures/operational-data.ts:315:    department: "Student Records",
+features/demo-operations/fixtures/operational-data.ts:331:    department: "Registrar",
+features/demo-engine/fixtures/officer-review.reference.ts:9:        role: "Finance Officer",
+features/demo-engine/fixtures/officer-review.reference.ts:15:        role: "Senior Finance Officer",
+features/demo-engine/fixtures/officer-review.reference.ts:21:        role: "Registrar Analyst",
+features/demo-engine/fixtures/officer-review.reference.ts:22:        departmentName: "Registrar",
+features/demo-engine/fixtures/officer-review.reference.ts:27:        role: "Student Records Officer",
+features/demo-engine/fixtures/officer-review.reference.ts:28:        departmentName: "Student Records",
+features/demo-engine/fixtures/officer-review.reference.ts:34:          "Finance verification is required before the transcript request can proceed to final review.",
+features/demo-engine/fixtures/officer-review.reference.ts:39:          "Registrar confirmation is required before the request can proceed.",
+features/demo-engine/fixtures/officer-review.reference.ts:40:        label: "Registrar confirmation",
+features/demo-engine/fixtures/officer-review.reference.ts:78:      "Finance verification is required before the transcript request can proceed to final review.",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:5:    title: "Registrar oversight",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:67:        requestTitle: "Transcript Request",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:70:        ownerDepartment: "Student Records",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:83:        requestTitle: "Certificate Replacement",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:86:        ownerDepartment: "Student Records",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:102:        ownerDepartment: "Student Records",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:118:        ownerDepartment: "Student Records",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:131:        requestTitle: "Course Registration",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:134:        ownerDepartment: "Student Records",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:151:        role: "Student Records Officer",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:161:        role: "Finance Officer",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:171:        role: "Finance Officer",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:181:        role: "Registrar Supervisor",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:209:        label: "Registrar approval",
+features/demo-engine/fixtures/supervisor-approvals.reference.ts:240:          "Two Student Records referrals were returned more than once.",
+features/demo-engine/fixtures/department-handoffs.reference.ts:11:    detail: "Student Records sent a structured Finance verification request.",
+features/demo-engine/fixtures/department-handoffs.reference.ts:27:  ["HND-DEMO-001", "REQ-DEMO-001", "Transcript Request", "Grace Wanjiku", "Student Records", "Grace Wanjiku", "Verify the submitted manual payment reference and confirm whether the student account is clear.", "Finance verification is required before the transcript request can proceed to final review.", "Return one structured result: CLEAR, HOLD or CANNOT_VERIFY.", "May 12, 2026 · 9:42 AM", "May 13, 2026", "Today", "Amina Hassan", "AH", "PENDING_ACCEPTANCE", "Pending acceptance", "orange"],
+features/demo-engine/fixtures/department-handoffs.reference.ts:30:  ["HND-DEMO-004", "REQ-DEMO-004", "Enrollment Verification", "Linda Njeri", "Admissions Office", "Brian Otieno", "Confirm the current Finance snapshot associated with the enrollment record.", "Admissions requires a Finance snapshot before confirming enrollment.", "Return the account status and any active Finance hold.", "May 11, 2026 · 2:10 PM", "May 15, 2026", "2 days left", "Marcus Lee", "ML", "RETURNED_FOR_CLARIFICATION", "Returned", "purple"],
+features/demo-engine/fixtures/department-handoffs.reference.ts:58:      ? [{ id: "DOC-DEMO-001", name: "Transcript Request Notes.pdf", summary: "PDF · 128 KB" }]
+features/demo-engine/fixtures/department-handoffs.reference.ts:66:  { id: "HND-COMPLETE-003", departmentName: "Admissions Office", requestTitle: "Enrollment Verification", completedLabel: "May 11, 2026", resultLabel: "Completed", href: "/demo/department/handoffs/HND-DEMO-004" },
+features/demo-engine/fixtures/officer-dashboard.reference.ts:90:        requestTitle: "Transcript Request",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:96:        typeLabel: "Transcript",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:105:        requestTitle: "Certificate Replacement",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:111:        typeLabel: "Certificate",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:150:        requestTitle: "Course Registration",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:171:        title: "From Admissions Office",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:172:        subject: "Transcript Request",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:181:        title: "To Finance Office",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:182:        subject: "Certificate Replacement",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:201:        title: "To Registrar Office",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:212:        subject: "Transcript Request",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:230:        subject: "Regarding my transcript request REQ-2026-0715",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:232:          "Good morning, I wanted to follow up on the status of my transcript request...",
+features/demo-engine/fixtures/officer-dashboard.reference.ts:243:        subject: "Certificate replacement follow-up",
+features/demo-admin-workflows/components/workflow-builder.tsx:80:  { id: "payment-check", kind: "verification", title: "3. Payment Check", description: "Verify payment reference and fee status", sla: "1 working day", assignee: "Finance Office" },
+features/demo-admin-workflows/components/workflow-builder.tsx:81:  { id: "hod-approval", kind: "approval", title: "4. HOD Approval", description: "Head of Department approval", sla: "2 working days", assignee: "Head of Department" },
+features/demo-admin-workflows/components/workflow-builder.tsx:82:  { id: "registrar-approval", kind: "approval", title: "5. Registrar Approval", description: "Registrar reviews the complete request", sla: "2 working days", assignee: "Registrar Office" },
+features/demo-admin-workflows/components/workflow-builder.tsx:92:  initialTemplateId = "certificate-issuance",
+features/demo-admin-workflows/components/workflow-builder.tsx:454:                  <option>Finance Office</option>
+features/demo-admin-workflows/components/workflow-builder.tsx:455:                  <option>Head of Department</option>
+features/demo-admin-workflows/components/workflow-builder.tsx:456:                  <option>Registrar Office</option>
+features/demo-admin-workflows/components/workflow-builder.tsx:524:                      <option>Registrar</option>
+features/demo-admin-workflows/components/workflow-overview.tsx:82:    href: "/demo/admin/workflows/builder?template=transcript-request",
+features/demo-admin-workflows/components/workflow-overview.tsx:88:    href: "/demo/admin/workflows/builder?template=certificate-issuance",
+features/demo-admin-workflows/components/workflow-overview.tsx:363:              <p>Frequently used workflows at Savannah Technical College.</p>
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:24:    category: "Admissions",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:31:    id: "transcript-request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:32:    name: "Transcript Request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:34:      "Records review, finance verification, registrar approval and transcript issue.",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:35:    category: "Student Records",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:42:    id: "certificate-issuance",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:43:    name: "Certificate Issuance",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:57:    category: "Academic Affairs",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:65:    name: "Course Registration",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:68:    category: "Academic Affairs",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:76:    name: "Student Clearance",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:78:      "Parallel clearance through Library, Finance, Department and Registrar.",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:86:    id: "certificate-replacement",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:87:    name: "Certificate Replacement",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:90:    category: "Student Records",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:98:    name: "Industrial Attachment Letter",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:101:    category: "Career Services",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:112:    name: "Transcript Request — John Doe",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:113:    template: "Transcript Request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:116:    currentStep: "Registrar Approval",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:121:    name: "Certificate Issuance — Maria Santos",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:122:    template: "Certificate Issuance",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:148:    name: "Transcript Request — Daniel Martinez",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:149:    template: "Transcript Request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:159:    title: "John Doe’s Transcript Request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:160:    detail: "Registrar approved the request",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:165:    title: "Maria Santos’s Certificate Issuance",
+features/demo-admin-workflows/fixtures/workflow-demo-data.ts:183:    title: "Daniel Martinez’s Transcript Request",
+features/supervisor-approvals/components/supervisor-approval-body.tsx:111:          <h1>Registrar approval</h1>
+features/supervisor-approvals/components/supervisor-approval-body.tsx:290:                    {model.registrarDepartmentName}
+features/supervisor-approvals/components/supervisor-approval-body.tsx:351:                  Student Records.
+features/supervisor-approvals/components/supervisor-approval-body.tsx:446:              <h2>Registrar Decision</h2>
+features/supervisor-approvals/components/supervisor-approval-body.tsx:521:                    Registrar-profile Supervisor and have
+features/supervisor-approvals/components/supervisor-approval-body.tsx:586:                        placeholder="Explain what Student Records must resolve."
+features/supervisor-approvals/components/supervisor-approval-body.tsx:595:                      Return to Student Records
+features/supervisor-approvals/components/supervisor-approval-body.tsx:603:              This stage records the Registrar decision only.
+features/supervisor-approvals/components/supervisor-dashboard-body.tsx:124:                  Registrar decisions ready for review.
+features/supervisor-approvals/components/supervisor-dashboard-body.tsx:139:                aria-label="Registrar approval queue"
+features/supervisor-approvals/model/supervisor-approval-model.ts:130:  readonly registrarDepartmentName: string;
