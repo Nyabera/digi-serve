@@ -10,6 +10,8 @@ import "./demo-presentation.css";
 import "./demo-accessibility.css";
 import "./demo-internal-shell.css";
 
+import { DemoRoleNavigationBridge } from "@/components/demo/role-switch/demo-role-navigation-bridge";
+
 type DemoLayoutProps = {
   readonly children: ReactNode;
 };
@@ -29,7 +31,8 @@ export default function DemoLayout({
       <DemoPresentationFrame
         controls={<DemoControlBar />}
       >
-        {children}
+        <DemoRoleNavigationBridge />
+{children}
       </DemoPresentationFrame>
           </DemoWorkspaceRoleProvider>
     </DemoStateProvider>
