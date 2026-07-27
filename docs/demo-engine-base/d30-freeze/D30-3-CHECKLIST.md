@@ -43,4 +43,4 @@
 - [x] TypeScript passes
 - [x] Lint passes
 - [x] Git whitespace validation passes
-- [ ] D30-3 is committed separately
+- [x] D30-3 is committed separately
