@@ -1,0 +1,12 @@
+.homepageFontScope,
+.homepageFontScope :where(*) {
+  font-family:
+    var(--font-plus-jakarta-sans),
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+}
+
+.homepageFontScope h2 {
+  letter-spacing: -0.025em;
+}

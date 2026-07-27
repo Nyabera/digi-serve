@@ -194,11 +194,11 @@
 
 .tableCard > header span { color: #68748e; font-size: 10px; }
 .tableScroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 760px; }
-th, td { border-bottom: 1px solid #e6ebf2; padding: 13px 16px; text-align: left; font-size: 10px; }
-th { background: #f8f9fc; color: #65718d; font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase; }
-td { color: #344163; }
-td a { color: #155eef; font-weight: 700; text-decoration: none; }
+.chartCanvas table { width: 100%; border-collapse: collapse; min-width: 760px; }
+.chartCanvas th, .chartCanvas td { border-bottom: 1px solid #e6ebf2; padding: 13px 16px; text-align: left; font-size: 10px; }
+.chartCanvas th { background: #f8f9fc; color: #65718d; font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase; }
+.chartCanvas td { color: #344163; }
+.chartCanvas td a { color: #155eef; font-weight: 700; text-decoration: none; }
 
 @media (max-width: 72rem) {
   .metricGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
