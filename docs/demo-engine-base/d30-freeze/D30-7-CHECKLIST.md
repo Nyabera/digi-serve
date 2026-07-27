@@ -22,4 +22,4 @@
 - [x] lint passes
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D30-7 is committed separately
+- [x] D30-7 is committed separately
