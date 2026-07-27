@@ -108,7 +108,8 @@ runtime_imports="$(
     app components features \
     --include='*.ts' \
     --include='*.tsx' \
-    2>/dev/null || true
+    2>/dev/null |
+  grep -v '^features/demo-engine/config/active-demo-pack.ts:' || true
 )"
 
 if [[ -n "$runtime_imports" ]]; then

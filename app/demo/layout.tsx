@@ -11,6 +11,8 @@ import "./demo-accessibility.css";
 import "./demo-internal-shell.css";
 
 import { DemoRoleNavigationBridge } from "@/components/demo/role-switch/demo-role-navigation-bridge";
+import { ActiveDemoPackProvider } from "@/features/demo-engine/config";
+
 
 type DemoLayoutProps = {
   readonly children: ReactNode;
@@ -20,6 +22,8 @@ export default function DemoLayout({
   children,
 }: DemoLayoutProps) {
   return (
+      <ActiveDemoPackProvider>
+(
     <DemoStateProvider>
       <DemoWorkspaceRoleProvider>
       <a
@@ -36,5 +40,7 @@ export default function DemoLayout({
       </DemoPresentationFrame>
           </DemoWorkspaceRoleProvider>
     </DemoStateProvider>
-  );
+  )
+      </ActiveDemoPackProvider>
+    );
 }
