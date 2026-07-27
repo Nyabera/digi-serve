@@ -35,4 +35,4 @@
 - [x] Lint passes
 - [x] Production build passes
 - [x] Git whitespace validation passes
-- [ ] D30-6 is committed separately
+- [x] D30-6 is committed separately
