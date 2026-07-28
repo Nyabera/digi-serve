@@ -1593,3 +1593,16 @@ body {
     }
   }
 }
+
+/* D30 local variable font classes */
+.font-plus-jakarta-sans {
+  --font-plus-jakarta-sans: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", sans-serif;
+}
+
+.font-inter {
+  --font-inter: "Inter Variable", Inter, sans-serif;
+}
+
+.font-source-code-pro {
+  --font-source-code-pro: "Source Code Pro Variable", "Source Code Pro", monospace;
+}
