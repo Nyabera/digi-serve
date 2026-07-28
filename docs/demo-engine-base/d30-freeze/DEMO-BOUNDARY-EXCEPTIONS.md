@@ -101,3 +101,15 @@ has been removed.
 
 This resolves the Admin workflow-catalogue and builder-content boundary
 exception. Other Savannah fixture migrations remain tracked separately.
+
+
+## D30-9 universal workflow model status
+
+The Demo Engine now normalizes every configured workflow into one universal
+model containing nodes, transitions, an entry step and terminal steps.
+
+The workflow builder consumes this neutral model rather than implementing its
+own sequence assumptions.
+
+TVET workflow names, departments, labels and approval content remain inside
+`demo-packs/tvet/workflows.ts`.

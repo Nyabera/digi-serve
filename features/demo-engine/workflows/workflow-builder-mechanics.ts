@@ -1,8 +1,8 @@
-import type {
-  DemoWorkflowConfig,
-  DemoWorkflowStepConfig,
-  DemoWorkflowStepType,
-} from "../config";
+import type { DemoWorkflowConfig } from "../config";
+import {
+  createUniversalWorkflowModel,
+  type UniversalWorkflowNode,
+} from "./universal-workflow-model";
 
 export type WorkflowBuilderNodeKind =
   | "start"
@@ -76,9 +76,9 @@ export const EMPTY_WORKFLOW_TEMPLATE: DemoWorkflowConfig = {
 };
 
 function toBuilderKind(
-  type: DemoWorkflowStepType,
+  node: UniversalWorkflowNode,
 ): WorkflowBuilderNodeKind {
-  switch (type) {
+  switch (node.type) {
     case "start":
       return "start";
     case "approval":
@@ -102,26 +102,26 @@ function toBuilderKind(
 }
 
 function defaultAssignee(
-  step: DemoWorkflowStepConfig,
+  node: UniversalWorkflowNode,
   resolveDepartmentName?: (departmentId: string) => string,
 ): string {
-  if (step.departmentId) {
+  if (node.departmentId) {
     return (
-      resolveDepartmentName?.(step.departmentId) ??
-      step.departmentId
+      resolveDepartmentName?.(node.departmentId) ??
+      node.departmentId
     );
   }
 
-  if (step.role) {
-    return step.role;
+  if (node.role) {
+    return node.role;
   }
 
   if (
-    step.type === "start" ||
-    step.type === "automation" ||
-    step.type === "notification" ||
-    step.type === "output" ||
-    step.type === "end"
+    node.type === "start" ||
+    node.type === "automation" ||
+    node.type === "notification" ||
+    node.type === "output" ||
+    node.type === "end"
   ) {
     return "System";
   }
@@ -130,21 +130,21 @@ function defaultAssignee(
 }
 
 function toBuilderNode(
-  step: DemoWorkflowStepConfig,
+  node: UniversalWorkflowNode,
   resolveDepartmentName?: (departmentId: string) => string,
 ): WorkflowBuilderNode {
   return {
-    id: step.id,
-    kind: toBuilderKind(step.type),
-    title: step.label,
+    id: node.id,
+    kind: toBuilderKind(node),
+    title: node.label,
     description:
-      step.description ??
-      step.conditionLabel ??
-      step.outputLabel ??
+      node.description ??
+      node.conditionLabel ??
+      node.outputLabel ??
       "Configured workflow step",
-    sla: step.slaId ?? "Configured target",
+    sla: node.slaId ?? "Configured target",
     assignee: defaultAssignee(
-      step,
+      node,
       resolveDepartmentName,
     ),
   };
@@ -154,44 +154,11 @@ export function createWorkflowBuilderNodes(
   workflow: DemoWorkflowConfig,
   resolveDepartmentName?: (departmentId: string) => string,
 ): WorkflowBuilderNode[] {
-  const converted = workflow.steps.map((step) =>
-    toBuilderNode(step, resolveDepartmentName),
-  );
+  const model = createUniversalWorkflowModel(workflow);
 
-  const hasStart = converted.some(
-    (node) => node.kind === "start",
+  return model.nodes.map((node) =>
+    toBuilderNode(node, resolveDepartmentName),
   );
-  const hasEnd = converted.some(
-    (node) => node.kind === "end",
-  );
-
-  return [
-    ...(hasStart
-      ? []
-      : [
-          {
-            id: `${workflow.id}-start`,
-            kind: "start" as const,
-            title: "Start",
-            description: "Workflow instance created",
-            sla: "Immediate",
-            assignee: "System",
-          },
-        ]),
-    ...converted,
-    ...(hasEnd
-      ? []
-      : [
-          {
-            id: `${workflow.id}-end`,
-            kind: "end" as const,
-            title: "End",
-            description: "Workflow completed",
-            sla: "Complete",
-            assignee: "System",
-          },
-        ]),
-  ];
 }
 
 export function createWorkflowBuilderNode(
@@ -241,5 +208,6 @@ export function reorderWorkflowBuilderNodes(
   const next = [...nodes];
   const [moved] = next.splice(sourceIndex, 1);
   next.splice(targetIndex, 0, moved);
+
   return next;
 }
