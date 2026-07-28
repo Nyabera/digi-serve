@@ -55,4 +55,4 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D30-10 is committed separately
+- [x] D30-10 is committed separately
