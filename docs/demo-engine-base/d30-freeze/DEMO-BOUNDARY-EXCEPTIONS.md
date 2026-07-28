@@ -113,3 +113,14 @@ own sequence assumptions.
 
 TVET workflow names, departments, labels and approval content remain inside
 `demo-packs/tvet/workflows.ts`.
+
+
+## D30-10 configuration validation status
+
+The Demo Engine now validates organization identity, branding, assets,
+departments, users, services, workflows, requests, reports and SLA
+cross-references before a Demo Pack is accepted.
+
+Validation is pack-neutral and does not import the TVET pack directly.
+
+The TVET pack now contains a validated pack-owned logo asset.

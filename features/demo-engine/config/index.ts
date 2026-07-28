@@ -1,3 +1,12 @@
+export {
+  validateDemoPack,
+} from "./demo-pack-validation";
+export type {
+  DemoPackValidationIssue,
+  DemoPackValidationLevel,
+  DemoPackValidationOptions,
+  DemoPackValidationResult,
+} from "./demo-pack-validation";
 export { activeDemoPack, activeDemoPackId } from "./active-demo-pack";
 export { ActiveDemoPackProvider } from "./active-demo-pack-provider";
 export { getActiveDemoPack } from "./demo-pack.server";
