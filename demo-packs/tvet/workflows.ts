@@ -7,6 +7,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Academic-record review, payment verification, approval and transcript issue.",
     category: "Student Records",
+    usageCount: 36,
+    presentationTone: "green",
     status: "published",
     steps: [
       {
@@ -58,6 +60,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Sequential and parallel clearance across institutional departments.",
     category: "Student Services",
+    usageCount: 18,
+    presentationTone: "green",
     status: "published",
     steps: [
       {
@@ -103,6 +107,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Identity validation, document review, approval and replacement issue.",
     category: "Academic Records",
+    usageCount: 12,
+    presentationTone: "purple",
     status: "published",
     steps: [
       {
@@ -154,6 +160,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Programme validation, placement review and attachment-letter generation.",
     category: "Career Services",
+    usageCount: 11,
+    presentationTone: "orange",
     status: "published",
     steps: [
       {
@@ -198,6 +206,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Programme application, academic review and admission decision.",
     category: "Admissions",
+    usageCount: 24,
+    presentationTone: "blue",
     status: "published",
     steps: [
       {
@@ -242,6 +252,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Eligibility, fee-status and capacity checks before registration.",
     category: "Academic Affairs",
+    usageCount: 22,
+    presentationTone: "purple",
     status: "published",
     steps: [
       {
@@ -287,6 +299,8 @@ export const tvetWorkflowsDraft = [
     description:
       "End-to-end application, review, payment and enrolment workflow.",
     category: "Admissions",
+    usageCount: 48,
+    presentationTone: "blue",
     status: "published",
     steps: [
       {
@@ -330,6 +344,8 @@ export const tvetWorkflowsDraft = [
     description:
       "Student request, departmental review and Registrar approval.",
     category: "Academic Affairs",
+    usageCount: 29,
+    presentationTone: "orange",
     status: "published",
     steps: [
       {

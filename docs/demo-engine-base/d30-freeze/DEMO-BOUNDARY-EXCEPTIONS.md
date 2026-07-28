@@ -84,3 +84,20 @@ runtime provider and active-pack cutover are completed.
 
 The corresponding exceptions therefore remain open, but their extraction
 destination is now implemented.
+
+
+## D30-8 workflow separation status
+
+The Admin workflow overview and visual builder now receive workflow names,
+steps, departments, request instances and presentation metadata from the active
+Demo Pack.
+
+Generic palette definitions, node conversion, node creation and reordering
+remain inside the reusable Demo Engine.
+
+The former hard-coded
+`features/demo-admin-workflows/fixtures/workflow-demo-data.ts` content fixture
+has been removed.
+
+This resolves the Admin workflow-catalogue and builder-content boundary
+exception. Other Savannah fixture migrations remain tracked separately.

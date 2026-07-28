@@ -30,26 +30,19 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { workflowTemplates } from "../fixtures/workflow-demo-data";
+import {
+  createWorkflowBuilderNode,
+  createWorkflowBuilderNodes,
+  EMPTY_WORKFLOW_TEMPLATE,
+  type WorkflowBuilderNode as WorkflowNode,
+  type WorkflowBuilderNodeKind as NodeKind,
+  WORKFLOW_STEP_PALETTE as palette,
+} from "@/features/demo-engine/workflows";
+import {
+  useDemoDepartments,
+  useDemoWorkflows,
+} from "@/features/demo-engine/config";
 import styles from "./workflow-builder.module.css";
-
-type NodeKind =
-  | "start"
-  | "approval"
-  | "verification"
-  | "task"
-  | "automated"
-  | "decision"
-  | "end";
-
-type WorkflowNode = {
-  id: string;
-  kind: NodeKind;
-  title: string;
-  description: string;
-  sla: string;
-  assignee: string;
-};
 
 type EditableField = "title" | "description" | "sla" | "assignee";
 
@@ -57,46 +50,59 @@ type WorkflowBuilderProps = {
   initialTemplateId?: string;
 };
 
-const palette: Array<{
-  kind: NodeKind;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}> = [
-  { kind: "start", title: "Start", description: "Submission initiated", icon: Play },
-  { kind: "approval", title: "Approval", description: "Require a named approval", icon: UserCheck },
-  { kind: "verification", title: "Verification", description: "Validate records or documents", icon: ShieldCheck },
-  { kind: "task", title: "Task", description: "Assign operational work", icon: FileText },
-  { kind: "automated", title: "Automated Task", description: "Run a system action", icon: Zap },
-  { kind: "decision", title: "Decision", description: "Branch using a condition", icon: GitBranch },
-  { kind: "end", title: "End", description: "Complete the workflow", icon: CheckCircle2 },
-];
-
-const initialNodes: WorkflowNode[] = [
-  { id: "start", kind: "start", title: "Start", description: "Submission initiated", sla: "Immediate", assignee: "System" },
-  { id: "submission", kind: "approval", title: "1. Submission", description: "Applicant submits request", sla: "1 working day", assignee: "Student Services" },
-  { id: "document-check", kind: "verification", title: "2. Document Check", description: "Verify documents for completeness and validity", sla: "1 working day", assignee: "Document Verification Officer" },
-  { id: "validity-decision", kind: "decision", title: "Documents Valid?", description: "Return incomplete files or continue", sla: "Immediate", assignee: "Workflow rule" },
-  { id: "payment-check", kind: "verification", title: "3. Payment Check", description: "Verify payment reference and fee status", sla: "1 working day", assignee: "Finance Office" },
-  { id: "hod-approval", kind: "approval", title: "4. HOD Approval", description: "Head of Department approval", sla: "2 working days", assignee: "Head of Department" },
-  { id: "registrar-approval", kind: "approval", title: "5. Registrar Approval", description: "Registrar reviews the complete request", sla: "2 working days", assignee: "Registrar Office" },
-  { id: "issue-document", kind: "automated", title: "6. Issue Document", description: "Generate and issue the approved document", sla: "1 working day", assignee: "Document Service" },
-  { id: "end", kind: "end", title: "End", description: "Process completed", sla: "Complete", assignee: "System" },
-];
-
-function iconForKind(kind: NodeKind) {
-  return palette.find((item) => item.kind === kind)?.icon ?? Workflow;
+function iconForKind(
+  kind: NodeKind,
+): LucideIcon {
+  switch (kind) {
+    case "start":
+      return Play;
+    case "approval":
+      return UserCheck;
+    case "verification":
+      return ShieldCheck;
+    case "task":
+      return FileText;
+    case "automated":
+      return Zap;
+    case "decision":
+      return GitBranch;
+    case "end":
+      return CheckCircle2;
+  }
 }
 
 export function WorkflowBuilder({
-  initialTemplateId = "certificate-issuance",
+  initialTemplateId = "transcript-request",
 }: WorkflowBuilderProps) {
-  const nodeIdSequenceRef = useRef(initialNodes.length);
+  const workflows = useDemoWorkflows();
+  const departments = useDemoDepartments();
   const selectedTemplate =
-    workflowTemplates.find((template) => template.id === initialTemplateId) ??
-    workflowTemplates[2];
+    workflows.find(
+      (workflow) => workflow.id === initialTemplateId,
+    ) ??
+    workflows[0] ??
+    EMPTY_WORKFLOW_TEMPLATE;
 
-  const [nodes, setNodes] = useState<WorkflowNode[]>(initialNodes);
+  const initialBuilderNodes = useMemo(
+    () =>
+      createWorkflowBuilderNodes(
+        selectedTemplate,
+        (departmentId) =>
+          departments.find(
+            (department) =>
+              department.id === departmentId,
+          )?.name ?? departmentId,
+      ),
+    [departments, selectedTemplate],
+  );
+
+  const nodeIdSequenceRef = useRef(
+    initialBuilderNodes.length,
+  );
+
+  const [nodes, setNodes] = useState<WorkflowNode[]>(
+    initialBuilderNodes,
+  );
   const [selectedId, setSelectedId] = useState("document-check");
   const [status, setStatus] = useState(
     `${selectedTemplate.name} template loaded in demo mode.`,
@@ -109,26 +115,16 @@ export function WorkflowBuilder({
   );
 
   const addNode = (kind: NodeKind) => {
-    const item = palette.find((entry) => entry.kind === kind);
-    if (!item) return;
-
     nodeIdSequenceRef.current += 1;
-    const id = `${kind}-${nodeIdSequenceRef.current}`;
-    const node: WorkflowNode = {
-      id,
+
+    const node = createWorkflowBuilderNode(
       kind,
-      title: item.title,
-      description: item.description,
-      sla: kind === "end" ? "Complete" : "1 working day",
-      assignee:
-        kind === "automated" || kind === "start" || kind === "end"
-          ? "System"
-          : "Unassigned role",
-    };
+      nodeIdSequenceRef.current,
+    );
 
     setNodes((current) => [...current, node]);
-    setSelectedId(id);
-    setStatus(`${item.title} added to the workflow.`);
+    setSelectedId(node.id);
+    setStatus(`${node.title} added to the workflow.`);
   };
 
   const handlePaletteDragStart = (
@@ -272,7 +268,7 @@ export function WorkflowBuilder({
             {palette
               .filter((item) => item.kind === "start" || item.kind === "end")
               .map((item) => {
-                const Icon = item.icon;
+                const Icon = iconForKind(item.kind);
                 return (
                   <button
                     draggable
@@ -294,7 +290,7 @@ export function WorkflowBuilder({
             {palette
               .filter((item) => item.kind !== "start" && item.kind !== "end")
               .map((item) => {
-                const Icon = item.icon;
+                const Icon = iconForKind(item.kind);
                 return (
                   <button
                     draggable
@@ -450,7 +446,7 @@ export function WorkflowBuilder({
                 >
                   <option>{selectedNode.assignee}</option>
                   <option>Student Services</option>
-                  <option>Document Verification Officer</option>
+                  <option>Verification Officer</option>
                   <option>Finance Office</option>
                   <option>Head of Department</option>
                   <option>Registrar Office</option>

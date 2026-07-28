@@ -21,11 +21,12 @@ import {
   Workflow,
 } from "lucide-react";
 
+import { useDemoPack } from "@/features/demo-engine/config";
 import {
-  activeWorkflowRows,
-  recentWorkflowActivity,
-  workflowTemplates,
-} from "../fixtures/workflow-demo-data";
+  buildActiveWorkflowRows,
+  buildRecentWorkflowActivity,
+  buildWorkflowTemplateCards,
+} from "../lib/workflow-view-models";
 import styles from "./workflow-overview.module.css";
 
 type OverviewTab = "templates" | "active";
@@ -79,19 +80,19 @@ const quickActions = [
   {
     title: "Workflow Builder",
     detail: "Build custom workflows visually",
-    href: "/demo/admin/workflows/builder?template=transcript-request",
+    href: "/demo/admin/workflows/builder",
     icon: Workflow,
   },
   {
     title: "Manage Approval Chains",
     detail: "Create and manage approval chains",
-    href: "/demo/admin/workflows/builder?template=certificate-issuance",
+    href: "/demo/admin/workflows/builder",
     icon: GitBranch,
   },
   {
     title: "Escalation Rules",
     detail: "Configure escalation conditions",
-    href: "/demo/admin/workflows/builder?template=student-clearance",
+    href: "/demo/admin/workflows/builder",
     icon: ShieldCheck,
   },
 ];
@@ -111,6 +112,19 @@ function statusClass(status: string) {
 export function WorkflowOverview({
   initialTab = "templates",
 }: WorkflowOverviewProps) {
+  const pack = useDemoPack();
+  const workflowTemplates = useMemo(
+    () => buildWorkflowTemplateCards(pack),
+    [pack],
+  );
+  const activeWorkflowRows = useMemo(
+    () => buildActiveWorkflowRows(pack),
+    [pack],
+  );
+  const recentWorkflowActivity = useMemo(
+    () => buildRecentWorkflowActivity(pack),
+    [pack],
+  );
   const [tab, setTab] = useState<OverviewTab>(initialTab);
   const [query, setQuery] = useState("");
 
@@ -132,7 +146,7 @@ export function WorkflowOverview({
         .toLowerCase()
         .includes(normalized),
     );
-  }, [query]);
+  }, [query, workflowTemplates]);
 
   return (
     <main className={styles.page}>

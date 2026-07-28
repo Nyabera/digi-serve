@@ -49,6 +49,7 @@ export type {
   DemoTrendDirection,
   DemoUserConfig,
   DemoWorkflowConfig,
+  DemoWorkflowPresentationTone,
   DemoWorkflowStatus,
   DemoWorkflowStepConfig,
   DemoWorkflowStepType,

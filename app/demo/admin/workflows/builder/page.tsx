@@ -16,7 +16,7 @@ export default async function WorkflowBuilderPage({
 
   return (
     <WorkflowBuilder
-      initialTemplateId={template ?? "certificate-issuance"}
+      initialTemplateId={template ?? "transcript-request"}
     />
   );
 }

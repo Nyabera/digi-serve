@@ -19,6 +19,12 @@ export type DemoWorkflowStatus =
   | "published"
   | "archived";
 
+export type DemoWorkflowPresentationTone =
+  | "blue"
+  | "green"
+  | "purple"
+  | "orange";
+
 export type DemoWorkflowStepType =
   | "start"
   | "submission"
@@ -152,6 +158,8 @@ export interface DemoWorkflowConfig {
   readonly description?: string;
   readonly category?: string;
   readonly status: DemoWorkflowStatus;
+  readonly usageCount?: number;
+  readonly presentationTone?: DemoWorkflowPresentationTone;
   readonly steps: readonly DemoWorkflowStepConfig[];
 }
 
