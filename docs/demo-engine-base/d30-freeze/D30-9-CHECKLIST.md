@@ -37,4 +37,4 @@
 - [ ] tests pass
 - [ ] production build passes
 - [ ] Git whitespace validation passes
-- [ ] D30-9 is committed separately
+- [x] D30-9 is committed separately
