@@ -50,6 +50,24 @@ export type DemoRequestStatus =
   | "rejected"
   | "overdue";
 
+
+export type DemoIssuedDocumentStatus =
+  | "valid"
+  | "revoked"
+  | "expired"
+  | "replaced";
+
+export type DemoDocumentReviewStatus =
+  | "pending"
+  | "in-review"
+  | "approved"
+  | "rejected";
+
+export type DemoVerificationLogResult =
+  | "successful"
+  | "failed"
+  | "pending";
+
 export type DemoPublicVerificationStatus =
   | "valid"
   | "revoked"
@@ -182,6 +200,46 @@ export interface DemoRequestConfig {
   readonly data?: DemoRecord;
 }
 
+
+export interface DemoIssuedDocumentConfig {
+  readonly id: string;
+  readonly requestId: string;
+  readonly applicantName: string;
+  readonly documentType: string;
+  readonly issuedAt: string;
+  readonly expiresAt?: string;
+  readonly views: number;
+  readonly status: DemoIssuedDocumentStatus;
+}
+
+export interface DemoDocumentReviewConfig {
+  readonly id: string;
+  readonly requestId: string;
+  readonly applicantName: string;
+  readonly documentType: string;
+  readonly category: string;
+  readonly submittedAt: string;
+  readonly reviewerName: string;
+  readonly dueAt: string;
+  readonly status: DemoDocumentReviewStatus;
+}
+
+export interface DemoVerificationLogConfig {
+  readonly id: string;
+  readonly documentId: string;
+  readonly applicantName: string;
+  readonly documentType: string;
+  readonly verifiedAt: string;
+  readonly result: DemoVerificationLogResult;
+  readonly verifiedBy: string;
+}
+
+export interface DemoDocumentHubConfig {
+  readonly issuedDocuments: readonly DemoIssuedDocumentConfig[];
+  readonly reviewQueue: readonly DemoDocumentReviewConfig[];
+  readonly verificationLogs: readonly DemoVerificationLogConfig[];
+}
+
 export interface DemoPublicVerificationRecordConfig {
   readonly token: string;
   readonly verificationCode: string;
@@ -278,5 +336,6 @@ export interface DemoPack {
   readonly requests: readonly DemoRequestConfig[];
   readonly reports: DemoReportConfig;
   readonly sla: DemoSlaConfig;
+  readonly documents: DemoDocumentHubConfig;
   readonly verification: DemoVerificationConfig;
 }

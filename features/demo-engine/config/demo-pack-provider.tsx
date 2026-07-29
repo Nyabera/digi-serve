@@ -64,6 +64,10 @@ export function useDemoWorkflows() {
   return useDemoPack().workflows;
 }
 
+export function useDemoDocuments() {
+  return useDemoPack().documents;
+}
+
 export function useDemoRequests() {
   return useDemoPack().requests;
 }

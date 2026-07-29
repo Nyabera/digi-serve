@@ -1,4 +1,5 @@
 import {
+  Files,
   BarChart3,
   Bell,
   Building2,
@@ -107,6 +108,11 @@ const officerNavigation: readonly InternalNavigationGroup[] = [
         exact: true,
       },
       { label: "My tasks", href: "/demo/officer/tasks", icon: ListChecks },
+      {
+        label: "Documents Hub",
+        href: "/demo/officer/documents",
+        icon: Files,
+      },
       {
         label: "Application queue",
         href: "/demo/officer#application-queue",
