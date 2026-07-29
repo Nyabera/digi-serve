@@ -1,0 +1,35 @@
+D30-10F DEMO FREEZE VERIFICATION REPORT
+========================================
+Generated: 2026-07-29 13:51:31 EAT
+Branch: feat/demo-engine-base
+Base commit: d39be8a
+Node: v24.18.0
+npm: 12.0.1
+Next.js: 16.2.10
+
+RESULTS
+-------
+PASS: freeze alignment
+PASS: Demo Pack configuration
+PASS: 8 expected synthetic workflow-boundary pairs
+PASS: D30-10A verification
+PASS: D30-10B verification
+PASS: D30-10C verification
+PASS: D30-10D verification
+PASS: D30-10E verification
+PASS: TypeScript
+PASS: lint
+PASS: tests
+PASS: production build
+PASS: route build alignment
+PASS: Git whitespace validation
+PASS: live route smoke test
+
+EXPECTED NOTICES
+----------------
+Synthetic Start/End notices are expected because the universal workflow model supplies missing boundary nodes.
+They are retained in the raw validation log and are not configuration failures.
+
+RAW LOG DIRECTORY
+-----------------
+/var/folders/zd/h7_r0_253t357fnt82pn602c0000gn/T//faidia-d30-10f-logs

@@ -136,3 +136,19 @@
 - [ ] role state updates when a workspace route changes
 - [ ] public verification does not impersonate a staff role
 - [ ] all D30-10A through D30-10D routes load
+
+
+## D30-10F freeze gate
+
+- [ ] Demo Pack validation has zero errors
+- [ ] expected synthetic workflow-boundary notices are balanced
+- [ ] no unexpected validation warnings remain
+- [ ] D30-10A through D30-10E verifiers pass
+- [ ] TypeScript passes
+- [ ] lint passes
+- [ ] tests pass
+- [ ] production build passes
+- [ ] generated route output contains every D30-10 route
+- [ ] Git whitespace validation passes
+- [ ] freeze verification report is generated
+- [ ] complete Demo journeys are manually reviewed

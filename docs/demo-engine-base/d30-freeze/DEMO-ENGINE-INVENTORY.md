@@ -84,3 +84,15 @@ D30-10E centralizes:
 - Admin workflow routes;
 - role-switch destinations;
 - session-scoped Demo role and route state.
+
+
+## D30-10F freeze-gate tooling
+
+- architecture-alignment verifier;
+- aggregated D30-10A through D30-10E verification;
+- Demo Pack warning classification;
+- TypeScript, lint and test gate;
+- offline-safe production build gate;
+- generated route alignment;
+- optional live localhost route smoke testing;
+- reproducible freeze verification report.

@@ -157,3 +157,13 @@ The route registry is pack-neutral and contains no Savannah content.
 `sessionStorage` is used only for temporary Demo presentation state. It is not a
 production authorization source and must not replace server-side membership,
 permission or organization checks.
+
+
+## D30-10F expected validation notices
+
+`SYNTHETIC_START` and `SYNTHETIC_END` are expected notices from the universal
+workflow model. The freeze gate requires them to be balanced and fails on any
+other warning.
+
+The notices are preserved in raw validation logs rather than removed from the
+underlying validator.
