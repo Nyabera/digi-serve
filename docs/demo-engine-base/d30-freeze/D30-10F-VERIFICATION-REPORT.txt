@@ -1,8 +1,8 @@
 D30-10F DEMO FREEZE VERIFICATION REPORT
 ========================================
-Generated: 2026-07-29 13:51:31 EAT
+Generated: 2026-07-29 14:05:23 EAT
 Branch: feat/demo-engine-base
-Base commit: d39be8a
+Base commit: 2d8de87
 Node: v24.18.0
 npm: 12.0.1
 Next.js: 16.2.10
@@ -23,7 +23,7 @@ PASS: tests
 PASS: production build
 PASS: route build alignment
 PASS: Git whitespace validation
-PASS: live route smoke test
+NOT RUN: optional live route smoke test
 
 EXPECTED NOTICES
 ----------------
