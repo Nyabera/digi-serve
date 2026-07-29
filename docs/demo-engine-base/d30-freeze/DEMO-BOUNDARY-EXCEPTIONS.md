@@ -124,3 +124,15 @@ cross-references before a Demo Pack is accepted.
 Validation is pack-neutral and does not import the TVET pack directly.
 
 The TVET pack now contains a validated pack-owned logo asset.
+
+
+## D30-10C applicant-profile status
+
+The Applicant profile UI consumes neutral configuration through
+`useDemoApplicantProfile()`.
+
+Savannah applicant identity, academic details and seeded preferences remain in
+`demo-packs/tvet/applicant-profile.ts`.
+
+The reusable Applicant shell is owned by `app/demo/applicant/layout.tsx` and
+will also support the D30-10D document vault.

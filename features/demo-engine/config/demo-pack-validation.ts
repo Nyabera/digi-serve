@@ -1,3 +1,4 @@
+import { validateDemoApplicantProfileConfig } from "./demo-applicant-profile-validation";
 import { validateDemoVerificationConfig } from "./demo-verification-validation";
 import type {
   DemoPack,
@@ -877,6 +878,20 @@ export function validateDemoPack(
 
   for (const issue of validateDemoVerificationConfig(pack.verification)) {
     add(issue.level, issue.code, issue.path, issue.message);
+  }
+
+  for (
+    const issue
+    of validateDemoApplicantProfileConfig(
+      pack.applicantProfile,
+    )
+  ) {
+    add(
+      issue.level,
+      issue.code,
+      issue.path,
+      issue.message,
+    );
   }
 
   const errors = issues.filter(

@@ -68,6 +68,11 @@ export function useDemoDocuments() {
   return useDemoPack().documents;
 }
 
+export function useDemoApplicantProfile() {
+  return useDemoPack().applicantProfile;
+}
+
+
 export function useDemoRequests() {
   return useDemoPack().requests;
 }

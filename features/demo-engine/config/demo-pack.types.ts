@@ -201,6 +201,53 @@ export interface DemoRequestConfig {
 }
 
 
+export interface DemoApplicantVerificationConfig {
+  readonly emailVerifiedAt: string;
+  readonly phoneVerifiedAt: string;
+  readonly studentRecordMatchedAt: string;
+}
+
+export interface DemoApplicantCommunicationPreferencesConfig {
+  readonly emailNotifications: boolean;
+  readonly smsNotifications: boolean;
+  readonly inAppNotifications: boolean;
+  readonly requestUpdates: boolean;
+  readonly paymentConfirmations: boolean;
+  readonly documentIssuedAlerts: boolean;
+}
+
+export interface DemoApplicantSecurityConfig {
+  readonly twoFactorEnabled: boolean;
+  readonly activeSessions: number;
+}
+
+export interface DemoApplicantProfileConfig {
+  readonly id: string;
+  readonly fullName: string;
+  readonly preferredName: string;
+  readonly roleLabel: string;
+  readonly studentNumber: string;
+  readonly email: string;
+  readonly phone: string;
+  readonly alternatePhone?: string;
+  readonly dateOfBirth: string;
+  readonly gender: string;
+  readonly nationality: string;
+  readonly maritalStatus: string;
+  readonly homeAddress: string;
+  readonly programme: string;
+  readonly department: string;
+  readonly campus: string;
+  readonly intake: string;
+  readonly yearOfStudy: string;
+  readonly expectedCompletion: string;
+  readonly profileCompletion: number;
+  readonly verification: DemoApplicantVerificationConfig;
+  readonly communicationPreferences:
+    DemoApplicantCommunicationPreferencesConfig;
+  readonly security: DemoApplicantSecurityConfig;
+}
+
 export interface DemoIssuedDocumentConfig {
   readonly id: string;
   readonly requestId: string;
@@ -337,5 +384,6 @@ export interface DemoPack {
   readonly reports: DemoReportConfig;
   readonly sla: DemoSlaConfig;
   readonly documents: DemoDocumentHubConfig;
+  readonly applicantProfile: DemoApplicantProfileConfig;
   readonly verification: DemoVerificationConfig;
 }

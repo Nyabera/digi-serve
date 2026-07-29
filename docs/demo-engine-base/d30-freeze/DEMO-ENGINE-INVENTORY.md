@@ -47,3 +47,15 @@
 - active-pack entry point;
 - provider and selectors;
 - shared responsive and accessibility rules.
+
+
+## Applicant profile workspace
+
+- reusable Applicant shell;
+- profile summary and completion indicator;
+- personal and contact information;
+- institution details;
+- verified contact and student-record status;
+- communication preferences;
+- security settings;
+- responsive Applicant navigation.

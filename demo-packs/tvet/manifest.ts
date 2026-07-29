@@ -3,6 +3,7 @@ import type { DemoPack } from "../../features/demo-engine/config";
 import { tvetBrandingDraft } from "./branding";
 import { tvetDepartmentsDraft } from "./departments";
 import { tvetDocumentsDraft } from "./documents";
+import { tvetApplicantProfileDraft } from "./applicant-profile";
 import { tvetHomepageDraft } from "./homepage";
 import { tvetOrganizationDraft } from "./organization";
 import { tvetReportsDraft } from "./reports";
@@ -27,6 +28,7 @@ export const tvetDemoPackDraft = {
   homepage: tvetHomepageDraft,
   departments: tvetDepartmentsDraft,
   documents: tvetDocumentsDraft,
+  applicantProfile: tvetApplicantProfileDraft,
   users: tvetUsersDraft,
   services: tvetServicesDraft,
   workflows: tvetWorkflowsDraft,

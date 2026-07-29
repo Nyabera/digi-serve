@@ -86,3 +86,21 @@
 - [ ] limitations are documented
 - [ ] environment is recorded
 - [ ] screenshots are captured
+
+
+## Applicant profile
+
+- [ ] `/demo/applicant/profile` loads
+- [ ] `/demo/applicant` redirects to the profile
+- [ ] applicant shell shows one sidebar and one top bar
+- [ ] profile summary renders
+- [ ] profile-completion indicator renders
+- [ ] personal information renders
+- [ ] contact information renders
+- [ ] institution details render
+- [ ] verification status renders
+- [ ] membership information renders
+- [ ] communication-preference controls respond
+- [ ] security controls respond
+- [ ] responsive layouts remain usable
+- [ ] no duplicate shell appears

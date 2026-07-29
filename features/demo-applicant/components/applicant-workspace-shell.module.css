@@ -1,0 +1,282 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  background: #f7f9fc;
+  color: #101828;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e4e7ec;
+  background: #ffffff;
+}
+
+.brand {
+  min-height: 84px;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.brandMark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 15px;
+  background:
+    linear-gradient(145deg, #174b9f, #0b2758);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand strong {
+  color: #101828;
+  font-size: 16px;
+}
+
+.brand small {
+  margin-top: 3px;
+  color: #667085;
+  font-size: 11px;
+}
+
+.navigation {
+  padding: 20px 14px;
+  display: grid;
+  gap: 7px;
+}
+
+.navigation a,
+.sidebarFooter a {
+  min-height: 44px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 9px;
+  color: #344054;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.navigation a:hover,
+.sidebarFooter a:hover {
+  background: #f4f7fb;
+  color: #155eef;
+}
+
+.navigation a[aria-current="page"] {
+  background: #edf3ff;
+  color: #155eef;
+  box-shadow:
+    inset 3px 0 0 #155eef;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  padding: 16px 14px 22px;
+  display: grid;
+  gap: 7px;
+  border-top: 1px solid #eaecf0;
+}
+
+.main {
+  min-width: 0;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 76px;
+  padding: 0 clamp(18px, 3vw, 34px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #e4e7ec;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+}
+
+.menuButton,
+.notificationButton {
+  display: grid;
+  place-items: center;
+  border: 1px solid #d0d5dd;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #344054;
+  cursor: pointer;
+}
+
+.menuButton {
+  width: 42px;
+  height: 42px;
+  display: none;
+}
+
+.search {
+  width: min(560px, 100%);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #667085;
+}
+
+.search:focus-within {
+  border-color: #155eef;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.12);
+}
+
+.search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #101828;
+  font: inherit;
+  font-size: 13px;
+}
+
+.topbarActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notificationButton {
+  position: relative;
+  width: 42px;
+  height: 42px;
+}
+
+.notificationButton span {
+  position: absolute;
+  top: -7px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: #d92d20;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #101828;
+  text-decoration: none;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce8ff;
+  color: #175cd3;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.profileLink strong,
+.profileLink small {
+  display: block;
+}
+
+.profileLink strong {
+  font-size: 12px;
+}
+
+.profileLink small {
+  margin-top: 3px;
+  color: #667085;
+  font-size: 10px;
+}
+
+.content {
+  min-width: 0;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 920px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    width: min(286px, 86vw);
+    transform: translateX(-105%);
+    box-shadow: 18px 0 40px rgba(16, 24, 40, 0.16);
+    transition: transform 180ms ease;
+  }
+
+  .sidebar[data-open="true"] {
+    transform: translateX(0);
+  }
+
+  .menuButton {
+    display: grid;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    padding: 0 14px;
+  }
+
+  .search {
+    flex: 1;
+  }
+
+  .profileLink > span:last-child {
+    display: none;
+  }
+
+  .topbarActions {
+    gap: 10px;
+  }
+}
