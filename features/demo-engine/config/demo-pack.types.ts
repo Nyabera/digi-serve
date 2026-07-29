@@ -50,6 +50,12 @@ export type DemoRequestStatus =
   | "rejected"
   | "overdue";
 
+export type DemoPublicVerificationStatus =
+  | "valid"
+  | "revoked"
+  | "expired"
+  | "replaced";
+
 export type DemoSlaState =
   | "on-track"
   | "at-risk"
@@ -176,6 +182,28 @@ export interface DemoRequestConfig {
   readonly data?: DemoRecord;
 }
 
+export interface DemoPublicVerificationRecordConfig {
+  readonly token: string;
+  readonly verificationCode: string;
+  readonly status: DemoPublicVerificationStatus;
+  readonly institution: string;
+  readonly issuingOffice: string;
+  readonly documentType: string;
+  readonly maskedHolderName: string;
+  readonly certificateReference: string;
+  readonly issuedAt: string;
+  readonly verifiedAt: string;
+  readonly replacementReference?: string;
+  readonly publicNote?: string;
+}
+
+export interface DemoVerificationConfig {
+  readonly defaultCode: string;
+  readonly privacyNotice: string;
+  readonly disclaimer: string;
+  readonly records: readonly DemoPublicVerificationRecordConfig[];
+}
+
 export interface DemoReportMetricConfig {
   readonly id: string;
   readonly label: string;
@@ -250,4 +278,5 @@ export interface DemoPack {
   readonly requests: readonly DemoRequestConfig[];
   readonly reports: DemoReportConfig;
   readonly sla: DemoSlaConfig;
+  readonly verification: DemoVerificationConfig;
 }

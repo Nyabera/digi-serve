@@ -407,6 +407,7 @@ export function SavannahHomepage() {
               <nav className={styles.desktopNav} aria-label="Student services">
                 <a href="#services">Services</a>
                 <Link href="/demo/track">My requests</Link>
+
                 <a href="#support">Student support</a>
                 <a href="#story">About the college</a>
               </nav>
@@ -867,6 +868,9 @@ export function SavannahHomepage() {
             <Link href="/demo/reports">Operational reports</Link>
           </div>
         </div>
+        <nav aria-label="Footer navigation">
+          <Link href="/demo/verify-certificate">Verify Certificate</Link>
+        </nav>
       </footer>
     </div>
   );

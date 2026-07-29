@@ -1,3 +1,4 @@
+import { validateDemoVerificationConfig } from "./demo-verification-validation";
 import type {
   DemoPack,
   DemoWorkflowConfig,
@@ -872,6 +873,10 @@ export function validateDemoPack(
         "Average resolution time cannot be negative.",
       );
     }
+  }
+
+  for (const issue of validateDemoVerificationConfig(pack.verification)) {
+    add(issue.level, issue.code, issue.path, issue.message);
   }
 
   const errors = issues.filter(

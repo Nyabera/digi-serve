@@ -1,4 +1,10 @@
 export {
+  validateDemoVerificationConfig,
+} from "./demo-verification-validation";
+export type {
+  DemoVerificationValidationIssue,
+} from "./demo-verification-validation";
+export {
   validateDemoPack,
 } from "./demo-pack-validation";
 export type {
@@ -47,6 +53,9 @@ export type {
   DemoReportChartConfig,
   DemoReportConfig,
   DemoReportMetricConfig,
+  DemoPublicVerificationRecordConfig,
+  DemoPublicVerificationStatus,
+  DemoVerificationConfig,
   DemoRequestConfig,
   DemoRequestStatus,
   DemoRole,

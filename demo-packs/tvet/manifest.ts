@@ -10,6 +10,7 @@ import { tvetServicesDraft } from "./services";
 import { tvetSlaDraft } from "./sla";
 import { tvetUsersDraft } from "./users";
 import { tvetWorkflowsDraft } from "./workflows";
+import { tvetVerificationDraft } from "./verification";
 
 export const tvetDemoPackDraft = {
   id: "tvet",
@@ -30,4 +31,5 @@ export const tvetDemoPackDraft = {
   requests: tvetRequestsDraft,
   reports: tvetReportsDraft,
   sla: tvetSlaDraft,
+  verification: tvetVerificationDraft,
 } satisfies DemoPack;
