@@ -1,4 +1,10 @@
 export {
+  validateDemoApplicantDocumentVaultConfig,
+} from "./demo-applicant-document-vault-validation";
+export type {
+  DemoApplicantDocumentVaultValidationIssue,
+} from "./demo-applicant-document-vault-validation";
+export {
   validateDemoApplicantProfileConfig,
 } from "./demo-applicant-profile-validation";
 export type {
@@ -28,6 +34,7 @@ export {
   useDemoDepartments,
   useDemoDocuments,
   useDemoApplicantProfile,
+  useDemoApplicantDocumentVault,
   useDemoHomepage,
   useDemoOrganization,
   useDemoPack,
@@ -54,6 +61,10 @@ export type {
   DemoApplicantVerificationConfig,
   DemoApplicantSecurityConfig,
   DemoApplicantProfileConfig,
+  DemoApplicantDocumentVaultConfig,
+  DemoApplicantDocumentStatus,
+  DemoApplicantDocumentKind,
+  DemoApplicantDocumentConfig,
   DemoApplicantCommunicationPreferencesConfig,
   DemoVerificationLogResult,
   DemoVerificationLogConfig,

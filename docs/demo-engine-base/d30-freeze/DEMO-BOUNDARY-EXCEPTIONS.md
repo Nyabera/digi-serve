@@ -136,3 +136,15 @@ Savannah applicant identity, academic details and seeded preferences remain in
 
 The reusable Applicant shell is owned by `app/demo/applicant/layout.tsx` and
 will also support the D30-10D document vault.
+
+
+## D30-10D applicant-document-vault status
+
+The Applicant vault consumes neutral configuration through
+`useDemoApplicantDocumentVault()`.
+
+Savannah upload, letter and certificate records remain in
+`demo-packs/tvet/applicant-document-vault.ts`.
+
+The Demo uses non-sensitive seeded metadata and simulated file actions. It does not expose
+permanent public file URLs or write to production storage.

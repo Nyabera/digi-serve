@@ -221,6 +221,41 @@ export interface DemoApplicantSecurityConfig {
   readonly activeSessions: number;
 }
 
+export type DemoApplicantDocumentKind =
+  | "upload"
+  | "generated-letter"
+  | "certificate";
+
+export type DemoApplicantDocumentStatus =
+  | "verified"
+  | "under-review"
+  | "issued"
+  | "expired"
+  | "rejected";
+
+export interface DemoApplicantDocumentConfig {
+  readonly id: string;
+  readonly fileName: string;
+  readonly displayName: string;
+  readonly kind: DemoApplicantDocumentKind;
+  readonly category: string;
+  readonly mimeType: string;
+  readonly sizeBytes: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly status: DemoApplicantDocumentStatus;
+  readonly requestId?: string;
+  readonly expiresAt?: string;
+  readonly verificationCode?: string;
+  readonly downloadable: boolean;
+}
+
+export interface DemoApplicantDocumentVaultConfig {
+  readonly storageUsedBytes: number;
+  readonly storageLimitBytes: number;
+  readonly documents: readonly DemoApplicantDocumentConfig[];
+}
+
 export interface DemoApplicantProfileConfig {
   readonly id: string;
   readonly fullName: string;
@@ -385,5 +420,6 @@ export interface DemoPack {
   readonly sla: DemoSlaConfig;
   readonly documents: DemoDocumentHubConfig;
   readonly applicantProfile: DemoApplicantProfileConfig;
+  readonly applicantDocumentVault: DemoApplicantDocumentVaultConfig;
   readonly verification: DemoVerificationConfig;
 }

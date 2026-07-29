@@ -59,3 +59,15 @@
 - communication preferences;
 - security settings;
 - responsive Applicant navigation.
+
+
+## Applicant document vault
+
+- My Uploads;
+- Generated Letters;
+- Certificates;
+- vault search;
+- document metadata table;
+- storage usage;
+- verification-aware document status;
+- simulated upload, preview and download actions.

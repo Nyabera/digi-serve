@@ -1,3 +1,4 @@
+import { validateDemoApplicantDocumentVaultConfig } from "./demo-applicant-document-vault-validation";
 import { validateDemoApplicantProfileConfig } from "./demo-applicant-profile-validation";
 import { validateDemoVerificationConfig } from "./demo-verification-validation";
 import type {
@@ -884,6 +885,20 @@ export function validateDemoPack(
     const issue
     of validateDemoApplicantProfileConfig(
       pack.applicantProfile,
+    )
+  ) {
+    add(
+      issue.level,
+      issue.code,
+      issue.path,
+      issue.message,
+    );
+  }
+
+  for (
+    const issue
+    of validateDemoApplicantDocumentVaultConfig(
+      pack.applicantDocumentVault,
     )
   ) {
     add(

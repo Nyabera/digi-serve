@@ -4,6 +4,7 @@ import {
   Bell,
   CircleHelp,
   ClipboardList,
+  FolderOpen,
   Home,
   LogOut,
   Menu,
@@ -40,6 +41,11 @@ const navigation = [
     label: "My Requests",
     href: "/demo/track",
     icon: ClipboardList,
+  },
+  {
+    label: "My Documents",
+    href: "/demo/applicant/documents",
+    icon: FolderOpen,
   },
   {
     label: "My Profile",

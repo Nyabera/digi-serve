@@ -73,6 +73,11 @@ export function useDemoApplicantProfile() {
 }
 
 
+export function useDemoApplicantDocumentVault() {
+  return useDemoPack().applicantDocumentVault;
+}
+
+
 export function useDemoRequests() {
   return useDemoPack().requests;
 }

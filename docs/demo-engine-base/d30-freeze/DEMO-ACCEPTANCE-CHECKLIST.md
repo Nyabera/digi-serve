@@ -104,3 +104,20 @@
 - [ ] security controls respond
 - [ ] responsive layouts remain usable
 - [ ] no duplicate shell appears
+
+
+## Applicant document vault
+
+- [ ] `/demo/applicant/documents` loads
+- [ ] Applicant sidebar contains My Documents
+- [ ] My Uploads tab works
+- [ ] Generated Letters tab works
+- [ ] Certificates tab works
+- [ ] search filters the active tab
+- [ ] metrics render
+- [ ] storage usage renders
+- [ ] upload action provides Demo feedback
+- [ ] preview, download and more actions provide Demo feedback
+- [ ] document statuses render
+- [ ] responsive layouts remain usable
+- [ ] exactly one Applicant shell appears
