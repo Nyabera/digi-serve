@@ -71,3 +71,16 @@
 - storage usage;
 - verification-aware document status;
 - simulated upload, preview and download actions.
+
+
+## Central Demo route registry
+
+D30-10E centralizes:
+
+- public verification;
+- Applicant request, profile and document routes;
+- Officer document and SLA routes;
+- Supervisor workspace routes;
+- Admin workflow routes;
+- role-switch destinations;
+- session-scoped Demo role and route state.

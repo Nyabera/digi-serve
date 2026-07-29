@@ -148,3 +148,12 @@ Savannah upload, letter and certificate records remain in
 
 The Demo uses non-sensitive seeded metadata and simulated file actions. It does not expose
 permanent public file URLs or write to production storage.
+
+
+## D30-10E navigation-state status
+
+The route registry is pack-neutral and contains no Savannah content.
+
+`sessionStorage` is used only for temporary Demo presentation state. It is not a
+production authorization source and must not replace server-side membership,
+permission or organization checks.

@@ -121,3 +121,18 @@
 - [ ] document statuses render
 - [ ] responsive layouts remain usable
 - [ ] exactly one Applicant shell appears
+
+
+## D30-10E route and Demo-state integration
+
+- [ ] homepage footer links to `/demo/verify-certificate`
+- [ ] verification link does not appear in the homepage top navigation
+- [ ] Applicant navigation links to requests, documents and profile
+- [ ] Officer navigation links to the document hub
+- [ ] Applicant role switch opens `/demo/track`
+- [ ] Officer role switch opens `/demo/officer`
+- [ ] Supervisor role switch opens `/demo/supervisor`
+- [ ] Admin role switch opens `/demo/admin`
+- [ ] role state updates when a workspace route changes
+- [ ] public verification does not impersonate a staff role
+- [ ] all D30-10A through D30-10D routes load

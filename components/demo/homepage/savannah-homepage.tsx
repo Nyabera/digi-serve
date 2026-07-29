@@ -869,6 +869,8 @@ export function SavannahHomepage() {
           </div>
         </div>
         <nav aria-label="Footer navigation">
+
+
           <Link href="/demo/verify-certificate">Verify Certificate</Link>
         </nav>
       </footer>
