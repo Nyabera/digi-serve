@@ -1,4 +1,10 @@
 export {
+  validateDemoDocumentHubConfig,
+} from "./demo-document-hub-validation";
+export type {
+  DemoDocumentHubValidationIssue,
+} from "./demo-document-hub-validation";
+export {
   validateDemoApplicantDocumentVaultConfig,
 } from "./demo-applicant-document-vault-validation";
 export type {

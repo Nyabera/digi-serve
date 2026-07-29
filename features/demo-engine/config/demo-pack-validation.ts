@@ -1,3 +1,4 @@
+import { validateDemoDocumentHubConfig } from "./demo-document-hub-validation";
 import { validateDemoApplicantDocumentVaultConfig } from "./demo-applicant-document-vault-validation";
 import { validateDemoApplicantProfileConfig } from "./demo-applicant-profile-validation";
 import { validateDemoVerificationConfig } from "./demo-verification-validation";
@@ -908,6 +909,12 @@ export function validateDemoPack(
       issue.message,
     );
   }
+
+  issues.push(
+    ...validateDemoDocumentHubConfig(
+      pack.documents,
+    ),
+  );
 
   const errors = issues.filter(
     (issue) => issue.level === "error",
