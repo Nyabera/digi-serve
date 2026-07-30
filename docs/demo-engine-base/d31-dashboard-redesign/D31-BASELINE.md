@@ -65,3 +65,14 @@ git log --oneline --decorate archive/demo-engine-d30-10-freeze -1
 ```
 
 Do not run the hard reset unless intentionally restoring the branch.
+
+## D31-2 shell contract
+
+D31-2 introduces explicit route-layout boundaries:
+
+- `OperationalWorkspaceShell` for Officer and Supervisor;
+- `AdminWorkspaceShell` for Admin.
+
+The operational shell is hash-protected during dashboard-body reconstruction.
+The Admin boundary is stable, while its internal dark-shell implementation is
+deferred to D31-8.
