@@ -31,5 +31,5 @@
 
 - [x] D31-1 verifier passes
 - [x] Git whitespace validation passes
-- [ ] D31-1 reference commit created
-- [ ] D31-1 checklist completion commit created
+- [x] D31-1 reference commit created
+- [x] D31-1 checklist completion commit created
