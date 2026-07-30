@@ -38,5 +38,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-2 shell-contract commit created
-- [ ] D31-2 checklist completion commit created
+- [x] D31-2 shell-contract commit created
+- [x] D31-2 checklist completion commit created
