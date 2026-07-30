@@ -8,4 +8,4 @@
 - [x] D30-11 continuation point was documented
 - [x] D31 scope and shell boundaries were documented
 - [x] reference source locations were recorded
-- [ ] D31-0 commit created
+- [x] D31-0 commit created
