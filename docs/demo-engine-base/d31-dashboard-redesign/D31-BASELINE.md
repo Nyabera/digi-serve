@@ -101,3 +101,11 @@ Demo Pack adapters under `features/demo-engine/dashboards/data/`.
 
 Dashboard JSX must consume these typed view models rather than importing TVET
 fixtures or reading the raw Demo Pack directly.
+
+## D31-6 Officer dashboard body
+
+D31-6 replaces the `/demo/officer` dashboard body with the frozen Officer
+reference composition.
+
+The route consumes the active Demo Pack through `adaptOfficerDashboard()`.
+Operational shell ownership remains unchanged and protected by D31-2.
