@@ -171,7 +171,7 @@ const planTabIcons: Record<PlanTab, LucideIcon> = {
 
 const signalContent: Record<SignalTab, Array<{ title: string; note: string }>> = {
   Messages: [
-    { title: "Brian Otieno", note: "I uploaded the requested documents. Please confirm if everything is in order." },
+    { title: "Brian Otieno", note: "Hello, I uploaded the requested documents. Please confirm if everything is in order." },
     { title: "Mercy Akinyi", note: "I have attached the payment receipt for your review." },
   ],
   Assignments: [

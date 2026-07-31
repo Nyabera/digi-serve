@@ -1532,3 +1532,304 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+/* D31-6R5A PARITY FIX START */
+
+.d31-officer-reference .work-table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 900px !important;
+  max-width: none !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  font-size: 9.5px !important;
+  line-height: 1.42 !important;
+}
+
+.d31-officer-reference .work-table colgroup {
+  display: table-column-group !important;
+}
+
+.d31-officer-reference .work-table col {
+  display: table-column !important;
+}
+
+.d31-officer-reference .work-table thead {
+  display: table-header-group !important;
+}
+
+.d31-officer-reference .work-table tbody {
+  display: table-row-group !important;
+}
+
+.d31-officer-reference .work-table tr {
+  display: table-row !important;
+}
+
+.d31-officer-reference .work-table th,
+.d31-officer-reference .work-table td {
+  display: table-cell !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.d31-officer-reference .work-table .col-service { width: 18.5% !important; }
+.d31-officer-reference .work-table .col-applicant { width: 10% !important; }
+.d31-officer-reference .work-table .col-request { width: 12.5% !important; }
+.d31-officer-reference .work-table .col-next-action { width: 21% !important; }
+.d31-officer-reference .work-table .col-stage { width: 12% !important; }
+.d31-officer-reference .work-table .col-sla { width: 10% !important; }
+.d31-officer-reference .work-table .col-status { width: 9% !important; }
+.d31-officer-reference .work-table .col-action { width: 7% !important; }
+
+.d31-officer-reference .work-table tbody tr {
+  height: 48px !important;
+  min-height: 48px !important;
+}
+
+.d31-officer-reference .work-table th {
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 7px 0 0 !important;
+  font-size: 8.7px !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+.d31-officer-reference .work-table th:first-child {
+  padding-left: 21px !important;
+}
+
+.d31-officer-reference .work-table td {
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 4px 8px 4px 0 !important;
+  font-size: 9.5px !important;
+  line-height: 1.4 !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .work-table td:first-child {
+  padding-left: 11px !important;
+}
+
+.d31-officer-reference .service-cell {
+  display: grid !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 38px !important;
+  grid-template-columns: 32px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.d31-officer-reference .service-cell strong {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  color: #101936 !important;
+  font-size: 9.4px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .request-id {
+  display: inline-grid !important;
+  width: auto !important;
+  min-width: 0 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+}
+
+.d31-officer-reference .next-action-copy {
+  line-height: 1.42 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .work-plan-card {
+  min-height: 465px !important;
+}
+
+.d31-officer-reference .work-table-wrap {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.d31-officer-reference .text-button {
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 4px 3px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #005fff !important;
+  font-size: 9.25px !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+
+.d31-officer-reference .signals-card > .view-all {
+  width: max-content !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  flex: 0 0 35px !important;
+  margin: 0 auto !important;
+  padding: 0 6px !important;
+  font-size: 9.4px !important;
+  line-height: 1 !important;
+}
+
+.d31-officer-reference .signal-meta .text-button {
+  align-self: flex-end !important;
+  padding: 2px 0 !important;
+  font-size: 9.25px !important;
+}
+
+.d31-officer-reference .card-heading-row .text-button {
+  padding: 2px 0 !important;
+  font-size: 9.25px !important;
+}
+
+.d31-officer-reference .dashboard-top-grid {
+  align-items: start !important;
+}
+
+.d31-officer-reference .dashboard-right-column {
+  display: grid !important;
+  grid-template-rows: 422px 168px !important;
+  align-content: start !important;
+  align-self: start !important;
+  gap: 10px !important;
+}
+
+.d31-officer-reference .signals-card {
+  width: 100% !important;
+  height: 422px !important;
+  min-height: 422px !important;
+  max-height: 422px !important;
+  padding: 13px 16px 0 !important;
+}
+
+.d31-officer-reference .signal-list {
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.d31-officer-reference .signal-item {
+  min-height: 77px !important;
+  padding: 9px 7px 7px 5px !important;
+}
+
+.d31-officer-reference .signal-item--compact {
+  min-height: 67px !important;
+  padding-top: 8px !important;
+}
+
+.d31-officer-reference .signal-copy p {
+  margin: 4px 0 2px !important;
+  font-size: 9.2px !important;
+  line-height: 1.4 !important;
+}
+
+.d31-officer-reference .handoffs-card {
+  width: 100% !important;
+  height: 168px !important;
+  min-height: 168px !important;
+  max-height: 168px !important;
+  flex: 0 0 168px !important;
+  padding: 11px 16px !important;
+}
+
+.d31-officer-reference .handoff-list {
+  display: grid !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+  justify-content: stretch !important;
+  align-content: stretch !important;
+  padding-top: 2px !important;
+}
+
+.d31-officer-reference .handoff-item {
+  display: grid !important;
+  width: 100% !important;
+  height: 41px !important;
+  min-height: 41px !important;
+  max-height: 41px !important;
+  grid-template-columns: 43px minmax(0, 1fr) 65px !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  padding: 2px 7px 2px 4px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: #0d1733 !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+}
+
+.d31-officer-reference .handoff-item strong {
+  margin-bottom: 2px !important;
+  font-size: 9.6px !important;
+  line-height: 1.2 !important;
+}
+
+.d31-officer-reference .handoff-item small,
+.d31-officer-reference .handoff-item time {
+  font-size: 8.35px !important;
+  line-height: 1.2 !important;
+}
+
+@container officer-dashboard (max-width: 1120px) {
+  .d31-officer-reference .dashboard-right-column {
+    grid-template-rows: auto auto !important;
+  }
+
+  .d31-officer-reference .signals-card,
+  .d31-officer-reference .handoffs-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .d31-officer-reference .handoffs-card {
+    min-height: 168px !important;
+  }
+}
+
+@container officer-dashboard (max-width: 760px) {
+  .d31-officer-reference .work-table {
+    min-width: 900px !important;
+  }
+}
+
+/* D31-6R5A PARITY FIX END */
