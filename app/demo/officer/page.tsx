@@ -3,5 +3,5 @@ import "@/features/demo-engine/dashboards/officer/high-fidelity/officer-dashboar
 import OfficerDashboardHighFidelity from "@/features/demo-engine/dashboards/officer/high-fidelity/OfficerDashboardHighFidelity";
 
 export default function OfficerDashboardPage() {
-  return <OfficerDashboardHighFidelity />;
+  return <OfficerDashboardHighFidelity embedded />;
 }

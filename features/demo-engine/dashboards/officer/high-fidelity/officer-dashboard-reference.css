@@ -1,3 +1,11 @@
+@import "@fontsource-variable/plus-jakarta-sans";
+/*
+ * D31-6R2 Officer dashboard shell-safe stylesheet.
+ * Derived from the user-supplied cutoff-correction bundle.
+ * Every selector is scoped to .d31-officer-reference.
+ */
+
+
 .d31-officer-reference{
   --ink: #09132f;
   --ink-soft: #34436b;
@@ -43,23 +51,42 @@
 }
 
 .d31-officer-reference.officer-dashboard{
-  min-height: 100vh;
+  container-name: officer-dashboard;
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 0;
   padding: 5px 7px 7px;
+  overflow-x: clip;
   background:
     radial-gradient(circle at 72% -12%, rgba(39, 99, 211, 0.025), transparent 31%),
     linear-gradient(180deg, #fafbfc 0%, #f7f8fa 100%);
 }
 
+.d31-officer-reference.officer-dashboard--standalone{
+  min-height: 100vh;
+}
+
+.d31-officer-reference.officer-dashboard--embedded{
+  min-height: 0;
+}
+
 .d31-officer-reference .dashboard-frame{
   width: 100%;
+  min-width: 0;
   max-width: 1740px;
-  min-height: calc(100vh - 12px);
+  min-height: 0;
   margin: 0 auto;
   padding: 18px 20px 22px;
   border: 1px solid #dde2ea;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.46);
   box-shadow: 0 1px 2px rgba(18, 31, 61, 0.02);
+}
+
+.d31-officer-reference.officer-dashboard--standalone .dashboard-frame{
+  min-height: calc(100vh - 12px);
 }
 
 .d31-officer-reference .dashboard-header{
@@ -91,6 +118,7 @@
 }
 
 .d31-officer-reference .card{
+  min-width: 0;
   overflow: hidden;
   border: 1px solid #d8dee9;
   border-radius: 10px;
@@ -122,24 +150,35 @@
 }
 
 .d31-officer-reference .workload-card{
-  height: 145px;
+  height: auto;
+  min-height: 145px;
   padding: 13px 27px 13px;
 }
 
 .d31-officer-reference .workload-stats{
   display: grid;
-  height: calc(100% - 23px);
+  min-height: 96px;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 }
 
 .d31-officer-reference .workload-stat{
+  position: relative;
   display: flex;
   height: 69px;
   align-items: center;
-  gap: 25px;
-  padding: 0 25px 0 13px;
-  border-right: 1px solid #d8dee9;
+  gap: clamp(12px, 1.35vw, 25px);
+  padding: 0 clamp(12px, 1.3vw, 25px) 0 clamp(8px, 0.7vw, 13px);
+}
+
+.d31-officer-reference .workload-stat:not(:last-child)::after{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: #d8dee9;
+  content: "";
 }
 
 .d31-officer-reference .workload-stat:first-child{
@@ -147,7 +186,7 @@
 }
 
 .d31-officer-reference .workload-stat:last-child{
-  border-right: 0;
+  padding-right: 0;
 }
 
 .d31-officer-reference .metric-icon{
@@ -214,7 +253,8 @@
 .d31-officer-reference .fill--green{ background: var(--green); }
 
 .d31-officer-reference .work-plan-card{
-  height: 443px;
+  height: auto;
+  min-height: 443px;
   padding: 14px 10px 9px;
 }
 
@@ -224,9 +264,10 @@
 
 .d31-officer-reference .plan-tabs{
   display: grid;
-  width: min(585px, 64%);
+  width: min(620px, 100%);
+  min-width: 0;
   height: 39px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   overflow: hidden;
   border: 1px solid #e1e5ec;
   border-bottom: 0;
@@ -239,7 +280,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 13px;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  gap: clamp(6px, 0.7vw, 13px);
+  padding: 0 8px;
   border: 0;
   border-right: 1px solid #e0e4eb;
   background: transparent;
@@ -291,11 +336,14 @@
 .d31-officer-reference .work-table-wrap{
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
   border-top: 1px solid #e1e5ec;
 }
 
 .d31-officer-reference .work-table{
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   color: #354368;
@@ -312,14 +360,14 @@
   white-space: nowrap;
 }
 
-.d31-officer-reference .work-table th:nth-child(1){ width: 17%; padding-left: 21px; }
-.d31-officer-reference .work-table th:nth-child(2){ width: 10%; }
+.d31-officer-reference .work-table th:nth-child(1){ width: 16.5%; padding-left: 21px; }
+.d31-officer-reference .work-table th:nth-child(2){ width: 9.5%; }
 .d31-officer-reference .work-table th:nth-child(3){ width: 12%; }
-.d31-officer-reference .work-table th:nth-child(4){ width: 18%; }
-.d31-officer-reference .work-table th:nth-child(5){ width: 12%; }
+.d31-officer-reference .work-table th:nth-child(4){ width: 17.5%; }
+.d31-officer-reference .work-table th:nth-child(5){ width: 11.5%; }
 .d31-officer-reference .work-table th:nth-child(6){ width: 11.5%; }
 .d31-officer-reference .work-table th:nth-child(7){ width: 11%; }
-.d31-officer-reference .work-table th:nth-child(8){ width: 8.5%; }
+.d31-officer-reference .work-table th:nth-child(8){ width: 10.5%; }
 
 .d31-officer-reference .work-table tbody tr{
   position: relative;
@@ -345,6 +393,7 @@
 .d31-officer-reference .row-accent--violet{ --row-accent: var(--violet); }
 
 .d31-officer-reference .work-table td{
+  min-width: 0;
   padding: 4px 5px 4px 0;
   vertical-align: middle;
 }
@@ -474,7 +523,10 @@
 }
 
 .d31-officer-reference .signals-card{
-  height: 422px;
+  display: flex;
+  height: auto;
+  min-height: 422px;
+  flex-direction: column;
   padding: 13px 16px 0;
 }
 
@@ -484,17 +536,20 @@
 
 .d31-officer-reference .signal-tabs{
   position: relative;
-  display: flex;
+  display: grid;
   height: 40px;
-  align-items: flex-end;
-  gap: 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) max-content;
+  align-items: end;
+  gap: 0;
   border-bottom: 1px solid #e3e7ed;
 }
 
 .d31-officer-reference .signal-tabs > button:not(.mark-read){
   position: relative;
   height: 34px;
-  padding: 0 17px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 clamp(5px, 0.65vw, 12px);
   border: 0;
   background: transparent;
   color: #485675;
@@ -524,11 +579,15 @@
 }
 
 .d31-officer-reference .signal-tabs .mark-read{
-  margin: 0 2px 7px auto;
+  height: 32px;
+  min-height: 0;
+  margin: 0 2px 7px 8px;
+  font-size: 8.5px;
 }
 
 .d31-officer-reference .signal-list{
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
 }
 
@@ -663,13 +722,17 @@
 
 .d31-officer-reference .signals-card > .view-all{
   display: flex;
-  height: 35px;
-  margin: 0 auto;
+  height: auto;
+  min-height: 35px;
+  flex: 0 0 auto;
+  margin: auto auto 0;
+  padding-block: 8px;
   font-size: 9.4px;
 }
 
 .d31-officer-reference .handoffs-card{
-  height: 168px;
+  height: auto;
+  min-height: 168px;
   padding: 11px 16px;
 }
 
@@ -696,7 +759,8 @@
 .d31-officer-reference .handoff-item{
   display: grid;
   width: 100%;
-  height: 41px;
+  height: auto;
+  min-height: 41px;
   grid-template-columns: 43px minmax(0, 1fr) 65px;
   align-items: center;
   gap: 5px;
@@ -752,11 +816,13 @@
   display: grid;
   grid-template-columns: 1.2fr 1.17fr 0.99fr 1.5fr;
   gap: 11px;
+  align-items: stretch;
   margin-top: 10px;
 }
 
 .d31-officer-reference .bottom-card{
-  height: 267px;
+  height: auto;
+  min-height: 267px;
   padding: 13px 12px 10px;
 }
 
@@ -898,7 +964,8 @@
 .d31-officer-reference .action-item{
   display: grid;
   width: 100%;
-  height: 36px;
+  height: auto;
+  min-height: 36px;
   grid-template-columns: 25px minmax(0, 1fr) 24px 13px;
   align-items: center;
   gap: 7px;
@@ -969,6 +1036,7 @@
 .d31-officer-reference .period-select select{
   width: 86px;
   height: 26px;
+  min-height: 0;
   padding: 0 25px 0 11px;
   border: 1px solid #dce2ea;
   border-radius: 6px;
@@ -1148,48 +1216,80 @@
   border: 0;
 }
 
-@media (min-width: 1680px) {
-  .d31-officer-reference .dashboard-frame{
-    margin-top: 5px;
-  }
-}
-
-@media (max-width: 1270px) {
+/*
+ * Shell-safe responsive system.
+ * These breakpoints follow the dashboard content area beside the sidebar,
+ * instead of the full browser viewport.
+ */
+@container officer-dashboard (max-width: 1320px){
   .d31-officer-reference .dashboard-frame{
     padding: 17px;
   }
 
   .d31-officer-reference .dashboard-top-grid{
-    grid-template-columns: minmax(0, 1.55fr) minmax(385px, 1fr);
+    grid-template-columns: minmax(0, 1.88fr) minmax(400px, 1fr);
+    gap: 12px;
+  }
+
+  .d31-officer-reference .workload-card{
+    padding-inline: 18px;
   }
 
   .d31-officer-reference .workload-stat{
-    gap: 15px;
-    padding-right: 15px;
+    gap: 13px;
+    padding-right: 13px;
     padding-left: 8px;
   }
 
-  .d31-officer-reference .work-table{
-    min-width: 900px;
+  .d31-officer-reference .signal-tabs > button:not(.mark-read){
+    padding-inline: 5px;
+    font-size: 9.5px;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read{
+    margin-left: 5px;
+    font-size: 8px;
+  }
+
+  .d31-officer-reference .rhythm-card{
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .d31-officer-reference .rhythm-body{
+    grid-template-columns: minmax(0, 1fr) 122px;
+  }
+}
+
+@container officer-dashboard (max-width: 1120px){
+  .d31-officer-reference .dashboard-top-grid{
+    grid-template-columns: 1fr;
   }
 
   .d31-officer-reference .dashboard-bottom-grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .d31-officer-reference .bottom-card{
-    height: 267px;
+  .d31-officer-reference .work-table{
+    min-width: 0;
+  }
+
+  .d31-officer-reference .signal-tabs > button:not(.mark-read){
+    font-size: 10.5px;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read{
+    font-size: 8.5px;
   }
 }
 
-@media (max-width: 980px) {
-  .d31-officer-reference.officer-dashboard{
+@container officer-dashboard (max-width: 760px){
+  .d31-officer-reference.officer-dashboard--embedded{
     padding: 0;
   }
 
   .d31-officer-reference .dashboard-frame{
-    min-height: 100vh;
-    padding: 20px;
+    padding: 18px 12px 24px;
     border: 0;
     border-radius: 0;
   }
@@ -1198,44 +1298,6 @@
     height: auto;
     min-height: 84px;
     padding: 0;
-  }
-
-  .d31-officer-reference .dashboard-top-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .d31-officer-reference .workload-card,
-.d31-officer-reference .work-plan-card,
-.d31-officer-reference .signals-card,
-.d31-officer-reference .handoffs-card{
-    height: auto;
-  }
-
-  .d31-officer-reference .workload-card{
-    min-height: 145px;
-  }
-
-  .d31-officer-reference .work-plan-card{
-    min-height: 443px;
-  }
-
-  .d31-officer-reference .signals-card{
-    min-height: 422px;
-  }
-
-  .d31-officer-reference .handoffs-card{
-    min-height: 168px;
-  }
-
-  .d31-officer-reference .dashboard-right-column{
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-  }
-}
-
-@media (max-width: 700px) {
-  .d31-officer-reference .dashboard-frame{
-    padding: 18px 12px 24px;
   }
 
   .d31-officer-reference .dashboard-header h1{
@@ -1248,19 +1310,22 @@
   }
 
   .d31-officer-reference .workload-card{
+    min-height: 205px;
     padding: 14px;
   }
 
   .d31-officer-reference .workload-stats{
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .d31-officer-reference .workload-stat{
     height: 78px;
     padding: 8px 10px;
-    border-right: 0;
     border-bottom: 1px solid #e3e7ed;
+  }
+
+  .d31-officer-reference .workload-stat::after{
+    display: none;
   }
 
   .d31-officer-reference .workload-stat:nth-child(odd){
@@ -1275,11 +1340,8 @@
     margin-top: 9px;
   }
 
-  .d31-officer-reference .workload-card{
-    min-height: 205px;
-  }
-
   .d31-officer-reference .plan-tabs{
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
     width: 100%;
     overflow-x: auto;
   }
@@ -1289,75 +1351,18 @@
     min-height: 44px;
   }
 
-  .d31-officer-reference .work-table-wrap{
-    border-top: 0;
-    overflow: visible;
-  }
-
-  .d31-officer-reference .work-table,
-.d31-officer-reference .work-table tbody,
-.d31-officer-reference .work-table tr,
-.d31-officer-reference .work-table td{
-    display: block;
-    width: 100%;
-  }
-
-  .d31-officer-reference .work-table thead{
-    display: none;
-  }
-
-  .d31-officer-reference .work-table tbody tr{
-    height: auto;
-    min-height: 0;
-    margin: 10px 0;
-    padding: 12px 10px 11px 44px;
-    border: 1px solid #e2e6ed;
-    border-radius: 8px;
-  }
-
-  .d31-officer-reference .work-table tbody tr::before{
-    top: 7px;
-    bottom: 7px;
-  }
-
-  .d31-officer-reference .work-table td{
-    position: relative;
-    display: grid;
-    min-height: 28px;
-    grid-template-columns: 92px minmax(0, 1fr);
-    align-items: center;
-    padding: 5px 0;
-    font-size: 11px;
-  }
-
-  .d31-officer-reference .work-table td::before{
-    color: #7a849b;
-    content: attr(data-label);
-    font-size: 9px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .d31-officer-reference .work-table td:first-child{
-    display: flex;
-    height: auto;
-    min-height: 35px;
-    margin-left: -35px;
-    padding-left: 0;
-  }
-
-  .d31-officer-reference .work-table td:first-child::before{
-    display: none;
+  .d31-officer-reference .work-table{
+    min-width: 760px;
   }
 
   .d31-officer-reference .work-table .text-button{
     min-height: 44px;
-    justify-self: start;
   }
 
   .d31-officer-reference .signal-tabs{
     height: auto;
     min-height: 50px;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
     overflow-x: auto;
   }
 
@@ -1380,14 +1385,8 @@
     min-height: 44px;
   }
 
-  .d31-officer-reference .dashboard-right-column,
-.d31-officer-reference .dashboard-bottom-grid{
+  .d31-officer-reference .dashboard-bottom-grid{
     grid-template-columns: 1fr;
-  }
-
-  .d31-officer-reference .bottom-card{
-    height: auto;
-    min-height: 267px;
   }
 
   .d31-officer-reference .rhythm-body{
@@ -1395,7 +1394,7 @@
   }
 }
 
-@media (max-width: 440px) {
+@container officer-dashboard (max-width: 440px){
   .d31-officer-reference .dashboard-header h1{
     font-size: 27px;
   }
@@ -1448,7 +1447,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce){
   .d31-officer-reference, .d31-officer-reference *,
 .d31-officer-reference::before, .d31-officer-reference *::before,
 .d31-officer-reference::after, .d31-officer-reference *::after{
@@ -1457,14 +1456,4 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-}
-
-
-/* Existing FAIDIA role-shell integration overrides. */
-.d31-officer-reference.officer-dashboard {
-  min-height: auto;
-}
-
-.d31-officer-reference .dashboard-frame {
-  min-height: auto;
 }

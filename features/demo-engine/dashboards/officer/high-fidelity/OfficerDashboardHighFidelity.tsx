@@ -1,8 +1,3 @@
-/*
- * High-fidelity Officer dashboard body.
- * Derived directly from the user-supplied verified React/TypeScript bundle.
- * Keep structural class names aligned with officer-dashboard-reference.css.
- */
 "use client";
 
 import {
@@ -31,6 +26,11 @@ import { useMemo, useState } from "react";
 type Accent = "blue" | "orange" | "red" | "green" | "violet";
 type PlanTab = "Needs action" | "Waiting on others" | "Ready to complete";
 type SignalTab = "Messages" | "Assignments" | "Notices" | "Case Updates";
+
+export type OfficerDashboardProps = {
+  /** Keep true when the dashboard renders inside the existing sidebar/topbar shell. */
+  embedded?: boolean;
+};
 
 type WorkItem = {
   service: string;
@@ -469,7 +469,7 @@ function MyRhythm({ notify }: { notify: (message: string) => void }) {
   );
 }
 
-export default function OfficerDashboard() {
+export default function OfficerDashboardHighFidelity({ embedded = true }: OfficerDashboardProps) {
   const [toast, setToast] = useState("");
   const notify = (message: string) => {
     setToast(message);
@@ -477,7 +477,10 @@ export default function OfficerDashboard() {
   };
 
   return (
-    <main className="officer-dashboard d31-officer-reference">
+    <main
+      className={`officer-dashboard d31-officer-reference officer-dashboard--${embedded ? "embedded" : "standalone"}`}
+      data-dashboard-version="shell-safe-v2"
+    >
       <div className="dashboard-frame">
         <header className="dashboard-header">
           <h1>Good afternoon, Grace</h1>
