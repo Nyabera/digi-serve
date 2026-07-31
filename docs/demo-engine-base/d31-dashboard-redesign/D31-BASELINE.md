@@ -84,3 +84,12 @@ D31-3 creates a scoped dashboard design-token system under
 
 The tokens are not global. Officer, Supervisor, and Admin dashboard roots must
 opt into them using the CSS Module `theme` class and `data-dashboard-role`.
+
+## D31-4 shared dashboard primitives
+
+D31-4 creates reusable card, grid, zone, section-heading, metric, status,
+progress, table, chart-frame, and tabs primitives.
+
+The primitives are pack-neutral and shell-neutral. Role dashboard bodies may
+compose them, but the primitives do not own routes, navigation, or state
+transitions.

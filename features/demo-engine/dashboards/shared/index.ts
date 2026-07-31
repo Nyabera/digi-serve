@@ -19,3 +19,5 @@ export {
 export type {
   RequiredDashboardCssToken,
 } from "./dashboard-token-contract";
+
+export * from "./components";
