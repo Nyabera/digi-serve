@@ -44,5 +44,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] implementation commit created
-- [ ] checklist commit created
+- [x] implementation commit created
+- [x] checklist commit created
