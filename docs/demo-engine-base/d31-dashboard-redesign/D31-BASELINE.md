@@ -109,3 +109,12 @@ reference composition.
 
 The route consumes the active Demo Pack through `adaptOfficerDashboard()`.
 Operational shell ownership remains unchanged and protected by D31-2.
+
+## D31-8 Supervisor dashboard body
+
+D31-8 reconstructs `/demo/supervisor` as the four-zone departmental command
+dashboard in the frozen Supervisor reference.
+
+The route consumes the active Demo Pack through `adaptSupervisorDashboard()`.
+Officer and Supervisor shell ownership remains frozen under D31-2. D31-9 will
+perform the Supervisor screenshot comparison and visual freeze.
