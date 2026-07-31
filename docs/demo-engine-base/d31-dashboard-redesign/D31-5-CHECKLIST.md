@@ -80,5 +80,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-5 data-contract commit created
-- [ ] D31-5 checklist completion commit created
+- [x] D31-5 data-contract commit created
+- [x] D31-5 checklist completion commit created
