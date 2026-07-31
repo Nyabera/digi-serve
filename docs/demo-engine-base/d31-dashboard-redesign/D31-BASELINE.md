@@ -76,3 +76,11 @@ D31-2 introduces explicit route-layout boundaries:
 The operational shell is hash-protected during dashboard-body reconstruction.
 The Admin boundary is stable, while its internal dark-shell implementation is
 deferred to D31-8.
+
+## D31-3 dashboard token system
+
+D31-3 creates a scoped dashboard design-token system under
+`features/demo-engine/dashboards/shared/`.
+
+The tokens are not global. Officer, Supervisor, and Admin dashboard roots must
+opt into them using the CSS Module `theme` class and `data-dashboard-role`.
