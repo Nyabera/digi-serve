@@ -15,11 +15,11 @@ The remaining crowding came from width allocation rather than a global font prob
 - The embedded dashboard frame now bleeds 14px into the route padding on each side. The bleed resets at 1120px, before the layout stacks.
 - The desktop top grid now favors the work-plan column while preserving a 410px minimum for Case signals.
 - Column widths now prioritize Service (18.5%), Request ID (12.5%), and Next action (21%). SLA, Status, and Action use 26% together instead of 33%.
-- Work-plan tabs span the full card and use stacked two-line labels with separate count badges.
+- Work-plan tabs span the full card. In v3.1 they use icon-led, single-line labels and count badges, with a cobalt active segment matching the supplied switcher reference.
 - Request IDs split predictably before their final numeric group.
 - Table rows are 58px high, with 32px service icons and calmer cell padding.
 - The header row uses a soft surface, clearer hierarchy, and compact uppercase labels.
-- Case signals can grow with the left column so both sides keep a clean lower edge.
+- Case signals now sizes to its content; Recent handoffs absorbs the remaining right-column height so the Case signals footer never floats above a large blank area.
 
 ## Integration boundary
 
