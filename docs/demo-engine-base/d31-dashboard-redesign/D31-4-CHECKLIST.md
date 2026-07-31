@@ -63,5 +63,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-4 primitive commit created
-- [ ] D31-4 checklist completion commit created
+- [x] D31-4 primitive commit created
+- [x] D31-4 checklist completion commit created
