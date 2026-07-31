@@ -75,5 +75,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-6 Officer commit created
-- [ ] D31-6 checklist completion commit created
+- [x] D31-6 Officer commit created
+- [x] D31-6 checklist completion commit created
