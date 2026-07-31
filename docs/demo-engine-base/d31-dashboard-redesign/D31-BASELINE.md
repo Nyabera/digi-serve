@@ -93,3 +93,11 @@ progress, table, chart-frame, and tabs primitives.
 The primitives are pack-neutral and shell-neutral. Role dashboard bodies may
 compose them, but the primitives do not own routes, navigation, or state
 transitions.
+
+## D31-5 typed dashboard data boundary
+
+D31-5 adds role-specific Officer, Supervisor, and Admin dashboard contracts and
+Demo Pack adapters under `features/demo-engine/dashboards/data/`.
+
+Dashboard JSX must consume these typed view models rather than importing TVET
+fixtures or reading the raw Demo Pack directly.
