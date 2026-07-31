@@ -36,5 +36,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-7 implementation commit created
-- [ ] D31-7 checklist completion commit created
+- [x] D31-7 implementation commit created
+- [x] D31-7 checklist completion commit created
