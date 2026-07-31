@@ -2,32 +2,32 @@
 
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUp,
+  CalendarDays,
   Check,
   CheckCircle2,
-  ChevronDown,
-  ChevronRight,
+  CircleAlert,
   CircleHelp,
+  ClipboardList,
   Clock3,
+  EllipsisVertical,
   FileBarChart,
   FileText,
-  Inbox,
   ListChecks,
   Mail,
   RefreshCw,
   ShieldCheck,
   UserRound,
   UserRoundCheck,
+  UsersRound,
   type LucideIcon,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 
 import "./officer-dashboard-reference.css";
 
 type Accent = "blue" | "orange" | "red" | "green" | "violet";
 type PlanTab = "Needs action" | "Waiting on others" | "Ready to complete";
-type SignalTab = "Messages" | "Assignments" | "Notices" | "Case Updates";
 
 export type OfficerDashboardProps = {
   /** Keep true when the dashboard renders inside the existing sidebar/topbar shell. */
@@ -46,6 +46,17 @@ type WorkItem = {
   accent: Accent;
   icon: LucideIcon;
   tab: PlanTab;
+};
+
+type SignalItem = {
+  title: string;
+  meta: string;
+  note?: string;
+  time: string;
+  action: string;
+  accent: Accent;
+  icon: LucideIcon;
+  tag?: string;
 };
 
 const workItems: WorkItem[] = [
@@ -155,36 +166,48 @@ const workItems: WorkItem[] = [
   },
 ];
 
-const planCounts: Record<PlanTab, number> = {
-  "Needs action": 3,
-  "Waiting on others": 3,
-  "Ready to complete": 2,
+const planTabs: Record<PlanTab, { count: number; icon: LucideIcon }> = {
+  "Needs action": { count: 3, icon: ClipboardList },
+  "Waiting on others": { count: 3, icon: UsersRound },
+  "Ready to complete": { count: 2, icon: CheckCircle2 },
 };
 
-const planTabLines: Record<PlanTab, readonly [string, string]> = {
-  "Needs action": ["Needs", "action"],
-  "Waiting on others": ["Waiting on", "others"],
-  "Ready to complete": ["Ready to", "complete"],
-};
+const caseSignals: SignalItem[] = [
+  {
+    title: "I have attached the payment receipt for your review.",
+    meta: "Certificate Replacement   •   REQ-2026-0718",
+    time: "9:28 AM",
+    action: "Reply",
+    accent: "orange",
+    icon: CircleAlert,
+  },
+  {
+    title: "From Admissions Office",
+    meta: "Transcript Request   •   REQ-2026-0709",
+    note: "Please review documents and confirm eligibility.",
+    time: "9:12 AM",
+    action: "View case",
+    accent: "green",
+    icon: ArrowUp,
+    tag: "Handoff",
+  },
+  {
+    title: "To Finance Office",
+    meta: "Certificate Replacement   •   REQ-2026-0718",
+    note: "Sent for payment verification.",
+    time: "Yesterday",
+    action: "View handoff",
+    accent: "blue",
+    icon: ArrowUp,
+    tag: "Handoff sent",
+  },
+];
 
-const signalContent: Record<SignalTab, Array<{ title: string; note: string }>> = {
-  Messages: [
-    { title: "Brian Otieno", note: "I uploaded the requested documents. Please confirm if everything is in order." },
-    { title: "Mercy Akinyi", note: "I have attached the payment receipt for your review." },
-  ],
-  Assignments: [
-    { title: "3 new cases assigned", note: "Two transcript requests and one clearance letter were added to your queue." },
-    { title: "Priority changed", note: "REQ-2026-0715 is now marked urgent by the Records Office." },
-  ],
-  Notices: [
-    { title: "Records desk closes at 4:30 PM", note: "Complete physical file requests before the daily registry handoff." },
-    { title: "SLA policy updated", note: "Clarification wait time now pauses the request SLA automatically." },
-  ],
-  "Case Updates": [
-    { title: "REQ-2026-0718 moved forward", note: "Finance confirmed the applicant payment reference." },
-    { title: "REQ-2026-0709 returned", note: "Admissions supplied the missing eligibility document." },
-  ],
-};
+const handoffs = [
+  { title: "From Admissions Office", meta: "Transcript Request   •   REQ-2026-0709", time: "9:12 AM", icon: ArrowDown, accent: "green" as Accent },
+  { title: "To Finance Office", meta: "Certificate Replacement   •   REQ-2026-0718", time: "8:45 AM", icon: ArrowUp, accent: "blue" as Accent },
+  { title: "Completed to Applicant", meta: "Clearance Letter   •   REQ-2026-0698", time: "Yesterday", icon: CheckCircle2, accent: "green" as Accent },
+];
 
 const activities = [
   { time: "9:35 AM", title: "Assigned Transcript Request to you", meta: "REQ-2026-0715   •   Brian Otieno", icon: UserRound, accent: "blue" as Accent },
@@ -226,62 +249,32 @@ const chartSeries: Record<string, { labels: string[]; workload: number[]; comple
   },
 };
 
-function IconBadge({ icon: Icon, accent, small = false }: { icon: LucideIcon; accent: Accent; small?: boolean }) {
-  return (
-    <span className={`icon-badge icon-badge--${accent}${small ? " icon-badge--small" : ""}`} aria-hidden="true">
-      <Icon strokeWidth={2.2} />
-    </span>
-  );
+function TextButton({ children, onClick, className = "" }: { children: ReactNode; onClick?: () => void; className?: string }) {
+  return <button type="button" className={`text-button ${className}`} onClick={onClick}>{children}</button>;
 }
 
-function TextButton({ children, onClick, className = "" }: { children: React.ReactNode; onClick?: () => void; className?: string }) {
+function IconBadge({ icon: Icon, accent, small = false }: { icon: LucideIcon; accent: Accent; small?: boolean }) {
+  return <span className={`icon-badge icon-badge--${accent}${small ? " icon-badge--small" : ""}`} aria-hidden="true"><Icon strokeWidth={2.15} /></span>;
+}
+
+function SectionHeading({ id, icon: Icon, children, action }: { id: string; icon: LucideIcon; children: ReactNode; action?: ReactNode }) {
   return (
-    <button type="button" className={`text-button ${className}`} onClick={onClick}>
-      {children}
-    </button>
+    <div className="section-heading">
+      <span className="section-heading__icon" aria-hidden="true"><Icon strokeWidth={2.1} /></span>
+      <h2 id={id}>{children}</h2>
+      {action && <div className="section-heading__action">{action}</div>}
+    </div>
   );
 }
 
 function RequestId({ value }: { value: string }) {
   const splitAt = value.lastIndexOf("-");
-
   if (splitAt < 0) return <span className="request-id">{value}</span>;
-
   return (
     <span className="request-id" aria-label={value}>
       <span aria-hidden="true">{value.slice(0, splitAt + 1)}</span>
       <span aria-hidden="true">{value.slice(splitAt + 1)}</span>
     </span>
-  );
-}
-
-function WorkloadPulse() {
-  const stats = [
-    { value: "18", label: "Assigned", accent: "blue" as Accent, icon: ListChecks, width: "78%" },
-    { value: "7", label: "Due today", accent: "orange" as Accent, icon: Clock3, width: "66%" },
-    { value: "3", label: "Overdue", accent: "red" as Accent, icon: Inbox, width: "61%" },
-    { value: "92%", label: "SLA on time", accent: "green" as Accent, icon: CheckCircle2, width: "82%" },
-  ];
-
-  return (
-    <section className="card workload-card" aria-labelledby="workload-title">
-      <h2 id="workload-title">Workload pulse</h2>
-      <div className="workload-stats">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <article className="workload-stat" key={stat.label}>
-              <span className={`metric-icon metric-icon--${stat.accent}`}><Icon strokeWidth={2.15} /></span>
-              <div className="metric-copy">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-                <div className="metric-track"><i className={`fill--${stat.accent}`} style={{ width: stat.width }} /></div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
   );
 }
 
@@ -294,28 +287,40 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
   }, [activeTab]);
 
   return (
-    <section className="card work-plan-card" aria-labelledby="plan-title">
-      <h2 id="plan-title">Today&apos;s work plan</h2>
+    <section className="work-plan" aria-labelledby="plan-title">
+      <h2 className="sr-only" id="plan-title">Today&apos;s work plan</h2>
       <div className="plan-tabs" role="tablist" aria-label="Work plan filters">
-        {(Object.keys(planCounts) as PlanTab[]).map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab}
-            className={activeTab === tab ? "is-active" : ""}
-            onClick={() => setActiveTab(tab)}
-          >
-            <span className="plan-tab-label">
-              <span>{planTabLines[tab][0]}</span>
-              <span>{planTabLines[tab][1]}</span>
-            </span>
-            <span className="plan-tab-count">{planCounts[tab]}</span>
-          </button>
-        ))}
+        {(Object.keys(planTabs) as PlanTab[]).map((tab) => {
+          const Icon = planTabs[tab].icon;
+          return (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab}
+              className={activeTab === tab ? "is-active" : ""}
+              onClick={() => setActiveTab(tab)}
+            >
+              <Icon aria-hidden="true" strokeWidth={2.05} />
+              <span className="plan-tab-label">{tab}</span>
+              <span className="plan-tab-count">{planTabs[tab].count}</span>
+            </button>
+          );
+        })}
       </div>
+
       <div className="work-table-wrap">
         <table className="work-table">
+          <colgroup>
+            <col className="col-service" />
+            <col className="col-applicant" />
+            <col className="col-request" />
+            <col className="col-next" />
+            <col className="col-stage" />
+            <col className="col-sla" />
+            <col className="col-status" />
+            <col className="col-action" />
+          </colgroup>
           <thead>
             <tr>
               <th>Service</th><th>Applicant</th><th>Request ID</th><th>Next action</th><th>Stage</th><th>SLA</th><th>Status</th><th>Action</th>
@@ -327,16 +332,28 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
               return (
                 <tr key={item.requestId} className={`row-accent--${item.accent}`}>
                   <td data-label="Service">
-                    <span className={`service-icon service-icon--${item.accent}`}><Icon strokeWidth={2.25} /></span>
-                    <strong>{item.service}</strong>
+                    <div className="service-cell">
+                      <span className={`service-icon service-icon--${item.accent}`} aria-hidden="true"><Icon strokeWidth={2.25} /></span>
+                      <strong>{item.service}</strong>
+                    </div>
                   </td>
                   <td data-label="Applicant">{item.applicant}</td>
                   <td data-label="Request ID"><RequestId value={item.requestId} /></td>
                   <td data-label="Next action" className="next-action-copy" title={item.nextAction}>{item.nextAction}</td>
                   <td data-label="Stage">{item.stage}</td>
-                  <td data-label="SLA"><div className={`sla-line sla-line--${item.accent}`}><i /></div><span className={`sla-text--${item.accent}`}>{item.sla}</span></td>
+                  <td data-label="SLA">
+                    <div className="sla-cell">
+                      <span className={`sla-line sla-line--${item.accent}`}><i /></span>
+                      <span className={`sla-text--${item.accent}`}>{item.sla}</span>
+                    </div>
+                  </td>
                   <td data-label="Status"><span className={`status status--${item.accent}`}>{item.status}</span></td>
-                  <td data-label="Action"><TextButton onClick={() => notify(`${item.action}: ${item.service}`)}>{item.action}</TextButton></td>
+                  <td data-label="Action">
+                    <div className="row-actions">
+                      <TextButton onClick={() => notify(`${item.action}: ${item.service}`)}>{item.action}</TextButton>
+                      <button className="row-menu" type="button" aria-label={`More actions for ${item.service}`} onClick={() => notify(`More actions: ${item.service}`)}><EllipsisVertical /></button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}
@@ -348,60 +365,51 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
 }
 
 function CaseSignals({ notify }: { notify: (message: string) => void }) {
-  const [tab, setTab] = useState<SignalTab>("Messages");
-  const items = signalContent[tab];
-
   return (
     <section className="card signals-card" aria-labelledby="signals-title">
-      <h2 id="signals-title">Case signals</h2>
-      <div className="signal-tabs" role="tablist" aria-label="Case signals">
-        {(Object.keys(signalContent) as SignalTab[]).map((item) => (
-          <button key={item} type="button" role="tab" aria-selected={tab === item} className={tab === item ? "is-active" : ""} onClick={() => setTab(item)}>{item}</button>
-        ))}
-        <TextButton className="mark-read" onClick={() => notify("All case signals marked as read")}>Mark all read</TextButton>
+      <div className="signals-heading">
+        <h2 id="signals-title">Case signals</h2>
+        <span className="signals-count">3</span>
+        <TextButton onClick={() => notify("Opened all messages and handoffs")}>View all messages and handoffs</TextButton>
       </div>
       <div className="signal-list">
-        {items.map((item, index) => (
-          <article className="signal-item" key={`${tab}-${item.title}`}>
-            {tab === "Messages" ? <span className={`avatar avatar--${index ? "orange" : "violet"}`}>{index ? "MA" : "BO"}</span> : <IconBadge icon={tab === "Assignments" ? UserRoundCheck : tab === "Notices" ? CircleHelp : RefreshCw} accent={index ? "blue" : "green"} />}
+        {caseSignals.map((item, index) => (
+          <article className="signal-item" key={item.title}>
+            <IconBadge icon={item.icon} accent={item.accent} />
             <div className="signal-copy">
-              <div className="signal-heading"><strong>{item.title}</strong>{tab === "Messages" && <><i>•</i><span>Unread</span></>}</div>
-              <p>{item.note}</p>
-              <small>{index ? "Certificate Replacement   •   REQ-2026-0718" : "Transcript Request   •   REQ-2026-0715"}</small>
+              <div className="signal-title-line">
+                <strong>{item.title}</strong>
+                {item.tag && <><i>•</i><span className={`tag tag--${item.accent}`}>{item.tag}</span></>}
+              </div>
+              <small>{item.meta}</small>
+              {item.note && <p>{item.note}</p>}
             </div>
-            <div className="signal-meta"><time>{index ? "8:50 AM" : "9:35 AM"}</time><TextButton onClick={() => notify(`${tab}: ${item.title}`)}>{tab === "Messages" ? "Reply" : "Open"}</TextButton></div>
+            <div className={`signal-meta${index > 0 ? " signal-meta--time-first" : ""}`}>
+              <TextButton onClick={() => notify(`${item.action}: ${item.title}`)}>{item.action}</TextButton>
+              <time>{item.time}</time>
+            </div>
           </article>
         ))}
-        <article className="signal-item signal-item--compact">
-          <IconBadge icon={ArrowUp} accent="green" />
-          <div className="signal-copy"><div className="signal-heading"><strong>From Admissions Office</strong><i>•</i><span className="tag tag--green">Handoff</span></div><small>Transcript Request   •   REQ-2026-0709</small><p>Please review documents and confirm eligibility.</p></div>
-          <div className="signal-meta"><time>9:12 AM</time><TextButton onClick={() => notify("Opened Admissions handoff")}>View case</TextButton></div>
-        </article>
-        <article className="signal-item signal-item--compact">
-          <IconBadge icon={ArrowUp} accent="blue" />
-          <div className="signal-copy"><div className="signal-heading"><strong>To Finance Office</strong><i>•</i><span className="tag tag--blue">Handoff sent</span></div><small>Certificate Replacement   •   REQ-2026-0718</small><p>Sent for payment verification.</p></div>
-          <div className="signal-meta"><time>Yesterday</time><TextButton onClick={() => notify("Opened Finance handoff")}>View handoff</TextButton></div>
-        </article>
       </div>
-      <TextButton className="view-all" onClick={() => notify("Opened all messages and handoffs")}>View all messages and handoffs <ArrowRight /></TextButton>
     </section>
   );
 }
 
 function RecentHandoffs({ notify }: { notify: (message: string) => void }) {
-  const items = [
-    { title: "From Admissions Office", meta: "Transcript Request   •   REQ-2026-0709", time: "9:12 AM", icon: ArrowDown, accent: "green" as Accent },
-    { title: "To Finance Office", meta: "Certificate Replacement   •   REQ-2026-0718", time: "8:45 AM", icon: ArrowUp, accent: "blue" as Accent },
-    { title: "Completed to Applicant", meta: "Clearance Letter   •   REQ-2026-0698", time: "Yesterday", icon: CheckCircle2, accent: "green" as Accent },
-  ];
   return (
     <section className="card handoffs-card" aria-labelledby="handoffs-title">
-      <div className="card-heading-row"><h2 id="handoffs-title">Recent handoffs</h2><TextButton onClick={() => notify("Opened all handoffs")}>View all <ArrowRight /></TextButton></div>
+      <div className="plain-heading">
+        <h2 id="handoffs-title">Recent handoffs</h2>
+        <TextButton onClick={() => notify("Opened all handoffs")}>View all</TextButton>
+      </div>
       <div className="handoff-list">
-        {items.map((item) => (
+        {handoffs.map((item, index) => (
           <button className="handoff-item" type="button" key={item.title} onClick={() => notify(item.title)}>
-            <IconBadge icon={item.icon} accent={item.accent} />
-            <span><strong>{item.title}</strong><small>{item.meta}</small></span>
+            <span className={`handoff-marker${index < handoffs.length - 1 ? " handoff-marker--connected" : ""}`}>
+              <IconBadge icon={item.icon} accent={item.accent} />
+              <i className={`timeline-dot timeline-dot--${item.accent}`} />
+            </span>
+            <span className="handoff-copy"><strong>{item.title}</strong><small>{item.meta}</small></span>
             <time>{item.time}</time>
           </button>
         ))}
@@ -413,12 +421,13 @@ function RecentHandoffs({ notify }: { notify: (message: string) => void }) {
 function RecentActivity({ notify }: { notify: (message: string) => void }) {
   return (
     <section className="card bottom-card activity-card" aria-labelledby="activity-title">
-      <div className="card-heading-row"><h2 id="activity-title">Recent Activity</h2><TextButton onClick={() => notify("Opened full activity")}>View all activity <ArrowRight /></TextButton></div>
+      <SectionHeading id="activity-title" icon={Clock3} action={<TextButton onClick={() => notify("Opened full activity")}>View all activity</TextButton>}>Recent Activity</SectionHeading>
       <div className="activity-list">
         {activities.map((item) => (
           <article className="activity-item" key={`${item.time}-${item.title}`}>
-            <time>{item.time}</time><IconBadge icon={item.icon} accent={item.accent} small />
-            <span><strong>{item.title}</strong><small>{item.meta}</small></span>
+            <time>{item.time}</time>
+            <IconBadge icon={item.icon} accent={item.accent} small />
+            <span><strong title={item.title}>{item.title}</strong><small>{item.meta}</small></span>
           </article>
         ))}
       </div>
@@ -429,12 +438,12 @@ function RecentActivity({ notify }: { notify: (message: string) => void }) {
 function UpNext({ notify }: { notify: (message: string) => void }) {
   return (
     <section className="card bottom-card up-next-card" aria-labelledby="up-next-title">
-      <h2 id="up-next-title">Up Next</h2>
+      <SectionHeading id="up-next-title" icon={ListChecks}>Up Next</SectionHeading>
       <div className="up-next-list">
         {upNext.map((item) => (
           <article className="up-next-item" key={item.id}>
             <IconBadge icon={item.icon} accent={item.accent} small />
-            <span><strong>{item.service}</strong><small>{item.id}</small></span>
+            <span><strong title={item.service}>{item.service}</strong><small>{item.id}</small></span>
             <em className={`sla-text--${item.accent}`}>{item.due}</em>
             <TextButton onClick={() => notify(`Opened ${item.service}`)}>Open</TextButton>
           </article>
@@ -447,12 +456,13 @@ function UpNext({ notify }: { notify: (message: string) => void }) {
 function ActionRequired({ notify }: { notify: (message: string) => void }) {
   return (
     <section className="card bottom-card action-card" aria-labelledby="action-title">
-      <h2 id="action-title">Action Required</h2>
+      <SectionHeading id="action-title" icon={ListChecks}>Action Required</SectionHeading>
       <div className="action-list">
         {actions.map((item) => (
           <button type="button" className="action-item" key={item.label} onClick={() => notify(item.label)}>
             <item.icon className={`line-icon line-icon--${item.accent}`} strokeWidth={2.15} />
-            <span>{item.label}</span><b className={`count count--${item.accent}`}>{item.count}</b><ChevronRight />
+            <span>{item.label}</span>
+            <b className={`count count--${item.accent}`}>{item.count}</b>
           </button>
         ))}
       </div>
@@ -462,17 +472,17 @@ function ActionRequired({ notify }: { notify: (message: string) => void }) {
 
 function RhythmChart({ period }: { period: string }) {
   const series = chartSeries[period];
-  const x = [25, 74, 123, 172, 221, 270, 319];
-  const y = (value: number) => 130 - (value / 30) * 108;
+  const x = [28, 75, 122, 169, 216, 263, 310];
+  const y = (value: number) => 128 - (value / 30) * 100;
   const points = (values: number[]) => values.map((value, index) => `${x[index]},${y(value)}`).join(" ");
   return (
-    <svg className="rhythm-chart" viewBox="0 0 344 174" role="img" aria-label={`Workload and completions for ${period.toLowerCase()}`}>
-      {[0, 10, 20, 30].map((tick) => <g key={tick}><line x1="24" x2="323" y1={y(tick)} y2={y(tick)} /><text x="4" y={y(tick) + 4}>{tick}</text></g>)}
+    <svg className="rhythm-chart" viewBox="0 0 338 172" role="img" aria-label={`Workload and completions for ${period.toLowerCase()}`}>
+      {[0, 10, 20, 30].map((tick) => <g key={tick}><line x1="27" x2="312" y1={y(tick)} y2={y(tick)} /><text x="4" y={y(tick) + 4}>{tick}</text></g>)}
       <polyline className="chart-line chart-line--blue" points={points(series.workload)} />
       <polyline className="chart-line chart-line--green" points={points(series.completions)} />
-      {series.workload.map((value, index) => <circle className="chart-dot chart-dot--blue" cx={x[index]} cy={y(value)} r="3.2" key={`w-${index}`} />)}
-      {series.completions.map((value, index) => <circle className="chart-dot chart-dot--green" cx={x[index]} cy={y(value)} r="3.2" key={`c-${index}`} />)}
-      {series.labels.map((label, index) => <text className="chart-label" x={x[index]} y="163" textAnchor="middle" key={label}>{label}</text>)}
+      {series.workload.map((value, index) => <circle className="chart-dot chart-dot--blue" cx={x[index]} cy={y(value)} r="3" key={`w-${index}`} />)}
+      {series.completions.map((value, index) => <circle className="chart-dot chart-dot--green" cx={x[index]} cy={y(value)} r="3" key={`c-${index}`} />)}
+      {series.labels.map((label, index) => <text className="chart-label" x={x[index]} y="162" textAnchor="middle" key={label}>{label}</text>)}
     </svg>
   );
 }
@@ -481,13 +491,22 @@ function MyRhythm({ notify }: { notify: (message: string) => void }) {
   const [period, setPeriod] = useState("Last 7 days");
   return (
     <section className="card bottom-card rhythm-card" aria-labelledby="rhythm-title">
-      <div className="card-heading-row"><h2 id="rhythm-title">My rhythm</h2><label className="period-select"><span className="sr-only">Chart period</span><select value={period} onChange={(event) => setPeriod(event.target.value)}>{Object.keys(chartSeries).map((item) => <option key={item}>{item}</option>)}</select><ChevronDown /></label></div>
+      <SectionHeading
+        id="rhythm-title"
+        icon={CalendarDays}
+        action={
+          <label className="period-select">
+            <span className="sr-only">Chart period</span>
+            <select value={period} onChange={(event) => setPeriod(event.target.value)}>{Object.keys(chartSeries).map((item) => <option key={item}>{item}</option>)}</select>
+          </label>
+        }
+      >My rhythm</SectionHeading>
       <div className="chart-legend"><span><i className="legend-blue" />Workload</span><span><i className="legend-green" />Completions</span></div>
       <div className="rhythm-body">
         <RhythmChart period={period} />
         <div className="sla-summary">
           <div className="sla-ring"><div><strong>92%</strong><span>SLA on time</span></div></div>
-          <TextButton onClick={() => notify("Opened SLA details")}>View details <ArrowRight /></TextButton>
+          <TextButton onClick={() => notify("Opened SLA details")}>View details</TextButton>
         </div>
       </div>
     </section>
@@ -504,17 +523,15 @@ export default function OfficerDashboardHighFidelity({ embedded = true }: Office
   return (
     <main
       className={`d31-officer-reference officer-dashboard officer-dashboard--${embedded ? "embedded" : "standalone"}`}
-      data-dashboard-version="spacious-v3"
+      data-dashboard-version="command-center-v4"
     >
       <div className="dashboard-frame">
-        <header className="dashboard-header">
-          <h1>Good afternoon, Grace</h1>
-          <p>Officer dashboard <i>•</i> Thursday, May 8, 2026</p>
-        </header>
-
         <div className="dashboard-top-grid">
-          <div className="dashboard-left-column"><WorkloadPulse /><WorkPlan notify={notify} /></div>
-          <aside className="dashboard-right-column"><CaseSignals notify={notify} /><RecentHandoffs notify={notify} /></aside>
+          <WorkPlan notify={notify} />
+          <aside className="dashboard-side-stack">
+            <CaseSignals notify={notify} />
+            <RecentHandoffs notify={notify} />
+          </aside>
         </div>
 
         <div className="dashboard-bottom-grid">
