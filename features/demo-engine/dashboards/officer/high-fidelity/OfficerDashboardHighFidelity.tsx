@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import "./officer-dashboard-reference.css";
+
 type Accent = "blue" | "orange" | "red" | "green" | "violet";
 type PlanTab = "Needs action" | "Waiting on others" | "Ready to complete";
 type SignalTab = "Messages" | "Assignments" | "Notices" | "Case Updates";
@@ -159,6 +161,12 @@ const planCounts: Record<PlanTab, number> = {
   "Ready to complete": 2,
 };
 
+const planTabLines: Record<PlanTab, readonly [string, string]> = {
+  "Needs action": ["Needs", "action"],
+  "Waiting on others": ["Waiting on", "others"],
+  "Ready to complete": ["Ready to", "complete"],
+};
+
 const signalContent: Record<SignalTab, Array<{ title: string; note: string }>> = {
   Messages: [
     { title: "Brian Otieno", note: "I uploaded the requested documents. Please confirm if everything is in order." },
@@ -234,6 +242,19 @@ function TextButton({ children, onClick, className = "" }: { children: React.Rea
   );
 }
 
+function RequestId({ value }: { value: string }) {
+  const splitAt = value.lastIndexOf("-");
+
+  if (splitAt < 0) return <span className="request-id">{value}</span>;
+
+  return (
+    <span className="request-id" aria-label={value}>
+      <span aria-hidden="true">{value.slice(0, splitAt + 1)}</span>
+      <span aria-hidden="true">{value.slice(splitAt + 1)}</span>
+    </span>
+  );
+}
+
 function WorkloadPulse() {
   const stats = [
     { value: "18", label: "Assigned", accent: "blue" as Accent, icon: ListChecks, width: "78%" },
@@ -285,7 +306,11 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
             className={activeTab === tab ? "is-active" : ""}
             onClick={() => setActiveTab(tab)}
           >
-            {tab}<span>{planCounts[tab]}</span>
+            <span className="plan-tab-label">
+              <span>{planTabLines[tab][0]}</span>
+              <span>{planTabLines[tab][1]}</span>
+            </span>
+            <span className="plan-tab-count">{planCounts[tab]}</span>
           </button>
         ))}
       </div>
@@ -306,8 +331,8 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
                     <strong>{item.service}</strong>
                   </td>
                   <td data-label="Applicant">{item.applicant}</td>
-                  <td data-label="Request ID">{item.requestId}</td>
-                  <td data-label="Next action">{item.nextAction}</td>
+                  <td data-label="Request ID"><RequestId value={item.requestId} /></td>
+                  <td data-label="Next action" className="next-action-copy" title={item.nextAction}>{item.nextAction}</td>
                   <td data-label="Stage">{item.stage}</td>
                   <td data-label="SLA"><div className={`sla-line sla-line--${item.accent}`}><i /></div><span className={`sla-text--${item.accent}`}>{item.sla}</span></td>
                   <td data-label="Status"><span className={`status status--${item.accent}`}>{item.status}</span></td>
@@ -478,8 +503,8 @@ export default function OfficerDashboardHighFidelity({ embedded = true }: Office
 
   return (
     <main
-      className={`officer-dashboard d31-officer-reference officer-dashboard--${embedded ? "embedded" : "standalone"}`}
-      data-dashboard-version="shell-safe-v2"
+      className={`d31-officer-reference officer-dashboard officer-dashboard--${embedded ? "embedded" : "standalone"}`}
+      data-dashboard-version="spacious-v3"
     >
       <div className="dashboard-frame">
         <header className="dashboard-header">

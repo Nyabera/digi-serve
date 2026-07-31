@@ -1,2 +1,4 @@
-export { default as OfficerDashboardHighFidelity } from "./OfficerDashboardHighFidelity";
-export type { OfficerDashboardProps } from "./OfficerDashboardHighFidelity";
+export { default } from "./OfficerDashboardHighFidelity";
+export type {
+  OfficerDashboardProps,
+} from "./OfficerDashboardHighFidelity";
