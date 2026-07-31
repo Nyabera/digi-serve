@@ -33,5 +33,5 @@
 - [x] tests pass
 - [x] production build passes
 - [x] Git whitespace validation passes
-- [ ] D31-3 token commit created
-- [ ] D31-3 checklist completion commit created
+- [x] D31-3 token commit created
+- [x] D31-3 checklist completion commit created
