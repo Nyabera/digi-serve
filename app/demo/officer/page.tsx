@@ -1,24 +1,7 @@
-import {
-  getActiveDemoPack,
-} from "@/features/demo-engine/config";
-import {
-  adaptOfficerDashboard,
-  assertDashboardDataValid,
-  validateOfficerDashboardData,
-} from "@/features/demo-engine/dashboards/data";
-import {
-  OfficerDashboard,
-} from "@/features/demo-engine/dashboards/officer";
+import "@/features/demo-engine/dashboards/officer/high-fidelity/officer-dashboard-reference.css";
 
-export default function DemoOfficerDashboardPage() {
-  const data = adaptOfficerDashboard(
-    getActiveDemoPack(),
-  );
+import OfficerDashboardHighFidelity from "@/features/demo-engine/dashboards/officer/high-fidelity/OfficerDashboardHighFidelity";
 
-  assertDashboardDataValid(
-    "officer",
-    validateOfficerDashboardData(data),
-  );
-
-  return <OfficerDashboard data={data} />;
+export default function OfficerDashboardPage() {
+  return <OfficerDashboardHighFidelity />;
 }

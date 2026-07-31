@@ -1,0 +1,1470 @@
+.d31-officer-reference{
+  --ink: #09132f;
+  --ink-soft: #34436b;
+  --muted: #66728f;
+  --line: #dce1eb;
+  --line-soft: #e8ebf1;
+  --canvas: #f8f9fb;
+  --card: #ffffff;
+  --blue: #0866ff;
+  --blue-soft: #eaf2ff;
+  --green: #08a653;
+  --green-soft: #e8f8ef;
+  --orange: #ff6500;
+  --orange-soft: #fff1e8;
+  --red: #ff1f27;
+  --red-soft: #ffedef;
+  --violet: #6d16ff;
+  --violet-soft: #f1e9ff;
+}
+
+.d31-officer-reference, .d31-officer-reference *{
+  box-sizing: border-box;
+}
+
+.d31-officer-reference{
+  background: var(--canvas);
+}
+
+.d31-officer-reference{
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", Inter, sans-serif;
+}
+
+.d31-officer-reference button,
+.d31-officer-reference select{
+  font: inherit;
+}
+
+.d31-officer-reference button{
+  -webkit-tap-highlight-color: transparent;
+}
+
+.d31-officer-reference.officer-dashboard{
+  min-height: 100vh;
+  padding: 5px 7px 7px;
+  background:
+    radial-gradient(circle at 72% -12%, rgba(39, 99, 211, 0.025), transparent 31%),
+    linear-gradient(180deg, #fafbfc 0%, #f7f8fa 100%);
+}
+
+.d31-officer-reference .dashboard-frame{
+  width: 100%;
+  max-width: 1740px;
+  min-height: calc(100vh - 12px);
+  margin: 0 auto;
+  padding: 18px 20px 22px;
+  border: 1px solid #dde2ea;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.46);
+  box-shadow: 0 1px 2px rgba(18, 31, 61, 0.02);
+}
+
+.d31-officer-reference .dashboard-header{
+  height: 76px;
+  padding: 0 12px;
+}
+
+.d31-officer-reference .dashboard-header h1{
+  margin: 0 0 3px;
+  color: #09122e;
+  font-size: clamp(31px, 2.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1.65px;
+}
+
+.d31-officer-reference .dashboard-header p{
+  margin: 0 0 0 1px;
+  color: #566486;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.12px;
+}
+
+.d31-officer-reference .dashboard-header p i{
+  margin: 0 9px;
+  color: #425174;
+  font-style: normal;
+}
+
+.d31-officer-reference .card{
+  overflow: hidden;
+  border: 1px solid #d8dee9;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 3px rgba(34, 46, 77, 0.018);
+}
+
+.d31-officer-reference .card h2{
+  margin: 0;
+  color: #08122e;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.28px;
+}
+
+.d31-officer-reference .dashboard-top-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.735fr) minmax(430px, 1fr);
+  gap: 14px;
+}
+
+.d31-officer-reference .dashboard-left-column,
+.d31-officer-reference .dashboard-right-column{
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.d31-officer-reference .workload-card{
+  height: 145px;
+  padding: 13px 27px 13px;
+}
+
+.d31-officer-reference .workload-stats{
+  display: grid;
+  height: calc(100% - 23px);
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+
+.d31-officer-reference .workload-stat{
+  display: flex;
+  height: 69px;
+  align-items: center;
+  gap: 25px;
+  padding: 0 25px 0 13px;
+  border-right: 1px solid #d8dee9;
+}
+
+.d31-officer-reference .workload-stat:first-child{
+  padding-left: 12px;
+}
+
+.d31-officer-reference .workload-stat:last-child{
+  border-right: 0;
+}
+
+.d31-officer-reference .metric-icon{
+  display: grid;
+  width: 45px;
+  height: 45px;
+  flex: 0 0 45px;
+  place-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .metric-icon svg{
+  width: 21px;
+  height: 21px;
+}
+
+.d31-officer-reference .metric-icon--blue{ color: var(--blue); }
+.d31-officer-reference .metric-icon--orange{ color: var(--orange); }
+.d31-officer-reference .metric-icon--red{ color: var(--red); }
+.d31-officer-reference .metric-icon--green{ color: var(--green); }
+
+.d31-officer-reference .metric-copy{
+  width: 100%;
+  min-width: 80px;
+}
+
+.d31-officer-reference .metric-copy strong{
+  display: block;
+  margin-bottom: 2px;
+  color: #08112e;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.05px;
+}
+
+.d31-officer-reference .metric-copy > span{
+  display: block;
+  color: #354368;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .metric-track{
+  width: 86px;
+  height: 3px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e1e5ec;
+}
+
+.d31-officer-reference .metric-track i{
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.d31-officer-reference .fill--blue{ background: var(--blue); }
+.d31-officer-reference .fill--orange{ background: var(--orange); }
+.d31-officer-reference .fill--red{ background: var(--red); }
+.d31-officer-reference .fill--green{ background: var(--green); }
+
+.d31-officer-reference .work-plan-card{
+  height: 443px;
+  padding: 14px 10px 9px;
+}
+
+.d31-officer-reference .work-plan-card > h2{
+  padding: 0 14px 9px;
+}
+
+.d31-officer-reference .plan-tabs{
+  display: grid;
+  width: min(585px, 64%);
+  height: 39px;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 1px solid #e1e5ec;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+}
+
+.d31-officer-reference .plan-tabs button{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  border: 0;
+  border-right: 1px solid #e0e4eb;
+  background: transparent;
+  color: #405071;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .plan-tabs button:last-child{
+  border-right: 0;
+}
+
+.d31-officer-reference .plan-tabs button::after{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: transparent;
+  content: "";
+}
+
+.d31-officer-reference .plan-tabs button.is-active{
+  color: var(--blue);
+}
+
+.d31-officer-reference .plan-tabs button.is-active::after{
+  background: var(--blue);
+}
+
+.d31-officer-reference .plan-tabs button span{
+  display: grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f0f2f6;
+  color: #526081;
+  font-size: 10px;
+}
+
+.d31-officer-reference .plan-tabs button.is-active span{
+  background: #e8f1ff;
+  color: var(--blue);
+}
+
+.d31-officer-reference .work-table-wrap{
+  width: 100%;
+  overflow-x: auto;
+  border-top: 1px solid #e1e5ec;
+}
+
+.d31-officer-reference .work-table{
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #354368;
+  font-size: 9.25px;
+  line-height: 1.55;
+}
+
+.d31-officer-reference .work-table th{
+  height: 31px;
+  color: #344266;
+  font-size: 9px;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .work-table th:nth-child(1){ width: 17%; padding-left: 21px; }
+.d31-officer-reference .work-table th:nth-child(2){ width: 10%; }
+.d31-officer-reference .work-table th:nth-child(3){ width: 12%; }
+.d31-officer-reference .work-table th:nth-child(4){ width: 18%; }
+.d31-officer-reference .work-table th:nth-child(5){ width: 12%; }
+.d31-officer-reference .work-table th:nth-child(6){ width: 11.5%; }
+.d31-officer-reference .work-table th:nth-child(7){ width: 11%; }
+.d31-officer-reference .work-table th:nth-child(8){ width: 8.5%; }
+
+.d31-officer-reference .work-table tbody tr{
+  position: relative;
+  height: 49px;
+  border-top: 1px solid #e4e8ee;
+}
+
+.d31-officer-reference .work-table tbody tr::before{
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--row-accent);
+  content: "";
+}
+
+.d31-officer-reference .row-accent--blue{ --row-accent: var(--blue); }
+.d31-officer-reference .row-accent--orange{ --row-accent: var(--orange); }
+.d31-officer-reference .row-accent--red{ --row-accent: var(--red); }
+.d31-officer-reference .row-accent--green{ --row-accent: var(--green); }
+.d31-officer-reference .row-accent--violet{ --row-accent: var(--violet); }
+
+.d31-officer-reference .work-table td{
+  padding: 4px 5px 4px 0;
+  vertical-align: middle;
+}
+
+.d31-officer-reference .work-table td:first-child{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 49px;
+  padding-left: 10px;
+  color: #101936;
+  line-height: 1.25;
+}
+
+.d31-officer-reference .work-table td:first-child strong{
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .service-icon{
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .service-icon svg{
+  width: 18px;
+  height: 18px;
+}
+
+.d31-officer-reference .service-icon--blue{ color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .service-icon--orange{ color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .service-icon--red{ color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .service-icon--green{ color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .service-icon--violet{ color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .sla-line{
+  position: relative;
+  width: 74px;
+  height: 3px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #e5e8ed;
+}
+
+.d31-officer-reference .sla-line i{
+  display: block;
+  width: 55%;
+  height: 100%;
+  background: currentColor;
+}
+
+.d31-officer-reference .sla-line--red{ color: var(--red); }
+.d31-officer-reference .sla-line--orange{ color: var(--orange); }
+.d31-officer-reference .sla-line--green{ color: var(--orange); }
+.d31-officer-reference .sla-line--blue{ color: var(--violet); }
+.d31-officer-reference .sla-line--violet{ color: var(--violet); }
+
+.d31-officer-reference .sla-text--red{ color: var(--red) !important; }
+.d31-officer-reference .sla-text--orange{ color: var(--orange) !important; }
+.d31-officer-reference .sla-text--green{ color: var(--orange) !important; }
+.d31-officer-reference .sla-text--blue{ color: var(--violet) !important; }
+.d31-officer-reference .sla-text--violet{ color: var(--violet) !important; }
+
+.d31-officer-reference .work-table td:nth-child(6) > span{
+  font-size: 8.75px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .status{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 57px;
+  height: 23px;
+  padding: 0 8px;
+  border-radius: 5px;
+  font-size: 8.4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .status--red{ color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .status--orange{ color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .status--green{ color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .status--blue,
+.d31-officer-reference .status--violet{ color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .text-button{
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 3px;
+  border: 0;
+  background: transparent;
+  color: #005fff;
+  cursor: pointer;
+  font-size: 9.25px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .text-button svg{
+  width: 14px;
+  height: 14px;
+}
+
+.d31-officer-reference .text-button:hover,
+.d31-officer-reference .text-button:focus-visible{
+  color: #004ed6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.d31-officer-reference button:focus-visible,
+.d31-officer-reference select:focus-visible{
+  outline: 2px solid rgba(8, 102, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.d31-officer-reference .signals-card{
+  height: 422px;
+  padding: 13px 16px 0;
+}
+
+.d31-officer-reference .signals-card > h2{
+  padding-left: 8px;
+}
+
+.d31-officer-reference .signal-tabs{
+  position: relative;
+  display: flex;
+  height: 40px;
+  align-items: flex-end;
+  gap: 4px;
+  border-bottom: 1px solid #e3e7ed;
+}
+
+.d31-officer-reference .signal-tabs > button:not(.mark-read){
+  position: relative;
+  height: 34px;
+  padding: 0 17px;
+  border: 0;
+  background: transparent;
+  color: #485675;
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signal-tabs > button:not(.mark-read)::after{
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: transparent;
+  content: "";
+}
+
+.d31-officer-reference .signal-tabs > button.is-active:not(.mark-read){
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.d31-officer-reference .signal-tabs > button.is-active:not(.mark-read)::after{
+  background: var(--blue);
+}
+
+.d31-officer-reference .signal-tabs .mark-read{
+  margin: 0 2px 7px auto;
+}
+
+.d31-officer-reference .signal-list{
+  display: flex;
+  flex-direction: column;
+}
+
+.d31-officer-reference .signal-item{
+  display: grid;
+  min-height: 84px;
+  grid-template-columns: 45px minmax(0, 1fr) 65px;
+  gap: 9px;
+  align-items: start;
+  padding: 11px 7px 8px 5px;
+  border-bottom: 1px solid #e2e6ec;
+}
+
+.d31-officer-reference .signal-item--compact{
+  min-height: 74px;
+  padding-top: 9px;
+}
+
+.d31-officer-reference .avatar,
+.d31-officer-reference .icon-badge{
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .avatar{
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .avatar--violet{ color: var(--violet); background: var(--violet-soft); }
+.d31-officer-reference .avatar--orange{ color: var(--orange); background: var(--orange-soft); }
+
+.d31-officer-reference .icon-badge svg{
+  width: 19px;
+  height: 19px;
+}
+
+.d31-officer-reference .icon-badge--small{
+  width: 29px;
+  height: 29px;
+  flex-basis: 29px;
+}
+
+.d31-officer-reference .icon-badge--small svg{
+  width: 15px;
+  height: 15px;
+}
+
+.d31-officer-reference .icon-badge--blue{ color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .icon-badge--orange{ color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .icon-badge--red{ color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .icon-badge--green{ color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .icon-badge--violet{ color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .signal-copy{
+  min-width: 0;
+}
+
+.d31-officer-reference .signal-heading{
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: #0d1734;
+  font-size: 9.9px;
+}
+
+.d31-officer-reference .signal-heading strong{
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signal-heading i{
+  color: var(--blue);
+  font-style: normal;
+}
+
+.d31-officer-reference .signal-heading > span:not(.tag){
+  color: var(--blue);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .signal-copy p{
+  margin: 5px 0 2px;
+  color: #344366;
+  font-size: 9.2px;
+  line-height: 1.45;
+}
+
+.d31-officer-reference .signal-copy small{
+  display: block;
+  color: #4b5878;
+  font-size: 8.4px;
+  line-height: 1.4;
+  white-space: pre;
+}
+
+.d31-officer-reference .tag{
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 7px;
+  border-radius: 4px;
+  font-size: 8.4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .tag--green{ color: #078743; background: #e2f6ea; }
+.d31-officer-reference .tag--blue{ color: #0c5cd8; background: #e7f0ff; }
+
+.d31-officer-reference .signal-meta{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.d31-officer-reference .signal-meta time{
+  color: #465475;
+  font-size: 8.6px;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signals-card > .view-all{
+  display: flex;
+  height: 35px;
+  margin: 0 auto;
+  font-size: 9.4px;
+}
+
+.d31-officer-reference .handoffs-card{
+  height: 168px;
+  padding: 11px 16px;
+}
+
+.d31-officer-reference .card-heading-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.d31-officer-reference .card-heading-row .text-button{
+  gap: 13px;
+}
+
+.d31-officer-reference .handoffs-card .card-heading-row{
+  height: 22px;
+  padding-left: 7px;
+}
+
+.d31-officer-reference .handoff-list{
+  padding-top: 1px;
+}
+
+.d31-officer-reference .handoff-item{
+  display: grid;
+  width: 100%;
+  height: 41px;
+  grid-template-columns: 43px minmax(0, 1fr) 65px;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px 2px 4px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #0d1733;
+  cursor: pointer;
+  text-align: left;
+}
+
+.d31-officer-reference .handoff-item:hover{
+  background: #f7f9fc;
+}
+
+.d31-officer-reference .handoff-item .icon-badge{
+  width: 34px;
+  height: 34px;
+}
+
+.d31-officer-reference .handoff-item > span{
+  min-width: 0;
+}
+
+.d31-officer-reference .handoff-item strong,
+.d31-officer-reference .handoff-item small{
+  display: block;
+}
+
+.d31-officer-reference .handoff-item strong{
+  margin-bottom: 2px;
+  overflow: hidden;
+  font-size: 9.6px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .handoff-item small,
+.d31-officer-reference .handoff-item time{
+  color: #465474;
+  font-size: 8.35px;
+  font-weight: 500;
+  white-space: pre;
+}
+
+.d31-officer-reference .handoff-item time{
+  justify-self: end;
+}
+
+.d31-officer-reference .dashboard-bottom-grid{
+  display: grid;
+  grid-template-columns: 1.2fr 1.17fr 0.99fr 1.5fr;
+  gap: 11px;
+  margin-top: 10px;
+}
+
+.d31-officer-reference .bottom-card{
+  height: 267px;
+  padding: 13px 12px 10px;
+}
+
+.d31-officer-reference .activity-card{
+  padding-right: 16px;
+  padding-left: 13px;
+}
+
+.d31-officer-reference .activity-card .card-heading-row{
+  padding: 0 2px 5px 8px;
+}
+
+.d31-officer-reference .activity-list{
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+}
+
+.d31-officer-reference .activity-item{
+  display: grid;
+  min-height: 46px;
+  grid-template-columns: 55px 31px minmax(0, 1fr);
+  align-items: start;
+  gap: 5px;
+  color: #111b39;
+}
+
+.d31-officer-reference .activity-item time{
+  padding-top: 8px;
+  color: #445271;
+  font-size: 9px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .activity-item .icon-badge{
+  margin-top: 2px;
+}
+
+.d31-officer-reference .activity-item > span{
+  min-width: 0;
+  padding-top: 6px;
+}
+
+.d31-officer-reference .activity-item strong,
+.d31-officer-reference .activity-item small{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .activity-item strong{
+  font-size: 8.1px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .activity-item small{
+  margin-top: 4px;
+  color: #506080;
+  font-size: 7.9px;
+  white-space: pre;
+}
+
+.d31-officer-reference .up-next-card{
+  padding-right: 12px;
+  padding-left: 18px;
+}
+
+.d31-officer-reference .up-next-card > h2,
+.d31-officer-reference .action-card > h2{
+  margin-bottom: 8px;
+}
+
+.d31-officer-reference .up-next-list{
+  display: flex;
+  flex-direction: column;
+}
+
+.d31-officer-reference .up-next-item{
+  display: grid;
+  min-height: 48px;
+  grid-template-columns: 35px minmax(0, 1fr) 65px 43px;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid #e1e5ec;
+}
+
+.d31-officer-reference .up-next-item:last-child{
+  border-bottom: 0;
+}
+
+.d31-officer-reference .up-next-item > span{
+  min-width: 0;
+}
+
+.d31-officer-reference .up-next-item strong,
+.d31-officer-reference .up-next-item small{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .up-next-item strong{
+  color: #101a37;
+  font-size: 8.6px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .up-next-item small{
+  margin-top: 3px;
+  color: #506080;
+  font-size: 8px;
+}
+
+.d31-officer-reference .up-next-item em{
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .action-card{
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.d31-officer-reference .action-card > h2{
+  padding-left: 1px;
+}
+
+.d31-officer-reference .action-list{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.d31-officer-reference .action-item{
+  display: grid;
+  width: 100%;
+  height: 36px;
+  grid-template-columns: 25px minmax(0, 1fr) 24px 13px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 7px 0 10px;
+  border: 1px solid #e2e6ed;
+  border-radius: 7px;
+  background: #fff;
+  color: #465475;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(18, 30, 60, 0.025);
+}
+
+.d31-officer-reference .action-item:hover{
+  border-color: #cbd5e5;
+  background: #fafcff;
+}
+
+.d31-officer-reference .action-item > span{
+  overflow: hidden;
+  font-size: 8.5px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .action-item > svg:last-child{
+  width: 13px;
+  height: 13px;
+}
+
+.d31-officer-reference .line-icon{
+  width: 20px;
+  height: 20px;
+}
+
+.d31-officer-reference .line-icon--blue{ color: var(--blue); }
+.d31-officer-reference .line-icon--orange{ color: var(--orange); }
+.d31-officer-reference .line-icon--red{ color: var(--red); }
+.d31-officer-reference .line-icon--green{ color: var(--green); }
+.d31-officer-reference .line-icon--violet{ color: var(--violet); }
+
+.d31-officer-reference .count{
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 5px;
+  font-size: 8.5px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .count--blue{ color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .count--orange{ color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .count--red{ color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .count--green{ color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .count--violet{ color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .rhythm-card{
+  padding: 13px 22px 9px;
+}
+
+.d31-officer-reference .period-select{
+  position: relative;
+  display: block;
+}
+
+.d31-officer-reference .period-select select{
+  width: 86px;
+  height: 26px;
+  padding: 0 25px 0 11px;
+  border: 1px solid #dce2ea;
+  border-radius: 6px;
+  appearance: none;
+  background: #fff;
+  color: #344366;
+  cursor: pointer;
+  font-size: 8.4px;
+  font-weight: 500;
+}
+
+.d31-officer-reference .period-select svg{
+  position: absolute;
+  top: 8px;
+  right: 7px;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+}
+
+.d31-officer-reference .chart-legend{
+  display: flex;
+  height: 26px;
+  align-items: center;
+  gap: 24px;
+  color: #53617f;
+  font-size: 8px;
+}
+
+.d31-officer-reference .chart-legend span{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.d31-officer-reference .chart-legend i{
+  width: 12px;
+  height: 6px;
+  border-radius: 2px;
+}
+
+.d31-officer-reference .legend-blue{ background: var(--blue); }
+.d31-officer-reference .legend-green{ background: var(--green); }
+
+.d31-officer-reference .rhythm-body{
+  display: grid;
+  min-height: 186px;
+  grid-template-columns: minmax(0, 1fr) 133px;
+  align-items: center;
+}
+
+.d31-officer-reference .rhythm-chart{
+  width: 100%;
+  min-width: 0;
+  height: 174px;
+  overflow: visible;
+}
+
+.d31-officer-reference .rhythm-chart line{
+  stroke: #e7eaf0;
+  stroke-width: 1;
+}
+
+.d31-officer-reference .rhythm-chart text{
+  fill: #526080;
+  font-family: "Plus Jakarta Sans Variable", sans-serif;
+  font-size: 8px;
+}
+
+.d31-officer-reference .chart-line{
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.d31-officer-reference .chart-line--blue{ stroke: var(--blue); }
+.d31-officer-reference .chart-line--green{ stroke: var(--green); }
+.d31-officer-reference .chart-dot--blue{ fill: var(--blue); }
+.d31-officer-reference .chart-dot--green{ fill: var(--green); }
+.d31-officer-reference .chart-label{ font-size: 7.2px !important; }
+
+.d31-officer-reference .sla-summary{
+  display: flex;
+  height: 160px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0 2px 18px;
+  border-left: 1px solid #e1e5ec;
+}
+
+.d31-officer-reference .sla-ring{
+  display: grid;
+  width: 116px;
+  height: 116px;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--blue) 0deg 237deg, var(--green) 237deg 331deg, #e5e8ed 331deg 360deg);
+}
+
+.d31-officer-reference .sla-ring::before{
+  grid-area: 1 / 1;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+}
+
+.d31-officer-reference .sla-ring > div{
+  z-index: 1;
+  display: flex;
+  grid-area: 1 / 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.d31-officer-reference .sla-ring strong{
+  color: #07112f;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.9px;
+}
+
+.d31-officer-reference .sla-ring span{
+  margin-top: 8px;
+  color: #435171;
+  font-size: 8.2px;
+  font-weight: 500;
+}
+
+.d31-officer-reference .dashboard-toast{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  display: flex;
+  min-width: 230px;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: 1px solid #cdd8e8;
+  border-radius: 9px;
+  background: #101a37;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(10, 23, 54, 0.2);
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.d31-officer-reference .dashboard-toast svg{
+  width: 16px;
+  height: 16px;
+  color: #5fe19b;
+}
+
+.d31-officer-reference .dashboard-toast.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d31-officer-reference .sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 1680px) {
+  .d31-officer-reference .dashboard-frame{
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 1270px) {
+  .d31-officer-reference .dashboard-frame{
+    padding: 17px;
+  }
+
+  .d31-officer-reference .dashboard-top-grid{
+    grid-template-columns: minmax(0, 1.55fr) minmax(385px, 1fr);
+  }
+
+  .d31-officer-reference .workload-stat{
+    gap: 15px;
+    padding-right: 15px;
+    padding-left: 8px;
+  }
+
+  .d31-officer-reference .work-table{
+    min-width: 900px;
+  }
+
+  .d31-officer-reference .dashboard-bottom-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .d31-officer-reference .bottom-card{
+    height: 267px;
+  }
+}
+
+@media (max-width: 980px) {
+  .d31-officer-reference.officer-dashboard{
+    padding: 0;
+  }
+
+  .d31-officer-reference .dashboard-frame{
+    min-height: 100vh;
+    padding: 20px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .d31-officer-reference .dashboard-header{
+    height: auto;
+    min-height: 84px;
+    padding: 0;
+  }
+
+  .d31-officer-reference .dashboard-top-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .workload-card,
+.d31-officer-reference .work-plan-card,
+.d31-officer-reference .signals-card,
+.d31-officer-reference .handoffs-card{
+    height: auto;
+  }
+
+  .d31-officer-reference .workload-card{
+    min-height: 145px;
+  }
+
+  .d31-officer-reference .work-plan-card{
+    min-height: 443px;
+  }
+
+  .d31-officer-reference .signals-card{
+    min-height: 422px;
+  }
+
+  .d31-officer-reference .handoffs-card{
+    min-height: 168px;
+  }
+
+  .d31-officer-reference .dashboard-right-column{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .d31-officer-reference .dashboard-frame{
+    padding: 18px 12px 24px;
+  }
+
+  .d31-officer-reference .dashboard-header h1{
+    font-size: 30px;
+    letter-spacing: -1.25px;
+  }
+
+  .d31-officer-reference .dashboard-header p{
+    font-size: 12px;
+  }
+
+  .d31-officer-reference .workload-card{
+    padding: 14px;
+  }
+
+  .d31-officer-reference .workload-stats{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .d31-officer-reference .workload-stat{
+    height: 78px;
+    padding: 8px 10px;
+    border-right: 0;
+    border-bottom: 1px solid #e3e7ed;
+  }
+
+  .d31-officer-reference .workload-stat:nth-child(odd){
+    border-right: 1px solid #e3e7ed;
+  }
+
+  .d31-officer-reference .workload-stat:nth-child(n/**/+3){
+    border-bottom: 0;
+  }
+
+  .d31-officer-reference .metric-track{
+    margin-top: 9px;
+  }
+
+  .d31-officer-reference .workload-card{
+    min-height: 205px;
+  }
+
+  .d31-officer-reference .plan-tabs{
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .d31-officer-reference .plan-tabs button,
+.d31-officer-reference .signal-tabs > button:not(.mark-read){
+    min-height: 44px;
+  }
+
+  .d31-officer-reference .work-table-wrap{
+    border-top: 0;
+    overflow: visible;
+  }
+
+  .d31-officer-reference .work-table,
+.d31-officer-reference .work-table tbody,
+.d31-officer-reference .work-table tr,
+.d31-officer-reference .work-table td{
+    display: block;
+    width: 100%;
+  }
+
+  .d31-officer-reference .work-table thead{
+    display: none;
+  }
+
+  .d31-officer-reference .work-table tbody tr{
+    height: auto;
+    min-height: 0;
+    margin: 10px 0;
+    padding: 12px 10px 11px 44px;
+    border: 1px solid #e2e6ed;
+    border-radius: 8px;
+  }
+
+  .d31-officer-reference .work-table tbody tr::before{
+    top: 7px;
+    bottom: 7px;
+  }
+
+  .d31-officer-reference .work-table td{
+    position: relative;
+    display: grid;
+    min-height: 28px;
+    grid-template-columns: 92px minmax(0, 1fr);
+    align-items: center;
+    padding: 5px 0;
+    font-size: 11px;
+  }
+
+  .d31-officer-reference .work-table td::before{
+    color: #7a849b;
+    content: attr(data-label);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .d31-officer-reference .work-table td:first-child{
+    display: flex;
+    height: auto;
+    min-height: 35px;
+    margin-left: -35px;
+    padding-left: 0;
+  }
+
+  .d31-officer-reference .work-table td:first-child::before{
+    display: none;
+  }
+
+  .d31-officer-reference .work-table .text-button{
+    min-height: 44px;
+    justify-self: start;
+  }
+
+  .d31-officer-reference .signal-tabs{
+    height: auto;
+    min-height: 50px;
+    overflow-x: auto;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read{
+    display: none;
+  }
+
+  .d31-officer-reference .signal-item{
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .d31-officer-reference .signal-meta{
+    display: flex;
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .d31-officer-reference .signal-meta .text-button{
+    min-height: 44px;
+  }
+
+  .d31-officer-reference .dashboard-right-column,
+.d31-officer-reference .dashboard-bottom-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .bottom-card{
+    height: auto;
+    min-height: 267px;
+  }
+
+  .d31-officer-reference .rhythm-body{
+    grid-template-columns: minmax(0, 1fr) 130px;
+  }
+}
+
+@media (max-width: 440px) {
+  .d31-officer-reference .dashboard-header h1{
+    font-size: 27px;
+  }
+
+  .d31-officer-reference .dashboard-header p{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .d31-officer-reference .dashboard-header p i{
+    margin: 0 6px;
+  }
+
+  .d31-officer-reference .metric-icon{
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+  }
+
+  .d31-officer-reference .metric-copy strong{
+    font-size: 21px;
+  }
+
+  .d31-officer-reference .metric-track{
+    width: 70px;
+  }
+
+  .d31-officer-reference .plan-tabs button{
+    gap: 5px;
+    padding: 0 5px;
+    font-size: 9.5px;
+  }
+
+  .d31-officer-reference .rhythm-card{
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .d31-officer-reference .rhythm-body{
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .sla-summary{
+    height: auto;
+    min-height: 150px;
+    flex-direction: row;
+    padding: 15px 0 0;
+    border-top: 1px solid #e1e5ec;
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d31-officer-reference, .d31-officer-reference *,
+.d31-officer-reference::before, .d31-officer-reference *::before,
+.d31-officer-reference::after, .d31-officer-reference *::after{
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* Existing FAIDIA role-shell integration overrides. */
+.d31-officer-reference.officer-dashboard {
+  min-height: auto;
+}
+
+.d31-officer-reference .dashboard-frame {
+  min-height: auto;
+}
