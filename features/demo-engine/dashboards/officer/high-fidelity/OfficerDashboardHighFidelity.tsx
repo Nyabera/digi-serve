@@ -16,6 +16,7 @@ import {
   Inbox,
   ListChecks,
   Mail,
+  MoreVertical,
   RefreshCw,
   ShieldCheck,
   UserRound,
@@ -34,6 +35,8 @@ type SignalTab = "Messages" | "Assignments" | "Notices" | "Case Updates";
 export type OfficerDashboardProps = {
   /** Keep true when the dashboard renders inside the existing sidebar/topbar shell. */
   embedded?: boolean;
+  /** Request-time date formatted by the server route. */
+  todayLabel?: string;
 };
 
 type WorkItem = {
@@ -228,6 +231,16 @@ const chartSeries: Record<string, { labels: string[]; workload: number[]; comple
   },
 };
 
+function formatDashboardDate(value: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "Africa/Nairobi",
+  }).format(value);
+}
+
 function IconBadge({ icon: Icon, accent, small = false }: { icon: LucideIcon; accent: Accent; small?: boolean }) {
   return (
     <span className={`icon-badge icon-badge--${accent}${small ? " icon-badge--small" : ""}`} aria-hidden="true">
@@ -351,7 +364,21 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
                   <td data-label="Stage">{item.stage}</td>
                   <td data-label="SLA"><div className={`sla-line sla-line--${item.accent}`}><i /></div><span className={`sla-text--${item.accent}`}>{item.sla}</span></td>
                   <td data-label="Status"><span className={`status status--${item.accent}`}>{item.status}</span></td>
-                  <td data-label="Action"><TextButton onClick={() => notify(`${item.action}: ${item.service}`)}>{item.action}</TextButton></td>
+                  <td data-label="Action">
+                    <div className="row-action">
+                      <TextButton onClick={() => notify(`${item.action}: ${item.service}`)}>
+                        {item.action}
+                      </TextButton>
+                      <button
+                        type="button"
+                        className="row-menu"
+                        aria-label={`More actions for ${item.service}`}
+                        onClick={() => notify(`More actions: ${item.service}`)}
+                      >
+                        <MoreVertical aria-hidden="true" strokeWidth={2.2} />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}
@@ -509,7 +536,11 @@ function MyRhythm({ notify }: { notify: (message: string) => void }) {
   );
 }
 
-export default function OfficerDashboardHighFidelity({ embedded = true }: OfficerDashboardProps) {
+export default function OfficerDashboardHighFidelity({
+  embedded = true,
+  todayLabel,
+}: OfficerDashboardProps) {
+  const resolvedTodayLabel = todayLabel ?? formatDashboardDate(new Date());
   const [toast, setToast] = useState("");
   const notify = (message: string) => {
     setToast(message);
@@ -524,7 +555,11 @@ export default function OfficerDashboardHighFidelity({ embedded = true }: Office
       <div className="dashboard-frame">
         <header className="dashboard-header">
           <h1>Good afternoon, Grace</h1>
-          <p>Officer dashboard <i>•</i> Thursday, May 8, 2026</p>
+          <p>
+            This is what your day looks like today
+            <i>•</i>
+            {resolvedTodayLabel}
+          </p>
         </header>
 
         <div className="dashboard-top-grid">
