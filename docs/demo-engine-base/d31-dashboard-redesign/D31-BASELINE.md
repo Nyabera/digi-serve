@@ -135,3 +135,12 @@ The dashboard consumes the active Demo Pack through the D31-5 Admin adapter and
 preserves the reference's Zones 1, 2, 3 and 5.
 
 D31-11 will perform the Admin screenshot comparison and visual freeze.
+
+## D31-11 Admin visual freeze
+
+D31-11 freezes the D31-10 Admin dashboard at five responsive widths and compares
+the production dashboard body with body crops from the exact supplied desktop,
+design and mobile references.
+
+The existing Admin shell remains governed independently by the D31-2 shell
+contract.

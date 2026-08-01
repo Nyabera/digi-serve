@@ -14,7 +14,9 @@
     "test:visual:officer": "playwright test --config=playwright.d31.config.ts tests/visual/d31/officer-dashboard.pw.ts",
     "test:visual:officer:update": "playwright test --config=playwright.d31.config.ts tests/visual/d31/officer-dashboard.pw.ts --update-snapshots",
     "test:visual:supervisor": "playwright test --config=playwright.d31.config.ts tests/visual/d31/supervisor-dashboard.pw.ts",
-    "test:visual:supervisor:update": "playwright test --config=playwright.d31.config.ts tests/visual/d31/supervisor-dashboard.pw.ts --update-snapshots"
+    "test:visual:supervisor:update": "playwright test --config=playwright.d31.config.ts tests/visual/d31/supervisor-dashboard.pw.ts --update-snapshots",
+    "test:visual:admin": "playwright test --config=playwright.d31.config.ts tests/visual/d31/admin-dashboard.pw.ts",
+    "test:visual:admin:update": "playwright test --config=playwright.d31.config.ts tests/visual/d31/admin-dashboard.pw.ts --update-snapshots"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
