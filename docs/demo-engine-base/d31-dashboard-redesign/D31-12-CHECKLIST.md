@@ -36,6 +36,6 @@
 - [x] regression-results record exists
 - [x] D31 master freeze exists
 - [x] D31 master freeze verifier passes
-- [ ] implementation commit created
-- [ ] checklist completion commit created
-- [ ] working tree is clean
+- [x] implementation commit created
+- [x] checklist completion commit created
+- [x] working tree is clean
