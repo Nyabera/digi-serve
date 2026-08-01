@@ -118,3 +118,11 @@ dashboard in the frozen Supervisor reference.
 The route consumes the active Demo Pack through `adaptSupervisorDashboard()`.
 Officer and Supervisor shell ownership remains frozen under D31-2. D31-9 will
 perform the Supervisor screenshot comparison and visual freeze.
+## D31-9 Supervisor visual freeze
+
+D31-9 freezes the D31-8 Supervisor dashboard against responsive Playwright
+screenshots and archives the exact supplied runnable bundle as its visual
+calibration source.
+
+The comparison includes 50% opacity overlays against both the 864 × 1821 design
+reference and the 1536 × 2842 runnable-bundle implementation preview.
