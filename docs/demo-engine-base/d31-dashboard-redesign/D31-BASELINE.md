@@ -126,3 +126,12 @@ calibration source.
 
 The comparison includes 50% opacity overlays against both the 864 × 1821 design
 reference and the 1536 × 2842 runnable-bundle implementation preview.
+
+## D31-10 Admin dashboard reconstruction
+
+D31-10 reconstructs `/demo/admin` using the supplied high-fidelity runnable
+bundle in embedded mode. The existing D31-2 Admin shell remains authoritative.
+The dashboard consumes the active Demo Pack through the D31-5 Admin adapter and
+preserves the reference's Zones 1, 2, 3 and 5.
+
+D31-11 will perform the Admin screenshot comparison and visual freeze.
