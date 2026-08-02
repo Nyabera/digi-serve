@@ -1,0 +1,76 @@
+{
+  "stage": "D30-13",
+  "sourceStage": "D30-12",
+  "routes": [
+    {
+      "id": "home",
+      "path": "/demo",
+      "role": "public",
+      "requiresChart": false
+    },
+    {
+      "id": "verify-certificate",
+      "path": "/demo/verify-certificate",
+      "role": "public",
+      "requiresChart": false
+    },
+    {
+      "id": "track",
+      "path": "/demo/track/STC-CL-2026-0027",
+      "role": "applicant",
+      "requiresChart": false
+    },
+    {
+      "id": "officer",
+      "path": "/demo/officer",
+      "role": "officer",
+      "requiresChart": true
+    },
+    {
+      "id": "supervisor",
+      "path": "/demo/supervisor",
+      "role": "supervisor",
+      "requiresChart": true
+    },
+    {
+      "id": "admin",
+      "path": "/demo/admin",
+      "role": "admin",
+      "requiresChart": true
+    }
+  ],
+  "viewports": [
+    {
+      "id": "desktop-1440x900",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "id": "tablet-landscape-1024x768",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "id": "tablet-portrait-768x1024",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "id": "mobile-390x844",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "totals": {
+    "routes": 6,
+    "viewports": 4,
+    "responsiveCases": 24
+  },
+  "contracts": {
+    "pageHorizontalOverflow": "no visible uncontained overflow; intentional local scroll regions are allowed",
+    "navigation": "visible navigation must remain inside the viewport or inside an intentional local scroll boundary; fully off-canvas closed navigation is ignored",
+    "charts": "role dashboards retain at least one substantial chart or data graphic",
+    "contrast": "no gross low-contrast text pair below 1.8:1",
+    "errors": "no uncaught browser errors"
+  }
+}

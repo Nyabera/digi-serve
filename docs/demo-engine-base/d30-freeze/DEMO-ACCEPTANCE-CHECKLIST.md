@@ -68,13 +68,13 @@
 
 ## Responsive
 
-- [ ] 1440 × 900 inspected
-- [ ] 1024 × 768 inspected
-- [ ] 768 × 1024 inspected
-- [ ] 390 × 844 inspected
-- [ ] charts remain visible
-- [ ] navigation is not clipped
-- [ ] contrast remains legible
+- [x] 1440 × 900 inspected
+- [x] 1024 × 768 inspected
+- [x] 768 × 1024 inspected
+- [x] 390 × 844 inspected
+- [x] charts remain visible
+- [x] navigation is not clipped
+- [x] contrast remains legible
 
 ## Freeze evidence
 
@@ -85,7 +85,7 @@
 - [ ] reset behaviour is documented
 - [ ] limitations are documented
 - [ ] environment is recorded
-- [ ] screenshots are captured
+- [x] screenshots are captured
 
 
 ## Applicant profile

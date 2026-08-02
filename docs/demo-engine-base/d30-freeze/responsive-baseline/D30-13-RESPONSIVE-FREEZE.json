@@ -1,0 +1,173 @@
+{
+  "stage": "D30-13",
+  "sourceStage": "D30-12",
+  "responsiveCases": {
+    "expected": 24,
+    "recorded": 24,
+    "passed": 24,
+    "missing": [],
+    "failed": []
+  },
+  "files": [
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-13-RESPONSIVE-MANIFEST.json",
+      "bytes": 1772,
+      "sha256": "f036839ffc29b0fce9808d7c92b1ecfd0d728aa9a54bd67556e16ab659223f2b"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-13-RESPONSIVE-RESULTS.json",
+      "bytes": 5680,
+      "sha256": "8a95b9117a88085672575407fa0edd919909f24267de6a3ec00b03ff025fad28"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-13-RESPONSIVE-EVIDENCE.md",
+      "bytes": 675,
+      "sha256": "67f31b2c4290d5e8bccb8c8ae42c51adeddf55db618b7c74ab954c4524737b99"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-13-RESPONSIVE-ACCEPTANCE.md",
+      "bytes": 2767,
+      "sha256": "2fcebdb1651aca86ad03c8f343a062069c9724410fd14046fbea0770bda1c21d"
+    },
+    {
+      "path": "playwright.d30-responsive.config.ts",
+      "bytes": 1248,
+      "sha256": "0a607ff6336fe32f159116d2baa22d929117fdcaa0a1fd1714ea3fcea7bae5b4"
+    },
+    {
+      "path": "tests/acceptance/d30/demo-responsive-acceptance.pw.ts",
+      "bytes": 30493,
+      "sha256": "663bbe3a50d23841eefac324dc95985094b71ea3ab366e9ca6c0fbf90c85cea5"
+    },
+    {
+      "path": "scripts/run-d30-13-responsive-acceptance.sh",
+      "bytes": 277,
+      "sha256": "2d24a7240274518c511c9520732e391f441ed2a582ead9112c7c9db6cb91e101"
+    },
+    {
+      "path": "scripts/verify-d30-13-responsive-acceptance.sh",
+      "bytes": 4213,
+      "sha256": "2c19bad9496d38eb3830e2769c5b91ccedb511251891f03f738fb5d1abfadd09"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/admin.png",
+      "bytes": 216939,
+      "sha256": "7645128870d1682afacf34170d80c6e522ed59b833d64949c8aca98dc01da928"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/home.png",
+      "bytes": 274203,
+      "sha256": "a52e512d0a9ddadc8c799a5ba3bd494b6946e523d0113b4a1d9ca1f37ec9ef50"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/officer.png",
+      "bytes": 221893,
+      "sha256": "2ede356726ec4328363ae9a134febb4195207630a1571a653c32b6d5e27f5d24"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/supervisor.png",
+      "bytes": 163188,
+      "sha256": "97fbe2882f597d1d5391139dc80259083cf2271dcb3eab4639fc2f52ee064cbe"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/track.png",
+      "bytes": 134037,
+      "sha256": "9ca15b136adde403b50941ff2a14558914d461eefa985eb9732ac48f32149241"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/desktop-1440x900/verify-certificate.png",
+      "bytes": 256785,
+      "sha256": "eff8681813e8b974d7f57932344d8505d5c5aaee2fc1b981f2c65e7e9c3d93a0"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/admin.png",
+      "bytes": 101886,
+      "sha256": "c59be372e3e05db8beb2f4f1014d00823be3404635ce2600f8e851077246bd7e"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/home.png",
+      "bytes": 60326,
+      "sha256": "9366e27291e0bb42b33fe184297f300df38364403c6f8686d0579e477893fa51"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/officer.png",
+      "bytes": 82054,
+      "sha256": "7110f0f2f83e39759a698b461f3888160141d2ff48ab2c037df90ba89e8a7f41"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/supervisor.png",
+      "bytes": 51625,
+      "sha256": "d262a1b2d6ba7a7b6f872c41fa35502f37093279376a292166b8639cff346254"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/track.png",
+      "bytes": 63025,
+      "sha256": "9040b9cbd1b9e0640bd18eb8dfc2a02dcb8a6000c269607fdac5b16eeab12519"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/mobile-390x844/verify-certificate.png",
+      "bytes": 108176,
+      "sha256": "6d0d73c08e7af2cf9fb2576005e2853c082180a50a209412b9b8ac22fb48f30e"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/admin.png",
+      "bytes": 151386,
+      "sha256": "369f318e1c016057abd3e3285d2c55f67bbf74237c3707167afb3d1a5e89e2a0"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/home.png",
+      "bytes": 115682,
+      "sha256": "d10bccab8427c5ed1ef289ac403f3186c566385dc80d2b2018592708d8cb88d0"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/officer.png",
+      "bytes": 144420,
+      "sha256": "a36730060ee38ae2d2912de10bb05a9841a709a76ae6cb21babe49f65a030e49"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/supervisor.png",
+      "bytes": 106184,
+      "sha256": "365dbb991988c05d4955c8b548ed4eae85df8e38f693d0518db75ccf5a589292"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/track.png",
+      "bytes": 95265,
+      "sha256": "4e71af4711888b1b4d8206ed3546409e9d7f00d4ea3c000ed954c8b98b991dd6"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-landscape-1024x768/verify-certificate.png",
+      "bytes": 198629,
+      "sha256": "4b9b7564197bdee68e82f1cc4c8e22c59bd95458c0f131795655cfc07edcbc2d"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/admin.png",
+      "bytes": 143795,
+      "sha256": "f81fd5151ae3495ab0094c8b8426c05d9443b156abc6a8479057f4249564f893"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/home.png",
+      "bytes": 260814,
+      "sha256": "f43089c694063d6cf3b1a94da3c493efbe5ee44fe1b8b6612477c4178d6de624"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/officer.png",
+      "bytes": 151677,
+      "sha256": "258f427bced388fa04061c85a4cd28a802c618b456a6a0dc877c976eb7254a80"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/supervisor.png",
+      "bytes": 102106,
+      "sha256": "7244186b18b88a89d546194f1d73615bd2745d28329f086d72defb2df49d440b"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/track.png",
+      "bytes": 112830,
+      "sha256": "404a968dc6a2fff00b9d1988fc201201c3fc9925df6728d557fc5d6afd14907a"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/screenshots/responsive/tablet-portrait-768x1024/verify-certificate.png",
+      "bytes": 192084,
+      "sha256": "27f4b1b0ad96f72f766b505ae83855dc3b551615cf711d2e7d5399a4b6f1b251"
+    }
+  ]
+}
