@@ -1,0 +1,17 @@
+{
+  "stage": "D30-11",
+  "status": "passed",
+  "playwright": {
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "routeBehaviour": {
+    "publicRoute": "/demo",
+    "publicResetResult": "/demo",
+    "officerRoute": "/demo/officer",
+    "officerResetResult": "/demo/officer",
+    "policy": "preserve-current-route"
+  }
+}
