@@ -33,5 +33,5 @@
 - [x] production build passes
 - [x] Git whitespace validation passes
 - [x] D30-13 verifier passes
-- [ ] implementation commit created
-- [ ] checklist completion commit created
+- [x] implementation commit created
+- [x] checklist completion commit created
