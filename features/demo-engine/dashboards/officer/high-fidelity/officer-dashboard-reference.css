@@ -1,0 +1,1981 @@
+@import "@fontsource-variable/plus-jakarta-sans";
+
+.d31-officer-reference.officer-dashboard {
+  --ink: #09132f;
+  --ink-soft: #34436b;
+  --muted: #66728f;
+  --line: #dce1eb;
+  --line-soft: #e8ebf1;
+  --canvas: #f8f9fb;
+  --card: #ffffff;
+  --blue: #0866ff;
+  --blue-soft: #eaf2ff;
+  --green: #08a653;
+  --green-soft: #e8f8ef;
+  --orange: #ff6500;
+  --orange-soft: #fff1e8;
+  --red: #ff1f27;
+  --red-soft: #ffedef;
+  --violet: #6d16ff;
+  --violet-soft: #f1e9ff;
+}
+
+.d31-officer-reference.officer-dashboard,
+.d31-officer-reference.officer-dashboard *,
+.d31-officer-reference.officer-dashboard *::before,
+.d31-officer-reference.officer-dashboard *::after {
+  box-sizing: border-box;
+}
+
+.d31-officer-reference.officer-dashboard button,
+.d31-officer-reference.officer-dashboard select {
+  font: inherit;
+}
+
+.d31-officer-reference.officer-dashboard button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.d31-officer-reference.officer-dashboard {
+  container-name: officer-dashboard;
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 0;
+  padding: 5px 7px 7px;
+  overflow-x: clip;
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", Inter, sans-serif;
+  background:
+    radial-gradient(circle at 72% -12%, rgba(39, 99, 211, 0.025), transparent 31%),
+    linear-gradient(180deg, #fafbfc 0%, #f7f8fa 100%);
+}
+
+.d31-officer-reference.officer-dashboard--standalone {
+  min-height: 100vh;
+}
+
+.d31-officer-reference.officer-dashboard--embedded {
+  min-height: 0;
+  padding-inline: 0;
+}
+
+.d31-officer-reference .dashboard-frame {
+  width: 100%;
+  min-width: 0;
+  max-width: 1840px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 18px 18px 24px;
+  border: 1px solid #dbe2ec;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.46);
+  box-shadow: 0 2px 8px rgba(18, 31, 61, 0.025);
+}
+
+/* A small body-only bleed reclaims the route padding without touching the app shell. */
+.d31-officer-reference.officer-dashboard--embedded .dashboard-frame {
+  width: calc(100% + 28px);
+  max-width: none;
+  margin-inline: -14px;
+}
+
+.d31-officer-reference.officer-dashboard--standalone .dashboard-frame {
+  min-height: calc(100vh - 12px);
+}
+
+.d31-officer-reference .dashboard-header {
+  height: 76px;
+  padding: 0 12px;
+}
+
+.d31-officer-reference .dashboard-header h1 {
+  margin: 0 0 3px;
+  color: #09122e;
+  font-size: clamp(31px, 2.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -1.65px;
+}
+
+.d31-officer-reference .dashboard-header p {
+  margin: 0 0 0 1px;
+  color: #566486;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.12px;
+}
+
+.d31-officer-reference .dashboard-header p i {
+  margin: 0 9px;
+  color: #425174;
+  font-style: normal;
+}
+
+.d31-officer-reference .card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dbe2eb;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 7px rgba(28, 42, 72, 0.025);
+}
+
+.d31-officer-reference .card h2 {
+  margin: 0;
+  color: #08122e;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.28px;
+}
+
+.d31-officer-reference .dashboard-top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.96fr) minmax(410px, 0.96fr);
+  gap: 12px;
+}
+
+.d31-officer-reference .dashboard-left-column,
+.d31-officer-reference .dashboard-right-column {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.d31-officer-reference .dashboard-right-column {
+  display: grid;
+  grid-template-rows: auto minmax(168px, 1fr);
+  align-self: stretch;
+}
+
+.d31-officer-reference .workload-card {
+  height: auto;
+  min-height: 145px;
+  padding: 13px 27px 13px;
+}
+
+.d31-officer-reference .workload-stats {
+  display: grid;
+  min-height: 96px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+
+.d31-officer-reference .workload-stat {
+  position: relative;
+  display: flex;
+  height: 69px;
+  align-items: center;
+  gap: clamp(12px, 1.35vw, 25px);
+  padding: 0 clamp(12px, 1.3vw, 25px) 0 clamp(8px, 0.7vw, 13px);
+}
+
+.d31-officer-reference .workload-stat:not(:last-child)::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: #d8dee9;
+  content: "";
+}
+
+.d31-officer-reference .workload-stat:first-child {
+  padding-left: 12px;
+}
+
+.d31-officer-reference .workload-stat:last-child {
+  padding-right: 0;
+}
+
+.d31-officer-reference .metric-icon {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  flex: 0 0 45px;
+  place-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .metric-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.d31-officer-reference .metric-icon--blue { color: var(--blue); }
+.d31-officer-reference .metric-icon--orange { color: var(--orange); }
+.d31-officer-reference .metric-icon--red { color: var(--red); }
+.d31-officer-reference .metric-icon--green { color: var(--green); }
+
+.d31-officer-reference .metric-copy {
+  width: 100%;
+  min-width: 80px;
+}
+
+.d31-officer-reference .metric-copy strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #08112e;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.05px;
+}
+
+.d31-officer-reference .metric-copy > span {
+  display: block;
+  color: #354368;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .metric-track {
+  width: 86px;
+  height: 3px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e1e5ec;
+}
+
+.d31-officer-reference .metric-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.d31-officer-reference .fill--blue { background: var(--blue); }
+.d31-officer-reference .fill--orange { background: var(--orange); }
+.d31-officer-reference .fill--red { background: var(--red); }
+.d31-officer-reference .fill--green { background: var(--green); }
+
+.d31-officer-reference .work-plan-card {
+  height: auto;
+  min-height: 508px;
+  padding: 15px 10px 10px;
+}
+
+.d31-officer-reference .work-plan-card > h2 {
+  padding: 0 12px 11px;
+}
+
+.d31-officer-reference .plan-tabs {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  height: 80px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid #dce4ef;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(24, 46, 88, 0.035);
+}
+
+.d31-officer-reference .plan-tabs button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  gap: clamp(10px, 0.9vw, 16px);
+  padding: 0 clamp(10px, 1vw, 18px);
+  border: 0;
+  border-right: 1px solid #e1e7f0;
+  border-radius: 0;
+  background: transparent;
+  color: #14264f;
+  cursor: pointer;
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 700;
+  line-height: 1.2;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.d31-officer-reference .plan-tabs button:last-child {
+  border-right: 0;
+}
+
+.d31-officer-reference .plan-tabs button:hover {
+  background: #f7f9fc;
+}
+
+.d31-officer-reference .plan-tabs button.is-active {
+  border-right-color: transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0a68f2 0%, #0757d8 100%);
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(6, 88, 220, 0.2);
+}
+
+.d31-officer-reference .plan-tab-icon {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+}
+
+.d31-officer-reference .plan-tab-label {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .plan-tabs button .plan-tab-count {
+  display: grid;
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e9edf4;
+  color: #526081;
+  font-size: 10.5px;
+}
+
+.d31-officer-reference .plan-tabs button.is-active .plan-tab-count {
+  background: #fff;
+  color: #075bdc;
+}
+
+.d31-officer-reference .work-table-wrap {
+  width: 100%;
+  margin-top: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  border: 1px solid #e3e8f0;
+  border-radius: 10px;
+}
+
+.d31-officer-reference .work-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #354368;
+  font-size: 9.5px;
+  line-height: 1.48;
+}
+
+.d31-officer-reference .work-table th {
+  height: 34px;
+  padding-right: 7px;
+  background: #f7f9fc;
+  color: #344266;
+  font-size: 8.7px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .work-table .col-service { width: 18.5%; }
+.d31-officer-reference .work-table .col-applicant { width: 10%; }
+.d31-officer-reference .work-table .col-request { width: 12.5%; }
+.d31-officer-reference .work-table .col-next-action { width: 21%; }
+.d31-officer-reference .work-table .col-stage { width: 12%; }
+.d31-officer-reference .work-table .col-sla { width: 10%; }
+.d31-officer-reference .work-table .col-status { width: 9%; }
+.d31-officer-reference .work-table .col-action { width: 7%; }
+
+.d31-officer-reference .work-table th:first-child {
+  padding-left: 21px;
+}
+
+.d31-officer-reference .work-table tbody tr {
+  position: relative;
+  height: 58px;
+  border-top: 1px solid #e4e8ee;
+}
+
+.d31-officer-reference .work-table tbody tr:hover {
+  background: #fbfcfe;
+}
+
+.d31-officer-reference .work-table tbody tr::before {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--row-accent);
+  content: "";
+}
+
+.d31-officer-reference .row-accent--blue { --row-accent: var(--blue); }
+.d31-officer-reference .row-accent--orange { --row-accent: var(--orange); }
+.d31-officer-reference .row-accent--red { --row-accent: var(--red); }
+.d31-officer-reference .row-accent--green { --row-accent: var(--green); }
+.d31-officer-reference .row-accent--violet { --row-accent: var(--violet); }
+
+.d31-officer-reference .work-table td {
+  min-width: 0;
+  padding: 6px 8px 6px 0;
+  vertical-align: middle;
+}
+
+.d31-officer-reference .work-table td:first-child {
+  padding-left: 11px;
+  color: #101936;
+  line-height: 1.3;
+}
+
+.d31-officer-reference .service-cell {
+  display: grid;
+  min-width: 0;
+  min-height: 46px;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.d31-officer-reference .service-cell strong {
+  font-size: 9.4px;
+  font-weight: 700;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.d31-officer-reference .service-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .service-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.d31-officer-reference .request-id {
+  display: inline-grid;
+  color: #3e4f73;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.28;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .next-action-copy {
+  color: #344568;
+  line-height: 1.5;
+}
+
+.d31-officer-reference .service-icon--blue { color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .service-icon--orange { color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .service-icon--red { color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .service-icon--green { color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .service-icon--violet { color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .sla-line {
+  position: relative;
+  width: min(70px, calc(100% - 8px));
+  height: 3px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #e5e8ed;
+}
+
+.d31-officer-reference .sla-line i {
+  display: block;
+  width: 55%;
+  height: 100%;
+  background: currentColor;
+}
+
+.d31-officer-reference .sla-line--red { color: var(--red); }
+.d31-officer-reference .sla-line--orange { color: var(--orange); }
+.d31-officer-reference .sla-line--green { color: var(--orange); }
+.d31-officer-reference .sla-line--blue { color: var(--violet); }
+.d31-officer-reference .sla-line--violet { color: var(--violet); }
+
+.d31-officer-reference .sla-text--red { color: var(--red) !important; }
+.d31-officer-reference .sla-text--orange { color: var(--orange) !important; }
+.d31-officer-reference .sla-text--green { color: var(--orange) !important; }
+.d31-officer-reference .sla-text--blue { color: var(--violet) !important; }
+.d31-officer-reference .sla-text--violet { color: var(--violet) !important; }
+
+.d31-officer-reference .work-table td:nth-child(6) > span {
+  font-size: 8.75px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-size: 8.4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .status--red { color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .status--orange { color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .status--green { color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .status--blue,
+.d31-officer-reference .status--violet { color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .text-button {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 3px;
+  border: 0;
+  background: transparent;
+  color: #005fff;
+  cursor: pointer;
+  font-size: 9.25px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .text-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.d31-officer-reference .text-button:hover,
+.d31-officer-reference .text-button:focus-visible {
+  color: #004ed6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.d31-officer-reference.officer-dashboard button:focus-visible,
+.d31-officer-reference.officer-dashboard select:focus-visible {
+  outline: 2px solid rgba(8, 102, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.d31-officer-reference .signals-card {
+  display: flex;
+  height: auto;
+  min-height: 422px;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 13px 16px 0;
+}
+
+.d31-officer-reference .signals-card > h2 {
+  padding-left: 8px;
+}
+
+.d31-officer-reference .signal-tabs {
+  position: relative;
+  display: grid;
+  height: 44px;
+  grid-template-columns: repeat(4, minmax(68px, 1fr)) 76px;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid #e3e7ed;
+}
+
+.d31-officer-reference .signal-tabs > button:not(.mark-read) {
+  position: relative;
+  height: 40px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 clamp(5px, 0.65vw, 12px);
+  border: 0;
+  background: transparent;
+  color: #485675;
+  cursor: pointer;
+  font-size: 10.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signal-tabs > button:not(.mark-read)::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: transparent;
+  content: "";
+}
+
+.d31-officer-reference .signal-tabs > button.is-active:not(.mark-read) {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.d31-officer-reference .signal-tabs > button.is-active:not(.mark-read)::after {
+  background: var(--blue);
+}
+
+.d31-officer-reference .signal-tabs .mark-read {
+  height: 32px;
+  min-height: 0;
+  margin: 0 2px 0 6px;
+  align-self: center;
+  font-size: 8.5px;
+}
+
+.d31-officer-reference .signal-list {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+}
+
+.d31-officer-reference .signal-item {
+  display: grid;
+  min-height: 84px;
+  grid-template-columns: 45px minmax(0, 1fr) 65px;
+  gap: 9px;
+  align-items: start;
+  padding: 11px 7px 8px 5px;
+  border-bottom: 1px solid #e2e6ec;
+}
+
+.d31-officer-reference .signal-item--compact {
+  min-height: 74px;
+  padding-top: 9px;
+}
+
+.d31-officer-reference .avatar,
+.d31-officer-reference .icon-badge {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.d31-officer-reference .avatar {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .avatar--violet { color: var(--violet); background: var(--violet-soft); }
+.d31-officer-reference .avatar--orange { color: var(--orange); background: var(--orange-soft); }
+
+.d31-officer-reference .icon-badge svg {
+  width: 19px;
+  height: 19px;
+}
+
+.d31-officer-reference .icon-badge--small {
+  width: 29px;
+  height: 29px;
+  flex-basis: 29px;
+}
+
+.d31-officer-reference .icon-badge--small svg {
+  width: 15px;
+  height: 15px;
+}
+
+.d31-officer-reference .icon-badge--blue { color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .icon-badge--orange { color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .icon-badge--red { color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .icon-badge--green { color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .icon-badge--violet { color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .signal-copy {
+  min-width: 0;
+}
+
+.d31-officer-reference .signal-heading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  color: #0d1734;
+  font-size: 9.9px;
+}
+
+.d31-officer-reference .signal-heading strong {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signal-heading i {
+  color: var(--blue);
+  font-style: normal;
+}
+
+.d31-officer-reference .signal-heading > span:not(.tag) {
+  color: var(--blue);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .signal-copy p {
+  margin: 5px 0 2px;
+  color: #344366;
+  font-size: 9.2px;
+  line-height: 1.45;
+}
+
+.d31-officer-reference .signal-copy small {
+  display: block;
+  color: #4b5878;
+  font-size: 8.4px;
+  line-height: 1.4;
+  white-space: pre;
+}
+
+.d31-officer-reference .tag {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 7px;
+  border-radius: 4px;
+  font-size: 8.4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .tag--green { color: #078743; background: #e2f6ea; }
+.d31-officer-reference .tag--blue { color: #0c5cd8; background: #e7f0ff; }
+
+.d31-officer-reference .signal-meta {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.d31-officer-reference .signal-meta time {
+  color: #465475;
+  font-size: 8.6px;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .signals-card > .view-all {
+  display: flex;
+  height: auto;
+  min-height: 35px;
+  flex: 0 0 auto;
+  margin: 0 auto;
+  padding-block: 8px;
+  font-size: 9.4px;
+}
+
+.d31-officer-reference .handoffs-card {
+  display: flex;
+  height: auto;
+  min-height: 168px;
+  flex-direction: column;
+  padding: 11px 16px;
+}
+
+.d31-officer-reference .card-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.d31-officer-reference .card-heading-row .text-button {
+  gap: 13px;
+}
+
+.d31-officer-reference .handoffs-card .card-heading-row {
+  height: 22px;
+  padding-left: 7px;
+}
+
+.d31-officer-reference .handoff-list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-top: 1px;
+}
+
+.d31-officer-reference .handoff-item {
+  display: grid;
+  width: 100%;
+  height: auto;
+  min-height: 41px;
+  grid-template-columns: 43px minmax(0, 1fr) 65px;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px 2px 4px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #0d1733;
+  cursor: pointer;
+  text-align: left;
+}
+
+.d31-officer-reference .handoff-item:hover {
+  background: #f7f9fc;
+}
+
+.d31-officer-reference .handoff-item .icon-badge {
+  width: 34px;
+  height: 34px;
+}
+
+.d31-officer-reference .handoff-item > span {
+  min-width: 0;
+}
+
+.d31-officer-reference .handoff-item strong,
+.d31-officer-reference .handoff-item small {
+  display: block;
+}
+
+.d31-officer-reference .handoff-item strong {
+  margin-bottom: 2px;
+  overflow: hidden;
+  font-size: 9.6px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .handoff-item small,
+.d31-officer-reference .handoff-item time {
+  color: #465474;
+  font-size: 8.35px;
+  font-weight: 500;
+  white-space: pre;
+}
+
+.d31-officer-reference .handoff-item time {
+  justify-self: end;
+}
+
+.d31-officer-reference .dashboard-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.17fr 0.99fr 1.5fr;
+  gap: 11px;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.d31-officer-reference .bottom-card {
+  height: auto;
+  min-height: 267px;
+  padding: 13px 12px 10px;
+}
+
+.d31-officer-reference .activity-card {
+  padding-right: 16px;
+  padding-left: 13px;
+}
+
+.d31-officer-reference .activity-card .card-heading-row {
+  padding: 0 2px 5px 8px;
+}
+
+.d31-officer-reference .activity-list {
+  display: grid;
+  padding-top: 4px;
+}
+
+.d31-officer-reference .activity-item {
+  display: grid;
+  min-height: 49px;
+  grid-template-columns: 58px 31px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  color: #111b39;
+}
+
+.d31-officer-reference .activity-item time {
+  padding-top: 0;
+  color: #445271;
+  font-size: 9px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .activity-item .icon-badge {
+  margin-top: 0;
+}
+
+.d31-officer-reference .activity-item > span {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.d31-officer-reference .activity-item strong,
+.d31-officer-reference .activity-item small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .activity-item strong {
+  font-size: 8.1px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .activity-item small {
+  margin-top: 4px;
+  color: #506080;
+  font-size: 7.9px;
+  white-space: pre;
+}
+
+.d31-officer-reference .up-next-card {
+  padding-right: 12px;
+  padding-left: 18px;
+}
+
+.d31-officer-reference .up-next-card > h2,
+.d31-officer-reference .action-card > h2 {
+  margin-bottom: 8px;
+}
+
+.d31-officer-reference .up-next-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.d31-officer-reference .up-next-item {
+  display: grid;
+  min-height: 48px;
+  grid-template-columns: 35px minmax(0, 1fr) 65px 43px;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid #e1e5ec;
+}
+
+.d31-officer-reference .up-next-item:last-child {
+  border-bottom: 0;
+}
+
+.d31-officer-reference .up-next-item > span {
+  min-width: 0;
+}
+
+.d31-officer-reference .up-next-item strong,
+.d31-officer-reference .up-next-item small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .up-next-item strong {
+  color: #101a37;
+  font-size: 8.6px;
+  font-weight: 700;
+}
+
+.d31-officer-reference .up-next-item small {
+  margin-top: 3px;
+  color: #506080;
+  font-size: 8px;
+}
+
+.d31-officer-reference .up-next-item em {
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .action-card {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.d31-officer-reference .action-card > h2 {
+  padding-left: 1px;
+}
+
+.d31-officer-reference .action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.d31-officer-reference .action-item {
+  display: grid;
+  width: 100%;
+  height: auto;
+  min-height: 36px;
+  grid-template-columns: 25px minmax(0, 1fr) 24px 13px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 7px 0 10px;
+  border: 1px solid #e2e6ed;
+  border-radius: 7px;
+  background: #fff;
+  color: #465475;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(18, 30, 60, 0.025);
+}
+
+.d31-officer-reference .action-item:hover {
+  border-color: #cbd5e5;
+  background: #fafcff;
+}
+
+.d31-officer-reference .action-item > span {
+  overflow: hidden;
+  font-size: 8.5px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d31-officer-reference .action-item > svg:last-child {
+  width: 13px;
+  height: 13px;
+}
+
+.d31-officer-reference .line-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.d31-officer-reference .line-icon--blue { color: var(--blue); }
+.d31-officer-reference .line-icon--orange { color: var(--orange); }
+.d31-officer-reference .line-icon--red { color: var(--red); }
+.d31-officer-reference .line-icon--green { color: var(--green); }
+.d31-officer-reference .line-icon--violet { color: var(--violet); }
+
+.d31-officer-reference .count {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 5px;
+  font-size: 8.5px;
+  font-weight: 600;
+}
+
+.d31-officer-reference .count--blue { color: var(--blue); background: var(--blue-soft); }
+.d31-officer-reference .count--orange { color: var(--orange); background: var(--orange-soft); }
+.d31-officer-reference .count--red { color: var(--red); background: var(--red-soft); }
+.d31-officer-reference .count--green { color: var(--green); background: var(--green-soft); }
+.d31-officer-reference .count--violet { color: var(--violet); background: var(--violet-soft); }
+
+.d31-officer-reference .rhythm-card {
+  padding: 13px 22px 9px;
+}
+
+.d31-officer-reference .rhythm-card .card-heading-row {
+  min-height: 34px;
+  align-items: center;
+}
+
+.d31-officer-reference .period-select {
+  position: relative;
+  display: grid;
+  width: 98px;
+  height: 32px;
+  align-items: center;
+}
+
+.d31-officer-reference .period-select select {
+  width: 98px;
+  height: 32px;
+  min-height: 0;
+  margin: 0;
+  padding: 0 27px 0 11px;
+  border: 1px solid #dce2ea;
+  border-radius: 6px;
+  appearance: none;
+  background: #fff;
+  color: #344366;
+  cursor: pointer;
+  font-size: 8.4px;
+  font-weight: 500;
+}
+
+.d31-officer-reference .period-select svg {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.d31-officer-reference .chart-legend {
+  display: flex;
+  height: 26px;
+  align-items: center;
+  gap: 24px;
+  color: #53617f;
+  font-size: 8px;
+}
+
+.d31-officer-reference .chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.d31-officer-reference .chart-legend i {
+  width: 12px;
+  height: 6px;
+  border-radius: 2px;
+}
+
+.d31-officer-reference .legend-blue { background: var(--blue); }
+.d31-officer-reference .legend-green { background: var(--green); }
+
+.d31-officer-reference .rhythm-body {
+  display: grid;
+  min-height: 186px;
+  grid-template-columns: minmax(0, 1fr) 133px;
+  align-items: center;
+}
+
+.d31-officer-reference .rhythm-chart {
+  width: 100%;
+  min-width: 0;
+  height: 174px;
+  overflow: visible;
+}
+
+.d31-officer-reference .rhythm-chart line {
+  stroke: #e7eaf0;
+  stroke-width: 1;
+}
+
+.d31-officer-reference .rhythm-chart text {
+  fill: #526080;
+  font-family: "Plus Jakarta Sans Variable", sans-serif;
+  font-size: 8px;
+}
+
+.d31-officer-reference .chart-line {
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.d31-officer-reference .chart-line--blue { stroke: var(--blue); }
+.d31-officer-reference .chart-line--green { stroke: var(--green); }
+.d31-officer-reference .chart-dot--blue { fill: var(--blue); }
+.d31-officer-reference .chart-dot--green { fill: var(--green); }
+.d31-officer-reference .chart-label { font-size: 7.2px !important; }
+
+.d31-officer-reference .sla-summary {
+  display: flex;
+  height: 160px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0 2px 18px;
+  border-left: 1px solid #e1e5ec;
+}
+
+.d31-officer-reference .sla-ring {
+  display: grid;
+  width: 116px;
+  height: 116px;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--blue) 0deg 237deg, var(--green) 237deg 331deg, #e5e8ed 331deg 360deg);
+}
+
+.d31-officer-reference .sla-ring::before {
+  grid-area: 1 / 1;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+}
+
+.d31-officer-reference .sla-ring > div {
+  z-index: 1;
+  display: flex;
+  grid-area: 1 / 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+.d31-officer-reference .sla-ring strong {
+  color: #07112f;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.9px;
+}
+
+.d31-officer-reference .sla-ring span {
+  margin-top: 8px;
+  color: #435171;
+  font-size: 8.2px;
+  font-weight: 500;
+}
+
+.d31-officer-reference .dashboard-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  display: flex;
+  min-width: 230px;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: 1px solid #cdd8e8;
+  border-radius: 9px;
+  background: #101a37;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(10, 23, 54, 0.2);
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.d31-officer-reference .dashboard-toast svg {
+  width: 16px;
+  height: 16px;
+  color: #5fe19b;
+}
+
+.d31-officer-reference .dashboard-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d31-officer-reference .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * Shell-safe responsive system.
+ * These breakpoints follow the dashboard content area beside the sidebar,
+ * instead of the full browser viewport.
+ */
+@container officer-dashboard (max-width: 1320px) {
+  .d31-officer-reference .dashboard-frame {
+    padding: 16px 12px 22px;
+  }
+
+  .d31-officer-reference .dashboard-top-grid {
+    grid-template-columns: minmax(0, 2.05fr) minmax(390px, 0.95fr);
+    gap: 10px;
+  }
+
+  .d31-officer-reference .workload-card {
+    padding-inline: 18px;
+  }
+
+  .d31-officer-reference .workload-stat {
+    gap: 13px;
+    padding-right: 13px;
+    padding-left: 8px;
+  }
+
+  .d31-officer-reference .signal-tabs > button:not(.mark-read) {
+    padding-inline: 5px;
+    font-size: 9.5px;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read {
+    margin-left: 5px;
+    font-size: 8px;
+  }
+
+  .d31-officer-reference .rhythm-card {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .d31-officer-reference .rhythm-body {
+    grid-template-columns: minmax(0, 1fr) 122px;
+  }
+}
+
+@container officer-dashboard (max-width: 1120px) {
+  .d31-officer-reference.officer-dashboard--embedded .dashboard-frame {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .d31-officer-reference .dashboard-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .dashboard-bottom-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .d31-officer-reference .work-table {
+    min-width: 0;
+  }
+
+  .d31-officer-reference .signal-tabs > button:not(.mark-read) {
+    font-size: 10.5px;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read {
+    font-size: 8.5px;
+  }
+}
+
+@container officer-dashboard (max-width: 760px) {
+  .d31-officer-reference.officer-dashboard--embedded {
+    padding: 0;
+  }
+
+  .d31-officer-reference .dashboard-frame {
+    padding: 18px 12px 24px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .d31-officer-reference .dashboard-header {
+    height: auto;
+    min-height: 84px;
+    padding: 0;
+  }
+
+  .d31-officer-reference .dashboard-header h1 {
+    font-size: 30px;
+    letter-spacing: -1.25px;
+  }
+
+  .d31-officer-reference .dashboard-header p {
+    font-size: 12px;
+  }
+
+  .d31-officer-reference .workload-card {
+    min-height: 205px;
+    padding: 14px;
+  }
+
+  .d31-officer-reference .workload-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .d31-officer-reference .workload-stat {
+    height: 78px;
+    padding: 8px 10px;
+    border-bottom: 1px solid #e3e7ed;
+  }
+
+  .d31-officer-reference .workload-stat::after {
+    display: none;
+  }
+
+  .d31-officer-reference .workload-stat:nth-child(odd) {
+    border-right: 1px solid #e3e7ed;
+  }
+
+  .d31-officer-reference .workload-stat:nth-child(n/**/+3) {
+    border-bottom: 0;
+  }
+
+  .d31-officer-reference .metric-track {
+    margin-top: 9px;
+  }
+
+  .d31-officer-reference .plan-tabs {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .d31-officer-reference .plan-tabs button,
+.d31-officer-reference .signal-tabs > button:not(.mark-read) {
+    min-height: 44px;
+  }
+
+  .d31-officer-reference .work-table {
+    min-width: 760px;
+  }
+
+  .d31-officer-reference .work-table .text-button {
+    min-height: 44px;
+  }
+
+  .d31-officer-reference .signal-tabs {
+    height: auto;
+    min-height: 50px;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    overflow-x: auto;
+  }
+
+  .d31-officer-reference .signal-tabs .mark-read {
+    display: none;
+  }
+
+  .d31-officer-reference .signal-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .d31-officer-reference .signal-meta {
+    display: flex;
+    grid-column: 2;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .d31-officer-reference .signal-meta .text-button {
+    min-height: 44px;
+  }
+
+  .d31-officer-reference .dashboard-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .rhythm-body {
+    grid-template-columns: minmax(0, 1fr) 130px;
+  }
+}
+
+@container officer-dashboard (max-width: 440px) {
+  .d31-officer-reference .dashboard-header h1 {
+    font-size: 27px;
+  }
+
+  .d31-officer-reference .dashboard-header p {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .d31-officer-reference .dashboard-header p i {
+    margin: 0 6px;
+  }
+
+  .d31-officer-reference .metric-icon {
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+  }
+
+  .d31-officer-reference .metric-copy strong {
+    font-size: 21px;
+  }
+
+  .d31-officer-reference .metric-track {
+    width: 70px;
+  }
+
+  .d31-officer-reference .plan-tabs button {
+    gap: 5px;
+    padding: 0 5px;
+    font-size: 9.5px;
+  }
+
+  .d31-officer-reference .rhythm-card {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .d31-officer-reference .rhythm-body {
+    grid-template-columns: 1fr;
+  }
+
+  .d31-officer-reference .sla-summary {
+    height: auto;
+    min-height: 150px;
+    flex-direction: row;
+    padding: 15px 0 0;
+    border-top: 1px solid #e1e5ec;
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d31-officer-reference.officer-dashboard,
+.d31-officer-reference.officer-dashboard *,
+.d31-officer-reference.officer-dashboard *::before,
+.d31-officer-reference.officer-dashboard *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* D31-6R5A PARITY FIX START */
+
+.d31-officer-reference .work-table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 900px !important;
+  max-width: none !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  font-size: 9.5px !important;
+  line-height: 1.42 !important;
+}
+
+.d31-officer-reference .work-table colgroup {
+  display: table-column-group !important;
+}
+
+.d31-officer-reference .work-table col {
+  display: table-column !important;
+}
+
+.d31-officer-reference .work-table thead {
+  display: table-header-group !important;
+}
+
+.d31-officer-reference .work-table tbody {
+  display: table-row-group !important;
+}
+
+.d31-officer-reference .work-table tr {
+  display: table-row !important;
+}
+
+.d31-officer-reference .work-table th,
+.d31-officer-reference .work-table td {
+  display: table-cell !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+}
+
+.d31-officer-reference .work-table .col-service { width: 18.5% !important; }
+.d31-officer-reference .work-table .col-applicant { width: 10% !important; }
+.d31-officer-reference .work-table .col-request { width: 12.5% !important; }
+.d31-officer-reference .work-table .col-next-action { width: 21% !important; }
+.d31-officer-reference .work-table .col-stage { width: 12% !important; }
+.d31-officer-reference .work-table .col-sla { width: 10% !important; }
+.d31-officer-reference .work-table .col-status { width: 9% !important; }
+.d31-officer-reference .work-table .col-action { width: 7% !important; }
+
+.d31-officer-reference .work-table tbody tr {
+  height: 48px !important;
+  min-height: 48px !important;
+}
+
+.d31-officer-reference .work-table th {
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 7px 0 0 !important;
+  font-size: 8.7px !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+.d31-officer-reference .work-table th:first-child {
+  padding-left: 21px !important;
+}
+
+.d31-officer-reference .work-table td {
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 4px 8px 4px 0 !important;
+  font-size: 9.5px !important;
+  line-height: 1.4 !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .work-table td:first-child {
+  padding-left: 11px !important;
+}
+
+.d31-officer-reference .service-cell {
+  display: grid !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 38px !important;
+  grid-template-columns: 32px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.d31-officer-reference .service-cell strong {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  color: #101936 !important;
+  font-size: 9.4px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .request-id {
+  display: inline-grid !important;
+  width: auto !important;
+  min-width: 0 !important;
+  line-height: 1.25 !important;
+  white-space: nowrap !important;
+}
+
+.d31-officer-reference .next-action-copy {
+  line-height: 1.42 !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+.d31-officer-reference .work-plan-card {
+  min-height: 465px !important;
+}
+
+.d31-officer-reference .work-table-wrap {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.d31-officer-reference .text-button {
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  padding: 4px 3px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #005fff !important;
+  font-size: 9.25px !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+
+.d31-officer-reference .signals-card > .view-all {
+  width: max-content !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  flex: 0 0 35px !important;
+  margin: 0 auto !important;
+  padding: 0 6px !important;
+  font-size: 9.4px !important;
+  line-height: 1 !important;
+}
+
+.d31-officer-reference .signal-meta .text-button {
+  align-self: flex-end !important;
+  padding: 2px 0 !important;
+  font-size: 9.25px !important;
+}
+
+.d31-officer-reference .card-heading-row .text-button {
+  padding: 2px 0 !important;
+  font-size: 9.25px !important;
+}
+
+.d31-officer-reference .dashboard-top-grid {
+  align-items: start !important;
+}
+
+.d31-officer-reference .dashboard-right-column {
+  display: grid !important;
+  grid-template-rows: 422px 168px !important;
+  align-content: start !important;
+  align-self: start !important;
+  gap: 10px !important;
+}
+
+.d31-officer-reference .signals-card {
+  width: 100% !important;
+  height: 422px !important;
+  min-height: 422px !important;
+  max-height: 422px !important;
+  padding: 13px 16px 0 !important;
+}
+
+.d31-officer-reference .signal-list {
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.d31-officer-reference .signal-item {
+  min-height: 77px !important;
+  padding: 9px 7px 7px 5px !important;
+}
+
+.d31-officer-reference .signal-item--compact {
+  min-height: 67px !important;
+  padding-top: 8px !important;
+}
+
+.d31-officer-reference .signal-copy p {
+  margin: 4px 0 2px !important;
+  font-size: 9.2px !important;
+  line-height: 1.4 !important;
+}
+
+.d31-officer-reference .handoffs-card {
+  width: 100% !important;
+  height: 168px !important;
+  min-height: 168px !important;
+  max-height: 168px !important;
+  flex: 0 0 168px !important;
+  padding: 11px 16px !important;
+}
+
+.d31-officer-reference .handoff-list {
+  display: grid !important;
+  min-height: 0 !important;
+  flex: 1 1 auto !important;
+  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+  justify-content: stretch !important;
+  align-content: stretch !important;
+  padding-top: 2px !important;
+}
+
+.d31-officer-reference .handoff-item {
+  display: grid !important;
+  width: 100% !important;
+  height: 41px !important;
+  min-height: 41px !important;
+  max-height: 41px !important;
+  grid-template-columns: 43px minmax(0, 1fr) 65px !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  padding: 2px 7px 2px 4px !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: #0d1733 !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+}
+
+.d31-officer-reference .handoff-item strong {
+  margin-bottom: 2px !important;
+  font-size: 9.6px !important;
+  line-height: 1.2 !important;
+}
+
+.d31-officer-reference .handoff-item small,
+.d31-officer-reference .handoff-item time {
+  font-size: 8.35px !important;
+  line-height: 1.2 !important;
+}
+
+@container officer-dashboard (max-width: 1120px) {
+  .d31-officer-reference .dashboard-right-column {
+    grid-template-rows: auto auto !important;
+  }
+
+  .d31-officer-reference .signals-card,
+  .d31-officer-reference .handoffs-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .d31-officer-reference .handoffs-card {
+    min-height: 168px !important;
+  }
+}
+
+@container officer-dashboard (max-width: 760px) {
+  .d31-officer-reference .work-table {
+    min-width: 900px !important;
+  }
+}
+
+/* D31-6R5A PARITY FIX END */
+
+/* D31-6R5B TABLE AND HEADER START */
+
+/* Reduce the greeting by exactly 8px from the approved spacious-v3 scale. */
+.d31-officer-reference .dashboard-header h1 {
+  font-size: clamp(23px, calc(2.5vw - 8px), 32px) !important;
+  letter-spacing: -1.1px !important;
+}
+
+.d31-officer-reference .dashboard-header p {
+  font-size: 13px !important;
+}
+
+/*
+ * The old row accent used tr::before. Chromium can treat that pseudo-element
+ * as an anonymous table cell after the host shell alters table display roles.
+ * That shifted every body cell one column to the right. Keep the accent inside
+ * the real first cell instead.
+ */
+.d31-officer-reference .work-table tbody tr::before {
+  display: none !important;
+  content: none !important;
+}
+
+.d31-officer-reference .work-table tbody tr {
+  position: static !important;
+}
+
+.d31-officer-reference .work-table tbody td:first-child {
+  box-shadow: inset 2px 0 0 var(--row-accent) !important;
+}
+
+/* Match the approved eight-column reference proportions. */
+.d31-officer-reference .work-table .col-service {
+  width: 16.5% !important;
+}
+
+.d31-officer-reference .work-table .col-applicant {
+  width: 10.5% !important;
+}
+
+.d31-officer-reference .work-table .col-request {
+  width: 11.5% !important;
+}
+
+.d31-officer-reference .work-table .col-next-action {
+  width: 20% !important;
+}
+
+.d31-officer-reference .work-table .col-stage {
+  width: 12% !important;
+}
+
+.d31-officer-reference .work-table .col-sla {
+  width: 11% !important;
+}
+
+.d31-officer-reference .work-table .col-status {
+  width: 9.5% !important;
+}
+
+.d31-officer-reference .work-table .col-action {
+  width: 9% !important;
+}
+
+.d31-officer-reference .work-table th {
+  padding-inline: 8px !important;
+  color: #273556 !important;
+  font-size: 9.25px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.d31-officer-reference .work-table th:first-child {
+  padding-left: 21px !important;
+}
+
+.d31-officer-reference .work-table td {
+  padding-right: 9px !important;
+}
+
+.d31-officer-reference .work-table td:first-child {
+  padding-left: 12px !important;
+}
+
+.d31-officer-reference .service-cell {
+  grid-template-columns: 32px minmax(0, 1fr) !important;
+  gap: 8px !important;
+}
+
+.d31-officer-reference .service-cell strong {
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.d31-officer-reference .request-id {
+  white-space: nowrap !important;
+}
+
+.d31-officer-reference .work-table td[data-label="Action"] {
+  padding-right: 6px !important;
+}
+
+.d31-officer-reference .row-action {
+  display: grid !important;
+  width: 100% !important;
+  grid-template-columns: minmax(0, 1fr) 20px !important;
+  align-items: center !important;
+  justify-items: end !important;
+  gap: 2px !important;
+}
+
+.d31-officer-reference .row-action .text-button {
+  justify-self: end !important;
+  padding: 3px 1px !important;
+  font-size: 9.2px !important;
+}
+
+.d31-officer-reference .row-menu {
+  display: grid !important;
+  width: 20px !important;
+  min-width: 20px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 5px !important;
+  background: transparent !important;
+  color: #253557 !important;
+  box-shadow: none !important;
+}
+
+.d31-officer-reference .row-menu:hover {
+  background: #f0f4fa !important;
+}
+
+.d31-officer-reference .row-menu svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* D31-6R5B TABLE AND HEADER END */

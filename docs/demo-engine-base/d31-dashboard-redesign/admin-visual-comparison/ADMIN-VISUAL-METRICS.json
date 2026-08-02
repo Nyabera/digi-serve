@@ -1,0 +1,45 @@
+{
+  "stage": "D31-11",
+  "route": "/demo/admin",
+  "method": "Mean sampled RGB similarity after normalizing the production dashboard body to the supplied reference body crop.",
+  "overlayOpacity": 0.5,
+  "implementationPreview": {
+    "targetOriginalWidth": 1536,
+    "targetOriginalHeight": 3327,
+    "targetCrop": {
+      "x": 216,
+      "y": 0,
+      "width": 1320,
+      "height": 3327
+    },
+    "currentWidth": 1208,
+    "currentHeight": 3303,
+    "parityScore": 94.03
+  },
+  "designReference": {
+    "targetOriginalWidth": 864,
+    "targetOriginalHeight": 1821,
+    "targetCrop": {
+      "x": 184,
+      "y": 0,
+      "width": 680,
+      "height": 1821
+    },
+    "currentWidth": 816,
+    "currentHeight": 4777,
+    "parityScore": 89.37
+  },
+  "mobilePreview": {
+    "targetOriginalWidth": 390,
+    "targetOriginalHeight": 7624,
+    "targetCrop": {
+      "x": 0,
+      "y": 64,
+      "width": 390,
+      "height": 7560
+    },
+    "currentWidth": 358,
+    "currentHeight": 7610,
+    "parityScore": 93.99
+  }
+}

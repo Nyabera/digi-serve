@@ -1,0 +1,71 @@
+{
+  "stage": "D31-7",
+  "approvedImplementation": "D31-6R5B",
+  "dashboardVersion": "spacious-v3.1",
+  "testRunnerIsolation": {
+    "playwrightPattern": "**/*.pw.ts",
+    "vitestPatternCollision": false
+  },
+  "reference": {
+    "width": 1568,
+    "height": 1003,
+    "includesShell": false
+  },
+  "files": [
+    {
+      "path": "features/demo-engine/dashboards/officer/high-fidelity/OfficerDashboardHighFidelity.tsx",
+      "bytes": 24265,
+      "sha256": "40d64f14044895a1897eaf6356cdc3a7feb69651b9192e6f2a128f8503b06ad5"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/high-fidelity/officer-dashboard-reference.css",
+      "bytes": 45950,
+      "sha256": "c445dd03ba4506ca2a80a44a5a942c639e9a5ed00df5079aa25a5db0f7053777"
+    },
+    {
+      "path": "app/demo/officer/page.tsx",
+      "bytes": 534,
+      "sha256": "153451e3392dfdb60ee3ef92832aaf58e86dbbd223b8d50eadd8e9a7e2e50faa"
+    },
+    {
+      "path": "public/demo/references/dashboards/officer-dashboard.png",
+      "bytes": 1865237,
+      "sha256": "c8dd71760480011f113a30419ab6557bd1f3b122e21736e0c15e877573f48e91"
+    },
+    {
+      "path": "playwright.d31.config.ts",
+      "bytes": 1213,
+      "sha256": "5c9dea645ad725ca5898acf8df4fcdb3c78b0c8e46e2e1e5e605fa38bb2804da"
+    },
+    {
+      "path": "tests/visual/d31/officer-dashboard.pw.ts",
+      "bytes": 6591,
+      "sha256": "8ffb663b8d2910e39e6b9d7e8248eed32ce859d1219d1d09d9c152a4a34db7ac"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-browser-zoom-80.png",
+      "bytes": 209266,
+      "sha256": "f4fc832b8099a55f4edc22d20cb0cd5982d31d88b849052d0e38e75b3a403605"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-desktop-1440.png",
+      "bytes": 296203,
+      "sha256": "2da813ffe2316913d0a944fcf38476a04812055f663f113b5b5ced35587544ae"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-mobile-390.png",
+      "bytes": 223123,
+      "sha256": "8a96ed1f7caff58b2d3c6a6680629e0aad5d397339e753361e58ddf7021265d3"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-reference-desktop.png",
+      "bytes": 289932,
+      "sha256": "fc5221af54e37f6c378485709820352fde1386c9df8b0b971198928dc5edea86"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-tablet-1024.png",
+      "bytes": 280771,
+      "sha256": "62991a504386df39b2ad4e849a36802d4c7a99fe53e4b93568074a3a14ce7939"
+    }
+  ]
+}

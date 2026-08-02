@@ -1,0 +1,6 @@
+import AdminDashboard from "../components/AdminDashboard";
+import "../styles/admin-dashboard.css";
+
+export default function AdminDashboardPage() {
+  return <AdminDashboard />;
+}

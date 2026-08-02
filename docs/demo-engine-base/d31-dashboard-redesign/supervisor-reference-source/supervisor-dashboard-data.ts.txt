@@ -1,0 +1,203 @@
+import type { LucideIcon } from "lucide-react";
+import {
+  AlertCircle,
+  BadgeCheck,
+  BellRing,
+  CheckCircle2,
+  ClipboardCheck,
+  Clock3,
+  FileCheck2,
+  FileText,
+  FolderClock,
+  ShieldAlert,
+  UserRoundCheck,
+  UsersRound,
+} from "lucide-react";
+
+export type Tone = "blue" | "violet" | "orange" | "red" | "green";
+
+export type Metric = {
+  label: string;
+  value: string;
+  tone: Tone;
+  icon: LucideIcon;
+};
+
+export type Approval = {
+  request: string;
+  applicant: string;
+  service: string;
+  dueDate: string;
+  dueState: string;
+  dueTone?: "red" | "orange";
+  stage: string;
+  stageTone: "slate" | "blue" | "orange";
+  owner: string;
+};
+
+export type AttentionItem = {
+  title: string;
+  meta: string;
+  tone: Tone;
+  icon: LucideIcon;
+};
+
+export type OfficerLoad = {
+  name: string;
+  role: string;
+  capacity: number;
+  avatar: string;
+  tone: "red" | "orange" | "green";
+};
+
+export type AssignmentRecommendation = {
+  service: string;
+  volume: string;
+  eta: string;
+  match: string;
+  tone: Tone;
+  icon: LucideIcon;
+};
+
+export const supervisorDashboardData = {
+  identity: {
+    greeting: "Good afternoon, Grace",
+    department: "Records Department",
+    role: "Supervisor",
+    date: "May 12, 2026",
+  },
+  healthMetrics: [
+    { label: "Open requests", value: "126", tone: "blue", icon: FileText },
+    { label: "Unassigned", value: "14", tone: "violet", icon: UsersRound },
+    { label: "Due today", value: "11", tone: "orange", icon: Clock3 },
+    { label: "Overdue", value: "7", tone: "red", icon: AlertCircle },
+    { label: "Pending approvals", value: "5", tone: "orange", icon: ClipboardCheck },
+    { label: "SLA on time", value: "92%", tone: "green", icon: CheckCircle2 },
+  ] satisfies Metric[],
+  approvals: [
+    { request: "REQ-REC-0118", applicant: "Brian Otieno", service: "Transcript", dueDate: "May 12, 2026", dueState: "Due today", dueTone: "red", stage: "Records review", stageTone: "slate", owner: "Linda Njeri" },
+    { request: "REQ-REC-0124", applicant: "Mercy Akinyi", service: "Certificate", dueDate: "May 13, 2026", dueState: "Due in 1 day", dueTone: "red", stage: "Finance verification", stageTone: "blue", owner: "Amina Hassan" },
+    { request: "REQ-REC-0112", applicant: "Daniel Kiptoo", service: "Grade Review", dueDate: "May 14, 2026", dueState: "Due in 2 days", dueTone: "orange", stage: "Registrar approval", stageTone: "orange", owner: "Marcus Lee" },
+    { request: "REQ-REC-0127", applicant: "Kevin Mwangi", service: "Transcript", dueDate: "May 16, 2026", dueState: "Due in 4 days", stage: "Finance verification", stageTone: "blue", owner: "Amina Hassan" },
+    { request: "REQ-REC-0130", applicant: "Faith Wairimu", service: "Certificate", dueDate: "May 17, 2026", dueState: "Due in 5 days", stage: "Records review", stageTone: "slate", owner: "Linda Njeri" },
+  ] satisfies Approval[],
+  criticalAttention: [
+    { title: "7 requests are overdue", meta: "Oldest: REQ-REC-0093  •  3 days", tone: "red", icon: Clock3 },
+    { title: "5 requests breach risk", meta: "Due within 24 hours", tone: "red", icon: ShieldAlert },
+    { title: "2 handoffs pending", meta: "Awaiting your review", tone: "orange", icon: BellRing },
+  ] satisfies AttentionItem[],
+  unassigned: [
+    { title: "8 requests need assignment", meta: "New in last 24 hours", tone: "violet", icon: UserRoundCheck },
+    { title: "6 documents for verification", meta: "Awaiting owner", tone: "violet", icon: FileCheck2 },
+  ] satisfies AttentionItem[],
+  officerWorkload: [
+    { name: "Linda Njeri", role: "Records Officer", capacity: 92, avatar: "LN", tone: "red" },
+    { name: "Amina Hassan", role: "Finance Officer", capacity: 78, avatar: "AH", tone: "orange" },
+    { name: "Marcus Lee", role: "Registrar Officer", capacity: 64, avatar: "ML", tone: "green" },
+    { name: "Daniel Otieno", role: "Records Officer", capacity: 48, avatar: "DO", tone: "green" },
+    { name: "Kevin Mwangi", role: "Records Officer", capacity: 38, avatar: "KM", tone: "green" },
+  ] satisfies OfficerLoad[],
+  assignmentRecommendations: [
+    { service: "Transcript Requests", volume: "5 new", eta: "Est. 3h 10m", match: "Skills match: 92%", tone: "green", icon: CheckCircle2 },
+    { service: "Certificates", volume: "3 new", eta: "Est. 1h 20m", match: "Skills match: 88%", tone: "violet", icon: FileText },
+    { service: "Grade Reviews", volume: "4 new", eta: "Est. 1h 40m", match: "Skills match: 84%", tone: "blue", icon: BadgeCheck },
+  ] satisfies AssignmentRecommendation[],
+  departmentQueue: [
+    { service: "Transcript Requests", count: 58, due: 5, overdue: 3 },
+    { service: "Certificate Replacement", count: 26, due: 3, overdue: 2 },
+    { service: "Grade Review", count: 18, due: 1, overdue: 1 },
+    { service: "Clearance Letter", count: 14, due: 1, overdue: 1 },
+    { service: "Registrar Documents", count: 10, due: 1, overdue: 0 },
+  ],
+  handoffs: [
+    { title: "Finance verification", from: "Amina Hassan", to: "Marcus Lee", time: "Sent 9:21 AM", service: "Transcript", request: "REQ-REC-0115" },
+    { title: "Registrar approval", from: "Marcus Lee", to: "Linda Njeri", time: "Sent 8:54 AM", service: "Grade Review", request: "REQ-REC-0112" },
+    { title: "Records review", from: "Daniel Otieno", to: "Amina Hassan", time: "Sent 8:15 AM", service: "Certificate", request: "REQ-REC-0124" },
+  ],
+  escalations: [
+    { title: "SLA breach risk", count: "5 requests", meta: "Next breach in 6h 32m", tone: "red", icon: AlertCircle, action: "Review" },
+    { title: "Waiting on applicant", count: "3 requests", meta: "Documents outstanding", tone: "orange", icon: UsersRound, action: "Follow up" },
+    { title: "Payment issue", count: "2 requests", meta: "Verification pending", tone: "violet", icon: FolderClock, action: "Resolve" },
+    { title: "Verification hold", count: "1 request", meta: "Data mismatch", tone: "green", icon: CheckCircle2, action: "Resolve" },
+  ],
+  documentExceptions: [
+    { title: "Missing documents", meta: "Requires applicant action", count: 3, tone: "orange", icon: FileText },
+    { title: "Invalid payments", meta: "Payments verification failed", count: 2, tone: "orange", icon: FileText },
+    { title: "Duplicate submissions", meta: "Potential duplicates", count: 1, tone: "orange", icon: UsersRound },
+  ],
+  flowStages: [
+    { title: "Records review", average: "6.2h avg", target: "Target 8h", inProgress: 82, tone: "blue" },
+    { title: "Finance verification", average: "9.1h avg", target: "Target 8h", inProgress: 39, tone: "red", flag: "Bottleneck" },
+    { title: "Registrar approval", average: "3.4h avg", target: "Target 4h", inProgress: 26, tone: "orange" },
+    { title: "Outcome issuance", average: "5.4h avg", target: "Target 4h", inProgress: 18, tone: "green" },
+  ],
+  slaTrend: [
+    { day: "Apr 29", value: 68 }, { day: "Apr 30", value: 74 }, { day: "May 1", value: 78 },
+    { day: "May 2", value: 76 }, { day: "May 3", value: 88 }, { day: "May 4", value: 81 },
+    { day: "May 5", value: 77 }, { day: "May 6", value: 84 }, { day: "May 7", value: 82 },
+    { day: "May 8", value: 86 }, { day: "May 9", value: 85 }, { day: "May 10", value: 88 },
+    { day: "May 11", value: 86 }, { day: "May 12", value: 92 },
+  ],
+  officerPerformance: [
+    { name: "Linda Njeri", role: "Records Officer", score: 96 },
+    { name: "Marcus Lee", role: "Registrar Officer", score: 93 },
+    { name: "Amina Hassan", role: "Finance Officer", score: 89 },
+    { name: "Daniel Otieno", role: "Records Officer", score: 86 },
+    { name: "Kevin Mwangi", role: "Records Officer", score: 83 },
+  ],
+  servicePerformance: [
+    { service: "Transcript Requests", score: 93 },
+    { service: "Certificate Replacement", score: 91 },
+    { service: "Grade Review", score: 90 },
+    { service: "Clearance Letter", score: 88 },
+    { service: "Registrar Documents", score: 86 },
+  ],
+  throughput: [
+    { day: "May 6", value: 12 }, { day: "May 7", value: 19 }, { day: "May 8", value: 27 },
+    { day: "May 9", value: 22 }, { day: "May 10", value: 30 }, { day: "May 11", value: 24 }, { day: "May 12", value: 23 },
+  ],
+  csat: [
+    { label: "5★", value: 62, tone: "green" },
+    { label: "4★", value: 26, tone: "green" },
+    { label: "3★", value: 9, tone: "orange" },
+    { label: "2★", value: 3, tone: "red" },
+    { label: "1★", value: 0, tone: "blue" },
+  ],
+  insights: [
+    { text: "Finance verification remains the bottleneck", meta: "Avg. 9.1hrs; target 8h", tone: "violet" },
+    { text: "SLA at risk for 5 requests", meta: "Action recommended", tone: "red" },
+    { text: "Good performance in outcome issuance", meta: "92% within target", tone: "green" },
+  ],
+  recentDecisions: [
+    { request: "REQ-REC-0109", service: "Transcript Request", meta: "Approved by you  •  May 12, 2026 9:32 AM" },
+    { request: "REQ-REC-0106", service: "Certificate Replacement", meta: "Approved by you  •  May 12, 2026 9:45 AM" },
+    { request: "REQ-REC-0101", service: "Grade Review", meta: "Approved by you  •  May 12, 2026 9:12 AM" },
+    { request: "REQ-REC-0098", service: "Clearance Letter", meta: "Approved by you  •  May 12, 2026 8:41 AM" },
+    { request: "REQ-REC-0095", service: "Transcript Request", meta: "Approved by you  •  May 12, 2026 8:05 AM" },
+  ],
+  departmentActivity: [
+    { name: "Amina Hassan", action: "sent handoff to Marcus Lee", meta: "Finance verification  •  REQ-REC-0115", time: "9:21 AM", tone: "blue" },
+    { name: "Marcus Lee", action: "completed Registrar approval", meta: "Grade Review  •  REQ-REC-0102", time: "9:04 AM", tone: "green" },
+    { name: "Linda Njeri", action: "escalated SLA risk", meta: "REQ-REC-0093  •  Transcript", time: "8:47 AM", tone: "red" },
+    { name: "Daniel Otieno", action: "assigned request", meta: "Certificate  •  REQ-REC-0119", time: "8:32 AM", tone: "blue" },
+    { name: "System", action: "reminder sent to applicant", meta: "REQ-REC-0121  •  Documents missing", time: "8:15 AM", tone: "violet" },
+  ],
+  auditStats: [
+    { label: "Decisions made", value: "32", delta: "↑ 8%", tone: "green" },
+    { label: "Handoffs created", value: "46", delta: "↑ 15%", tone: "green" },
+    { label: "Escalations", value: "7", delta: "↓ 22%", tone: "red" },
+  ],
+  notifications: [
+    { title: "Policy update: Document verification", meta: "Updated today" },
+    { title: "System maintenance window", meta: "May 14, 10:00 PM – 2:00 AM" },
+    { title: "Training: New records workflow", meta: "May 16, 2:00 PM" },
+  ],
+  reports: [
+    { title: "Department summary", meta: "SLA, throughput, workload", tone: "blue" },
+    { title: "Performance report", meta: "Service and officer metrics", tone: "violet" },
+    { title: "Audit summary", meta: "Decisions, handoffs, events", tone: "violet" },
+    { title: "Applicant feedback", meta: "CSAT and feedback trends", tone: "blue" },
+  ],
+} as const;
+
+export type SupervisorDashboardData = typeof supervisorDashboardData;

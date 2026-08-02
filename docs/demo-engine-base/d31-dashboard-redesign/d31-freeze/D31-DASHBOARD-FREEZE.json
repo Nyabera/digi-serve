@@ -1,0 +1,649 @@
+{
+  "stage": "D31-12",
+  "programme": "D31 dashboard redesign",
+  "baseCommit": "1db8be798d9567dc84c83a0bf74d52e1a86d7404",
+  "branch": "feat/demo-dashboard-redesign",
+  "roleBaselines": {
+    "officer": "docs/demo-engine-base/d31-dashboard-redesign/officer-baselines/OFFICER-DASHBOARD-BASELINE.json",
+    "supervisor": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-baselines/SUPERVISOR-DASHBOARD-BASELINE.json",
+    "admin": "docs/demo-engine-base/d31-dashboard-redesign/admin-baselines/ADMIN-DASHBOARD-BASELINE.json"
+  },
+  "changePolicy": "Update the affected role freeze and regenerate this master freeze.",
+  "files": [
+    {
+      "path": "app/demo/admin/admin-dashboard-reference.css",
+      "bytes": 31397,
+      "sha256": "55f67f6a7a104a46aed5e6c36a3d5789d7c4789615fb02af1666d88499c173a1"
+    },
+    {
+      "path": "app/demo/admin/layout.tsx",
+      "bytes": 268,
+      "sha256": "8a62069a70183d69a0ef91d9e1760a3e51380aede13516cad0e8a0253901db47"
+    },
+    {
+      "path": "app/demo/admin/page.tsx",
+      "bytes": 750,
+      "sha256": "7e547b2733146ba82585cb0add0bc2ed591e16bcc0dabe35d17904ee7c8d8ae7"
+    },
+    {
+      "path": "app/demo/admin/workflows/builder/page.tsx",
+      "bytes": 548,
+      "sha256": "acc0a61067b72547bf42d5f2f139c437b3945c21f8e822863edd00401f577c75"
+    },
+    {
+      "path": "app/demo/admin/workflows/page.tsx",
+      "bytes": 529,
+      "sha256": "8b24122e51fce9d2a4e67d2b18ebda5b757cfe36bc7633067f15787ed933b73b"
+    },
+    {
+      "path": "app/demo/officer/documents/page.tsx",
+      "bytes": 1034,
+      "sha256": "93826bf0c460766149dedafea01f19813b7ea46962d18599da9490bdeb91edee"
+    },
+    {
+      "path": "app/demo/officer/layout.tsx",
+      "bytes": 303,
+      "sha256": "541f045b82594c5c08b5f3a771e13b643b5accdd46dc3bf487b75899c59da3af"
+    },
+    {
+      "path": "app/demo/officer/page.tsx",
+      "bytes": 534,
+      "sha256": "153451e3392dfdb60ee3ef92832aaf58e86dbbd223b8d50eadd8e9a7e2e50faa"
+    },
+    {
+      "path": "app/demo/officer/queue/page.tsx",
+      "bytes": 544,
+      "sha256": "4518c092662afb5fc27ecbdbaba7af7f8938a59558fa6d1d8f395fd99a26bc3d"
+    },
+    {
+      "path": "app/demo/officer/reports/sla/page.tsx",
+      "bytes": 137,
+      "sha256": "375a91664a30f1cf2a804f24bbb8b64ed8b209fb3155afe1ed46ec47fa34b57f"
+    },
+    {
+      "path": "app/demo/officer/requests/[requestId]/page.tsx",
+      "bytes": 1417,
+      "sha256": "138c670d0e3e50b8ad749d31b7d4646d0c2c12f24e84c129d5bcaaf9b9ff2bd7"
+    },
+    {
+      "path": "app/demo/officer/requests/[requestId]/share-workflow-referral-page.tsx",
+      "bytes": 1759,
+      "sha256": "ebbcb8129ebb9ca38e3e822582a6cb09e5f5231d16756adec19c7e432b06d305"
+    },
+    {
+      "path": "app/demo/officer/sla-monitor/page.tsx",
+      "bytes": 202,
+      "sha256": "b8bb489483c918f34ad07cbbf16203cf30376102e8696c09cc60b1bdc132a633"
+    },
+    {
+      "path": "app/demo/officer/sla/page.tsx",
+      "bytes": 137,
+      "sha256": "375a91664a30f1cf2a804f24bbb8b64ed8b209fb3155afe1ed46ec47fa34b57f"
+    },
+    {
+      "path": "app/demo/officer/tasks/page.tsx",
+      "bytes": 544,
+      "sha256": "b409b5cc76bce36120e2faabd64f5fcc59579612b651c4bf041e01f0414bc26f"
+    },
+    {
+      "path": "app/demo/supervisor/approvals/[requestId]/page.tsx",
+      "bytes": 1223,
+      "sha256": "e8214301d7d6fc2eab51bd7d2b113331f5678f581fca84b16a2221966dc0ed56"
+    },
+    {
+      "path": "app/demo/supervisor/audit-trail/page.tsx",
+      "bytes": 166,
+      "sha256": "717601a3c5250299e6385ffa84a50b3d03a0c1bf3cc02ee4c692cb98b865192c"
+    },
+    {
+      "path": "app/demo/supervisor/audit/page.tsx",
+      "bytes": 161,
+      "sha256": "62b960f3fe35830a0a931c0f8d8422608cebada1e75c96cf04896915ddf1ba47"
+    },
+    {
+      "path": "app/demo/supervisor/layout.tsx",
+      "bytes": 309,
+      "sha256": "0b12aa6f994bf87e5a0c09f58db2b5b932745334137dfe0e3b94b097eb5e906c"
+    },
+    {
+      "path": "app/demo/supervisor/page.tsx",
+      "bytes": 578,
+      "sha256": "5267b4a9358eca0e3169528851fcd855089235bc4cbd5b5122a603383ac04950"
+    },
+    {
+      "path": "app/demo/supervisor/sla-monitor/page.tsx",
+      "bytes": 162,
+      "sha256": "7a2089d6fae0ec512e61330ba1d88aa93582071ff62407359178041d14be9265"
+    },
+    {
+      "path": "app/demo/supervisor/sla/page.tsx",
+      "bytes": 155,
+      "sha256": "4573488cc5c8d358d2d452aafae1fce1640c90db89eaaaefb07fc7fa28f316ea"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-12-REGRESSION-RESULTS.json",
+      "bytes": 852,
+      "sha256": "d58e6f10fd1fbf783f451d45d9f04d2195d6795c4bd8513678f05508a4a6e9a8"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-CROSS-ROLE-REGRESSION-AND-FREEZE.md",
+      "bytes": 1927,
+      "sha256": "ed3bd84a20169771e79b6d64b6474887617fc131c0e5cbce7055bc915f7b6dec"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-FREEZE-SUMMARY.md",
+      "bytes": 945,
+      "sha256": "6673ad942e3adf89398b7efb9fa1ac7ec2ef0f3dec2145db58140bafc6822ff5"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-baselines/ADMIN-DASHBOARD-BASELINE.json",
+      "bytes": 8524,
+      "sha256": "402fbcdeb2df32bd7975e453ff4e43117b4e2faab7ca9efa97b9dd8fa8a6cb2a"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/ADMIN-VISUAL-METRICS.json",
+      "bytes": 1016,
+      "sha256": "927425d93176022d2483c9fef956d8ceed0b8e3581196f551a9e453ac76ce8b2"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-body.png",
+      "bytes": 490214,
+      "sha256": "22b8372e8a54e7f7beb7a0ba4ee1e405bcf55ade9a274ce3a48c14dacbb18050"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-normalized.png",
+      "bytes": 377725,
+      "sha256": "feed1bad025c710994fe0fd36ed998e1fd182bd5784fd2884dd6fd19eb354aa5"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-page.png",
+      "bytes": 511211,
+      "sha256": "1c8a28d3e1b1ed19f935b1ce0ddc150dd64876c0a01acae761d4073f6896c3e0"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-overlay-50.png",
+      "bytes": 1527368,
+      "sha256": "60b3f0db094112876c7400c4bffeb37f5ac7231de3ac3aecd6e16de867d0a18b"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-target-body-crop.png",
+      "bytes": 1713025,
+      "sha256": "12aacc34d3fd32c3fd46a0c65d40b6884ffaee5926e1b8727982774fc06d8f7f"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-body.png",
+      "bytes": 475159,
+      "sha256": "f4a782146f00e192fef4f0fdc721d96c3043d734fabcac29999375959acbce8d"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-normalized.png",
+      "bytes": 1041128,
+      "sha256": "353480ee31b1c58bef3f7d773ab04e7c5d9629191c7e5a6c605f72095ec99cdd"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-page.png",
+      "bytes": 571103,
+      "sha256": "5d0774a63ed00b6bf442064b0dde894a3405db401f35216a508e73dc11699735"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-overlay-50.png",
+      "bytes": 1486327,
+      "sha256": "68129fe6381b49b80b59c3565b83f849c2d3cf63018aeb6643cd9f19759e0d21"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-target-body-crop.png",
+      "bytes": 827540,
+      "sha256": "cf3d057ec52bf3340cbcc31441fe3e9acc1785bdff197c36243591107cfa1cd1"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-body.png",
+      "bytes": 454135,
+      "sha256": "db917b79a83e0a97769e4e10550dcc0d8cb4faaa1d003c92a97e32e1f533c3ef"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-normalized.png",
+      "bytes": 876118,
+      "sha256": "8f44cca923ae30f784f7a29d610a86d8ac9c1b537e5dde9b7fba4fd91e0e5bb8"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-page.png",
+      "bytes": 472296,
+      "sha256": "fd5cab6d090d145a03a46ff935a01117a14659359bedd3c9393212d2206e835a"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-overlay-50.png",
+      "bytes": 1239933,
+      "sha256": "802421e7f2b03d311816e870e67548611132b92cc50872ab9a38d7ec53ea2bbe"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-target-body-crop.png",
+      "bytes": 741450,
+      "sha256": "9debed09fb8754358fc9785544e79e29c6233407ecca04137c0e385b36382fbf"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/officer-baselines/OFFICER-DASHBOARD-BASELINE.json",
+      "bytes": 2418,
+      "sha256": "c78dd4d2f166b7af7378a1c186f5eac040ed514a0868cb254dc2bce6a84e9ad5"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-baselines/SUPERVISOR-DASHBOARD-BASELINE.json",
+      "bytes": 6528,
+      "sha256": "e9351fa5597c03fab2c7c9985cc97617fa6a30edd9885c4daf8cedf01d3610b4"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/SUPERVISOR-VISUAL-METRICS.json",
+      "bytes": 442,
+      "sha256": "0be714b39472fd543c2009b5fe407f9e23a2f9207db3cfbebae707e99356144d"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-bundle-preview-overlay-50.png",
+      "bytes": 1201241,
+      "sha256": "3e5be8a4f17804a1ebb9da2d5bfa45188c1e47a41d599e11ba62040d26c9fe72"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-full-page.png",
+      "bytes": 475960,
+      "sha256": "54cd15cbe7ea5a305762edff090c37de4745615ef243a31fe2b5cb65428dd155"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-normalized-to-bundle-preview.png",
+      "bytes": 758928,
+      "sha256": "6ddff005918492a721a469681c6cfebc9980521d3b181ec2f1629b14cb97767b"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-normalized-to-design.png",
+      "bytes": 390914,
+      "sha256": "6e4b2e0261f968c40d9a4bc154f1085e629a1a0398b8fab97f6ab4201a8b3dda"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-design-overlay-50.png",
+      "bytes": 1577411,
+      "sha256": "7407985f5ef66541a20e3fcc8be5fb285248e198d1a9a7ed0d3fb84751f5d60e"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/admin-dashboard.reference-contract.ts",
+      "bytes": 1934,
+      "sha256": "f8e70c7d746d325f7bebbbcff2ec2c86dd223892374e8ac9334ea7dc2a65dad7"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/admin-dashboard.visual-contract.ts",
+      "bytes": 2811,
+      "sha256": "663a3fabf8cead809cb8d780a8b3885cbe27b7cd15fe4b3ac2d6102bea9f9a19"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/AdminDashboardHighFidelity.tsx",
+      "bytes": 26209,
+      "sha256": "abcec12e6f6ffb88c71d02516965a084a60b859a0740dd44c4587770f9de1774"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/admin-dashboard-reference-data.ts",
+      "bytes": 13306,
+      "sha256": "36a4a4542a4b5e9de8525f8cd95b0993620dc7c323a4ff76b852aa662db1f301"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/index.ts",
+      "bytes": 247,
+      "sha256": "69957b51238ee8f7908bba33c87954191cf9120aa04c5276a46f7308fff89e8e"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/index.ts",
+      "bytes": 181,
+      "sha256": "6df7edbcf7f583199141da9b262095f16824afe3cc419cbdb6acf85bf1ea5f6f"
+    },
+    {
+      "path": "features/demo-engine/dashboards/config/dashboard-shell-contracts.ts",
+      "bytes": 2304,
+      "sha256": "f419547c1499a05abd5a79df6d43e00cd840d53deddf0d3ea7e2b689c289aabb"
+    },
+    {
+      "path": "features/demo-engine/dashboards/config/index.ts",
+      "bytes": 209,
+      "sha256": "8eb42827601d7e13bdc8c29146eebb4d2af4367bc57181c34cc70c74e309ad40"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/admin-dashboard.adapter.ts",
+      "bytes": 26343,
+      "sha256": "de5d57170e73ffe78690a31a186a3265998d4ebd9d2e9989432ed2d27dc2f614"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/admin-dashboard.types.ts",
+      "bytes": 5571,
+      "sha256": "24716cfce38764b305701fdc4b2404697c6180029273eb8820aaad93c53aebc1"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/dashboard-adapter.utilities.ts",
+      "bytes": 5852,
+      "sha256": "fb1f7df8450e480d0bd61972a0f4d72f451aba9dca109af05b01ac119c019608"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/dashboard-data.shared.ts",
+      "bytes": 1857,
+      "sha256": "bbf1f174fa66b76048388cca24a38c49f7afef5a399541448613c30f39977f2d"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/dashboard-data.validation.ts",
+      "bytes": 3575,
+      "sha256": "c29370f8b3645856776f09c8466bfee899de28923c9bd5e426f0d9e8647d9d04"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/demo-pack-dashboard.snapshot.ts",
+      "bytes": 9343,
+      "sha256": "3fccfa38285b65e2cb7cbc38e8cb5d2c4818d5efce84c0a130963e5edc46e3a0"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/index.ts",
+      "bytes": 1889,
+      "sha256": "3a2c294f23709b29f4a89dab58434038202adcb2d1323c6e8e5a4cd435589798"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/officer-dashboard.adapter.ts",
+      "bytes": 16622,
+      "sha256": "20719b2efd67888d5b53d0963b1e8ab71235d98973e74aa5799e84d86901735f"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/officer-dashboard.types.ts",
+      "bytes": 2906,
+      "sha256": "e62a50cd92d6dea62817e8c59d62598012633ca4021ccc0e756ae102ecfeb9c5"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/supervisor-dashboard.adapter.ts",
+      "bytes": 21628,
+      "sha256": "e60ff126a8e18da66e6e85bf4217580460600b0846fe549f6f6ac2e3d5d72748"
+    },
+    {
+      "path": "features/demo-engine/dashboards/data/supervisor-dashboard.types.ts",
+      "bytes": 4862,
+      "sha256": "48cd088162001cf9d49b09174c2e0aacea9e3183524dc648728c3a9852a50182"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/high-fidelity/OfficerDashboardHighFidelity.tsx",
+      "bytes": 24265,
+      "sha256": "40d64f14044895a1897eaf6356cdc3a7feb69651b9192e6f2a128f8503b06ad5"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/high-fidelity/index.ts",
+      "bytes": 135,
+      "sha256": "732f168edc78c10c158250e387f7c9822453a81ee8f80c9047c61001fb0dbf35"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/high-fidelity/officer-dashboard-reference.css",
+      "bytes": 45950,
+      "sha256": "c445dd03ba4506ca2a80a44a5a942c639e9a5ed00df5079aa25a5db0f7053777"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/index.ts",
+      "bytes": 264,
+      "sha256": "fbed251e0aca89b8f09ed9c68f678ce860545cc0e7cf153b4cbd19b6c1d40ea5"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-case-signal-tabs.tsx",
+      "bytes": 3408,
+      "sha256": "b3b2a85bbc4e79b0c74a2cc09ce72fa56ed49583652db1b0731bea8e54ccb466"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-dashboard.module.css",
+      "bytes": 13712,
+      "sha256": "d0bd54adb4a2a8f0c92bf1854c45ea037bbddb70a39238d93c3bfa81b9a40860"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-dashboard.tsx",
+      "bytes": 11016,
+      "sha256": "50844afc6bf296c5ca9c8144b2f8653861867e8d581cdfb66774ad51e2efe5cd"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-dashboard.visual-contract.ts",
+      "bytes": 1593,
+      "sha256": "b617270752bddd376b7c23b6fc446aaedac36013ea5c986871718dab9fdd7029"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-rhythm-panel.tsx",
+      "bytes": 6167,
+      "sha256": "8dd7c6143d0e8e839eec9bebcf275b35683c2c736dedcb8ff53c0c7857cc55bc"
+    },
+    {
+      "path": "features/demo-engine/dashboards/officer/officer-work-plan-tabs.tsx",
+      "bytes": 5165,
+      "sha256": "539909fab20e3d83000289098f055a24c5cea40f3494a1d72a825a7206799ecb"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-card.tsx",
+      "bytes": 1033,
+      "sha256": "da060d30e66b04c7026603b69b50b82be6e7268519b76ac4e64d97c59b531089"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-chart-frame.tsx",
+      "bytes": 4450,
+      "sha256": "a7b4632a1e6a4e93f71f35c2a8c3d89a229f3f05c9fce9967be8738bc66a1b50"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-grid.tsx",
+      "bytes": 2260,
+      "sha256": "cfadffac7237ae647c183c2c1ae9afc4dfe37401032a29feec5a9907cc73c770"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-metric.tsx",
+      "bytes": 2633,
+      "sha256": "7ca8c0064de60321871fd02f4fb02e2fb7e7f78caa8934f2f530aa62ef66d125"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-primitives.module.css",
+      "bytes": 14202,
+      "sha256": "c991c509fdacae36960c79c9b9c304d1fde44ae1a6d60d86acdcf53f086b0cb3"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-primitives.types.ts",
+      "bytes": 193,
+      "sha256": "3322f74f43d1e9e97e7ffd3ed8b478139e0d785a9fd4efbd30b262368b79c5e2"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-progress.tsx",
+      "bytes": 2236,
+      "sha256": "c6cea16d7f09ac982839a26480fedde3e1e0074cafa4545d6eb48af318241946"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-section-heading.tsx",
+      "bytes": 1242,
+      "sha256": "4f441c8583cc3de5d31d259858661c7209afd427e080260fef16210e9323400c"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-status-badge.tsx",
+      "bytes": 1080,
+      "sha256": "c4ae7131a98a2f44b0923414ce778aea958a98697b9fce44eef14cfb81183dc7"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-table.tsx",
+      "bytes": 3543,
+      "sha256": "b8e97e6c9a51ced44eeb60dfd70705001e6fbd5a6ebb798a2036ed466778e8d9"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-tabs.tsx",
+      "bytes": 4354,
+      "sha256": "8d63fd0421ade1e13e2e8970fe2eb302e16b492e73184feb07e73cb4db38a45e"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/dashboard-zone.tsx",
+      "bytes": 1609,
+      "sha256": "ff5487e6ae993f075728ba6da7f94b2a689f1be4c8d7b39d63a85af309ed47bf"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/components/index.ts",
+      "bytes": 1564,
+      "sha256": "e2c5ffcc4666cf25bb73cbbad01fa8b31fb64b2bb5b76128df5c981aa24ffdd5"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/dashboard-theme.ts",
+      "bytes": 3313,
+      "sha256": "efb7d51fdbb0f456568cd6af67fb89a45f1f24fc932095276beb7ec873235e83"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/dashboard-token-contract.ts",
+      "bytes": 1080,
+      "sha256": "7727e648bb32a357f9862de36e56ae2f64f14e14ef55e0c197af744879ecfaff"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/dashboard-tokens.module.css",
+      "bytes": 6232,
+      "sha256": "ce856d32858e0f19e3447f013753be8bccc2d581f3432fba56f654aa5c2abeb7"
+    },
+    {
+      "path": "features/demo-engine/dashboards/shared/index.ts",
+      "bytes": 490,
+      "sha256": "1f031913fdeedf41e35a4f8771a90de92eee6934485b0d8bb72befdec4d6bf58"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/index.ts",
+      "bytes": 171,
+      "sha256": "8892009676051caf097e50bc13dcba563d9905a5429c5345aa3009da33c75506"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard-charts.tsx",
+      "bytes": 3753,
+      "sha256": "4163ac4304710e6f270d63cf4bf1280373d9f7dfaa20e8c68870d374a99dd838"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.module.css",
+      "bytes": 20941,
+      "sha256": "c052d3ae14700541a886b43ffaa9392882f77bea87a1efc057c99b2c4f95fe41"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.tsx",
+      "bytes": 29848,
+      "sha256": "44d64b25bff2e5a2662ce2316e830b7c182444d54bc89bbe79e98c1357d59cef"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.visual-contract.ts",
+      "bytes": 2625,
+      "sha256": "0dc8cb5bcf26f185a86c1460efc94d4a87685e1d80895e6acf94b8fd41e72069"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2900,
+      "sha256": "9049347e4dbcd809f73ebbc59a68b07f14a982d5a816d4734f79617e0fa617bc"
+    },
+    {
+      "path": "playwright.d31.config.ts",
+      "bytes": 1213,
+      "sha256": "5c9dea645ad725ca5898acf8df4fcdb3c78b0c8e46e2e1e5e605fa38bb2804da"
+    },
+    {
+      "path": "scripts/verify-d31-11-admin-visual-freeze.sh",
+      "bytes": 7404,
+      "sha256": "09d361d98d91c9af8ec013ef5e1a4a485e3d7b138431ff0e809840031ee6e973"
+    },
+    {
+      "path": "scripts/verify-d31-12-dashboard-freeze.sh",
+      "bytes": 4414,
+      "sha256": "0dd29039e7cb37445aced191b1b484936e517895066ac8af143ca9a0bfc22660"
+    },
+    {
+      "path": "scripts/verify-d31-2-shell-contracts.sh",
+      "bytes": 4421,
+      "sha256": "c82009f32475d61148c035356c7c8e8cc3671e351724cc34d6e5b456060c364b"
+    },
+    {
+      "path": "scripts/verify-d31-7-officer-visual-freeze.sh",
+      "bytes": 3226,
+      "sha256": "e41ff0d2d35d7c94f797baa3b1500ecdfddc946302e7c4df1458f354dd2ba800"
+    },
+    {
+      "path": "scripts/verify-d31-9-supervisor-visual-freeze.sh",
+      "bytes": 6611,
+      "sha256": "8f3b882f8baef338212cbdd0883e9ac67610a1338f396176a6edac6a8e3fd554"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-desktop-1440.png",
+      "bytes": 470954,
+      "sha256": "d020975c23f4a32f30d67a9424dc61fbdc5e76b1bbbe2a2674722dd04f6a7bed"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-desktop-1536.png",
+      "bytes": 475097,
+      "sha256": "56c93b974f5451e945bfaf32d3a94b48df12522d6ab8b38189af34bd19dd03b7"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-mobile-390.png",
+      "bytes": 454135,
+      "sha256": "db917b79a83e0a97769e4e10550dcc0d8cb4faaa1d003c92a97e32e1f533c3ef"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-reference-width-864.png",
+      "bytes": 485786,
+      "sha256": "7c5fbb4a7bbb8ab2342a0c73d98f8b710f00fbcc2a4276bb85090ea965d3b425"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-tablet-1024.png",
+      "bytes": 492914,
+      "sha256": "a3841e3baf07ca0f31cb7f23813fcd020df5ea9a09218fa0706942f9bf441457"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-browser-zoom-80.png",
+      "bytes": 209266,
+      "sha256": "f4fc832b8099a55f4edc22d20cb0cd5982d31d88b849052d0e38e75b3a403605"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-desktop-1440.png",
+      "bytes": 296203,
+      "sha256": "2da813ffe2316913d0a944fcf38476a04812055f663f113b5b5ced35587544ae"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-mobile-390.png",
+      "bytes": 223123,
+      "sha256": "8a96ed1f7caff58b2d3c6a6680629e0aad5d397339e753361e58ddf7021265d3"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-reference-desktop.png",
+      "bytes": 289932,
+      "sha256": "fc5221af54e37f6c378485709820352fde1386c9df8b0b971198928dc5edea86"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/officer-tablet-1024.png",
+      "bytes": 280771,
+      "sha256": "62991a504386df39b2ad4e849a36802d4c7a99fe53e4b93568074a3a14ce7939"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-desktop-1440.png",
+      "bytes": 390044,
+      "sha256": "08a1ed10335a82c6046d8a525ba521a4b75019ad6b636614e791f0202c9892e5"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-desktop-1536.png",
+      "bytes": 390443,
+      "sha256": "c4ee805875e8dec04146de786d307c6dfc73b2f34ea8aec29b54cc2bff0f9183"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-mobile-390.png",
+      "bytes": 398642,
+      "sha256": "3e96ea4e24e822df18e67ca86ca9b528f259d14a5dab27a44839ec6236eb8136"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-reference-width-864.png",
+      "bytes": 415219,
+      "sha256": "e746744e3c48e12291246230d5d4f12b188b9f891ea7d3d7566d430c201a9842"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-tablet-1024.png",
+      "bytes": 415756,
+      "sha256": "a4aeca2d3eac8f20d947bc78624d44ee9bd362d820e781863ca6ff02416a2973"
+    },
+    {
+      "path": "tests/visual/d31/admin-dashboard.pw.ts",
+      "bytes": 14865,
+      "sha256": "a152158762981096e51d604a6e20c4e3e1b5b7d6c737a96601f6e111fd3b91fb"
+    },
+    {
+      "path": "tests/visual/d31/cross-role-dashboard-regression.pw.ts",
+      "bytes": 3348,
+      "sha256": "4c4ba74aa4ba320114298ce9720b7796c81499b51ca6c761526f1594fdd70650"
+    },
+    {
+      "path": "tests/visual/d31/officer-dashboard.pw.ts",
+      "bytes": 6591,
+      "sha256": "8ffb663b8d2910e39e6b9d7e8248eed32ce859d1219d1d09d9c152a4a34db7ac"
+    },
+    {
+      "path": "tests/visual/d31/supervisor-dashboard.pw.ts",
+      "bytes": 12459,
+      "sha256": "8c6af477e3d55c137cdc16d490bf133e44754124b8355d5fc1608212e589560b"
+    }
+  ]
+}

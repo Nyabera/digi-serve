@@ -1,29 +1,22 @@
-import { OfficerDashboard } from "@/components/demo/officer/officer-dashboard";
-import { getDefaultDemoClient } from "@/config/demo";
+import OfficerDashboardHighFidelity from "@/features/demo-engine/dashboards/officer/high-fidelity";
 
-export default function DemoOfficerPage() {
-  const client = getDefaultDemoClient();
+export const dynamic = "force-dynamic";
 
-  const services = client.services
-    .filter((service) => service.active)
-    .map((service) => ({
-      id: service.id,
-      slug: service.slug,
-      name: service.name,
-    }));
+const dashboardDateFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "Africa/Nairobi",
+});
 
-  const departments = client.departments.map(
-    (department) => ({
-      id: department.id,
-      name: department.name,
-    }),
-  );
+export default function OfficerDashboardPage() {
+  const todayLabel = dashboardDateFormatter.format(new Date());
 
   return (
-    <OfficerDashboard
-      organizationName={client.organization.name}
-      services={services}
-      departments={departments}
+    <OfficerDashboardHighFidelity
+      embedded
+      todayLabel={todayLabel}
     />
   );
 }

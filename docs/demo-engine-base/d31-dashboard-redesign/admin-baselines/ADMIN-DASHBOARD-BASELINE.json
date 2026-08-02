@@ -1,0 +1,206 @@
+{
+  "stage": "D31-11",
+  "approvedImplementation": "D31-10",
+  "dashboardVersion": "d31-admin-zones-v1",
+  "comparisonMethod": "shell-aware body crop and normalized 50% overlay",
+  "semanticRowContract": {
+    "minimumConfiguredRows": 1,
+    "exactVisibleContentAuthority": "Playwright screenshot baseline"
+  },
+  "testRunnerIsolation": {
+    "playwrightPattern": "**/*.pw.ts",
+    "vitestPatternCollision": false
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "bytes": 2900,
+      "sha256": "9049347e4dbcd809f73ebbc59a68b07f14a982d5a816d4734f79617e0fa617bc"
+    },
+    {
+      "path": "playwright.d31.config.ts",
+      "bytes": 1213,
+      "sha256": "5c9dea645ad725ca5898acf8df4fcdb3c78b0c8e46e2e1e5e605fa38bb2804da"
+    },
+    {
+      "path": "app/demo/admin/page.tsx",
+      "bytes": 750,
+      "sha256": "7e547b2733146ba82585cb0add0bc2ed591e16bcc0dabe35d17904ee7c8d8ae7"
+    },
+    {
+      "path": "app/demo/admin/admin-dashboard-reference.css",
+      "bytes": 31397,
+      "sha256": "55f67f6a7a104a46aed5e6c36a3d5789d7c4789615fb02af1666d88499c173a1"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/admin-dashboard.reference-contract.ts",
+      "bytes": 1934,
+      "sha256": "f8e70c7d746d325f7bebbbcff2ec2c86dd223892374e8ac9334ea7dc2a65dad7"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/admin-dashboard.visual-contract.ts",
+      "bytes": 2811,
+      "sha256": "663a3fabf8cead809cb8d780a8b3885cbe27b7cd15fe4b3ac2d6102bea9f9a19"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/AdminDashboardHighFidelity.tsx",
+      "bytes": 26209,
+      "sha256": "abcec12e6f6ffb88c71d02516965a084a60b859a0740dd44c4587770f9de1774"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/admin-dashboard-reference-data.ts",
+      "bytes": 13306,
+      "sha256": "36a4a4542a4b5e9de8525f8cd95b0993620dc7c323a4ff76b852aa662db1f301"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/high-fidelity/index.ts",
+      "bytes": 247,
+      "sha256": "69957b51238ee8f7908bba33c87954191cf9120aa04c5276a46f7308fff89e8e"
+    },
+    {
+      "path": "features/demo-engine/dashboards/admin/index.ts",
+      "bytes": 181,
+      "sha256": "6df7edbcf7f583199141da9b262095f16824afe3cc419cbdb6acf85bf1ea5f6f"
+    },
+    {
+      "path": "tests/visual/d31/admin-dashboard.pw.ts",
+      "bytes": 14865,
+      "sha256": "a152158762981096e51d604a6e20c4e3e1b5b7d6c737a96601f6e111fd3b91fb"
+    },
+    {
+      "path": "scripts/verify-d31-11-admin-visual-freeze.sh",
+      "bytes": 7404,
+      "sha256": "09d361d98d91c9af8ec013ef5e1a4a485e3d7b138431ff0e809840031ee6e973"
+    },
+    {
+      "path": "public/demo/references/dashboards/admin-dashboard-bundle-reference.png",
+      "bytes": 2154608,
+      "sha256": "4bf810f6d7d443e719f4536073df5dac6bdfd4612268b6d2a24e5828aee3ae96"
+    },
+    {
+      "path": "public/demo/references/dashboards/admin-dashboard-bundle-implementation-preview.png",
+      "bytes": 816235,
+      "sha256": "6f709a64dafc9a88d8e7ddf6399002076ac004b3d927e99e268fac9f8511458a"
+    },
+    {
+      "path": "public/demo/references/dashboards/admin-dashboard-bundle-mobile-preview.png",
+      "bytes": 515115,
+      "sha256": "7e5f7d406dd10ee4f63f7a8263c375576e8257dc2222fa5e5513f9d2cdf242c4"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-ADMIN-VISUAL-FREEZE.md",
+      "bytes": 2401,
+      "sha256": "6d4d4544eeb2ed99d1e5cb9ceb34e20ed1e3ba9ee7e972565f153339f3419dae"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-11-VISUAL-REVIEW.md",
+      "bytes": 1480,
+      "sha256": "bca3575301242a3f2086c133922f723d7ab9d62b2d69c16aa1f8ad42b3447f02"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/ADMIN-VISUAL-METRICS.json",
+      "bytes": 1016,
+      "sha256": "927425d93176022d2483c9fef956d8ceed0b8e3581196f551a9e453ac76ce8b2"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-desktop-1440.png",
+      "bytes": 470954,
+      "sha256": "d020975c23f4a32f30d67a9424dc61fbdc5e76b1bbbe2a2674722dd04f6a7bed"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-desktop-1536.png",
+      "bytes": 475097,
+      "sha256": "56c93b974f5451e945bfaf32d3a94b48df12522d6ab8b38189af34bd19dd03b7"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-mobile-390.png",
+      "bytes": 454135,
+      "sha256": "db917b79a83e0a97769e4e10550dcc0d8cb4faaa1d003c92a97e32e1f533c3ef"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-reference-width-864.png",
+      "bytes": 485786,
+      "sha256": "7c5fbb4a7bbb8ab2342a0c73d98f8b710f00fbcc2a4276bb85090ea965d3b425"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/admin-body-tablet-1024.png",
+      "bytes": 492914,
+      "sha256": "a3841e3baf07ca0f31cb7f23813fcd020df5ea9a09218fa0706942f9bf441457"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-body.png",
+      "bytes": 490214,
+      "sha256": "22b8372e8a54e7f7beb7a0ba4ee1e405bcf55ade9a274ce3a48c14dacbb18050"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-normalized.png",
+      "bytes": 377725,
+      "sha256": "feed1bad025c710994fe0fd36ed998e1fd182bd5784fd2884dd6fd19eb354aa5"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-current-page.png",
+      "bytes": 511211,
+      "sha256": "1c8a28d3e1b1ed19f935b1ce0ddc150dd64876c0a01acae761d4073f6896c3e0"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-overlay-50.png",
+      "bytes": 1527368,
+      "sha256": "60b3f0db094112876c7400c4bffeb37f5ac7231de3ac3aecd6e16de867d0a18b"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-design-target-body-crop.png",
+      "bytes": 1713025,
+      "sha256": "12aacc34d3fd32c3fd46a0c65d40b6884ffaee5926e1b8727982774fc06d8f7f"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-body.png",
+      "bytes": 475159,
+      "sha256": "f4a782146f00e192fef4f0fdc721d96c3043d734fabcac29999375959acbce8d"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-normalized.png",
+      "bytes": 1041128,
+      "sha256": "353480ee31b1c58bef3f7d773ab04e7c5d9629191c7e5a6c605f72095ec99cdd"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-current-page.png",
+      "bytes": 571103,
+      "sha256": "5d0774a63ed00b6bf442064b0dde894a3405db401f35216a508e73dc11699735"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-overlay-50.png",
+      "bytes": 1486327,
+      "sha256": "68129fe6381b49b80b59c3565b83f849c2d3cf63018aeb6643cd9f19759e0d21"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-implementation-target-body-crop.png",
+      "bytes": 827540,
+      "sha256": "cf3d057ec52bf3340cbcc31441fe3e9acc1785bdff197c36243591107cfa1cd1"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-body.png",
+      "bytes": 454135,
+      "sha256": "db917b79a83e0a97769e4e10550dcc0d8cb4faaa1d003c92a97e32e1f533c3ef"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-normalized.png",
+      "bytes": 876118,
+      "sha256": "8f44cca923ae30f784f7a29d610a86d8ac9c1b537e5dde9b7fba4fd91e0e5bb8"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-current-page.png",
+      "bytes": 472296,
+      "sha256": "fd5cab6d090d145a03a46ff935a01117a14659359bedd3c9393212d2206e835a"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-overlay-50.png",
+      "bytes": 1239933,
+      "sha256": "802421e7f2b03d311816e870e67548611132b92cc50872ab9a38d7ec53ea2bbe"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/admin-visual-comparison/admin-mobile-target-body-crop.png",
+      "bytes": 741450,
+      "sha256": "9debed09fb8754358fc9785544e79e29c6233407ecca04137c0e385b36382fbf"
+    }
+  ]
+}

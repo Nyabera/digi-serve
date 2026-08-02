@@ -1,32 +1,24 @@
-import { notFound } from "next/navigation";
+import {
+  getActiveDemoPack,
+} from "@/features/demo-engine/config";
+import {
+  adaptSupervisorDashboard,
+  assertDashboardDataValid,
+  validateSupervisorDashboardData,
+} from "@/features/demo-engine/dashboards/data";
+import {
+  SupervisorDashboard,
+} from "@/features/demo-engine/dashboards/supervisor";
 
-import { SupervisorDashboardWorkspace } from "@/components/demo/supervisor/supervisor-dashboard-workspace";
-import { getDefaultDemoClient } from "@/config/demo";
-
-export default function DemoSupervisorPage() {
-  const client = getDefaultDemoClient();
-
-  const service =
-    client.services.find(
-      (candidate) =>
-        candidate.active &&
-        candidate.slug ===
-          "transcript-request",
-    ) ??
-    client.services.find(
-      (candidate) => candidate.active,
-    );
-
-  if (!service) {
-    notFound();
-  }
-
-  return (
-    <SupervisorDashboardWorkspace
-      organizationName={
-        client.organization.name
-      }
-      service={service}
-    />
+export default function DemoSupervisorDashboardPage() {
+  const data = adaptSupervisorDashboard(
+    getActiveDemoPack(),
   );
+
+  assertDashboardDataValid(
+    "supervisor",
+    validateSupervisorDashboardData(data),
+  );
+
+  return <SupervisorDashboard data={data} />;
 }

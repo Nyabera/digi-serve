@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import { RoleWorkspaceShell } from "@/components/demo/internal-shell/role-workspace-shell";
+import { AdminWorkspaceShell } from "@/components/demo/workspace-shells";
 
 export default function AdminWorkspaceLayout({ children }: { children: ReactNode }) {
-  return <RoleWorkspaceShell role="admin">{children}</RoleWorkspaceShell>;
+  return <AdminWorkspaceShell>{children}</AdminWorkspaceShell>;
 }

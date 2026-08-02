@@ -1,0 +1,27 @@
+{
+  "stage": "D31-12",
+  "baseCommit": "1db8be798d9567dc84c83a0bf74d52e1a86d7404",
+  "branch": "feat/demo-dashboard-redesign",
+  "checks": {
+    "shellContract": "passed",
+    "officerFreeze": "passed",
+    "supervisorFreeze": "passed",
+    "adminFreeze": "passed",
+    "officerVisual": "passed",
+    "supervisorVisual": "passed",
+    "adminVisual": "passed",
+    "crossRoleVisual": "passed",
+    "demoPackValidation": "passed",
+    "typeScript": "passed",
+    "lint": "passed",
+    "vitest": "passed",
+    "productionBuild": "passed",
+    "gitWhitespace": "passed"
+  },
+  "verifiers": {
+    "shellContract": "scripts/verify-d31-2-shell-contracts.sh",
+    "officer": "scripts/verify-d31-7-officer-visual-freeze.sh",
+    "supervisor": "scripts/verify-d31-9-supervisor-visual-freeze.sh",
+    "admin": "scripts/verify-d31-11-admin-visual-freeze.sh"
+  }
+}

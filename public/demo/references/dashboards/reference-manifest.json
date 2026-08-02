@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "stage": "D31-1",
+  "references": [
+    {
+      "id": "officer",
+      "file": "officer-dashboard.png",
+      "intendedViewport": {
+        "width": 1568,
+        "height": 1003
+      },
+      "includesShell": false,
+      "interpretation": "Dashboard body reference",
+      "dimensions": {
+        "width": 1568,
+        "height": 1003
+      },
+      "sha256": "c8dd71760480011f113a30419ab6557bd1f3b122e21736e0c15e877573f48e91",
+      "bytes": 1865237
+    },
+    {
+      "id": "supervisor",
+      "file": "supervisor-dashboard.png",
+      "intendedViewport": {
+        "width": 864,
+        "height": 1821
+      },
+      "includesShell": true,
+      "interpretation": "Long-scrolling department supervisor dashboard",
+      "dimensions": {
+        "width": 864,
+        "height": 1821
+      },
+      "sha256": "10d6c51289bb10f8bbf9ad804ff5bc7fb42cc537d8f4cd5accf61b662fb38ab0",
+      "bytes": 1853086
+    },
+    {
+      "id": "admin",
+      "file": "admin-dashboard.png",
+      "intendedViewport": {
+        "width": 864,
+        "height": 1821
+      },
+      "includesShell": true,
+      "interpretation": "Long-scrolling organization administration dashboard",
+      "dimensions": {
+        "width": 864,
+        "height": 1821
+      },
+      "sha256": "4bf810f6d7d443e719f4536073df5dac6bdfd4612268b6d2a24e5828aee3ae96",
+      "bytes": 2154608
+    }
+  ]
+}

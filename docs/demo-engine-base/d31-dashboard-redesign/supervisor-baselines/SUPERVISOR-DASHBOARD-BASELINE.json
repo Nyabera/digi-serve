@@ -1,0 +1,155 @@
+{
+  "stage": "D31-9",
+  "approvedImplementation": "D31-8",
+  "dashboardVersion": "d31-supervisor-zones-v1",
+  "semanticRowContract": {
+    "minimumConfiguredRows": 1,
+    "visibleCountAuthority": "section implementation and visual baseline"
+  },
+  "testRunnerIsolation": {
+    "playwrightPattern": "**/*.pw.ts",
+    "vitestPatternCollision": false
+  },
+  "files": [
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.tsx",
+      "bytes": 29848,
+      "sha256": "44d64b25bff2e5a2662ce2316e830b7c182444d54bc89bbe79e98c1357d59cef"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard-charts.tsx",
+      "bytes": 3753,
+      "sha256": "4163ac4304710e6f270d63cf4bf1280373d9f7dfaa20e8c68870d374a99dd838"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.module.css",
+      "bytes": 20941,
+      "sha256": "c052d3ae14700541a886b43ffaa9392882f77bea87a1efc057c99b2c4f95fe41"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/index.ts",
+      "bytes": 171,
+      "sha256": "8892009676051caf097e50bc13dcba563d9905a5429c5345aa3009da33c75506"
+    },
+    {
+      "path": "features/demo-engine/dashboards/supervisor/supervisor-dashboard.visual-contract.ts",
+      "bytes": 2625,
+      "sha256": "0dc8cb5bcf26f185a86c1460efc94d4a87685e1d80895e6acf94b8fd41e72069"
+    },
+    {
+      "path": "app/demo/supervisor/page.tsx",
+      "bytes": 578,
+      "sha256": "5267b4a9358eca0e3169528851fcd855089235bc4cbd5b5122a603383ac04950"
+    },
+    {
+      "path": "tests/visual/d31/supervisor-dashboard.pw.ts",
+      "bytes": 12459,
+      "sha256": "8c6af477e3d55c137cdc16d490bf133e44754124b8355d5fc1608212e589560b"
+    },
+    {
+      "path": "public/demo/references/dashboards/supervisor-dashboard-bundle-reference.png",
+      "bytes": 1853086,
+      "sha256": "10d6c51289bb10f8bbf9ad804ff5bc7fb42cc537d8f4cd5accf61b662fb38ab0"
+    },
+    {
+      "path": "public/demo/references/dashboards/supervisor-dashboard-bundle-implementation-preview.png",
+      "bytes": 479352,
+      "sha256": "3587424a66b54c147d12b490a2dcdc52d33d059a6acad2685f50cfb013a55088"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/SUPERVISOR-VISUAL-METRICS.json",
+      "bytes": 442,
+      "sha256": "0be714b39472fd543c2009b5fe407f9e23a2f9207db3cfbebae707e99356144d"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/D31-9-VISUAL-REVIEW.md",
+      "bytes": 1331,
+      "sha256": "5d67df1c8525b8a46eba17b2e45a2af072b1f2a4094d9808da11f62c25f0be1d"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-desktop-1440.png",
+      "bytes": 390044,
+      "sha256": "08a1ed10335a82c6046d8a525ba521a4b75019ad6b636614e791f0202c9892e5"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-desktop-1536.png",
+      "bytes": 390443,
+      "sha256": "c4ee805875e8dec04146de786d307c6dfc73b2f34ea8aec29b54cc2bff0f9183"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-mobile-390.png",
+      "bytes": 398642,
+      "sha256": "3e96ea4e24e822df18e67ca86ca9b528f259d14a5dab27a44839ec6236eb8136"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-reference-width-864.png",
+      "bytes": 415219,
+      "sha256": "e746744e3c48e12291246230d5d4f12b188b9f891ea7d3d7566d430c201a9842"
+    },
+    {
+      "path": "tests/visual/d31/__screenshots__/supervisor-body-tablet-1024.png",
+      "bytes": 415756,
+      "sha256": "a4aeca2d3eac8f20d947bc78624d44ee9bd362d820e781863ca6ff02416a2973"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-bundle-preview-overlay-50.png",
+      "bytes": 1201241,
+      "sha256": "3e5be8a4f17804a1ebb9da2d5bfa45188c1e47a41d599e11ba62040d26c9fe72"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-full-page.png",
+      "bytes": 475960,
+      "sha256": "54cd15cbe7ea5a305762edff090c37de4745615ef243a31fe2b5cb65428dd155"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-normalized-to-bundle-preview.png",
+      "bytes": 758928,
+      "sha256": "6ddff005918492a721a469681c6cfebc9980521d3b181ec2f1629b14cb97767b"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-current-normalized-to-design.png",
+      "bytes": 390914,
+      "sha256": "6e4b2e0261f968c40d9a4bc154f1085e629a1a0398b8fab97f6ab4201a8b3dda"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-visual-comparison/supervisor-design-overlay-50.png",
+      "bytes": 1577411,
+      "sha256": "7407985f5ef66541a20e3fcc8be5fb285248e198d1a9a7ed0d3fb84751f5d60e"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/README.md",
+      "bytes": 2510,
+      "sha256": "827c5d4e3e268ae648989b53f45282f381c87a9cb01848728beb9f282cd391d8"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/SUPERVISOR-DASHBOARD-SPEC.md",
+      "bytes": 2662,
+      "sha256": "4b6296fc9b30ac2092086a0fb147347612ee7cd1bfb71e51c121a15989192845"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/SupervisorDashboard.tsx.txt",
+      "bytes": 25847,
+      "sha256": "340079b66eb789bff368fa6f6bfe02fa965803d6b3a75b62914b7251b444106e"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/implementation-preview.png",
+      "bytes": 479352,
+      "sha256": "3587424a66b54c147d12b490a2dcdc52d33d059a6acad2685f50cfb013a55088"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/supervisor-dashboard-data.ts.txt",
+      "bytes": 10910,
+      "sha256": "720c41385b4de848dc71c2fc41958a01d2890011177be98360f9d33170194718"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/supervisor-dashboard-design.png",
+      "bytes": 1853086,
+      "sha256": "10d6c51289bb10f8bbf9ad804ff5bc7fb42cc537d8f4cd5accf61b662fb38ab0"
+    },
+    {
+      "path": "docs/demo-engine-base/d31-dashboard-redesign/supervisor-reference-source/supervisor-dashboard.css.txt",
+      "bytes": 41401,
+      "sha256": "38d08cf834e85a7bb9a232c5f470cb400e2a7c31056cc6aa7cdd92ac79744bf3"
+    }
+  ]
+}
