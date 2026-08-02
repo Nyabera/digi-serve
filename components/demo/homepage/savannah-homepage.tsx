@@ -423,7 +423,7 @@ export function SavannahHomepage() {
                   type="button"
                   aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                   aria-expanded={mobileMenuOpen}
-                  aria-controls="savannah-mobile-navigation"
+                  aria-controls={mobileMenuOpen ? "savannah-mobile-navigation" : undefined}
                   onClick={() => setMobileMenuOpen((current) => !current)}
                 >
                   {mobileMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -496,7 +496,7 @@ export function SavannahHomepage() {
                     placeholder="Search transcripts, clearance, attachment letters, fees…"
                     autoComplete="off"
                     aria-expanded={searchOpen}
-                    aria-controls="savannah-search-results"
+                    aria-controls={searchOpen ? "savannah-search-results" : undefined}
                     onFocus={() => setSearchOpen(true)}
                     onChange={(event) => {
                       setQuery(event.target.value);

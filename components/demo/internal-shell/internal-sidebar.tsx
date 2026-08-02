@@ -51,6 +51,9 @@ export function InternalSidebar({
       <button
         type="button"
         aria-label="Close navigation"
+        aria-hidden={!mobileOpen}
+        disabled={!mobileOpen}
+        tabIndex={mobileOpen ? 0 : -1}
         onClick={onMobileClose}
         className={`${styles.drawerBackdrop} ${
           mobileOpen

@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import type {
   ApplicationPrompt,
@@ -641,6 +645,19 @@ export function ServiceTrackingWorkspace({
     workflow.currentStageIndex,
   );
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const workspace = document.querySelector<HTMLElement>(
+      '[data-track-request-ui="service-workflow"]',
+    );
+
+    workspace
+      ?.querySelectorAll<SVGElement>(".recharts-surface")
+      .forEach((surface) => {
+        surface.setAttribute("tabindex", "-1");
+        surface.setAttribute("focusable", "false");
+      });
+  }, [stageIndex]);
 
   const completed = stageIndex >= workflow.stages.length;
   const progress = completed

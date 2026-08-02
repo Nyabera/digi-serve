@@ -464,6 +464,8 @@ export function AdminDashboardHighFidelity({
       className="admin-dashboard admin-dashboard--embedded"
       data-dashboard-role="admin"
       data-dashboard-version="d31-admin-zones-v1"
+      role="main"
+      aria-label="Institution administrator dashboard"
     >
       <div className="adm-dashboard-body">
         <h1 className="adm-sr-only">Institution administrator dashboard</h1>
