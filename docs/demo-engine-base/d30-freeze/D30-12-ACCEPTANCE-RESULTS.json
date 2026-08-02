@@ -1,0 +1,392 @@
+{
+  "stage": "D30-12",
+  "routeManifest": {
+    "pageFiles": 46,
+    "resolvedRoutes": 43,
+    "unresolvedDynamicRoutes": 3,
+    "registryBackedRoutes": 20
+  },
+  "routeCoverage": {
+    "expected": 43,
+    "recorded": 43,
+    "passed": 43,
+    "missing": [],
+    "failed": []
+  },
+  "journeys": {
+    "publicHome": true,
+    "verification": true,
+    "applicantTracking": true,
+    "applicantProfile": true,
+    "applicantDocuments": true,
+    "officerHome": true,
+    "officerDocuments": true,
+    "officerSla": true,
+    "supervisorHome": true,
+    "adminHome": true,
+    "adminWorkflows": true,
+    "adminBuilder": true,
+    "referral": true,
+    "reports": true
+  },
+  "playwright": {
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "unknown": 0
+  },
+  "status": "passed",
+  "tests": [
+    {
+      "title": "required D30 journeys are represented in the route manifest",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/admin",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/admin/workflows",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/admin/workflows/builder",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/applicant",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/applicant/documents",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/applicant/profile",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/apply/certificate-replacement",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/apply/class-registration",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/apply/course-application",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/apply/industrial-attachment-letter",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/apply/student-clearance",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/department",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/documents",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/queue",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/reports/sla",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/requests/STC-CL-2026-0027",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/sla",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/sla-monitor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/officer/tasks",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/outcomes/STC-CL-2026-0027",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/reports",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/requests/STC-CL-2026-0027/confirmation",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/services/certificate-replacement",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/services/class-registration",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/services/course-application",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/services/industrial-attachment-letter",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/services/student-clearance",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/sign-up",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor/approvals/STC-CL-2026-0027",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor/audit",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor/audit-trail",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor/sla",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/supervisor/sla-monitor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/ATTACH-2026-0088",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/CERT-2026-0061",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/CLASS-2026-0109",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/CLEAR-2026-0042",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/COURSE-2026-01482",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/track/STC-CL-2026-0027",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "route loads: /demo/verify-certificate",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "role navigation keeps Applicant, Officer, Supervisor and Admin routes distinct",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "workflow builder route exposes working controls",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "referral journey opens for the seeded request",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "SLA routes render chart or progress evidence",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "report routes load from Demo configuration",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    },
+    {
+      "title": "Reset demo clears mutated presentation state and restores configured defaults",
+      "status": "passed",
+      "rawStatus": "expected",
+      "resultStatus": "passed",
+      "file": "demo-route-acceptance.pw.ts"
+    }
+  ]
+}

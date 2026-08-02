@@ -152,3 +152,19 @@
 - [ ] Git whitespace validation passes
 - [ ] freeze verification report is generated
 - [ ] complete Demo journeys are manually reviewed
+
+## D30-12 complete route acceptance
+
+- [x] generated route manifest covers every resolvable `app/demo` page
+- [x] public route acceptance passes
+- [x] Applicant route acceptance passes
+- [x] Officer route acceptance passes
+- [x] Supervisor route acceptance passes
+- [x] Admin route acceptance passes
+- [x] workflow builder acceptance passes
+- [x] referral acceptance passes
+- [x] SLA acceptance passes
+- [x] reports acceptance passes
+- [x] reset acceptance passes
+- [x] route evidence screenshots are recorded
+- [x] D31 master freeze remains intact
