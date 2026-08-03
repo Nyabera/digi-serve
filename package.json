@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "demo:validate": "node scripts/validate-demo-pack.mjs",
     "demo:validate:test": "node scripts/test-demo-pack-validator.mjs",
     "test:visual:officer": "playwright test --config=playwright.d31.config.ts tests/visual/d31/officer-dashboard.pw.ts",
