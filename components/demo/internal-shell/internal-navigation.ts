@@ -1,5 +1,4 @@
 import {
-  Files,
   BarChart3,
   Bell,
   Building2,
@@ -13,7 +12,6 @@ import {
   LayoutDashboard,
   ListChecks,
   LogOut,
-  MessageSquareText,
   Settings,
   ShieldCheck,
   StickyNote,
@@ -21,6 +19,10 @@ import {
   UsersRound,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+
+import {
+  OFFICER_NAVIGATION_CONTRACT,
+} from "../../../features/demo-engine/navigation/officer-navigation-contract";
 
 export type InternalShellRole =
   | "APPLICANT"
@@ -30,11 +32,15 @@ export type InternalShellRole =
   | "ADMIN";
 
 export type InternalNavigationItem = {
+  readonly id?: string;
+  readonly kind?: "route" | "action";
   readonly label: string;
-  readonly href: string;
+  readonly href?: string;
+  readonly action?: "logout";
   readonly icon: LucideIcon;
   readonly exact?: boolean;
   readonly activePrefixes?: readonly string[];
+  readonly legacyAliases?: readonly string[];
   readonly badge?: string;
 };
 
@@ -97,117 +103,30 @@ const applicantNavigation: readonly InternalNavigationGroup[] = [
   account("/demo"),
 ];
 
-const officerNavigation: readonly InternalNavigationGroup[] = [
-  {
-    label: "Operations",
-    items: [
-      {
-        label: "Dashboard",
-        href: "/demo/officer",
-        icon: LayoutDashboard,
-        exact: true,
-      },
-      { label: "My tasks", href: "/demo/officer/tasks", icon: ListChecks },
-      {
-        label: "Documents Hub",
-        href: "/demo/officer/documents",
-        icon: Files,
-      },
-      {
-        label: "Application queue",
-        href: "/demo/officer#application-queue",
-        icon: ClipboardCheck,
-        activePrefixes: ["/demo/officer/requests/"],
-        badge: "4",
-      },
-    ],
-  },
-  {
-    label: "Workflow",
-    items: [
-      { label: "Workflow inbox", href: "/demo/department", icon: Inbox },
-      {
-        label: "Approval queue",
-        href: "/demo/officer#approval-queue",
-        icon: ShieldCheck,
-      },
-      {
-        label: "Returned to applicant",
-        href: "/demo/officer#returned-to-applicant",
-        icon: Clock3,
-      },
-      {
-        label: "Shared workflows",
-        href: "/demo/department",
-        icon: UsersRound,
-      },
-      {
-        label: "Review invitations",
-        href: "/demo/officer#review-invitations",
-        icon: Bell,
-      },
-      {
-        label: "Ask for feedback",
-        href: "/demo/officer#feedback",
-        icon: MessageSquareText,
-      },
-    ],
-  },
-  {
-    label: "Documents",
-    items: [
-      {
-        label: "Document review",
-        href: "/demo/officer/requests/REQ-DEMO-001",
-        icon: FileText,
-      },
-      {
-        label: "Uploaded documents",
-        href: "/demo/officer#uploaded-documents",
-        icon: FileText,
-      },
-      {
-        label: "Generated PDFs",
-        href: "/demo/officer#generated-pdfs",
-        icon: FileCheck2,
-      },
-      {
-        label: "Issued documents",
-        href: "/demo/outcomes/REQ-DEMO-001",
-        icon: FileCheck2,
-      },
-    ],
-  },
-  {
-    label: "SLA",
-    items: [
-      { label: "SLA monitor", href: "/demo/officer/sla-monitor", icon: Clock3 },
-      { label: "Due soon tasks", href: "/demo/officer#due-soon", icon: Clock3 },
-      { label: "Overdue tasks", href: "/demo/officer#overdue", icon: Clock3 },
-    ],
-  },
-  {
-    label: "Communication",
-    items: [
-      {
-        label: "Applicant messages",
-        href: "/demo/officer#applicant-messages",
-        icon: MessageSquareText,
-      },
-      {
-        label: "Internal notes",
-        href: "/demo/officer/requests/REQ-DEMO-001",
-        icon: StickyNote,
-      },
-      {
-        label: "Notification log",
-        href: "/demo/officer#notification-log",
-        icon: Bell,
-      },
-    ],
-  },
-  account("/demo/officer"),
-];
+const officerNavigation: readonly InternalNavigationGroup[] =
+  OFFICER_NAVIGATION_CONTRACT.map((group) => ({
+    label: group.label,
+    items: group.items.map((item) =>
+      item.kind === "route"
+        ? {
+            id: item.id,
+            kind: item.kind,
+            label: item.label,
+            href: item.href,
+            icon: item.icon,
+            exact: item.exactMatch,
+            activePrefixes: item.activePrefixes,
+            legacyAliases: item.legacyAliases,
+          }
+        : {
+            id: item.id,
+            kind: item.kind,
+            action: item.action,
+            label: item.label,
+            icon: item.icon,
+          },
+    ),
+  }));
 
 const departmentNavigation: readonly InternalNavigationGroup[] = [
   {
@@ -484,6 +403,7 @@ export function isInternalNavigationItemActive({
   readonly pathname: string;
   readonly item: InternalNavigationItem;
 }): boolean {
+  if (!item.href || item.kind === "action") return false;
   if (item.href.includes("#")) return false;
 
   const itemPath = hrefPath(item.href);
@@ -492,8 +412,7 @@ export function isInternalNavigationItemActive({
   if (pathname === itemPath) return true;
 
   return Boolean(
-    item.activePrefixes?.some((prefix) =>
-      pathname.startsWith(prefix),
-    ),
+    item.activePrefixes?.some((prefix) => pathname.startsWith(prefix)) ||
+      item.legacyAliases?.includes(pathname),
   );
 }

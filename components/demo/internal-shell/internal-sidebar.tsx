@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { PanelLeftClose, X } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   getInternalNavigation,
@@ -44,7 +44,13 @@ export function InternalSidebar({
   onMobileClose,
 }: InternalSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const navigation = getInternalNavigation(role);
+
+  function handleDemoLogout() {
+    onMobileClose();
+    router.push("/demo");
+  }
 
   return (
     <>
@@ -137,6 +143,35 @@ export function InternalSidebar({
                       item,
                     });
                   const Icon = item.icon;
+
+                  if (item.kind === "action") {
+                    return (
+                      <button
+                        key={`${group.label}-${item.label}`}
+                        type="button"
+                        title={
+                          collapsed
+                            ? item.label
+                            : undefined
+                        }
+                        onClick={handleDemoLogout}
+                        className="nav-item"
+                      >
+                        <Icon
+                          aria-hidden="true"
+                          className="nav-item-icon"
+                        />
+
+                        <span className="nav-item-label">
+                          {item.label}
+                        </span>
+                      </button>
+                    );
+                  }
+
+                  if (!item.href) {
+                    return null;
+                  }
 
                   return (
                     <Link
