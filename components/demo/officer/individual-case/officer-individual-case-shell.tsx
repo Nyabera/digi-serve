@@ -15,7 +15,10 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import { OFFICER_ROUTE_HREFS } from "@/features/demo-engine/navigation/officer-navigation-contract";
+import {
+  getOfficerRequestReferralHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import styles from "./officer-individual-case.module.css";
 
@@ -155,10 +158,9 @@ export function OfficerIndividualCaseWorkspace({
     },
   ]);
 
-  const referralHref =
-    `/demo/officer/requests/${encodeURIComponent(
-      normalizedRequestId,
-    )}?view=refer`;
+  const referralHref = getOfficerRequestReferralHref(
+    normalizedRequestId,
+  );
 
   function addActivity(
     label: string,

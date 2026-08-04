@@ -18,6 +18,8 @@ import {
   Mail,
 } from "lucide-react";
 
+import { OFFICER_ROUTE_HREFS } from "@/features/demo-engine/navigation/officer-navigation-contract";
+
 import type {
   DashboardSemanticTone,
   OfficerActionRequiredItem,
@@ -176,7 +178,7 @@ function RecentHandoffs({
       <PanelHeader
         action={
           <InlineAction
-            href="/demo/officer/department-inbox"
+            href={OFFICER_ROUTE_HREFS.sharedWork}
             label="View all"
           />
         }
@@ -280,7 +282,7 @@ function RecentActivity({
       <DashboardSectionHeading
         action={
           <InlineAction
-            href="/demo/officer"
+            href={OFFICER_ROUTE_HREFS.queue}
             label="View all activity"
           />
         }

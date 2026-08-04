@@ -1,4 +1,5 @@
 import {
+  isOfficerRoutePath,
   OFFICER_NON_NAVIGATION_ROUTES,
   OFFICER_ROUTE_HREFS,
 } from "./officer-navigation-contract";
@@ -86,7 +87,7 @@ export function resolveDemoRoleFromPath(
     return "supervisor";
   }
 
-  if (matchesPrefix(normalized, "/demo/officer")) {
+  if (isOfficerRoutePath(normalized)) {
     return "officer";
   }
 

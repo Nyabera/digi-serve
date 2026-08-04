@@ -11,6 +11,8 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { isOfficerRoutePath } from "@/features/demo-engine/navigation/officer-navigation-contract";
+
 export type DemoWorkspaceRole =
   | "APPLICANT"
   | "OFFICER"
@@ -58,7 +60,7 @@ function fallbackRole(
   }
 
   if (
-    pathname.startsWith("/demo/officer") ||
+    isOfficerRoutePath(pathname) ||
     pathname.startsWith("/demo/department")
   ) {
     return "OFFICER";
@@ -88,7 +90,7 @@ function roleFromLocation(
       : "SUPERVISOR";
   }
 
-  if (pathname.startsWith("/demo/officer")) {
+  if (isOfficerRoutePath(pathname)) {
     return "OFFICER";
   }
 

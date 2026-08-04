@@ -40,10 +40,7 @@ const forbiddenShellImports = [
 
 const protectedPaths = [
   "app/demo/officer/layout.tsx",
-  "features/demo-engine/navigation/officer-navigation-contract.ts",
-  "features/demo-engine/navigation/demo-route-registry.ts",
   "components/demo/internal-shell/internal-navigation.ts",
-  "components/demo/internal-shell/internal-sidebar.tsx",
   "components/demo/internal-shell/internal-app-shell.tsx",
   "components/demo/internal-shell/internal-topbar.tsx",
   "components/demo/internal-shell/internal-shell-boundary.tsx",

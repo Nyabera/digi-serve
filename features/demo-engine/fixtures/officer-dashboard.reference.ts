@@ -1,4 +1,8 @@
 import type { OfficerDashboardModel } from "../../officer-dashboard/model/officer-dashboard-model";
+import {
+  getOfficerRequestHref,
+  OFFICER_ROUTE_HREFS,
+} from "../navigation/officer-navigation-contract";
 
 /**
  * Immutable fixture for D29R-3P screenshot parity.
@@ -19,7 +23,7 @@ export const officerDashboardReference = {
       icon: "clipboard",
       action: {
         label: "View my queue",
-        href: "/demo/officer#queue",
+        href: OFFICER_ROUTE_HREFS.queue,
       },
     },
     {
@@ -30,7 +34,7 @@ export const officerDashboardReference = {
       icon: "calendar",
       action: {
         label: "View due today",
-        href: "/demo/officer#queue",
+        href: OFFICER_ROUTE_HREFS.tasks,
       },
     },
     {
@@ -41,7 +45,7 @@ export const officerDashboardReference = {
       icon: "clock",
       action: {
         label: "View overdue",
-        href: "/demo/officer#queue",
+        href: OFFICER_ROUTE_HREFS.overdueTasks,
       },
     },
     {
@@ -53,7 +57,7 @@ export const officerDashboardReference = {
       action: {
         label: "View all",
         ariaLabel: "View all requests waiting on an applicant",
-        href: "/demo/officer#queue",
+        href: OFFICER_ROUTE_HREFS.returnedToApplicant,
       },
     },
     {
@@ -65,7 +69,7 @@ export const officerDashboardReference = {
       action: {
         label: "View all",
         ariaLabel: "View all requests waiting on a department",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.workflowInbox,
       },
     },
     {
@@ -76,19 +80,19 @@ export const officerDashboardReference = {
       icon: "completed",
       action: {
         label: "View report",
-        href: "/demo/reports",
+        href: OFFICER_ROUTE_HREFS.issuedDocuments,
       },
     },
   ],
 
   queue: {
     totalAssigned: 18,
-    fullQueueHref: "/demo/officer#queue",
+    fullQueueHref: OFFICER_ROUTE_HREFS.queue,
     rows: [
       {
         requestId: "REQ-2026-0715",
         requestTitle: "Transcript Request",
-        requestHref: "/demo/officer/requests/REQ-DEMO-001",
+        requestHref: getOfficerRequestHref("REQ-2026-0715"),
         requestIcon: "document",
         requestTone: "purple",
         applicantName: "Brian Otieno",
@@ -103,7 +107,7 @@ export const officerDashboardReference = {
       {
         requestId: "REQ-2026-0718",
         requestTitle: "Certificate Replacement",
-        requestHref: "/demo/officer/requests/REQ-DEMO-002",
+        requestHref: getOfficerRequestHref("REQ-2026-0718"),
         requestIcon: "document",
         requestTone: "orange",
         applicantName: "Mercy Akinyi",
@@ -118,7 +122,7 @@ export const officerDashboardReference = {
       {
         requestId: "REQ-2026-0722",
         requestTitle: "Clearance Letter",
-        requestHref: "/demo/officer/requests/REQ-DEMO-003",
+        requestHref: getOfficerRequestHref("REQ-2026-0722"),
         requestIcon: "shield",
         requestTone: "green",
         applicantName: "Kevin Mwangi",
@@ -133,7 +137,7 @@ export const officerDashboardReference = {
       {
         requestId: "REQ-2026-0726",
         requestTitle: "Grade Review",
-        requestHref: "/demo/officer/requests/REQ-DEMO-004",
+        requestHref: getOfficerRequestHref("REQ-2026-0726"),
         requestIcon: "document",
         requestTone: "blue",
         applicantName: "Linda Njeri",
@@ -148,7 +152,7 @@ export const officerDashboardReference = {
       {
         requestId: "REQ-2026-0728",
         requestTitle: "Course Registration",
-        requestHref: "/demo/officer/requests/REQ-DEMO-005",
+        requestHref: getOfficerRequestHref("REQ-2026-0728"),
         requestIcon: "document",
         requestTone: "orange",
         applicantName: "Daniel Kiptoo",
@@ -164,7 +168,7 @@ export const officerDashboardReference = {
   },
 
   handoffs: {
-    allHref: "/demo/department",
+    allHref: OFFICER_ROUTE_HREFS.sharedWork,
     rows: [
       {
         id: "handoff-0709",
@@ -174,7 +178,7 @@ export const officerDashboardReference = {
         dateLabel: "May 12, 2026",
         timeLabel: "9:12 AM",
         direction: "incoming",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
       },
       {
         id: "handoff-0718",
@@ -184,7 +188,7 @@ export const officerDashboardReference = {
         dateLabel: "May 12, 2026",
         timeLabel: "8:45 AM",
         direction: "outgoing",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
       },
       {
         id: "handoff-0703",
@@ -194,7 +198,7 @@ export const officerDashboardReference = {
         dateLabel: "May 12, 2026",
         timeLabel: "8:15 AM",
         direction: "completed",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
       },
       {
         id: "handoff-0711",
@@ -204,7 +208,7 @@ export const officerDashboardReference = {
         dateLabel: "May 11, 2026",
         timeLabel: "4:22 PM",
         direction: "outgoing",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
       },
       {
         id: "handoff-0698",
@@ -214,13 +218,13 @@ export const officerDashboardReference = {
         dateLabel: "May 11, 2026",
         timeLabel: "11:10 AM",
         direction: "completed",
-        href: "/demo/department",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
       },
     ],
   },
 
   messages: {
-    allHref: "/demo/officer#messages",
+    allHref: OFFICER_ROUTE_HREFS.applicantMessages,
     rows: [
       {
         id: "message-brian",
@@ -233,7 +237,7 @@ export const officerDashboardReference = {
         dateLabel: "May 12, 2026",
         timeLabel: "9:35 AM",
         readState: "unread",
-        href: "/demo/officer/requests/REQ-DEMO-001",
+        href: getOfficerRequestHref("REQ-2026-0715"),
       },
       {
         id: "message-mercy",
@@ -246,7 +250,7 @@ export const officerDashboardReference = {
         dateLabel: "May 12, 2026",
         timeLabel: "8:50 AM",
         readState: "unread",
-        href: "/demo/officer/requests/REQ-DEMO-002",
+        href: getOfficerRequestHref("REQ-2026-0718"),
       },
       {
         id: "message-kevin",
@@ -258,7 +262,7 @@ export const officerDashboardReference = {
         dateLabel: "May 11, 2026",
         timeLabel: "3:20 PM",
         readState: "read",
-        href: "/demo/officer/requests/REQ-DEMO-003",
+        href: getOfficerRequestHref("REQ-2026-0722"),
       },
     ],
   },
@@ -277,5 +281,5 @@ export const officerDashboardReference = {
     overdue: 3,
   },
 
-  detailedReportHref: "/demo/officer/sla-monitor",
+  detailedReportHref: OFFICER_ROUTE_HREFS.sla,
 } satisfies OfficerDashboardModel;

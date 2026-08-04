@@ -25,6 +25,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import {
+  getOfficerRequestHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import "./officer-dashboard-reference.css";
 
@@ -211,7 +217,7 @@ const actions = [
   { label: "Clarification received", count: 1, accent: "blue" as Accent, icon: CircleHelp },
   { label: "Decision pending", count: 2, accent: "orange" as Accent, icon: Clock3 },
   { label: "Unread messages", count: 5, accent: "violet" as Accent, icon: Mail },
-];
+] as const;
 
 const chartSeries: Record<string, { labels: string[]; workload: number[]; completions: number[] }> = {
   "Last 7 days": {
@@ -300,7 +306,13 @@ function WorkloadPulse() {
   );
 }
 
-function WorkPlan({ notify }: { notify: (message: string) => void }) {
+function WorkPlan({
+  notify,
+  onNavigate,
+}: {
+  readonly notify: (message: string) => void;
+  readonly onNavigate: (href: string) => void;
+}) {
   const [activeTab, setActiveTab] = useState<PlanTab>("Needs action");
   const selected = useMemo(() => {
     const primary = workItems.filter((item) => item.tab === activeTab);
@@ -366,7 +378,7 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
                   <td data-label="Status"><span className={`status status--${item.accent}`}>{item.status}</span></td>
                   <td data-label="Action">
                     <div className="row-action">
-                      <TextButton onClick={() => notify(`${item.action}: ${item.service}`)}>
+                      <TextButton onClick={() => onNavigate(getOfficerRequestHref(item.requestId))}>
                         {item.action}
                       </TextButton>
                       <button
@@ -389,7 +401,13 @@ function WorkPlan({ notify }: { notify: (message: string) => void }) {
   );
 }
 
-function CaseSignals({ notify }: { notify: (message: string) => void }) {
+function CaseSignals({
+  notify,
+  onNavigate,
+}: {
+  readonly notify: (message: string) => void;
+  readonly onNavigate: (href: string) => void;
+}) {
   const [tab, setTab] = useState<SignalTab>("Messages");
   const items = signalContent[tab];
 
@@ -411,26 +429,30 @@ function CaseSignals({ notify }: { notify: (message: string) => void }) {
               <p>{item.note}</p>
               <small>{index ? "Certificate Replacement   •   REQ-2026-0718" : "Transcript Request   •   REQ-2026-0715"}</small>
             </div>
-            <div className="signal-meta"><time>{index ? "8:50 AM" : "9:35 AM"}</time><TextButton onClick={() => notify(`${tab}: ${item.title}`)}>{tab === "Messages" ? "Reply" : "Open"}</TextButton></div>
+            <div className="signal-meta"><time>{index ? "8:50 AM" : "9:35 AM"}</time><TextButton onClick={() => onNavigate(tab === "Messages" ? OFFICER_ROUTE_HREFS.applicantMessages : getOfficerRequestHref(index ? "REQ-2026-0718" : "REQ-2026-0715"))}>{tab === "Messages" ? "Reply" : "Open"}</TextButton></div>
           </article>
         ))}
         <article className="signal-item signal-item--compact">
           <IconBadge icon={ArrowUp} accent="green" />
           <div className="signal-copy"><div className="signal-heading"><strong>From Admissions Office</strong><i>•</i><span className="tag tag--green">Handoff</span></div><small>Transcript Request   •   REQ-2026-0709</small><p>Please review documents and confirm eligibility.</p></div>
-          <div className="signal-meta"><time>9:12 AM</time><TextButton onClick={() => notify("Opened Admissions handoff")}>View case</TextButton></div>
+          <div className="signal-meta"><time>9:12 AM</time><TextButton onClick={() => onNavigate(OFFICER_ROUTE_HREFS.sharedWork)}>View case</TextButton></div>
         </article>
         <article className="signal-item signal-item--compact">
           <IconBadge icon={ArrowUp} accent="blue" />
           <div className="signal-copy"><div className="signal-heading"><strong>To Finance Office</strong><i>•</i><span className="tag tag--blue">Handoff sent</span></div><small>Certificate Replacement   •   REQ-2026-0718</small><p>Sent for payment verification.</p></div>
-          <div className="signal-meta"><time>Yesterday</time><TextButton onClick={() => notify("Opened Finance handoff")}>View handoff</TextButton></div>
+          <div className="signal-meta"><time>Yesterday</time><TextButton onClick={() => onNavigate(OFFICER_ROUTE_HREFS.sharedWork)}>View handoff</TextButton></div>
         </article>
       </div>
-      <TextButton className="view-all" onClick={() => notify("Opened all messages and handoffs")}>View all messages and handoffs <ArrowRight /></TextButton>
+      <TextButton className="view-all" onClick={() => onNavigate(OFFICER_ROUTE_HREFS.workflowInbox)}>View all messages and handoffs <ArrowRight /></TextButton>
     </section>
   );
 }
 
-function RecentHandoffs({ notify }: { notify: (message: string) => void }) {
+function RecentHandoffs({
+  onNavigate,
+}: {
+  readonly onNavigate: (href: string) => void;
+}) {
   const items = [
     { title: "From Admissions Office", meta: "Transcript Request   •   REQ-2026-0709", time: "9:12 AM", icon: ArrowDown, accent: "green" as Accent },
     { title: "To Finance Office", meta: "Certificate Replacement   •   REQ-2026-0718", time: "8:45 AM", icon: ArrowUp, accent: "blue" as Accent },
@@ -438,10 +460,10 @@ function RecentHandoffs({ notify }: { notify: (message: string) => void }) {
   ];
   return (
     <section className="card handoffs-card" aria-labelledby="handoffs-title">
-      <div className="card-heading-row"><h2 id="handoffs-title">Recent handoffs</h2><TextButton onClick={() => notify("Opened all handoffs")}>View all <ArrowRight /></TextButton></div>
+      <div className="card-heading-row"><h2 id="handoffs-title">Recent handoffs</h2><TextButton onClick={() => onNavigate(OFFICER_ROUTE_HREFS.sharedWork)}>View all <ArrowRight /></TextButton></div>
       <div className="handoff-list">
         {items.map((item) => (
-          <button className="handoff-item" type="button" key={item.title} onClick={() => notify(item.title)}>
+          <button className="handoff-item" type="button" key={item.title} onClick={() => onNavigate(OFFICER_ROUTE_HREFS.sharedWork)}>
             <IconBadge icon={item.icon} accent={item.accent} />
             <span><strong>{item.title}</strong><small>{item.meta}</small></span>
             <time>{item.time}</time>
@@ -468,7 +490,11 @@ function RecentActivity({ notify }: { notify: (message: string) => void }) {
   );
 }
 
-function UpNext({ notify }: { notify: (message: string) => void }) {
+function UpNext({
+  onNavigate,
+}: {
+  readonly onNavigate: (href: string) => void;
+}) {
   return (
     <section className="card bottom-card up-next-card" aria-labelledby="up-next-title">
       <h2 id="up-next-title">Up Next</h2>
@@ -478,7 +504,7 @@ function UpNext({ notify }: { notify: (message: string) => void }) {
             <IconBadge icon={item.icon} accent={item.accent} small />
             <span><strong>{item.service}</strong><small>{item.id}</small></span>
             <em className={`sla-text--${item.accent}`}>{item.due}</em>
-            <TextButton onClick={() => notify(`Opened ${item.service}`)}>Open</TextButton>
+            <TextButton onClick={() => onNavigate(getOfficerRequestHref(item.id))}>Open</TextButton>
           </article>
         ))}
       </div>
@@ -486,13 +512,25 @@ function UpNext({ notify }: { notify: (message: string) => void }) {
   );
 }
 
-function ActionRequired({ notify }: { notify: (message: string) => void }) {
+function ActionRequired({
+  onNavigate,
+}: {
+  readonly onNavigate: (href: string) => void;
+}) {
+  const actionHrefByLabel = {
+    "Documents awaiting review": OFFICER_ROUTE_HREFS.documentReview,
+    "Referral acceptance": OFFICER_ROUTE_HREFS.sharedWork,
+    "Clarification received": OFFICER_ROUTE_HREFS.returnedToApplicant,
+    "Decision pending": OFFICER_ROUTE_HREFS.approvalQueue,
+    "Unread messages": OFFICER_ROUTE_HREFS.applicantMessages,
+  } as const;
+
   return (
     <section className="card bottom-card action-card" aria-labelledby="action-title">
       <h2 id="action-title">Action Required</h2>
       <div className="action-list">
         {actions.map((item) => (
-          <button type="button" className="action-item" key={item.label} onClick={() => notify(item.label)}>
+          <button type="button" className="action-item" key={item.label} onClick={() => onNavigate(actionHrefByLabel[item.label])}>
             <item.icon className={`line-icon line-icon--${item.accent}`} strokeWidth={2.15} />
             <span>{item.label}</span><b className={`count count--${item.accent}`}>{item.count}</b><ChevronRight />
           </button>
@@ -519,7 +557,11 @@ function RhythmChart({ period }: { period: string }) {
   );
 }
 
-function MyRhythm({ notify }: { notify: (message: string) => void }) {
+function MyRhythm({
+  onNavigate,
+}: {
+  readonly onNavigate: (href: string) => void;
+}) {
   const [period, setPeriod] = useState("Last 7 days");
   return (
     <section className="card bottom-card rhythm-card" aria-labelledby="rhythm-title">
@@ -529,7 +571,7 @@ function MyRhythm({ notify }: { notify: (message: string) => void }) {
         <RhythmChart period={period} />
         <div className="sla-summary">
           <div className="sla-ring"><div><strong>92%</strong><span>SLA on time</span></div></div>
-          <TextButton onClick={() => notify("Opened SLA details")}>View details <ArrowRight /></TextButton>
+          <TextButton onClick={() => onNavigate(OFFICER_ROUTE_HREFS.sla)}>View details <ArrowRight /></TextButton>
         </div>
       </div>
     </section>
@@ -540,6 +582,7 @@ export default function OfficerDashboardHighFidelity({
   embedded = true,
   todayLabel,
 }: OfficerDashboardProps) {
+  const router = useRouter();
   const resolvedTodayLabel = todayLabel ?? formatDashboardDate(new Date());
   const [toast, setToast] = useState("");
   const notify = (message: string) => {
@@ -563,15 +606,15 @@ export default function OfficerDashboardHighFidelity({
         </header>
 
         <div className="dashboard-top-grid">
-          <div className="dashboard-left-column"><WorkloadPulse /><WorkPlan notify={notify} /></div>
-          <aside className="dashboard-right-column"><CaseSignals notify={notify} /><RecentHandoffs notify={notify} /></aside>
+          <div className="dashboard-left-column"><WorkloadPulse /><WorkPlan notify={notify} onNavigate={(href) => router.push(href)} /></div>
+          <aside className="dashboard-right-column"><CaseSignals notify={notify} onNavigate={(href) => router.push(href)} /><RecentHandoffs onNavigate={(href) => router.push(href)} /></aside>
         </div>
 
         <div className="dashboard-bottom-grid">
           <RecentActivity notify={notify} />
-          <UpNext notify={notify} />
-          <ActionRequired notify={notify} />
-          <MyRhythm notify={notify} />
+          <UpNext onNavigate={(href) => router.push(href)} />
+          <ActionRequired onNavigate={(href) => router.push(href)} />
+          <MyRhythm onNavigate={(href) => router.push(href)} />
         </div>
       </div>
       <div className={`dashboard-toast${toast ? " is-visible" : ""}`} role="status" aria-live="polite"><Check />{toast}</div>

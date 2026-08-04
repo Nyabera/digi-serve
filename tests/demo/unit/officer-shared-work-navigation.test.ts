@@ -131,7 +131,7 @@ describe("D32-3A Shared Work navigation amendment", () => {
     expect(bodySource).toContain("Shared with you");
     expect(bodySource).toContain("Shared by you");
     expect(bodySource).toContain("Open request");
-    expect(bodySource).toContain("/demo/officer/requests/");
+    expect(bodySource).toContain("getOfficerRequestHref");
     expect(bodySource).not.toMatch(/coming soon|work in progress|todo/i);
   });
 });

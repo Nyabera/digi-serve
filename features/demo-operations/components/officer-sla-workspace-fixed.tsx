@@ -15,6 +15,10 @@ import {
 } from "recharts";
 
 import { OFFICER_TASKS } from "../fixtures/operational-data";
+import {
+  getOfficerRequestHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";
 import styles from "./officer-sla-workspace-fixed.module.css";
 
 const RANGE_DATA = {
@@ -151,7 +155,7 @@ export function OfficerSlaWorkspaceFixed() {
           <p>Track your personal SLA performance and assigned tasks over time.</p>
         </div>
         <div className={styles.headerActions}>
-          <Link href="/demo/officer/tasks">Open my tasks</Link>
+          <Link href={OFFICER_ROUTE_HREFS.tasks}>Open my tasks</Link>
           <button onClick={exportCsv} type="button">Export CSV</button>
         </div>
       </header>
@@ -258,7 +262,7 @@ export function OfficerSlaWorkspaceFixed() {
               {overdueTasks.map((task) => (
                 <tr key={task.id}>
                   <td>{task.id}</td><td>{task.service}</td><td>{task.step}</td><td>{task.overdue}</td><td>{task.due}</td>
-                  <td><Link href={`/demo/officer/requests/${task.id}`}>View</Link></td>
+                  <td><Link href={getOfficerRequestHref(task.id)}>View</Link></td>
                 </tr>
               ))}
             </tbody>

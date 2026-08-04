@@ -46,6 +46,8 @@ export const OFFICER_ROUTE_KEYS = [
 export type OfficerRouteKey = (typeof OFFICER_ROUTE_KEYS)[number];
 
 export type OfficerCanonicalHref = `/demo/officer${string}`;
+export type OfficerRequestHref = `/demo/officer/requests/${string}`;
+export type OfficerRequestReferralHref = `${OfficerRequestHref}?view=refer`;
 
 export const OFFICER_ROUTE_HREFS = {
   home: "/demo/officer",
@@ -64,6 +66,28 @@ export const OFFICER_ROUTE_HREFS = {
   applicantMessages: "/demo/officer/communications/applicant",
   internalNotes: "/demo/officer/communications/internal",
 } as const satisfies Readonly<Record<OfficerRouteKey, OfficerCanonicalHref>>;
+
+export function isOfficerRoutePath(pathname: string): boolean {
+  const path = pathname.split(/[?#]/, 1)[0] ?? pathname;
+  const normalized = path.replace(/\/+$/, "") || "/";
+
+  return (
+    normalized === OFFICER_ROUTE_HREFS.home ||
+    normalized.startsWith(`${OFFICER_ROUTE_HREFS.home}/`)
+  );
+}
+
+export function getOfficerRequestHref(
+  requestId: string,
+): OfficerRequestHref {
+  return `${OFFICER_ROUTE_HREFS.home}/requests/${encodeURIComponent(requestId)}`;
+}
+
+export function getOfficerRequestReferralHref(
+  requestId: string,
+): OfficerRequestReferralHref {
+  return `${getOfficerRequestHref(requestId)}?view=refer`;
+}
 
 /**
  * Existing officer-owned routes that are not canonical navigation

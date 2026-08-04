@@ -66,30 +66,30 @@ type DepartmentOption = { readonly id: string; readonly name: string };
 type UnknownRecord = Record<string, unknown>;
 
 const fallbackQueue: readonly OfficerQueueRow[] = [
-  { id: "REQ-DEMO-001", applicantName: "Grace Wanjiku", serviceName: "Transcript Request", status: "Submitted", statusTone: "info", departmentName: "Student Records", submittedLabel: "Today, 10:24", dueLabel: "Due today", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-001" },
-  { id: "REQ-DEMO-002", applicantName: "Brian Otieno", serviceName: "Student Clearance", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "Yesterday, 15:42", dueLabel: "Due tomorrow", priority: "MEDIUM", href: "/demo/officer/requests/REQ-DEMO-002" },
-  { id: "REQ-DEMO-003", applicantName: "Amina Hassan", serviceName: "Certificate Replacement", status: "Waiting on department", statusTone: "warning", departmentName: "Finance", submittedLabel: "Yesterday, 09:18", dueLabel: "2 days remaining", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-003" },
-  { id: "REQ-DEMO-004", applicantName: "Daniel Kamau", serviceName: "Transcript Request", status: "Completed", statusTone: "success", departmentName: "Student Records", submittedLabel: "18 Jul, 14:06", dueLabel: "Completed today", priority: "LOW", href: "/demo/officer/requests/REQ-DEMO-004" },
-  { id: "REQ-DEMO-005", applicantName: "Mercy Njeri", serviceName: "Student Clearance", status: "Waiting on applicant", statusTone: "warning", departmentName: "Student Records", submittedLabel: "17 Jul, 11:38", dueLabel: "Overdue by 1 day", priority: "CRITICAL", href: "/demo/officer/requests/REQ-DEMO-005" },
-  { id: "REQ-DEMO-006", applicantName: "Kelvin Mutiso", serviceName: "Transcript Request", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "16 Jul, 08:52", dueLabel: "Due today", priority: "MEDIUM", href: "/demo/officer/requests/REQ-DEMO-006" },
+  { id: "REQ-DEMO-001", applicantName: "Grace Wanjiku", serviceName: "Transcript Request", status: "Submitted", statusTone: "info", departmentName: "Student Records", submittedLabel: "Today, 10:24", dueLabel: "Due today", priority: "HIGH", href: getOfficerRequestHref("REQ-DEMO-001") },
+  { id: "REQ-DEMO-002", applicantName: "Brian Otieno", serviceName: "Student Clearance", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "Yesterday, 15:42", dueLabel: "Due tomorrow", priority: "MEDIUM", href: getOfficerRequestHref("REQ-DEMO-002") },
+  { id: "REQ-DEMO-003", applicantName: "Amina Hassan", serviceName: "Certificate Replacement", status: "Waiting on department", statusTone: "warning", departmentName: "Finance", submittedLabel: "Yesterday, 09:18", dueLabel: "2 days remaining", priority: "HIGH", href: getOfficerRequestHref("REQ-DEMO-003") },
+  { id: "REQ-DEMO-004", applicantName: "Daniel Kamau", serviceName: "Transcript Request", status: "Completed", statusTone: "success", departmentName: "Student Records", submittedLabel: "18 Jul, 14:06", dueLabel: "Completed today", priority: "LOW", href: getOfficerRequestHref("REQ-DEMO-004") },
+  { id: "REQ-DEMO-005", applicantName: "Mercy Njeri", serviceName: "Student Clearance", status: "Waiting on applicant", statusTone: "warning", departmentName: "Student Records", submittedLabel: "17 Jul, 11:38", dueLabel: "Overdue by 1 day", priority: "CRITICAL", href: getOfficerRequestHref("REQ-DEMO-005") },
+  { id: "REQ-DEMO-006", applicantName: "Kelvin Mutiso", serviceName: "Transcript Request", status: "Under review", statusTone: "info", departmentName: "Student Records", submittedLabel: "16 Jul, 08:52", dueLabel: "Due today", priority: "MEDIUM", href: getOfficerRequestHref("REQ-DEMO-006") },
 ];
 
 const fallbackHandoffs: readonly OfficerHandoffSummary[] = [
-  { id: "HND-DEMO-001", requestId: "REQ-DEMO-001", departmentName: "Finance", requestedAction: "Confirm fee-clearance position", status: "Pending acceptance", statusTone: "warning", href: "/demo/department" },
-  { id: "HND-DEMO-002", requestId: "REQ-DEMO-003", departmentName: "Registrar", requestedAction: "Confirm certificate reissue authority", status: "In progress", statusTone: "info", href: "/demo/department" },
-  { id: "HND-DEMO-003", requestId: "REQ-DEMO-004", departmentName: "Finance", requestedAction: "Return verified result", status: "Completed", statusTone: "success", href: "/demo/department" },
+  { id: "HND-DEMO-001", requestId: "REQ-DEMO-001", departmentName: "Finance", requestedAction: "Confirm fee-clearance position", status: "Pending acceptance", statusTone: "warning", href: OFFICER_ROUTE_HREFS.sharedWork },
+  { id: "HND-DEMO-002", requestId: "REQ-DEMO-003", departmentName: "Registrar", requestedAction: "Confirm certificate reissue authority", status: "In progress", statusTone: "info", href: OFFICER_ROUTE_HREFS.sharedWork },
+  { id: "HND-DEMO-003", requestId: "REQ-DEMO-004", departmentName: "Finance", requestedAction: "Return verified result", status: "Completed", statusTone: "success", href: OFFICER_ROUTE_HREFS.sharedWork },
 ];
 
 const fallbackMessages: readonly OfficerMessageSummary[] = [
-  { id: "MSG-DEMO-001", senderName: "Brian Otieno", senderRole: "Applicant", subject: "Clearance request document", message: "I have uploaded the missing library clearance confirmation.", timestamp: "12 min", href: "/demo/officer/requests/REQ-DEMO-002", unread: true },
-  { id: "MSG-DEMO-002", senderName: "Miriam Wekesa", senderRole: "Registrar", subject: "Approval requirement", message: "Please confirm the Finance result before forwarding the request.", timestamp: "48 min", href: "/demo/officer/requests/REQ-DEMO-001", unread: false },
-  { id: "MSG-DEMO-003", senderName: "Finance Desk", senderRole: "Department", subject: "Payment reference", message: "The reference is being checked against the daily collection report.", timestamp: "2 hr", href: "/demo/department", unread: false },
+  { id: "MSG-DEMO-001", senderName: "Brian Otieno", senderRole: "Applicant", subject: "Clearance request document", message: "I have uploaded the missing library clearance confirmation.", timestamp: "12 min", href: getOfficerRequestHref("REQ-DEMO-002"), unread: true },
+  { id: "MSG-DEMO-002", senderName: "Miriam Wekesa", senderRole: "Registrar", subject: "Approval requirement", message: "Please confirm the Finance result before forwarding the request.", timestamp: "48 min", href: getOfficerRequestHref("REQ-DEMO-001"), unread: false },
+  { id: "MSG-DEMO-003", senderName: "Finance Desk", senderRole: "Department", subject: "Payment reference", message: "The reference is being checked against the daily collection report.", timestamp: "2 hr", href: OFFICER_ROUTE_HREFS.sharedWork, unread: false },
 ];
 
 const fallbackDeadlines: readonly OfficerDeadlineSummary[] = [
-  { id: "DDL-DEMO-001", day: "23", month: "Jul", title: "Complete initial transcript review", reference: "REQ-DEMO-001", dueLabel: "Due today", priority: "HIGH", href: "/demo/officer/requests/REQ-DEMO-001" },
-  { id: "DDL-DEMO-002", day: "24", month: "Jul", title: "Review applicant correction", reference: "REQ-DEMO-005", dueLabel: "Due tomorrow", priority: "CRITICAL", href: "/demo/officer/requests/REQ-DEMO-005" },
-  { id: "DDL-DEMO-003", day: "25", month: "Jul", title: "Confirm Finance handoff result", reference: "REQ-DEMO-003", dueLabel: "2 days remaining", priority: "MEDIUM", href: "/demo/department" },
+  { id: "DDL-DEMO-001", day: "23", month: "Jul", title: "Complete initial transcript review", reference: "REQ-DEMO-001", dueLabel: "Due today", priority: "HIGH", href: getOfficerRequestHref("REQ-DEMO-001") },
+  { id: "DDL-DEMO-002", day: "24", month: "Jul", title: "Review applicant correction", reference: "REQ-DEMO-005", dueLabel: "Due tomorrow", priority: "CRITICAL", href: getOfficerRequestHref("REQ-DEMO-005") },
+  { id: "DDL-DEMO-003", day: "25", month: "Jul", title: "Confirm Finance handoff result", reference: "REQ-DEMO-003", dueLabel: "2 days remaining", priority: "MEDIUM", href: getOfficerRequestHref("REQ-DEMO-003") },
 ];
 
 function asRecord(value: unknown): UnknownRecord {
@@ -155,7 +155,7 @@ function mapRequest(value: unknown, index: number, services: readonly ServiceOpt
     submittedLabel: formatDate(firstText(request, ["submittedAt", "createdAt", "updatedAt", "lastActivityAt"])),
     dueLabel: firstText(request, ["dueLabel", "slaLabel", "deadlineLabel"]) ?? (priority === "CRITICAL" ? "Overdue" : index % 3 === 0 ? "Due today" : `${index + 1} days remaining`),
     priority,
-    href: `/demo/officer/requests/${id}`,
+    href: getOfficerRequestHref(id),
   };
 }
 
@@ -170,7 +170,9 @@ function mapHandoff(value: unknown, index: number): OfficerHandoffSummary {
     requestedAction: firstText(handoff, ["requestedAction", "action", "reason"]) ?? "Complete the requested departmental check",
     status,
     statusTone: officerStatusTone(status),
-    href: firstText(handoff, ["href"]) ?? "/demo/department",
+    href: getOfficerRequestHref(
+      firstText(handoff, ["requestId"]) ?? "REQ-DEMO-001",
+    ),
   };
 }
 
@@ -198,3 +200,7 @@ export function buildOfficerDashboardViewModel({ state, services, departments }:
     },
   };
 }
+import {
+  getOfficerRequestHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";

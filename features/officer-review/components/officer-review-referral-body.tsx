@@ -27,6 +27,7 @@ import type {
   ReviewOfficerOption,
   ReviewReasonOption,
 } from "@/features/officer-review/model/officer-review-model";
+import { OFFICER_ROUTE_HREFS } from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import styles from "./officer-review-referral-body.module.css";
 
@@ -228,11 +229,11 @@ export function OfficerReviewReferralBody({
         className={styles.breadcrumbs}
         aria-label="Breadcrumb"
       >
-        <Link href="/demo/officer">
+        <Link href={OFFICER_ROUTE_HREFS.home}>
           Officer Desk
         </Link>
         <ChevronRight aria-hidden="true" />
-        <Link href="/demo/officer#queue">
+        <Link href={OFFICER_ROUTE_HREFS.queue}>
           My Tasks
         </Link>
         <ChevronRight aria-hidden="true" />
@@ -251,7 +252,7 @@ export function OfficerReviewReferralBody({
         </div>
 
         <Link
-          href="/demo/officer"
+          href={OFFICER_ROUTE_HREFS.queue}
           className={styles.backButton}
         >
           <ArrowLeft aria-hidden="true" />

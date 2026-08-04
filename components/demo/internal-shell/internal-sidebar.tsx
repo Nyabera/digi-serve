@@ -4,6 +4,8 @@ import Link from "next/link";
 import { PanelLeftClose, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { OFFICER_ROUTE_HREFS } from "../../../features/demo-engine/navigation/officer-navigation-contract";
+
 import {
   getInternalNavigation,
   isInternalNavigationItemActive,
@@ -31,6 +33,14 @@ function initials(
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
+}
+
+export function getInternalSidebarBrandHref(
+  role: InternalShellRole,
+): string {
+  return role === "OFFICER"
+    ? OFFICER_ROUTE_HREFS.home
+    : "/demo";
 }
 
 export function InternalSidebar({
@@ -78,7 +88,7 @@ export function InternalSidebar({
       >
         <div className={styles.brandRow}>
           <Link
-            href="/demo"
+            href={getInternalSidebarBrandHref(role)}
             className={styles.brand}
             onClick={onMobileClose}
           >

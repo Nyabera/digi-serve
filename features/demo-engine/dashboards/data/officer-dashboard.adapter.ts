@@ -32,12 +32,10 @@ import type {
   OfficerQueueItem,
   OfficerWorkPlanItem,
 } from "./officer-dashboard.types";
-
-function requestHref(
-  requestId: string,
-): string {
-  return `/demo/officer/requests/${requestId}`;
-}
+import {
+  getOfficerRequestHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 export function adaptOfficerDashboard(
   pack: DemoPack,
@@ -215,7 +213,7 @@ export function adaptOfficerDashboard(
               index % 2 === 0
                 ? "Review"
                 : "Open",
-            href: requestHref(
+            href: getOfficerRequestHref(
               request.requestId,
             ),
             intent: "review",
@@ -279,7 +277,7 @@ export function adaptOfficerDashboard(
         action: {
           id: `activity-open-${request.id}`,
           label: "Open",
-          href: requestHref(
+          href: getOfficerRequestHref(
             request.requestId,
           ),
           intent: "view" as const,
@@ -315,7 +313,7 @@ export function adaptOfficerDashboard(
         action: {
           id: "open-documents",
           label: "View",
-          href: "/demo/officer/documents",
+          href: OFFICER_ROUTE_HREFS.documentReview,
           intent: "review",
         },
       },
@@ -334,8 +332,7 @@ export function adaptOfficerDashboard(
         action: {
           id: "open-handoffs",
           label: "View",
-          href:
-            "/demo/officer/department-inbox",
+          href: OFFICER_ROUTE_HREFS.sharedWork,
           intent: "review",
         },
       },
@@ -354,7 +351,7 @@ export function adaptOfficerDashboard(
         action: {
           id: "open-messages",
           label: "View",
-          href: "/demo/officer",
+          href: OFFICER_ROUTE_HREFS.applicantMessages,
           intent: "view",
         },
       },
@@ -369,7 +366,7 @@ export function adaptOfficerDashboard(
         action: {
           id: "open-decisions",
           label: "View",
-          href: "/demo/officer/queue",
+          href: OFFICER_ROUTE_HREFS.approvalQueue,
           intent: "review",
         },
       },
@@ -385,7 +382,7 @@ export function adaptOfficerDashboard(
         action: {
           id: "open-unread",
           label: "View",
-          href: "/demo/officer",
+          href: OFFICER_ROUTE_HREFS.applicantMessages,
           intent: "view",
         },
       },
@@ -484,8 +481,7 @@ export function adaptOfficerDashboard(
       action: {
         id: "open-sla-details",
         label: "View details",
-        href:
-          "/demo/officer/sla-monitor",
+        href: OFFICER_ROUTE_HREFS.sla,
         intent: "view",
       },
     },
@@ -664,7 +660,7 @@ function buildSignals(
             group === "messages"
               ? "Reply"
               : "View case",
-          href: requestHref(
+          href: getOfficerRequestHref(
             request.requestId,
           ),
           intent: "view",
@@ -721,7 +717,7 @@ function buildHandoffs(
         id: `handoff-open-${request.id}`,
         label: "View",
         href:
-          requestHref(
+          getOfficerRequestHref(
             request.requestId,
           ),
         intent: "view",

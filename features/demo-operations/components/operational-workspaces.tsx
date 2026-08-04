@@ -23,6 +23,11 @@ import {
   type DepartmentSlaRow,
   type OfficerTask,
   type OfficerTaskStatus } from "../fixtures/operational-data";
+import {
+  getOfficerRequestHref,
+  getOfficerRequestReferralHref,
+  OFFICER_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import styles from "./operational-workspaces.module.css";
 
@@ -326,12 +331,12 @@ export function OfficerTasksWorkspace({
         description="Open your assigned cases, review the workflow and collaborate without leaving the page."
         actions={
           <>
-            <Link className={styles.button} href="/demo/officer">
+            <Link className={styles.button} href={OFFICER_ROUTE_HREFS.home}>
               Dashboard
             </Link>
             <Link
               className={styles.button}
-              href="/demo/officer/sla-monitor"
+              href={OFFICER_ROUTE_HREFS.sla}
             >
               My SLA monitor
             </Link>
@@ -589,7 +594,7 @@ export function OfficerTasksWorkspace({
                 </p>
                 <div className={styles.linkStack}>
                   <Link
-                    href={`/demo/officer/requests/${selectedTask.id}?view=refer`}
+                    href={getOfficerRequestReferralHref(selectedTask.id)}
                   >
                     Share workflow
                   </Link>
@@ -604,7 +609,7 @@ export function OfficerTasksWorkspace({
                     Ask for feedback
                   </button>
                   <Link
-                    href={`/demo/officer/requests/${selectedTask.id}`}
+                    href={getOfficerRequestHref(selectedTask.id)}
                   >
                     Open full case
                   </Link>
@@ -665,16 +670,16 @@ export function OfficerTasksWorkspace({
             <h2>Quick links</h2>
           </div>
           <div className={styles.quickLinks}>
-            <Link href="/demo/officer/tasks">
+            <Link href={OFFICER_ROUTE_HREFS.queue}>
               Application queue
             </Link>
-            <Link href="/demo/officer/sla-monitor">
+            <Link href={OFFICER_ROUTE_HREFS.sla}>
               My SLA monitor
             </Link>
-            <Link href="/demo/department">
+            <Link href={OFFICER_ROUTE_HREFS.workflowInbox}>
               Workflow inbox
             </Link>
-            <Link href="/demo/officer">
+            <Link href={OFFICER_ROUTE_HREFS.home}>
               Officer dashboard
             </Link>
           </div>
@@ -866,7 +871,7 @@ export function OfficerWorkflowWorkspace({
                   {selectedItem.workflowStatus}
                 </span>
               </div>
-              <Link className={styles.button} href={`/demo/officer/requests/${selectedItem.id}`}>
+              <Link className={styles.button} href={getOfficerRequestHref(selectedItem.id)}>
                 Open case
               </Link>
             </div>
@@ -1254,7 +1259,7 @@ export function OfficerSlaWorkspace() {
         description="Track your personal SLA performance and assigned tasks over time."
         actions={
           <>
-            <Link className={styles.button} href="/demo/officer/tasks">
+            <Link className={styles.button} href={OFFICER_ROUTE_HREFS.tasks}>
               Open my tasks
             </Link>
             <button
@@ -1415,7 +1420,7 @@ export function OfficerSlaWorkspace() {
                     <td>{overdue}</td>
                     <td>{due}</td>
                     <td>
-                      <Link href={`/demo/officer/requests/${id}`}>
+                      <Link href={getOfficerRequestHref(id)}>
                         View
                       </Link>
                     </td>

@@ -5,6 +5,7 @@ import { ArrowRight, UsersRound } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { OFFICER_TASKS } from "../fixtures/operational-data";
+import { getOfficerRequestHref } from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import styles from "./operational-workspaces.module.css";
 
@@ -144,7 +145,7 @@ export function OfficerSharedWorkWorkspace() {
                   <td>{item.reason}</td>
                   <td><span className={styles.statusBadge} data-status={statusTone(item.status)}>{item.status}</span></td>
                   <td>{item.sharedOn}<br />Due: {item.due}</td>
-                  <td><Link href={`/demo/officer/requests/${item.requestId}`} onClick={() => setMessage(`Opening ${item.requestId} in the officer workspace.`)}>Open request <ArrowRight aria-hidden="true" /></Link></td>
+                  <td><Link href={getOfficerRequestHref(item.requestId)} onClick={() => setMessage(`Opening ${item.requestId} in the officer workspace.`)}>Open request <ArrowRight aria-hidden="true" /></Link></td>
                 </tr>
               ))}
             </tbody>
