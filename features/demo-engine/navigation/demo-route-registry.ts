@@ -1,3 +1,8 @@
+import {
+  OFFICER_NON_NAVIGATION_ROUTES,
+  OFFICER_ROUTE_HREFS,
+} from "./officer-navigation-contract";
+
 export type DemoWorkspaceRole =
   | "applicant"
   | "officer"
@@ -17,11 +22,8 @@ export const DEMO_ROUTES = {
     requests: "/demo/track",
   },
   officer: {
-    home: "/demo/officer",
-    queue: "/demo/officer/queue",
-    tasks: "/demo/officer/tasks",
-    documents: "/demo/officer/documents",
-    sla: "/demo/officer/sla-monitor",
+    ...OFFICER_ROUTE_HREFS,
+    documents: OFFICER_NON_NAVIGATION_ROUTES.documentsHub,
   },
   supervisor: {
     home: "/demo/supervisor",
