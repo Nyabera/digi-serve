@@ -1,0 +1,211 @@
+/*
+ * D31 dashboard design tokens.
+ *
+ * The variables are intentionally scoped to .theme rather than :root.
+ * Dashboard bodies opt into the system by applying this class to their
+ * outermost body element. All variables inherit into child dashboard modules.
+ */
+
+.theme {
+  --d31-dashboard-font-display:
+    var(
+      --font-plus-jakarta-sans,
+      "Plus Jakarta Sans Variable",
+      "Plus Jakarta Sans",
+      sans-serif
+    );
+  --d31-dashboard-font-body:
+    var(
+      --font-inter,
+      "Inter Variable",
+      Inter,
+      sans-serif
+    );
+  --d31-dashboard-font-mono:
+    var(
+      --font-source-code-pro,
+      "Source Code Pro Variable",
+      "Source Code Pro",
+      monospace
+    );
+
+  --d31-dashboard-canvas: #f7f9fc;
+  --d31-dashboard-canvas-subtle: #fafbfc;
+  --d31-dashboard-surface: #ffffff;
+  --d31-dashboard-surface-muted: #f8fafc;
+  --d31-dashboard-surface-emphasis: #f2f5fa;
+  --d31-dashboard-surface-inverse: #00163a;
+
+  --d31-dashboard-text-strong: #0b153e;
+  --d31-dashboard-text: #344054;
+  --d31-dashboard-text-muted: #667085;
+  --d31-dashboard-text-subtle: #98a2b3;
+  --d31-dashboard-text-inverse: #ffffff;
+
+  --d31-dashboard-border: #e3e8f1;
+  --d31-dashboard-border-strong: #d0d7e2;
+  --d31-dashboard-divider: #e9edf3;
+  --d31-dashboard-focus-ring: rgba(21, 94, 239, 0.2);
+
+  --d31-dashboard-primary: #155eef;
+  --d31-dashboard-primary-hover: #004eeb;
+  --d31-dashboard-primary-soft: #eef4ff;
+  --d31-dashboard-success: #079455;
+  --d31-dashboard-success-soft: #ecfdf3;
+  --d31-dashboard-warning: #f79009;
+  --d31-dashboard-warning-soft: #fffaeb;
+  --d31-dashboard-danger: #f04438;
+  --d31-dashboard-danger-soft: #fff1f0;
+  --d31-dashboard-purple: #7a5af8;
+  --d31-dashboard-purple-soft: #f4f3ff;
+  --d31-dashboard-teal: #0e9384;
+  --d31-dashboard-teal-soft: #f0fdfa;
+  --d31-dashboard-blue-ink: #0040c1;
+
+  --d31-dashboard-space-1: 4px;
+  --d31-dashboard-space-2: 6px;
+  --d31-dashboard-space-3: 8px;
+  --d31-dashboard-space-4: 10px;
+  --d31-dashboard-space-5: 12px;
+  --d31-dashboard-space-6: 14px;
+  --d31-dashboard-space-7: 16px;
+  --d31-dashboard-space-8: 18px;
+  --d31-dashboard-space-9: 20px;
+  --d31-dashboard-space-10: 24px;
+  --d31-dashboard-space-11: 28px;
+  --d31-dashboard-space-12: 32px;
+  --d31-dashboard-space-13: 40px;
+  --d31-dashboard-space-14: 48px;
+
+  --d31-dashboard-radius-xs: 6px;
+  --d31-dashboard-radius-sm: 8px;
+  --d31-dashboard-radius-md: 10px;
+  --d31-dashboard-radius-lg: 12px;
+  --d31-dashboard-radius-xl: 14px;
+  --d31-dashboard-radius-2xl: 16px;
+  --d31-dashboard-radius-pill: 999px;
+
+  --d31-dashboard-shadow-card:
+    0 1px 2px rgba(16, 24, 40, 0.03),
+    0 8px 24px rgba(16, 24, 40, 0.035);
+  --d31-dashboard-shadow-raised:
+    0 10px 30px rgba(16, 24, 40, 0.08);
+  --d31-dashboard-shadow-focus:
+    0 0 0 3px var(--d31-dashboard-focus-ring);
+
+  --d31-dashboard-title-size: 32px;
+  --d31-dashboard-title-line: 1.12;
+  --d31-dashboard-title-tracking: -0.035em;
+  --d31-dashboard-zone-size: 16px;
+  --d31-dashboard-zone-line: 1.25;
+  --d31-dashboard-zone-tracking: -0.02em;
+  --d31-dashboard-section-size: 14px;
+  --d31-dashboard-section-line: 1.3;
+  --d31-dashboard-card-title-size: 12px;
+  --d31-dashboard-body-size: 11px;
+  --d31-dashboard-body-line: 1.45;
+  --d31-dashboard-meta-size: 10px;
+  --d31-dashboard-micro-size: 9px;
+  --d31-dashboard-kpi-size: 26px;
+  --d31-dashboard-kpi-line: 1;
+  --d31-dashboard-table-size: 10px;
+  --d31-dashboard-control-size: 10px;
+
+  --d31-dashboard-grid-columns: 12;
+  --d31-dashboard-grid-gap: 14px;
+  --d31-dashboard-zone-gap: 24px;
+  --d31-dashboard-section-gap: 16px;
+  --d31-dashboard-card-padding: 16px;
+  --d31-dashboard-card-padding-compact: 12px;
+  --d31-dashboard-card-border-width: 1px;
+
+  --d31-dashboard-page-max: 1512px;
+  --d31-dashboard-page-inline: 20px;
+  --d31-dashboard-page-block-start: 24px;
+  --d31-dashboard-page-block-end: 40px;
+
+  --d31-dashboard-control-height: 36px;
+  --d31-dashboard-touch-target: 44px;
+  --d31-dashboard-table-row-height: 48px;
+  --d31-dashboard-icon-box: 34px;
+  --d31-dashboard-progress-height: 4px;
+
+  width: 100%;
+  min-width: 0;
+  color: var(--d31-dashboard-text);
+  font-family: var(--d31-dashboard-font-body);
+}
+
+.theme,
+.theme * {
+  box-sizing: border-box;
+}
+
+.theme[data-dashboard-role="officer"] {
+  --d31-dashboard-page-max: 1512px;
+  --d31-dashboard-title-size: 34px;
+  --d31-dashboard-card-padding: 18px;
+  --d31-dashboard-grid-gap: 14px;
+  --d31-dashboard-zone-gap: 12px;
+  --d31-dashboard-workload-min-height: 142px;
+  --d31-dashboard-primary-panel-min-height: 438px;
+  --d31-dashboard-lower-panel-min-height: 264px;
+}
+
+.theme[data-dashboard-role="supervisor"] {
+  --d31-dashboard-page-max: 680px;
+  --d31-dashboard-page-inline: 16px;
+  --d31-dashboard-title-size: 22px;
+  --d31-dashboard-title-tracking: -0.03em;
+  --d31-dashboard-grid-gap: 12px;
+  --d31-dashboard-zone-gap: 22px;
+  --d31-dashboard-card-padding: 12px;
+  --d31-dashboard-table-row-height: 42px;
+  --d31-dashboard-zone-label-width: 48px;
+}
+
+.theme[data-dashboard-role="admin"] {
+  --d31-dashboard-page-max: 683px;
+  --d31-dashboard-page-inline: 16px;
+  --d31-dashboard-title-size: 22px;
+  --d31-dashboard-title-tracking: -0.03em;
+  --d31-dashboard-grid-gap: 12px;
+  --d31-dashboard-zone-gap: 22px;
+  --d31-dashboard-card-padding: 12px;
+  --d31-dashboard-table-row-height: 42px;
+  --d31-dashboard-zone-label-width: 48px;
+  --d31-dashboard-surface-inverse: #00163a;
+}
+
+@media (max-width: 1024px) {
+  .theme {
+    --d31-dashboard-page-inline: 16px;
+    --d31-dashboard-grid-gap: 12px;
+    --d31-dashboard-zone-gap: 20px;
+    --d31-dashboard-card-padding: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  .theme {
+    --d31-dashboard-page-inline: 12px;
+    --d31-dashboard-page-block-start: 16px;
+    --d31-dashboard-page-block-end: 28px;
+    --d31-dashboard-grid-gap: 10px;
+    --d31-dashboard-zone-gap: 18px;
+    --d31-dashboard-card-padding: 12px;
+    --d31-dashboard-title-size: 26px;
+    --d31-dashboard-section-size: 13px;
+    --d31-dashboard-kpi-size: 23px;
+    --d31-dashboard-table-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme {
+    --d31-dashboard-page-inline: 10px;
+    --d31-dashboard-title-size: 24px;
+    --d31-dashboard-grid-gap: 8px;
+    --d31-dashboard-zone-gap: 16px;
+  }
+}

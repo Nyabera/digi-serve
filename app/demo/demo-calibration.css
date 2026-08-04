@@ -1,0 +1,537 @@
+/*
+ * FAIDIA Demo Engine — D26 visual calibration
+ *
+ * This stylesheet is imported only by app/demo/layout.tsx.
+ * It calibrates presentation without changing workflow logic,
+ * route structure, state, configuration or production data.
+ */
+
+:where(.demo-presentation-content) {
+  --demo-background: var(--background, #f4f6f9);
+  --demo-surface: var(--surface, #ffffff);
+  --demo-surface-muted: var(--surface-muted, #f8fafc);
+  --demo-foreground: var(--foreground, #0b1b4d);
+  --demo-text: var(--text, #172033);
+  --demo-muted: var(--muted-foreground, #64748b);
+  --demo-border: var(--border, #dce4ef);
+  --demo-border-strong: var(--border-control, #c8d2df);
+  --demo-primary: var(--primary, #2337b8);
+  --demo-primary-hover: var(--primary-hover, #1c2d99);
+  --demo-focus: var(--focus-ring, #7c8df5);
+  --demo-radius-sm: var(--radius-sm, 0.625rem);
+  --demo-radius-md: var(--radius-md, 0.875rem);
+  --demo-radius-lg: var(--radius-lg, 1.125rem);
+  --demo-shadow-card:
+    0 1px 2px rgb(15 23 42 / 4%),
+    0 8px 24px rgb(15 23 42 / 5%);
+  --demo-shadow-raised:
+    0 2px 4px rgb(15 23 42 / 5%),
+    0 18px 44px rgb(15 23 42 / 9%);
+
+  /* D29R-11 — surface-aware foreground contracts */
+  --demo-light-foreground: #101827;
+  --demo-light-muted: #5f6775;
+  --demo-dark-foreground: #f8fafc;
+  --demo-dark-muted: #b9c0cd;
+  --demo-dark-card-foreground: #e7eaf0;
+  --demo-dark-card-muted: #aeb5c4;
+  --demo-primary-action-foreground: #ffffff;
+
+  min-width: 0;
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+  text-rendering: optimizeLegibility;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/* D29R-11 surface-aware foreground contracts                                 */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) :where(.demo-surface-light) {
+  --demo-local-foreground: var(--demo-light-foreground);
+  --demo-local-muted: var(--demo-light-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-dark) {
+  --demo-local-foreground: var(--demo-dark-foreground);
+  --demo-local-muted: var(--demo-dark-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-dark-card) {
+  --demo-local-foreground: var(--demo-dark-card-foreground);
+  --demo-local-muted: var(--demo-dark-card-muted);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-surface-primary) {
+  --demo-local-foreground: var(--demo-primary-action-foreground);
+  --demo-local-muted: rgb(255 255 255 / 82%);
+  color: var(--demo-local-foreground);
+}
+
+:where(.demo-presentation-content) :where(.demo-muted-text) {
+  color: var(--demo-local-muted, var(--demo-muted));
+}
+
+:where(.demo-presentation-content)
+  :where(.demo-surface-light, .demo-surface-dark, .demo-surface-dark-card, .demo-surface-primary)
+  :where(svg:not([class*="text-"])) {
+  color: currentColor;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Structural rhythm                                                          */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) > :where(header, section, div) {
+  min-width: 0;
+}
+
+:where(.demo-presentation-content) :where(h1, h2, h3) {
+  color: inherit;
+  text-wrap: balance;
+}
+
+:where(.demo-presentation-content) :where(p, dd, li) {
+  text-wrap: pretty;
+}
+
+:where(.demo-presentation-content) :where([class*="max-w-"]) {
+  width: min(100%, var(--calibrated-content-width, 1440px));
+}
+
+:where(.demo-presentation-content) :where(section, article, aside, form, dl, div) {
+  min-width: 0;
+}
+
+:where(.demo-presentation-content) :where([class*="gap-8"]) {
+  row-gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+:where(.demo-presentation-content) :where([class*="py-8"], [class*="py-10"]) {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cards and operational surfaces                                             */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)
+  [class*="rounded-3xl"],
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="rounded-3xl"] {
+  border-radius: var(--demo-radius-lg);
+}
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)
+  [class*="rounded-2xl"],
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="rounded-2xl"] {
+  border-radius: var(--demo-radius-md);
+}
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="border-slate-200"][class*="bg-white"],
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="border"][class*="bg-white"] {
+  border-color: var(--demo-border);
+  box-shadow: var(--demo-shadow-card);
+}
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="shadow-sm"] {
+  box-shadow: var(--demo-shadow-card);
+}
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="bg-slate-50"] {
+  background-color: var(--demo-surface-muted);
+}
+
+:where(.demo-presentation-content)
+  :where(article, section, aside, form)[class*="bg-white"] {
+  background-color: var(--demo-surface);
+}
+
+/* Keep dark operational headers restrained and consistent. */
+:where(.demo-presentation-content) > header[class*="bg-[#"],
+:where(.demo-presentation-content) > header[class*="bg-slate-9"],
+:where(.demo-presentation-content) > header[class*="bg-black"] {
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  box-shadow: 0 8px 28px rgb(2 6 23 / 12%);
+}
+
+:where(.demo-presentation-content) > header > div {
+  min-height: 5.25rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons and action hierarchy                                               */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) :where(button, a)[class*="rounded-xl"] {
+  border-radius: var(--demo-radius-sm);
+}
+
+:where(.demo-presentation-content) :where(button, a)[class*="min-h-11"] {
+  min-height: 2.75rem;
+}
+
+:where(.demo-presentation-content) :where(button, a)[class*="min-h-12"] {
+  min-height: 3rem;
+}
+
+:where(.demo-presentation-content) :where(button, a)[class*="font-bold"] {
+  letter-spacing: -0.01em;
+}
+
+:where(.demo-presentation-content)
+  :where(button, a)[class*="bg-[#2557ff]"],
+:where(.demo-presentation-content)
+  :where(button, a)[class*="bg-blue-"] {
+  box-shadow: 0 1px 2px rgb(15 23 42 / 8%);
+}
+
+:where(.demo-presentation-content)
+  :where(button, a)[class*="bg-[#2557ff]"]:hover,
+:where(.demo-presentation-content)
+  :where(button, a)[class*="bg-blue-"]:hover {
+  filter: saturate(0.95) brightness(0.96);
+}
+
+:where(.demo-presentation-content) :where(button, a):focus-visible,
+:where(.demo-presentation-content) :where(input, select, textarea):focus-visible {
+  outline: 3px solid color-mix(
+    in srgb,
+    var(--demo-focus) 46%,
+    transparent
+  );
+  outline-offset: 2px;
+}
+
+:where(.demo-presentation-content) :where(button, a)[aria-disabled="true"],
+:where(.demo-presentation-content) :where(button, input, select, textarea):disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Forms                                                                      */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) :where(input, select, textarea) {
+  border-color: var(--demo-border-strong);
+  border-radius: var(--demo-radius-sm);
+  background: var(--demo-surface);
+  color: var(--demo-text);
+  caret-color: var(--demo-primary);
+}
+
+:where(.demo-presentation-content) :where(input, select) {
+  min-height: 2.875rem;
+}
+
+:where(.demo-presentation-content) textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+:where(.demo-presentation-content) :where(input, textarea)::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+:where(.demo-presentation-content) :where(input, select, textarea):hover:not(:disabled) {
+  border-color: #aebaca;
+}
+
+:where(.demo-presentation-content) :where(input, select, textarea):focus {
+  border-color: var(--demo-primary);
+  box-shadow:
+    0 0 0 3px
+      color-mix(
+        in srgb,
+        var(--demo-primary) 13%,
+        transparent
+      );
+}
+
+:where(.demo-presentation-content) input[type="checkbox"],
+:where(.demo-presentation-content) input[type="radio"] {
+  min-height: auto;
+  accent-color: var(--demo-primary);
+}
+
+:where(.demo-presentation-content) label > span:first-child {
+  color: inherit;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Queues, tables and dense staff interfaces                                  */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) :where(table) {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+:where(.demo-presentation-content) :where(th) {
+  height: 2.75rem;
+  border-bottom: 1px solid var(--demo-border);
+  background: var(--demo-surface-muted);
+  color: var(--demo-muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+:where(.demo-presentation-content) :where(td) {
+  min-height: 3.5rem;
+  border-bottom: 1px solid var(--demo-border);
+  color: var(--demo-text);
+}
+
+:where(.demo-presentation-content) :where(tr:last-child td) {
+  border-bottom: 0;
+}
+
+:where(.demo-presentation-content) :where(tr):hover td {
+  background: #fbfcfe;
+}
+
+:where(.demo-presentation-content) :where([class*="font-mono"]) {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Dense queue rows should feel interactive without looking decorative. */
+:where(.demo-presentation-content)
+  :where(article, div)[class*="hover:bg-slate-50"] {
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+:where(.demo-presentation-content)
+  :where(article, div)[class*="hover:bg-slate-50"]:hover {
+  background-color: #f8fafc;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Status and semantic feedback                                               */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content)
+  :where([class*="rounded-full"])[class*="text-xs"],
+:where(.demo-presentation-content)
+  :where([class*="rounded-full"])[class*="text-sm"] {
+  align-items: center;
+  gap: 0.375rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+:where(.demo-presentation-content)
+  :where([class*="bg-emerald-50"]) {
+  border-color: var(--status-success-border, #abefc6);
+}
+
+:where(.demo-presentation-content)
+  :where([class*="bg-amber-50"]) {
+  border-color: var(--status-warning-border, #fedf89);
+}
+
+:where(.demo-presentation-content)
+  :where([class*="bg-red-50"]) {
+  border-color: var(--status-danger-border, #fecdca);
+}
+
+:where(.demo-presentation-content)
+  :where([class*="bg-blue-50"], [class*="bg-violet-50"]) {
+  border-color: var(--status-info-border, #c7d2fe);
+}
+
+:where(.demo-presentation-content) [role="alert"],
+:where(.demo-presentation-content) [role="status"] {
+  border-radius: var(--demo-radius-md);
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Charts                                                                     */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) .recharts-responsive-container {
+  min-height: 16rem;
+}
+
+:where(.demo-presentation-content) .recharts-cartesian-grid-horizontal line,
+:where(.demo-presentation-content) .recharts-cartesian-grid-vertical line {
+  stroke: var(--chart-grid, #e7edf4);
+  stroke-width: 1;
+}
+
+:where(.demo-presentation-content) .recharts-text {
+  fill: var(--chart-axis, #64748b);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+:where(.demo-presentation-content) .recharts-legend-item-text {
+  color: var(--demo-muted) !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+:where(.demo-presentation-content) .recharts-default-tooltip {
+  border: 1px solid
+    var(--chart-tooltip-border, #dce4ef) !important;
+  border-radius: 0.75rem !important;
+  background:
+    var(--chart-tooltip-background, #ffffff) !important;
+  box-shadow: var(--demo-shadow-raised) !important;
+}
+
+:where(.demo-presentation-content) .recharts-tooltip-label {
+  color: var(--demo-foreground);
+  font-weight: 700;
+}
+
+:where(.demo-presentation-content) .recharts-tooltip-item {
+  font-size: 0.75rem !important;
+  font-weight: 600;
+}
+
+:where(.demo-presentation-content) .recharts-surface {
+  overflow: visible;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Outcome and controlled-document surfaces                                   */
+/* -------------------------------------------------------------------------- */
+
+:where(.demo-presentation-content) iframe[title*="issued demonstration"] {
+  border-color: var(--demo-border);
+  box-shadow: inset 0 0 0 1px rgb(15 23 42 / 3%);
+}
+
+:where(.demo-presentation-content)
+  :where([class*="font-mono"])[class*="text-blue"],
+:where(.demo-presentation-content)
+  :where([class*="font-mono"])[class*="text-slate"] {
+  overflow-wrap: anywhere;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive calibration                                                     */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  :where(.demo-presentation-content) > header > div {
+    min-height: auto;
+  }
+
+  :where(.demo-presentation-content) :where([class*="xl:sticky"]) {
+    position: static;
+  }
+
+  :where(.demo-presentation-content) .recharts-responsive-container {
+    min-height: 15rem;
+  }
+}
+
+@media (max-width: 767px) {
+  :where(.demo-presentation-content) {
+    overflow-x: clip;
+  }
+
+  :where(.demo-presentation-content) :where(h1) {
+    font-size: clamp(1.875rem, 9vw, 2.5rem);
+    line-height: 1.08;
+  }
+
+  :where(.demo-presentation-content) :where(h2) {
+    line-height: 1.15;
+  }
+
+  :where(.demo-presentation-content)
+    :where(article, section, aside, form)[class*="p-8"] {
+    padding: 1.25rem;
+  }
+
+  :where(.demo-presentation-content)
+    :where(article, section, aside, form)[class*="p-6"] {
+    padding: 1.125rem;
+  }
+
+  :where(.demo-presentation-content) :where(button, a)[class*="w-full"] {
+    white-space: normal;
+  }
+
+  :where(.demo-presentation-content) .recharts-responsive-container {
+    min-height: 14rem;
+  }
+
+  :where(.demo-presentation-content) .recharts-legend-wrapper {
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 479px) {
+  :where(.demo-presentation-content) :where([class*="px-5"]) {
+    padding-inline: 1rem;
+  }
+
+  :where(.demo-presentation-content)
+    :where([class*="rounded-3xl"]) {
+    border-radius: var(--demo-radius-md);
+  }
+
+  :where(.demo-presentation-content) :where([class*="text-4xl"]) {
+    font-size: 2rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Motion and printing                                                        */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.demo-presentation-content) *,
+  :where(.demo-presentation-content) *::before,
+  :where(.demo-presentation-content) *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  :where(.demo-presentation-content) {
+    background: #ffffff;
+  }
+
+  :where(.demo-presentation-content) > header,
+  :where(.demo-presentation-content) :where(button, [role="status"], [role="alert"]) {
+    display: none !important;
+  }
+
+  :where(.demo-presentation-content)
+    :where(article, section, aside, form)[class*="shadow"] {
+    box-shadow: none !important;
+  }
+}

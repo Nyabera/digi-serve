@@ -1,0 +1,10 @@
+FAIDIA DEMO LAYOUT FILE INVENTORY
+=================================
+
+Generated: 2026-07-27T18:45:44+03:00
+Layout count: 4
+
+app/demo/admin/layout.tsx
+app/demo/layout.tsx
+app/demo/officer/layout.tsx
+app/demo/supervisor/layout.tsx

@@ -1,0 +1,744 @@
+{
+  "stage": "D30-12",
+  "generatedFrom": "app/demo/**/page.tsx",
+  "defaults": {
+    "requestId": "STC-CL-2026-0027",
+    "role": "applicant",
+    "route": "/demo",
+    "serviceId": "transcript-request",
+    "workflowId": "transcript-request",
+    "documentId": "DOC-2026-06831"
+  },
+  "totals": {
+    "pageFiles": 46,
+    "resolvedRoutes": 43,
+    "unresolvedDynamicRoutes": 3,
+    "registryBackedRoutes": 20
+  },
+  "requiredJourneys": {
+    "publicHome": true,
+    "verification": true,
+    "applicantTracking": true,
+    "applicantProfile": true,
+    "applicantDocuments": true,
+    "officerHome": true,
+    "officerDocuments": true,
+    "officerSla": true,
+    "supervisorHome": true,
+    "adminHome": true,
+    "adminWorkflows": true,
+    "adminBuilder": true,
+    "referral": true,
+    "reports": true
+  },
+  "targetedRoutes": {
+    "referral": "/demo/officer/requests/STC-CL-2026-0027?view=refer",
+    "reports": [
+      "/demo/officer/reports/sla",
+      "/demo/reports"
+    ],
+    "sla": [
+      "/demo/officer/reports/sla",
+      "/demo/officer/sla",
+      "/demo/officer/sla-monitor",
+      "/demo/supervisor/sla",
+      "/demo/supervisor/sla-monitor"
+    ],
+    "tracking": "/demo/track/STC-CL-2026-0027"
+  },
+  "registryRoutes": [
+    "/demo/verify-certificate",
+    "/demo/applicant",
+    "/demo/applicant/profile",
+    "/demo/applicant/documents",
+    "/demo/officer",
+    "/demo/officer/queue",
+    "/demo/officer/tasks",
+    "/demo/officer/documents",
+    "/demo/officer/sla-monitor",
+    "/demo/supervisor",
+    "/demo/supervisor/audit-trail",
+    "/demo/supervisor/sla-monitor",
+    "/demo/admin",
+    "/demo/admin/workflows",
+    "/demo/admin/workflows/builder",
+    "/demo/applicant",
+    "/demo/sign-up",
+    "/demo/admin",
+    "/demo/supervisor",
+    "/demo/officer"
+  ],
+  "routes": [
+    {
+      "unresolved": false,
+      "path": "/demo",
+      "source": "app/demo/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/admin",
+      "source": "app/demo/admin/page.tsx",
+      "dynamic": false,
+      "expectedRole": "admin",
+      "category": "admin",
+      "capabilities": {
+        "referral": true,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/admin/workflows",
+      "source": "app/demo/admin/workflows/page.tsx",
+      "dynamic": false,
+      "expectedRole": "admin",
+      "category": "admin",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/admin/workflows/builder",
+      "source": "app/demo/admin/workflows/builder/page.tsx",
+      "dynamic": false,
+      "expectedRole": "admin",
+      "category": "admin",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": true
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/applicant",
+      "source": "app/demo/applicant/page.tsx",
+      "dynamic": false,
+      "expectedRole": "applicant",
+      "category": "applicant",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/applicant/documents",
+      "source": "app/demo/applicant/documents/page.tsx",
+      "dynamic": false,
+      "expectedRole": "applicant",
+      "category": "applicant",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/applicant/profile",
+      "source": "app/demo/applicant/profile/page.tsx",
+      "dynamic": false,
+      "expectedRole": "applicant",
+      "category": "applicant",
+      "capabilities": {
+        "referral": true,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/apply/certificate-replacement",
+      "source": "app/demo/apply/certificate-replacement/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/apply/class-registration",
+      "source": "app/demo/apply/class-registration/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/apply/course-application",
+      "source": "app/demo/apply/course-application/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/apply/industrial-attachment-letter",
+      "source": "app/demo/apply/industrial-attachment-letter/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/apply/student-clearance",
+      "source": "app/demo/apply/student-clearance/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/department",
+      "source": "app/demo/department/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer",
+      "source": "app/demo/officer/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/documents",
+      "source": "app/demo/officer/documents/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/queue",
+      "source": "app/demo/officer/queue/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/reports/sla",
+      "source": "app/demo/officer/reports/sla/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": true,
+        "report": true,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/requests/STC-CL-2026-0027",
+      "source": "app/demo/officer/requests/[requestId]/page.tsx",
+      "dynamic": true,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": true,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/sla",
+      "source": "app/demo/officer/sla/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": true,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/sla-monitor",
+      "source": "app/demo/officer/sla-monitor/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": true,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/officer/tasks",
+      "source": "app/demo/officer/tasks/page.tsx",
+      "dynamic": false,
+      "expectedRole": "officer",
+      "category": "officer",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/outcomes/STC-CL-2026-0027",
+      "source": "app/demo/outcomes/[requestId]/page.tsx",
+      "dynamic": true,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/reports",
+      "source": "app/demo/reports/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": true,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/requests/STC-CL-2026-0027/confirmation",
+      "source": "app/demo/requests/[requestId]/confirmation/page.tsx",
+      "dynamic": true,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/services/certificate-replacement",
+      "source": "app/demo/services/certificate-replacement/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/services/class-registration",
+      "source": "app/demo/services/class-registration/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/services/course-application",
+      "source": "app/demo/services/course-application/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/services/industrial-attachment-letter",
+      "source": "app/demo/services/industrial-attachment-letter/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/services/student-clearance",
+      "source": "app/demo/services/student-clearance/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/sign-up",
+      "source": "app/demo/sign-up/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor",
+      "source": "app/demo/supervisor/page.tsx",
+      "dynamic": false,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor/approvals/STC-CL-2026-0027",
+      "source": "app/demo/supervisor/approvals/[requestId]/page.tsx",
+      "dynamic": true,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor/audit",
+      "source": "app/demo/supervisor/audit/page.tsx",
+      "dynamic": false,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor/audit-trail",
+      "source": "app/demo/supervisor/audit-trail/page.tsx",
+      "dynamic": false,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor/sla",
+      "source": "app/demo/supervisor/sla/page.tsx",
+      "dynamic": false,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": true,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/supervisor/sla-monitor",
+      "source": "app/demo/supervisor/sla-monitor/page.tsx",
+      "dynamic": false,
+      "expectedRole": "supervisor",
+      "category": "supervisor",
+      "capabilities": {
+        "referral": false,
+        "sla": true,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/ATTACH-2026-0088",
+      "source": "app/demo/track/ATTACH-2026-0088/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/CERT-2026-0061",
+      "source": "app/demo/track/CERT-2026-0061/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/CLASS-2026-0109",
+      "source": "app/demo/track/CLASS-2026-0109/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/CLEAR-2026-0042",
+      "source": "app/demo/track/CLEAR-2026-0042/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/COURSE-2026-01482",
+      "source": "app/demo/track/COURSE-2026-01482/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": false
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/track/STC-CL-2026-0027",
+      "source": "app/demo/track/[requestId]/page.tsx",
+      "dynamic": true,
+      "expectedRole": "public",
+      "category": "shared",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    },
+    {
+      "unresolved": false,
+      "path": "/demo/verify-certificate",
+      "source": "app/demo/verify-certificate/page.tsx",
+      "dynamic": false,
+      "expectedRole": "public",
+      "category": "public",
+      "capabilities": {
+        "referral": false,
+        "sla": false,
+        "report": false,
+        "workflowBuilder": false
+      },
+      "captureEvidence": true
+    }
+  ],
+  "unresolved": [
+    {
+      "unresolved": true,
+      "source": "app/demo/apply/[serviceSlug]/page.tsx",
+      "pattern": "/demo/apply/[serviceSlug]",
+      "unresolvedSegments": [
+        "[serviceSlug]"
+      ]
+    },
+    {
+      "unresolved": true,
+      "source": "app/demo/department/handoffs/[handoffId]/page.tsx",
+      "pattern": "/demo/department/handoffs/[handoffId]",
+      "unresolvedSegments": [
+        "[handoffId]"
+      ]
+    },
+    {
+      "unresolved": true,
+      "source": "app/demo/services/[serviceSlug]/page.tsx",
+      "pattern": "/demo/services/[serviceSlug]",
+      "unresolvedSegments": [
+        "[serviceSlug]"
+      ]
+    }
+  ]
+}

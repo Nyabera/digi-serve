@@ -1,0 +1,57 @@
+{
+  "stage": "D30-11",
+  "defaultRoute": "/demo",
+  "roleRouteBehaviour": "preserve-current-route",
+  "files": [
+    {
+      "path": "components/demo/controls/presentation-controls.tsx",
+      "bytes": 2421,
+      "sha256": "44938dac94ce990d42b15891eedf783db2360580420b4cf5a2ffd7b2b437a575"
+    },
+    {
+      "path": "components/demo/presentation/demo-presentation-frame.tsx",
+      "bytes": 18430,
+      "sha256": "f19c0acf47c3ae97668b1bdf4eafef87076d4d67ab0e455673c7ef0dd7b3fbee"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-11-RESET-BEHAVIOUR.md",
+      "bytes": 986,
+      "sha256": "25a38b9ba4b163e98f9d33503745d839bf11ebadc0c20b218c7972822446f471"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-11-RESET-IMPLEMENTATION-AUDIT.json",
+      "bytes": 1141,
+      "sha256": "1e4ecb29e7d43328393de0be162e0c0cd7f754e84e197c38bc8889c2a80d1126"
+    },
+    {
+      "path": "docs/demo-engine-base/d30-freeze/D30-11-RESET-RESULTS.json",
+      "bytes": 344,
+      "sha256": "3d618cb43bc3214e0e98149c76752cb7870666180ef9d68943d265feae82d97d"
+    },
+    {
+      "path": "features/demo-service-workflows/components/service-workflow-pages.tsx",
+      "bytes": 26119,
+      "sha256": "d51e3107350ddcead44e70962bac75ab3dd02399429daf0ecadaffd1e4df2937"
+    },
+    {
+      "path": "features/demo/state/demo-state-context.tsx",
+      "bytes": 4112,
+      "sha256": "c8327be9f1e9b43573fc6b2cf2bb2e618677e8a7feece92e4b1b1cd032fb26a4"
+    },
+    {
+      "path": "package.json",
+      "bytes": 3036,
+      "sha256": "97430083c3c2a21c75f2bc793e74bd23fabe33a58ad6c7ff3e5876116d1634f3"
+    },
+    {
+      "path": "playwright.d30-reset.config.ts",
+      "bytes": 977,
+      "sha256": "12d2db18942d980a5da9c650f5efa54afa308986876e02754b6b80511b66d978"
+    },
+    {
+      "path": "tests/acceptance/d30/demo-reset-behaviour.pw.ts",
+      "bytes": 3656,
+      "sha256": "52f604b6a974c4a3acde724206810319f622bed46d21261aca2b205ae4eaee25"
+    }
+  ]
+}

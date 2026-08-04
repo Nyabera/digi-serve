@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "stage": "D31-2",
+  "purpose": "Protect operational shell and stable route ownership during D31.",
+  "mutableAtLaterStage": [
+    "components/demo/workspace-shells/admin-workspace-shell.tsx"
+  ],
+  "records": [
+    {
+      "file": "app/demo/admin/layout.tsx",
+      "bytes": 268,
+      "sha256": "8a62069a70183d69a0ef91d9e1760a3e51380aede13516cad0e8a0253901db47"
+    },
+    {
+      "file": "app/demo/officer/layout.tsx",
+      "bytes": 303,
+      "sha256": "541f045b82594c5c08b5f3a771e13b643b5accdd46dc3bf487b75899c59da3af"
+    },
+    {
+      "file": "app/demo/supervisor/layout.tsx",
+      "bytes": 309,
+      "sha256": "0b12aa6f994bf87e5a0c09f58db2b5b932745334137dfe0e3b94b097eb5e906c"
+    },
+    {
+      "file": "components/demo/internal-shell/index.ts",
+      "bytes": 584,
+      "sha256": "5a8c484642b8eb7cbf4ac6ce7629cfa26e7260eced81415288a7cf2f597feb83"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-app-shell.tsx",
+      "bytes": 2841,
+      "sha256": "d934d73b7d428ea2f7d92adcba973c847b88495d744d8a0ddae36f62b7df158d"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-global-search.tsx",
+      "bytes": 1593,
+      "sha256": "495f150f06f01ba251b07ecc6e916e263ae52973df0365aa589e2ebced2440d1"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-navigation.ts",
+      "bytes": 11634,
+      "sha256": "6b4dce4b90389ac0347ff0d3f4b00c900db4ec15f1b942d5193e1d4ddfd24e3f"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-page-header.tsx",
+      "bytes": 1121,
+      "sha256": "8e085b015a50bb62734dcff9b5de47f0e6541c5658ccd8e9a2bb01e4ee562b5e"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-shell-boundary.tsx",
+      "bytes": 489,
+      "sha256": "c09e1d3b3aa3a2e53765399973d365ccd2e01052ea27b7d8015a8bc23d76c756"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-shell.module.css",
+      "bytes": 13032,
+      "sha256": "cf5d23ae74b8fddd22b404c7a6c04a45f89818bb6d4d8cc1b52107421d3841cd"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-sidebar.tsx",
+      "bytes": 5176,
+      "sha256": "23d5a7d3bf30fe5d3397ebec771ad365cf002d0d99f23211e53c395d7178ff42"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-topbar.tsx",
+      "bytes": 2482,
+      "sha256": "879bac21b5592446854cb9b7c32499af62755b2eec676fb7e5eef64e7cc43a78"
+    },
+    {
+      "file": "components/demo/internal-shell/internal-user-menu.tsx",
+      "bytes": 1191,
+      "sha256": "d430cd54f66aef8b91375fc1a09248c8f225a64abee0bedd623e25c30c262cb5"
+    },
+    {
+      "file": "components/demo/internal-shell/role-workspace-shell.tsx",
+      "bytes": 1208,
+      "sha256": "827b3c7eaf367f8b28ace99f762818967db1f52d48550bc26a93cce27b2c9196"
+    },
+    {
+      "file": "components/demo/workspace-shells/index.ts",
+      "bytes": 339,
+      "sha256": "45cb124bd73c5a5cdd3872dc643d2dcf4dbd90b74fbd207db8a155678d0fcede"
+    },
+    {
+      "file": "components/demo/workspace-shells/operational-workspace-shell.tsx",
+      "bytes": 764,
+      "sha256": "8f69dfe0a03457785528a5a78de28c403be41cd93b4b2b90bf5da75d42b04ed7"
+    },
+    {
+      "file": "features/demo-engine/dashboards/config/dashboard-shell-contracts.ts",
+      "bytes": 2304,
+      "sha256": "f419547c1499a05abd5a79df6d43e00cd840d53deddf0d3ea7e2b689c289aabb"
+    }
+  ]
+}

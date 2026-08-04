@@ -1,0 +1,327 @@
+"use client";
+
+import {
+  AlertCircle,
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  Bell,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  ClipboardCheck,
+  FileBarChart,
+  FileCheck2,
+  FileText,
+  FolderKanban,
+  Handshake,
+  LayoutDashboard,
+  ListChecks,
+  MoreVertical,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+  UserRoundCheck,
+  UsersRound,
+  type LucideIcon,
+} from "lucide-react";
+import { useMemo, useState, type ReactNode } from "react";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import {
+  supervisorDashboardData,
+  type SupervisorDashboardData,
+  type Tone,
+} from "../data/supervisor-dashboard-data";
+
+export type SupervisorDashboardProps = {
+  data?: SupervisorDashboardData;
+  /** Use true inside the existing Officer/Supervisor application shell. */
+  embedded?: boolean;
+};
+
+type Notify = (message: string) => void;
+
+const navItems: Array<{ label: string; icon: LucideIcon }> = [
+  { label: "Overview", icon: LayoutDashboard },
+  { label: "Approvals", icon: BadgeCheck },
+  { label: "Department Queue", icon: FolderKanban },
+  { label: "Assignments", icon: UserRoundCheck },
+  { label: "Handoffs", icon: Handshake },
+  { label: "Team", icon: UsersRound },
+  { label: "Reports", icon: BarChart3 },
+  { label: "Audit", icon: ShieldCheck },
+];
+
+function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return <section className={`sup-card ${className}`}>{children}</section>;
+}
+
+function ToneIcon({ icon: Icon, tone = "blue", small = false }: { icon: LucideIcon; tone?: Tone; small?: boolean }) {
+  return <span className={`sup-tone-icon sup-tone-icon--${tone}${small ? " sup-tone-icon--small" : ""}`} aria-hidden="true"><Icon strokeWidth={2} /></span>;
+}
+
+function TextAction({ children, onClick, className = "" }: { children: ReactNode; onClick?: () => void; className?: string }) {
+  return <button className={`sup-text-action ${className}`} type="button" onClick={onClick}>{children}</button>;
+}
+
+function PanelHeader({ title, meta, action, onAction }: { title: string; meta?: ReactNode; action?: string; onAction?: () => void }) {
+  return (
+    <div className="sup-panel-header">
+      <div><h3>{title}</h3>{meta ? <span>{meta}</span> : null}</div>
+      {action ? <TextAction onClick={onAction}>{action}</TextAction> : null}
+    </div>
+  );
+}
+
+function ZoneHeading({ number, title }: { number: number; title: string }) {
+  return (
+    <div className="sup-zone-heading">
+      <span>ZONE {number}</span>
+      <h2>{title}</h2>
+    </div>
+  );
+}
+
+function ReferenceSidebar({ notify }: { notify: Notify }) {
+  const [active, setActive] = useState("Overview");
+  return (
+    <aside className="sup-reference-sidebar" aria-label="Supervisor navigation">
+      <div className="sup-brand"><span><ShieldCheck strokeWidth={1.8} /></span><div><strong>SAVANNAH</strong><small>TECHNICAL COLLEGE</small></div></div>
+      <nav>
+        {navItems.map(({ label, icon: Icon }) => (
+          <button key={label} type="button" className={active === label ? "is-active" : ""} onClick={() => { setActive(label); notify(`${label} selected`); }}>
+            <Icon strokeWidth={1.8} /><span>{label}</span>
+          </button>
+        ))}
+      </nav>
+      <button className="sup-profile" type="button" onClick={() => notify("Opened supervisor profile")}>
+        <span>GW</span><span><strong>Grace Wanjiku</strong><small>Supervisor</small></span><ChevronDown />
+      </button>
+    </aside>
+  );
+}
+
+function DashboardHeader({ data, showTools, notify }: { data: SupervisorDashboardData; showTools: boolean; notify: Notify }) {
+  const [query, setQuery] = useState("");
+  return (
+    <header className={`sup-dashboard-header${showTools ? " sup-dashboard-header--tools" : ""}`}>
+      <div className="sup-greeting"><h1>{data.identity.greeting}</h1><p>{data.identity.department}<i>•</i>{data.identity.role}</p></div>
+      {showTools ? (
+        <div className="sup-header-tools">
+          <label className="sup-search"><Search /><span className="sup-sr-only">Search requests, applicants, or documents</span><input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") notify(query ? `Searching for “${query}”` : "Enter a search term"); }} placeholder="Search requests, applicants, or documents..." /><kbd>⌘ K</kbd></label>
+          <button className="sup-date-control" type="button" onClick={() => notify("Date selector opened")}><CalendarDays /><span>{data.identity.date}</span><ChevronDown /></button>
+          <button className="sup-bell" type="button" aria-label="Notifications" onClick={() => notify("5 supervisor notifications")}><Bell /><b>5</b></button>
+        </div>
+      ) : null}
+    </header>
+  );
+}
+
+function HealthStrip({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <Card className="sup-health-strip">
+      {data.healthMetrics.map((metric) => (
+        <button type="button" className="sup-health-metric" key={metric.label} onClick={() => notify(`${metric.label}: ${metric.value}`)}>
+          <ToneIcon icon={metric.icon} tone={metric.tone} />
+          <span><small>{metric.label}</small><strong className={`sup-ink--${metric.tone}`}>{metric.value}</strong></span>
+          <ChevronRight />
+        </button>
+      ))}
+    </Card>
+  );
+}
+
+function ApprovalLane({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  const [approved, setApproved] = useState<string[]>([]);
+  return (
+    <Card className="sup-approval-card">
+      <PanelHeader title="Approval lane" meta="(Ready for decision)" action="View all" onAction={() => notify("Opened all approvals")} />
+      <div className="sup-approval-count">5 requests</div>
+      <div className="sup-table-scroll">
+        <table className="sup-approval-table">
+          <colgroup><col className="sup-col-request" /><col className="sup-col-applicant" /><col className="sup-col-service" /><col className="sup-col-due" /><col className="sup-col-stage" /><col className="sup-col-owner" /><col className="sup-col-decision" /><col className="sup-col-menu" /></colgroup>
+          <thead><tr><th>Request</th><th>Applicant</th><th>Service</th><th>Due date</th><th>Stage</th><th>Owner</th><th>Decision</th><th><span className="sup-sr-only">More</span></th></tr></thead>
+          <tbody>{data.approvals.map((row) => {
+            const isApproved = approved.includes(row.request);
+            return (
+              <tr key={row.request}>
+                <td><button type="button" className="sup-request-link" onClick={() => notify(`Opened ${row.request}`)}>{row.request}</button></td>
+                <td>{row.applicant}</td><td>{row.service}</td>
+                <td><strong>{row.dueDate}</strong><small className={row.dueTone ? `sup-due--${row.dueTone}` : ""}>{row.dueState}</small></td>
+                <td><span className={`sup-stage sup-stage--${row.stageTone}`}>{row.stage}</span></td><td>{row.owner}</td>
+                <td><button type="button" className={`sup-approve${isApproved ? " is-approved" : ""}`} onClick={() => { setApproved((current) => current.includes(row.request) ? current : [...current, row.request]); notify(`${row.request} ${isApproved ? "already approved" : "approved"}`); }}>{isApproved ? "Approved" : "Approve"}</button></td>
+                <td><button type="button" className="sup-icon-button" aria-label={`More actions for ${row.request}`} onClick={() => notify(`More actions for ${row.request}`)}><MoreVertical /></button></td>
+              </tr>
+            );
+          })}</tbody>
+        </table>
+      </div>
+      <TextAction className="sup-card-footer" onClick={() => notify("Opened all five approvals")}>View all approvals (5)<ArrowRight /></TextAction>
+    </Card>
+  );
+}
+
+function AttentionList({ items, notify }: { items: readonly { title: string; meta: string; tone: Tone; icon: LucideIcon }[]; notify: Notify }) {
+  return <div className="sup-attention-list">{items.map((item) => <button type="button" key={item.title} onClick={() => notify(item.title)}><ToneIcon icon={item.icon} tone={item.tone} small /><span><strong>{item.title}</strong><small>{item.meta}</small></span><ChevronRight /></button>)}</div>;
+}
+
+function ZoneOne({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <section className="sup-zone sup-zone--one">
+      <ZoneHeading number={1} title="Department health" />
+      <HealthStrip data={data} notify={notify} />
+      <div className="sup-zone-one-grid">
+        <ApprovalLane data={data} notify={notify} />
+        <div className="sup-zone-one-side">
+          <Card><PanelHeader title="Critical attention" meta={<b className="sup-count sup-count--red">3</b>} /><AttentionList items={data.criticalAttention} notify={notify} /></Card>
+          <Card><PanelHeader title="Unassigned work" meta={<b className="sup-count sup-count--violet">14</b>} /><AttentionList items={data.unassigned} notify={notify} /><TextAction className="sup-inline-footer" onClick={() => notify("Opened assignment centre")}>Assign now<ArrowRight /></TextAction></Card>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OfficerWorkload({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <Card className="sup-workload-panel"><PanelHeader title="Officer workload and capacity" action="View team" onAction={() => notify("Opened team capacity")} />
+      <div className="sup-officer-list">{data.officerWorkload.map((officer) => <button type="button" key={officer.name} onClick={() => notify(`${officer.name}: ${officer.capacity}% capacity`)}><span className="sup-avatar">{officer.avatar}</span><span className="sup-officer-copy"><strong>{officer.name}</strong><small>{officer.role}</small></span><span className="sup-capacity-track"><i className={`sup-capacity--${officer.tone}`} style={{ width: `${officer.capacity}%` }} /></span><b className={`sup-ink--${officer.tone}`}>{officer.capacity}%</b></button>)}</div>
+      <div className="sup-capacity-legend"><span><i className="sup-legend--green" />0–59% <small>Good</small></span><span><i className="sup-legend--orange" />60–85% <small>Moderate</small></span><span><i className="sup-legend--red" />86–100% <small>High</small></span></div>
+    </Card>
+  );
+}
+
+function AssignmentCentre({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <Card className="sup-assignment-panel"><PanelHeader title="Assignment centre" />
+      <div className="sup-recommendation-label">Recommendations <b>6</b></div>
+      <div className="sup-recommendations">{data.assignmentRecommendations.map((item) => <article key={item.service}><ToneIcon icon={item.icon} tone={item.tone} /><span><strong>{item.service}</strong><small>{item.volume}  •  {item.eta}</small><em>{item.match}</em></span><button type="button" onClick={() => notify(`${item.service} assigned`)}>Assign</button></article>)}</div>
+      <TextAction className="sup-inline-footer" onClick={() => notify("Opened all assignment recommendations")}>View all recommendations<ArrowRight /></TextAction>
+    </Card>
+  );
+}
+
+function DepartmentQueue({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  const [tab, setTab] = useState<"All" | "My queue" | "Team">("All");
+  return (
+    <Card className="sup-queue-panel"><PanelHeader title="Department work queue" action="View all" onAction={() => notify("Opened department queue")} />
+      <button type="button" className="sup-filter" onClick={() => notify("Queue filters opened")}>Filter<ChevronDown /></button>
+      <div className="sup-queue-tabs" role="tablist">{(["All", "My queue", "Team"] as const).map((item) => <button type="button" role="tab" aria-selected={tab === item} className={tab === item ? "is-active" : ""} onClick={() => setTab(item)} key={item}>{item}<b>{item === "All" ? 126 : item === "My queue" ? 24 : 102}</b></button>)}</div>
+      <table className="sup-queue-table"><thead><tr><th>Service</th><th>Count</th><th>Due today</th><th>Overdue</th></tr></thead><tbody>{data.departmentQueue.map((row) => <tr key={row.service}><td>{row.service}</td><td>{row.count}</td><td>{row.due}</td><td>{row.overdue}</td></tr>)}</tbody></table>
+    </Card>
+  );
+}
+
+function HandoffControl({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-handoff-panel"><PanelHeader title="Handoff control" action="View all handoffs" onAction={() => notify("Opened all handoffs")} /><div className="sup-handoff-list">{data.handoffs.map((item) => <article key={item.request}><ToneIcon icon={FileText} tone="blue" /><span><strong>{item.title}</strong><small>From: {item.from}<i>To: {item.to}</i></small><em>{item.service}  •  {item.request}</em></span><time>{item.time}</time><button type="button" onClick={() => notify(`Reviewing ${item.request}`)}>Review</button></article>)}</div></Card>;
+}
+
+function Escalations({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-escalation-panel"><PanelHeader title="Escalations and exceptions" meta={<b className="sup-count sup-count--red">4</b>} /><div className="sup-escalation-list">{data.escalations.map((item) => <article key={item.title}><ToneIcon icon={item.icon} tone={item.tone} small /><span><strong>{item.title}<i>{item.count}</i></strong><small>{item.meta}</small></span><button type="button" onClick={() => notify(`${item.action}: ${item.title}`)}>{item.action}</button></article>)}</div></Card>;
+}
+
+function DocumentExceptions({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-exceptions-panel"><PanelHeader title="Document & payment exceptions" meta={<b className="sup-count sup-count--orange">6</b>} /><div className="sup-exception-list">{data.documentExceptions.map((item) => <button type="button" key={item.title} onClick={() => notify(item.title)}><ToneIcon icon={item.icon} tone={item.tone} small /><span><strong>{item.title}</strong><small>{item.meta}</small></span><b>{item.count}</b></button>)}</div><TextAction className="sup-inline-footer" onClick={() => notify("Opened all exceptions")}>View all exceptions<ArrowRight /></TextAction></Card>;
+}
+
+function ZoneTwo({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <section className="sup-zone sup-zone--two"><ZoneHeading number={2} title="Work distribution and control" />
+      <div className="sup-zone-two-top"><OfficerWorkload data={data} notify={notify} /><AssignmentCentre data={data} notify={notify} /><DepartmentQueue data={data} notify={notify} /></div>
+      <div className="sup-zone-two-bottom"><HandoffControl data={data} notify={notify} /><Escalations data={data} notify={notify} /><DocumentExceptions data={data} notify={notify} /></div>
+    </section>
+  );
+}
+
+function SlaTrend({ data }: { data: SupervisorDashboardData }) {
+  return (
+    <div className="sup-sla-chart"><div className="sup-chart-title"><h3>SLA trend <span>(last 14 days)</span></h3><small><i />SLA on time %</small></div>
+      <div className="sup-chart-box"><ResponsiveContainer width="100%" height="100%"><LineChart data={data.slaTrend} margin={{ top: 12, right: 8, left: -18, bottom: 0 }}><CartesianGrid vertical={false} stroke="#e8edf5" /><XAxis dataKey="day" tick={{ fontSize: 8, fill: "#71809d" }} interval={2} axisLine={false} tickLine={false} /><YAxis domain={[40, 100]} tick={{ fontSize: 8, fill: "#71809d" }} tickFormatter={(value: number) => `${value}%`} axisLine={false} tickLine={false} /><Tooltip contentStyle={{ border: "1px solid #dbe3ef", borderRadius: 8, fontSize: 10 }} formatter={(value) => [`${value ?? 0}%`, "SLA on time"]} /><Line type="monotone" dataKey="value" stroke="#0866ff" strokeWidth={2} dot={{ r: 2.7, fill: "#0866ff" }} activeDot={{ r: 4 }} /></LineChart></ResponsiveContainer><span className="sup-chart-end">92%</span></div>
+    </div>
+  );
+}
+
+function ServiceFlow({ data }: { data: SupervisorDashboardData }) {
+  return (
+    <div className="sup-service-flow"><div className="sup-flow-heading"><h3>Service flow performance</h3><span>Average time against target</span></div><div className="sup-flow-stages">{data.flowStages.map((stage, index) => <div className="sup-flow-node-wrap" key={stage.title}><article className={`sup-flow-node sup-flow-node--${stage.tone}`}>{"flag" in stage && stage.flag ? <b className="sup-bottleneck">{stage.flag}</b> : null}<h4>{stage.title}</h4><div><span>{stage.average}</span><span>{stage.target}</span></div><strong>{stage.inProgress}</strong><small>In progress</small><CheckCircle2 /></article>{index < data.flowStages.length - 1 ? <ArrowRight className={`sup-flow-arrow sup-flow-arrow--${stage.tone}`} /> : null}</div>)}</div>
+      <div className="sup-flow-summary"><div className="sup-mini-ring"><strong>92%</strong></div><span>Overall SLA on time</span><i /><div><AlertCircle /><small>Overdue</small><strong className="sup-ink--red">7</strong></div><div><span className="sup-clock-dot" /><small>Due today</small><strong className="sup-ink--orange">11</strong></div><div><CheckCircle2 /><small>Completed today</small><strong>28</strong></div></div>
+    </div>
+  );
+}
+
+function RankedList({ rows, service = false, notify }: { rows: readonly { name?: string; role?: string; service?: string; score: number }[]; service?: boolean; notify: Notify }) {
+  return <ol className="sup-ranked-list">{rows.map((row, index) => { const label = service ? row.service : row.name; return <li key={label}><b>{index + 1}</b><span><strong>{label}</strong>{!service && row.role ? <small>{row.role}</small> : null}</span><div><em>{row.score}%</em><i><u style={{ width: `${row.score}%` }} /></i></div></li>; })}<TextAction onClick={() => notify(service ? "Opened service performance" : "Opened officer performance")}>View all<ArrowRight /></TextAction></ol>;
+}
+
+function Throughput({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-performance-small"><PanelHeader title="Department throughput" meta="Completed requests" /><div className="sup-throughput-kpi"><strong>128</strong><span>↑ 12%</span><small>vs May 5–11</small></div><div className="sup-bar-chart"><ResponsiveContainer width="100%" height="100%"><BarChart data={data.throughput} margin={{ top: 4, right: 0, bottom: 0, left: 0 }}><XAxis dataKey="day" tick={{ fontSize: 7, fill: "#71809d" }} axisLine={false} tickLine={false} /><Tooltip contentStyle={{ border: "1px solid #dbe3ef", borderRadius: 8, fontSize: 10 }} /><Bar dataKey="value" fill="#0866ff" radius={[3, 3, 0, 0]} /></BarChart></ResponsiveContainer></div><TextAction onClick={() => notify("Opened throughput details")}>View details<ArrowRight /></TextAction></Card>;
+}
+
+function Csat({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-performance-small sup-csat"><PanelHeader title="Applicant experience" meta="(CSAT)" /><div className="sup-csat-score"><strong>4.6</strong><span>★★★★<i>★</i></span><small>From 34 responses</small></div><div className="sup-csat-bars">{data.csat.map((row) => <div key={row.label}><span>{row.label}</span><i><u className={`sup-bg--${row.tone}`} style={{ width: `${row.value}%` }} /></i><b>{row.value}%</b></div>)}</div><TextAction onClick={() => notify("Opened applicant feedback")}>View feedback<ArrowRight /></TextAction></Card>;
+}
+
+function Insights({ data }: { data: SupervisorDashboardData }) {
+  return <Card className="sup-performance-small"><PanelHeader title="Performance insights" /><div className="sup-insights">{data.insights.map((item) => <article key={item.text}><span className={`sup-insight-dot sup-insight-dot--${item.tone}`}><AlertCircle /></span><div><strong>{item.text}</strong><small>{item.meta}</small></div></article>)}</div></Card>;
+}
+
+function ZoneThree({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return (
+    <section className="sup-zone sup-zone--three"><ZoneHeading number={3} title="Department performance" />
+      <Card className="sup-performance-hero"><ServiceFlow data={data} /><SlaTrend data={data} /></Card>
+      <div className="sup-performance-grid"><Card className="sup-performance-small"><PanelHeader title="Officer performance" meta="(SLA on time)" /><RankedList rows={data.officerPerformance} notify={notify} /></Card><Card className="sup-performance-small"><PanelHeader title="Service performance" meta="(SLA on time)" /><RankedList rows={data.servicePerformance} service notify={notify} /></Card><Throughput data={data} notify={notify} /><Csat data={data} notify={notify} /><Insights data={data} /></div>
+    </section>
+  );
+}
+
+function RecentDecisions({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-governance-card"><PanelHeader title="Recent decisions" action="View all" onAction={() => notify("Opened all decisions")} /><div className="sup-decision-list">{data.recentDecisions.map((item) => <button type="button" key={item.request} onClick={() => notify(`Opened ${item.request}`)}><ToneIcon icon={CheckCircle2} tone="green" small /><span><strong>{item.request}<i>•</i>{item.service}</strong><small>{item.meta}</small></span></button>)}</div></Card>;
+}
+
+function DepartmentActivity({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-governance-card"><PanelHeader title="Department activity" action="View all" onAction={() => notify("Opened full department activity")} /><div className="sup-timeline">{data.departmentActivity.map((item) => <article key={`${item.name}-${item.time}`}><i className={`sup-timeline-dot sup-bg--${item.tone}`} /><span><strong>{item.name}</strong> {item.action}<small>{item.meta}</small></span><time>{item.time}</time></article>)}</div></Card>;
+}
+
+function AuditHighlights({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-governance-card sup-audit-card"><PanelHeader title="Audit highlights" meta="(Last 7 days)" action="View audit log" onAction={() => notify("Opened audit log")} /><div className="sup-audit-stats">{data.auditStats.map((item) => <article key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small className={`sup-ink--${item.tone}`}>{item.delta}</small></article>)}</div><div className="sup-audit-events"><span>Audit events</span><strong>128 <small>↑ 10%</small></strong></div><div className="sup-audit-signals"><span>Top audit signals</span><p><CheckCircle2 />No policy violations detected</p><p><CheckCircle2 />All escalations resolved within SLA</p><p><CheckCircle2 />Strong documentation compliance</p></div></Card>;
+}
+
+function TeamNotifications({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-team-notifications"><PanelHeader title="Team notifications" action="View all" onAction={() => notify("Opened all notifications")} /><div>{data.notifications.map((item) => <button type="button" key={item.title} onClick={() => notify(item.title)}><ToneIcon icon={Bell} tone="violet" small /><span><strong>{item.title}</strong><small>{item.meta}</small></span></button>)}</div></Card>;
+}
+
+function ReportsExports({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <Card className="sup-reports-card"><PanelHeader title="Reports and exports" /><div className="sup-report-grid">{data.reports.map((report) => <article key={report.title}><ToneIcon icon={FileBarChart} tone={report.tone} small /><span><strong>{report.title}</strong><small>{report.meta}</small></span><div><button type="button" onClick={() => notify(`Running ${report.title}`)}>Run report</button><button type="button" onClick={() => notify(`Scheduling ${report.title}`)}>Schedule</button></div></article>)}</div><TextAction className="sup-card-footer" onClick={() => notify("Opened all reports")}>View all reports<ArrowRight /></TextAction></Card>;
+}
+
+function ZoneFour({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <section className="sup-zone sup-zone--four"><ZoneHeading number={4} title="Oversight and governance" /><div className="sup-governance-grid"><RecentDecisions data={data} notify={notify} /><DepartmentActivity data={data} notify={notify} /><AuditHighlights data={data} notify={notify} /></div><div className="sup-governance-bottom"><TeamNotifications data={data} notify={notify} /><ReportsExports data={data} notify={notify} /></div></section>;
+}
+
+function DashboardBody({ data, notify }: { data: SupervisorDashboardData; notify: Notify }) {
+  return <div className="sup-dashboard-body"><ZoneOne data={data} notify={notify} /><ZoneTwo data={data} notify={notify} /><ZoneThree data={data} notify={notify} /><ZoneFour data={data} notify={notify} /></div>;
+}
+
+export default function SupervisorDashboard({ data = supervisorDashboardData, embedded = true }: SupervisorDashboardProps) {
+  const [toast, setToast] = useState("");
+  const notify = (message: string) => { setToast(message); window.setTimeout(() => setToast(""), 2200); };
+  const body = useMemo(() => <><DashboardHeader data={data} showTools={!embedded} notify={notify} /><DashboardBody data={data} notify={notify} /></>, [data, embedded]);
+
+  return (
+    <main className={`supervisor-dashboard supervisor-dashboard--${embedded ? "embedded" : "reference"}`} data-dashboard-version="supervisor-reference-v1">
+      {embedded ? <div className="sup-dashboard-frame">{body}</div> : <div className="sup-reference-shell"><ReferenceSidebar notify={notify} /><div className="sup-reference-main">{body}</div></div>}
+      <div className={`sup-toast${toast ? " is-visible" : ""}`} role="status" aria-live="polite"><Check />{toast}</div>
+    </main>
+  );
+}

@@ -1,0 +1,24 @@
+# D30-10A Completion Checklist
+
+- [x] public verification contract exists
+- [x] TVET verification configuration exists
+- [x] configuration validation exists
+- [x] public route exists
+- [x] QR option exists
+- [x] VALID state exists
+- [x] REVOKED state exists
+- [x] EXPIRED state exists
+- [x] REPLACED state exists
+- [x] NOT FOUND state exists
+- [x] copy-link action exists
+- [x] privacy notice exists
+- [x] original-certificate disclaimer exists
+- [x] homepage navigation link exists
+- [x] TVET validation passes
+- [x] D30-10A verifier passes
+- [x] TypeScript passes
+- [x] lint passes
+- [x] tests pass
+- [x] production build passes
+- [x] Git whitespace validation passes
+- [x] D30-10A is committed separately

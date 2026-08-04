@@ -1,0 +1,22 @@
+# D30-11 — Freeze Demo Reset Behaviour
+
+- [x] existing Reset demo implementation located
+- [x] storage keys recorded
+- [x] Reset demo is visible
+- [x] session mutations are cleared
+- [x] local mutations are cleared
+- [x] reset on `/demo` remains on `/demo`
+- [x] Savannah state is restored
+- [x] reset preserves `/demo/officer`
+- [x] Reset remains available from Officer route
+- [x] no external mutating request occurs
+- [x] no uncaught browser error occurs
+- [x] Playwright passes
+- [x] Demo Pack validation passes
+- [x] TypeScript passes
+- [x] lint passes
+- [x] Vitest passes
+- [x] production build passes
+- [x] D30-11 verifier passes
+- [x] implementation commit created
+- [x] checklist completion commit created

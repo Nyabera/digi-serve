@@ -1,0 +1,20 @@
+{
+  "stage": "D31-9",
+  "route": "/demo/supervisor",
+  "method": "Mean sampled RGB similarity after normalization; manual overlay review remains required.",
+  "overlayOpacity": 0.5,
+  "currentCapture": {
+    "width": 1536,
+    "height": 2858
+  },
+  "designReference": {
+    "width": 864,
+    "height": 1821,
+    "parityScore": 95.8
+  },
+  "bundleImplementationPreview": {
+    "width": 1536,
+    "height": 2842,
+    "parityScore": 96.35
+  }
+}

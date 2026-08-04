@@ -1,0 +1,47 @@
+FAIDIA DEMO ROUTE FILE INVENTORY
+================================
+
+Generated: 2026-07-27T18:45:44+03:00
+Route count: 41
+
+/demo/admin                                                app/demo/admin/page.tsx
+/demo/admin/workflows/builder                              app/demo/admin/workflows/builder/page.tsx
+/demo/admin/workflows                                      app/demo/admin/workflows/page.tsx
+/demo/apply/[serviceSlug]                                  app/demo/apply/[serviceSlug]/page.tsx
+/demo/apply/certificate-replacement                        app/demo/apply/certificate-replacement/page.tsx
+/demo/apply/class-registration                             app/demo/apply/class-registration/page.tsx
+/demo/apply/course-application                             app/demo/apply/course-application/page.tsx
+/demo/apply/industrial-attachment-letter                   app/demo/apply/industrial-attachment-letter/page.tsx
+/demo/apply/student-clearance                              app/demo/apply/student-clearance/page.tsx
+/demo/department/handoffs/[handoffId]                      app/demo/department/handoffs/[handoffId]/page.tsx
+/demo/department                                           app/demo/department/page.tsx
+/demo/officer                                              app/demo/officer/page.tsx
+/demo/officer/queue                                        app/demo/officer/queue/page.tsx
+/demo/officer/reports/sla                                  app/demo/officer/reports/sla/page.tsx
+/demo/officer/requests/[requestId]                         app/demo/officer/requests/[requestId]/page.tsx
+/demo/officer/sla                                          app/demo/officer/sla/page.tsx
+/demo/officer/sla-monitor                                  app/demo/officer/sla-monitor/page.tsx
+/demo/officer/tasks                                        app/demo/officer/tasks/page.tsx
+/demo/outcomes/[requestId]                                 app/demo/outcomes/[requestId]/page.tsx
+/demo                                                      app/demo/page.tsx
+/demo/reports                                              app/demo/reports/page.tsx
+/demo/requests/[requestId]/confirmation                    app/demo/requests/[requestId]/confirmation/page.tsx
+/demo/services/[serviceSlug]                               app/demo/services/[serviceSlug]/page.tsx
+/demo/services/certificate-replacement                     app/demo/services/certificate-replacement/page.tsx
+/demo/services/class-registration                          app/demo/services/class-registration/page.tsx
+/demo/services/course-application                          app/demo/services/course-application/page.tsx
+/demo/services/industrial-attachment-letter                app/demo/services/industrial-attachment-letter/page.tsx
+/demo/services/student-clearance                           app/demo/services/student-clearance/page.tsx
+/demo/sign-up                                              app/demo/sign-up/page.tsx
+/demo/supervisor/approvals/[requestId]                     app/demo/supervisor/approvals/[requestId]/page.tsx
+/demo/supervisor/audit                                     app/demo/supervisor/audit/page.tsx
+/demo/supervisor/audit-trail                               app/demo/supervisor/audit-trail/page.tsx
+/demo/supervisor                                           app/demo/supervisor/page.tsx
+/demo/supervisor/sla                                       app/demo/supervisor/sla/page.tsx
+/demo/supervisor/sla-monitor                               app/demo/supervisor/sla-monitor/page.tsx
+/demo/track/ATTACH-2026-0088                               app/demo/track/ATTACH-2026-0088/page.tsx
+/demo/track/CERT-2026-0061                                 app/demo/track/CERT-2026-0061/page.tsx
+/demo/track/CLASS-2026-0109                                app/demo/track/CLASS-2026-0109/page.tsx
+/demo/track/CLEAR-2026-0042                                app/demo/track/CLEAR-2026-0042/page.tsx
+/demo/track/COURSE-2026-01482                              app/demo/track/COURSE-2026-01482/page.tsx
+/demo/track/[requestId]                                    app/demo/track/[requestId]/page.tsx

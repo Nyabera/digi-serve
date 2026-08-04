@@ -1,0 +1,202 @@
+.portalTarget {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.panel {
+  margin: 0 0 16px;
+  border-bottom: 1px solid #dce4f0;
+  padding: 0 0 16px;
+  color: #17233f;
+  font-family:
+    var(--font-plus-jakarta-sans),
+    var(--font-plus-jakarta),
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+}
+
+.heading h3,
+.heading p {
+  margin: 0;
+}
+
+.heading h3 {
+  color: #101b52;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.heading p {
+  margin-top: 3px;
+  color: #68748e;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.modeSelector {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-top: 11px;
+}
+
+.modeSelector button,
+.externalActions button {
+  min-height: 44px;
+  border: 1px solid #cad5e7;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0 14px;
+  color: #44516e;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.modeSelector button[data-active="true"] {
+  border-color: #76a1ff;
+  background: #edf3ff;
+  color: #174bd4;
+}
+
+.orLabel {
+  color: #8993a8;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.internalNotice {
+  margin: 9px 0 0;
+  border-radius: 7px;
+  background: #f6f8fc;
+  padding: 9px 10px;
+  color: #65718d;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.externalFields {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.7fr)
+    minmax(0, 1fr)
+    minmax(0, 1.3fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #27345f;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+}
+
+.field label span {
+  color: #7a849c;
+  font-weight: 500;
+}
+
+.field :where(input, select, textarea) {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #d5ddea;
+  border-radius: 8px;
+  background: #f9faff;
+  padding: 0 11px;
+  color: #27345f;
+  font: inherit;
+  font-size: 10px;
+}
+
+.field textarea {
+  min-height: 82px;
+  padding-top: 10px;
+  resize: vertical;
+}
+
+.field :where(input, select, textarea):focus-visible,
+.modeSelector button:focus-visible,
+.externalActions button:focus-visible {
+  outline: 3px solid #2457e6;
+  outline-offset: 2px;
+}
+
+.field [aria-invalid="true"] {
+  border-color: #e34b55;
+  background: #fff7f7;
+}
+
+.messageField {
+  grid-column: 1 / -1;
+}
+
+.externalActions {
+  display: flex;
+  grid-column: 1 / -1;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.externalActions p {
+  margin: 0;
+  color: #65718d;
+  font-size: 9.5px;
+  line-height: 14px;
+}
+
+.externalActions button {
+  border-color: #155eef;
+  background: #155eef;
+  color: #ffffff;
+}
+
+@media (max-width: 68rem) {
+  .externalFields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .messageField {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .modeSelector,
+  .externalFields {
+    grid-template-columns: 1fr;
+  }
+
+  .orLabel {
+    text-align: center;
+  }
+
+  .messageField {
+    grid-column: auto;
+  }
+
+  .externalActions {
+    display: grid;
+  }
+
+  .externalActions button {
+    width: 100%;
+  }
+}

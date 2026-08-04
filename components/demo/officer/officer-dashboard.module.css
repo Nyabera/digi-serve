@@ -1,0 +1,39 @@
+.dashboard { display: grid; gap: var(--space-5); }
+.metricGrid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-3); }
+.dashboardGrid { display: grid; min-width: 0; grid-template-columns: minmax(0, 1fr) minmax(19rem, 22rem); gap: var(--space-4); align-items: start; }
+.queuePanel, .handoffPanel, .slaPanel { min-width: 0; border: var(--border-size-thin) solid var(--border); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--elevation-control); }
+.panelHeader { display: flex; min-width: 0; align-items: flex-start; justify-content: space-between; gap: var(--space-3); border-bottom: var(--border-size-thin) solid var(--border); padding: var(--space-4); }
+.panelHeaderCopy { display: grid; min-width: 0; gap: var(--space-1); }
+.panelHeaderCopy p { color: var(--muted-foreground); }
+.panelAction, .tableAction { display: inline-flex; flex: none; align-items: center; gap: var(--space-1); color: var(--primary); font-size: 0.6875rem; font-weight: var(--font-weight-semibold); text-decoration: none; }
+.panelAction:hover, .tableAction:hover { color: var(--primary-hover); text-decoration: underline; text-underline-offset: 0.2em; }
+.panelAction svg, .tableAction svg { width: var(--icon-14); height: var(--icon-14); }
+.requestCell, .serviceCell, .dueCell { display: grid; gap: 0.125rem; }
+.requestCell strong, .serviceCell strong, .dueCell strong { color: var(--foreground); }
+.requestCell span, .serviceCell span, .dueCell span { color: var(--muted-foreground); font-size: 0.625rem; line-height: 0.875rem; }
+.rightRail { display: grid; min-width: 0; gap: var(--space-4); }
+.handoffItems { display: grid; }
+.handoffItem + .handoffItem { border-top: var(--border-size-thin) solid var(--border); }
+.handoffLink { display: grid; min-width: 0; gap: var(--space-2); padding: var(--space-3) var(--space-4); color: var(--text); text-decoration: none; }
+.handoffLink:hover { background: var(--surface-subtle); }
+.handoffTopline, .handoffBottomline { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.handoffTopline strong { color: var(--foreground); }
+.handoffAction { overflow: hidden; color: var(--muted-foreground); font-size: 0.6875rem; line-height: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+.handoffBottomline span { color: var(--muted-foreground); font-size: 0.625rem; line-height: 0.875rem; }
+.slaPanel { padding: var(--space-4); }
+.slaHeader { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.slaHeader span { color: var(--status-success, var(--primary)); font-size: 0.6875rem; font-weight: var(--font-weight-bold); }
+.slaTrack { height: 0.5rem; margin-top: var(--space-4); overflow: hidden; border-radius: 9999px; background: var(--surface-subtle); }
+.slaFill { width: 84%; height: 100%; border-radius: inherit; background: var(--primary); }
+.slaLegend { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); margin-top: var(--space-3); color: var(--muted-foreground); font-size: 0.625rem; line-height: 0.875rem; }
+.topbarSelect { min-width: 8.5rem; max-width: 12rem; }
+.topbarAction { white-space: nowrap; }
+.mobileQueueCards { display: none; }
+.mobileQueueCard { display: grid; gap: var(--space-3); border-bottom: var(--border-size-thin) solid var(--border); padding: var(--space-4); }
+.mobileQueueCard:last-child { border-bottom: 0; }
+.mobileQueueTopline, .mobileQueueMeta, .mobileQueueFooter { display: flex; min-width: 0; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.mobileQueueMeta { color: var(--muted-foreground); font-size: 0.6875rem; }
+@media (max-width: 89.99rem) { .metricGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 74.99rem) { .dashboardGrid { grid-template-columns: minmax(0, 1fr); } .rightRail { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rightRail > :last-child { grid-column: 1 / -1; } }
+@media (max-width: 63.99rem) { .metricGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rightRail { grid-template-columns: minmax(0, 1fr); } .rightRail > :last-child { grid-column: auto; } }
+@media (max-width: 47.99rem) { .dashboard { gap: var(--space-4); } .metricGrid { grid-template-columns: minmax(0, 1fr); } .desktopQueueTable { display: none; } .mobileQueueCards { display: block; } .panelHeader { padding: var(--space-3) var(--content-gutter-mobile); } }

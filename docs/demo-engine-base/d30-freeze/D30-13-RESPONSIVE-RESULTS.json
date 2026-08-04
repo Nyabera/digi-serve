@@ -1,0 +1,206 @@
+{
+  "stage": "D30-13",
+  "status": "passed",
+  "responsiveCases": {
+    "expected": 24,
+    "recorded": 24,
+    "passed": 24,
+    "missing": [],
+    "failed": []
+  },
+  "viewports": {
+    "desktop-1440x900": {
+      "expected": 6,
+      "passed": 6
+    },
+    "tablet-landscape-1024x768": {
+      "expected": 6,
+      "passed": 6
+    },
+    "tablet-portrait-768x1024": {
+      "expected": 6,
+      "passed": 6
+    },
+    "mobile-390x844": {
+      "expected": 6,
+      "passed": 6
+    }
+  },
+  "playwright": {
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "unknown": 0
+  },
+  "tests": [
+    {
+      "title": "responsive:desktop-1440x900:home",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:desktop-1440x900:verify-certificate",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:desktop-1440x900:track",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:desktop-1440x900:officer",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:desktop-1440x900:supervisor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:desktop-1440x900:admin",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:home",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:verify-certificate",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:track",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:officer",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:supervisor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-landscape-1024x768:admin",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:home",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:verify-certificate",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:track",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:officer",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:supervisor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:tablet-portrait-768x1024:admin",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:home",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:verify-certificate",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:track",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:officer",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:supervisor",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    },
+    {
+      "title": "responsive:mobile-390x844:admin",
+      "status": "passed",
+      "rawStatus": "expected",
+      "attemptStatus": "passed",
+      "file": "demo-responsive-acceptance.pw.ts"
+    }
+  ]
+}

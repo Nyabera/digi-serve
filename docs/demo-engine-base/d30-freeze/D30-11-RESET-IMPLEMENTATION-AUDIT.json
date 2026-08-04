@@ -1,0 +1,34 @@
+{
+  "stage": "D30-11",
+  "resetImplementationFiles": [
+    {
+      "path": "components/demo/controls/presentation-controls.tsx",
+      "containsResetLabel": true,
+      "containsStorageLogic": false,
+      "containsExternalWriteToken": false
+    },
+    {
+      "path": "components/demo/presentation/demo-presentation-frame.tsx",
+      "containsResetLabel": true,
+      "containsStorageLogic": true,
+      "containsExternalWriteToken": true
+    },
+    {
+      "path": "features/demo/state/demo-state-context.tsx",
+      "containsResetLabel": false,
+      "containsStorageLogic": true,
+      "containsExternalWriteToken": false
+    },
+    {
+      "path": "features/demo-service-workflows/components/service-workflow-pages.tsx",
+      "containsResetLabel": true,
+      "containsStorageLogic": true,
+      "containsExternalWriteToken": true
+    }
+  ],
+  "storageKeysUnderContract": [],
+  "storageKeyContractSource": "No literal localStorage or sessionStorage keys are owned by the current Reset implementation.",
+  "storageContractMode": "no-browser-storage-contract",
+  "speculativeFallbackKeysIncluded": false,
+  "resetControlLocated": true
+}
