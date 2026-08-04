@@ -11,6 +11,7 @@ import {
   QrCode,
   ShieldCheck,
   StickyNote,
+  UsersRound,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ export const OFFICER_ROUTE_KEYS = [
   "sla",
   "overdueTasks",
   "workflowInbox",
+  "sharedWork",
   "approvalQueue",
   "returnedToApplicant",
   "documentReview",
@@ -52,6 +54,7 @@ export const OFFICER_ROUTE_HREFS = {
   sla: "/demo/officer/sla-monitor",
   overdueTasks: "/demo/officer/tasks/overdue",
   workflowInbox: "/demo/officer/workflow",
+  sharedWork: "/demo/officer/shared-work",
   approvalQueue: "/demo/officer/workflow/approvals",
   returnedToApplicant: "/demo/officer/workflow/returned",
   documentReview: "/demo/officer/documents/review",
@@ -97,7 +100,8 @@ export type OfficerNavigationIconSymbol =
   | "MessageSquareText"
   | "QrCode"
   | "ShieldCheck"
-  | "StickyNote";
+  | "StickyNote"
+  | "UsersRound";
 
 type OfficerNavigationItemBase = {
   readonly id: string;
@@ -217,6 +221,18 @@ export const OFFICER_NAVIGATION_CONTRACT = [
         icon: Inbox,
         iconSymbol: "Inbox",
         exactMatch: false,
+        activePrefixes: NO_ACTIVE_PREFIXES,
+        legacyAliases: NO_LEGACY_ALIASES,
+      },
+      {
+        id: "shared-work",
+        label: "Shared Work",
+        kind: "route",
+        routeKey: "sharedWork",
+        href: OFFICER_ROUTE_HREFS.sharedWork,
+        icon: UsersRound,
+        iconSymbol: "UsersRound",
+        exactMatch: true,
         activePrefixes: NO_ACTIVE_PREFIXES,
         legacyAliases: NO_LEGACY_ALIASES,
       },

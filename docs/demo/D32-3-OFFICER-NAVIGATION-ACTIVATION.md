@@ -20,15 +20,15 @@ The live officer result now maps `OFFICER_NAVIGATION_CONTRACT` directly into the
 | Group | Items |
 | --- | --- |
 | Operations | Dashboard; My Tasks; Application Queue; SLA Monitor; Overdue Tasks |
-| Workflow | Workflow Inbox; Approval Queue; Returned to Applicant |
+| Workflow | Workflow Inbox; Shared Work; Approval Queue; Returned to Applicant |
 | Documents | Document Review; Generated PDFs; Issued Documents; QR Verification |
 | Communication & Account | Applicant Messages; Internal Notes; Log Out |
 
-The D32-1 contract is authoritative: it has four groups, fourteen route items, and one action. It does not define a separate `Shared Work` item, so none is rendered.
+> **D32-3A amendment:** The current D32-1 contract is authoritative with four groups, fifteen route items, and one action. Shared Work is rendered immediately after Workflow Inbox.
 
 ## Route And Action Handling
 
-- The fourteen contract route items render as Next.js `Link` elements with contract hrefs under `/demo/officer/**`.
+- The fifteen contract route items render as Next.js `Link` elements with contract hrefs under `/demo/officer/**`.
 - Log Out renders with the same `nav-item` styling as a native button, has no href, closes the mobile drawer, and uses the explicit demo handler to navigate to `/demo`.
 - No logout route or authentication/session behavior was added.
 
@@ -40,7 +40,7 @@ This gives Dashboard exclusive ownership of `/demo/officer`, My Tasks exclusive 
 
 ## Removed Visible Legacy Items
 
-The visible officer sidebar no longer includes the previous Documents Hub, Shared Workflows, Review Invitations, Ask for Feedback, Uploaded Documents, Due Soon Tasks, Correspondence, Notification Log, Workflow Invites, Feedback Requests, Knowledge Base, Bulk Actions, Service Rules, My Profile, Settings, Help Centre, or other non-contract officer entries.
+The visible officer sidebar no longer includes the previous Documents Hub, Shared Workflows, Review Invitations, Ask for Feedback, Uploaded Documents, Due Soon Tasks, Correspondence, Notification Log, Workflow Invites, Feedback Requests, Knowledge Base, Bulk Actions, Service Rules, My Profile, Settings, Help Centre, or other non-contract officer entries. Shared Work is the one canonical replacement for Shared Workflows.
 
 ## Desktop And Mobile Proof
 
@@ -85,7 +85,7 @@ The D32-1 contract, route registry, officer layout, canonical officer pages, off
 ## Acceptance Checklist
 
 - [x] Live officer navigation is sourced from the D32-1 contract.
-- [x] The contract inventory remains four groups, fourteen routes, and one action.
+- [x] The current contract inventory is four groups, fifteen routes, and one action.
 - [x] Route items remain officer-owned and Log Out remains an action.
 - [x] Active ownership uses contract metadata.
 - [x] Desktop and mobile use the same sidebar data.

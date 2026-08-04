@@ -68,13 +68,13 @@ test("history and the mobile drawer preserve canonical navigation behavior", asy
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto("/demo/officer/tasks", { waitUntil: "networkidle" });
-  await page.goto("/demo/officer/tasks/overdue", { waitUntil: "networkidle" });
+  await page.goto("/demo/officer/workflow", { waitUntil: "networkidle" });
+  await page.goto("/demo/officer/shared-work", { waitUntil: "networkidle" });
 
   await page.goBack({ waitUntil: "networkidle" });
-  await expectOfficerShell(page, "My Tasks");
+  await expectOfficerShell(page, "Workflow Inbox");
   await page.goForward({ waitUntil: "networkidle" });
-  await expectOfficerShell(page, "Overdue Tasks");
+  await expectOfficerShell(page, "Shared Work");
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/demo/officer", { waitUntil: "networkidle" });
@@ -88,10 +88,10 @@ test("history and the mobile drawer preserve canonical navigation behavior", asy
   });
 
   await expect(closeNavigation).toBeEnabled();
-  await sidebar.getByRole("link", { name: "My Tasks" }).click();
-  await expect(page).toHaveURL(/\/demo\/officer\/tasks$/);
+  await sidebar.getByRole("link", { name: "Shared Work" }).click();
+  await expect(page).toHaveURL(/\/demo\/officer\/shared-work$/);
   await expect(closeNavigation).toBeDisabled();
-  await expectOfficerShell(page, "My Tasks");
+  await expectOfficerShell(page, "Shared Work");
 
   await page.getByLabel("Open navigation").click();
   await expect(closeNavigation).toBeEnabled();

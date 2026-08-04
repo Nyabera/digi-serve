@@ -11,6 +11,7 @@ import {
   QrCode,
   ShieldCheck,
   StickyNote,
+  UsersRound,
 } from "lucide-react";
 import { describe, expect, it } from "vitest";
 
@@ -42,7 +43,12 @@ const expectedGroups = [
   {
     id: "workflow",
     label: "Workflow",
-    items: ["Workflow Inbox", "Approval Queue", "Returned to Applicant"],
+    items: [
+      "Workflow Inbox",
+      "Shared Work",
+      "Approval Queue",
+      "Returned to Applicant",
+    ],
   },
   {
     id: "documents",
@@ -68,7 +74,7 @@ function expectUnique(values: readonly string[]) {
 describe("D32-1 officer navigation contract", () => {
   it("locks the exact group and item order", () => {
     expect(OFFICER_NAVIGATION_CONTRACT).toHaveLength(4);
-    expect(OFFICER_NAVIGATION_ITEMS).toHaveLength(15);
+    expect(OFFICER_NAVIGATION_ITEMS).toHaveLength(16);
     expect(
       OFFICER_NAVIGATION_CONTRACT.map(({ id, label, items }) => ({
         id,
@@ -87,8 +93,8 @@ describe("D32-1 officer navigation contract", () => {
     expectUnique(OFFICER_NAVIGATION_ROUTE_ITEMS.map((item) => item.href));
   });
 
-  it("contains 14 canonical routes and one logout action", () => {
-    expect(OFFICER_NAVIGATION_ROUTE_ITEMS).toHaveLength(14);
+  it("contains 15 canonical routes and one logout action", () => {
+    expect(OFFICER_NAVIGATION_ROUTE_ITEMS).toHaveLength(15);
     expect(OFFICER_NAVIGATION_ACTION_ITEMS).toHaveLength(1);
     expect(OFFICER_NAVIGATION_ACTION_ITEMS[0]).toMatchObject({
       id: "log-out",
@@ -132,6 +138,7 @@ describe("D32-1 officer navigation contract", () => {
       "sla-monitor": Clock3,
       "overdue-tasks": Clock3,
       "workflow-inbox": Inbox,
+      "shared-work": UsersRound,
       "approval-queue": ShieldCheck,
       "returned-to-applicant": Clock3,
       "document-review": FileText,
@@ -181,11 +188,11 @@ describe("D32-1 officer navigation contract", () => {
     expect(applicationQueue?.exactMatch).toBe(false);
   });
 
-  it("locks exact matching to Dashboard and My Tasks", () => {
+  it("locks exact matching to Dashboard, My Tasks and Shared Work", () => {
     expect(
       OFFICER_NAVIGATION_ROUTE_ITEMS.filter((item) => item.exactMatch).map(
         (item) => item.id,
       ),
-    ).toEqual(["dashboard", "my-tasks"]);
+    ).toEqual(["dashboard", "my-tasks", "shared-work"]);
   });
 });

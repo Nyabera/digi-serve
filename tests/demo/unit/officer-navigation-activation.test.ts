@@ -127,15 +127,15 @@ describe("D32-3 officer navigation activation", () => {
     expect(navigationSource).not.toContain("Documents Hub");
   });
 
-  it("contains four groups, fourteen links, and one logout action in contract order", () => {
+  it("contains four groups, fifteen links, and one logout action in contract order", () => {
     const groups = officerNavigation();
     const items = officerItems();
     const routeItems = items.filter((item) => item.kind === "route");
     const actionItems = items.filter((item) => item.kind === "action");
 
     expect(groups).toHaveLength(4);
-    expect(items).toHaveLength(15);
-    expect(routeItems).toHaveLength(14);
+    expect(items).toHaveLength(16);
+    expect(routeItems).toHaveLength(15);
     expect(actionItems).toHaveLength(1);
     expect(actionItems[0]).toMatchObject({
       id: "log-out",
@@ -189,6 +189,9 @@ describe("D32-3 officer navigation activation", () => {
     ]);
     expect(activeOfficerItemIds(OFFICER_ROUTE_HREFS.overdueTasks)).toEqual([
       "overdue-tasks",
+    ]);
+    expect(activeOfficerItemIds(OFFICER_ROUTE_HREFS.sharedWork)).toEqual([
+      "shared-work",
     ]);
     expect(activeOfficerItemIds("/demo/officer/sla")).toEqual([
       "sla-monitor",

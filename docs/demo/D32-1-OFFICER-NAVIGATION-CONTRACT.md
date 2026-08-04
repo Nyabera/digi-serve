@@ -141,9 +141,12 @@ This prevents public `/demo` from being mistaken for a canonical officer logout 
 
 ## D32-1 acceptance checklist
 
+> **D32-3A amendment:** The historical D32-1 contract was later extended with the canonical `Shared Work` route. The current contract has sixteen items: fifteen routes and one action.
+
 - [x] Exactly four groups are defined in the required order.
-- [x] Exactly fifteen items are defined in the required order.
-- [x] Fourteen items are routes and one item is an action.
+- [x] Historically, exactly fifteen items were defined in the required order.
+- [x] Currently, sixteen items are defined in the required order.
+- [x] Currently, fifteen items are routes and one item is an action.
 - [x] Labels, group IDs, item IDs, and route keys are locked.
 - [x] IDs, route keys, and canonical hrefs are unique.
 - [x] All canonical hrefs are clean `/demo/officer` routes.

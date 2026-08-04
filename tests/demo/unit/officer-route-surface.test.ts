@@ -17,6 +17,7 @@ const canonicalHrefs = Object.values(OFFICER_ROUTE_HREFS);
 const newCanonicalHrefs = [
   OFFICER_ROUTE_HREFS.overdueTasks,
   OFFICER_ROUTE_HREFS.workflowInbox,
+  OFFICER_ROUTE_HREFS.sharedWork,
   OFFICER_ROUTE_HREFS.approvalQueue,
   OFFICER_ROUTE_HREFS.returnedToApplicant,
   OFFICER_ROUTE_HREFS.documentReview,
@@ -65,8 +66,8 @@ function containsLogoutPage(directory: string): boolean {
 }
 
 describe("D32-2 officer route surface", () => {
-  it("maps all 14 canonical contract hrefs to App Router pages under the officer tree", () => {
-    expect(canonicalHrefs).toHaveLength(14);
+  it("maps all 15 canonical contract hrefs to App Router pages under the officer tree", () => {
+    expect(canonicalHrefs).toHaveLength(15);
 
     for (const href of canonicalHrefs) {
       const pagePath = pagePathFor(href);
