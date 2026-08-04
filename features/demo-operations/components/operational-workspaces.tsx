@@ -684,6 +684,340 @@ export function OfficerTasksWorkspace({
   );
 }
 
+type OfficerWorkflowView = "inbox" | "approvals" | "returned";
+
+type OfficerWorkflowItem = OfficerTask & {
+  readonly workflowStatus: "In review" | "Awaiting approval" | "Returned to applicant";
+  readonly statusTone: "good" | "warning" | "danger";
+};
+
+function getOfficerWorkflowItems(view: OfficerWorkflowView) {
+  const items: readonly OfficerWorkflowItem[] = OFFICER_TASKS.map((task) => {
+    if (task.step === "Applicant correction") {
+      return {
+        ...task,
+        workflowStatus: "Returned to applicant",
+        statusTone: "danger",
+      };
+    }
+
+    if (task.step === "Registrar approval") {
+      return {
+        ...task,
+        workflowStatus: "Awaiting approval",
+        statusTone: "warning",
+      };
+    }
+
+    return {
+      ...task,
+      workflowStatus: "In review",
+      statusTone: "good",
+    };
+  });
+
+  if (view === "approvals") {
+    return items.filter((item) => item.workflowStatus === "Awaiting approval");
+  }
+
+  if (view === "returned") {
+    return items.filter((item) => item.workflowStatus === "Returned to applicant");
+  }
+
+  return items;
+}
+
+const workflowViewCopy: Record<
+  OfficerWorkflowView,
+  { readonly title: string; readonly description: string; readonly action: string }
+> = {
+  inbox: {
+    title: "Workflow Inbox",
+    description: "Monitor officer-owned handoffs and move each request through its next operational step.",
+    action: "Record workflow update",
+  },
+  approvals: {
+    title: "Approval Queue",
+    description: "Review requests that have completed officer checks and are ready for registrar approval.",
+    action: "Confirm readiness",
+  },
+  returned: {
+    title: "Returned to Applicant",
+    description: "Track requests awaiting applicant corrections or additional supporting information.",
+    action: "Send reminder",
+  },
+};
+
+export function OfficerWorkflowWorkspace({
+  canonicalHref,
+  view,
+}: {
+  readonly canonicalHref: string;
+  readonly view: OfficerWorkflowView;
+}) {
+  const [query, setQuery] = useState("");
+  const [message, setMessage] = useState("");
+  const items = getOfficerWorkflowItems(view);
+  const visibleItems = items.filter((item) => {
+    const value = query.trim().toLowerCase();
+
+    return (
+      !value ||
+      [item.id, item.applicant, item.service, item.step, item.workflowStatus]
+        .some((candidate) => candidate.toLowerCase().includes(value))
+    );
+  });
+  const [selectedId, setSelectedId] = useState(items[0]?.id ?? "");
+  const selectedItem =
+    visibleItems.find((item) => item.id === selectedId) ??
+    items.find((item) => item.id === selectedId) ??
+    items[0];
+  const copy = workflowViewCopy[view];
+
+  return (
+    <main className={styles.workspace} data-officer-workflow-route={canonicalHref}>
+      <PageHeader title={copy.title} description={copy.description} />
+
+      <MetricGrid
+        metrics={[
+          {
+            label: "Inbox items",
+            value: String(getOfficerWorkflowItems("inbox").length),
+            context: "Officer-owned active requests",
+            tone: "good",
+          },
+          {
+            label: "Awaiting approval",
+            value: String(getOfficerWorkflowItems("approvals").length),
+            context: "Ready for registrar decision",
+            tone: "warning",
+          },
+          {
+            label: "Applicant corrections",
+            value: String(getOfficerWorkflowItems("returned").length),
+            context: "Returned with a clear next step",
+            tone: "danger",
+          },
+          {
+            label: "Due today",
+            value: String(OFFICER_TASKS.filter((task) => task.group === "Today").length),
+            context: "Review before close of business",
+            tone: "warning",
+          },
+          {
+            label: "Overdue",
+            value: String(OFFICER_TASKS.filter((task) => task.status === "Overdue").length),
+            context: "Requires active follow-up",
+            tone: "danger",
+          },
+          {
+            label: "Waiting",
+            value: String(OFFICER_TASKS.filter((task) => task.status === "Waiting").length),
+            context: "External response in progress",
+            tone: "good",
+          },
+        ]}
+      />
+
+      <section className={styles.tasksLayout}>
+        <article className={styles.panel}>
+          <div className={styles.queueTools}>
+            <input
+              aria-label={`Search ${copy.title.toLowerCase()}`}
+              className={styles.input}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search by request, applicant or service..."
+              type="search"
+              value={query}
+            />
+          </div>
+          <div className={styles.taskList}>
+            {visibleItems.map((item) => (
+              <button
+                className={styles.taskRow}
+                data-selected={selectedItem?.id === item.id ? "true" : undefined}
+                key={item.id}
+                onClick={() => {
+                  setSelectedId(item.id);
+                  setMessage("");
+                }}
+                type="button"
+              >
+                <strong>{item.id}</strong>
+                <span>{item.applicant}</span>
+                <span>{item.service}</span>
+                <span className={styles.statusBadge} data-status={item.status === "Overdue" ? "Overdue" : item.workflowStatus === "Awaiting approval" ? "Due soon" : undefined}>
+                  {item.workflowStatus}
+                </span>
+              </button>
+            ))}
+            {visibleItems.length === 0 ? (
+              <p className={styles.emptyState}>No workflow records match this filter.</p>
+            ) : null}
+          </div>
+        </article>
+
+        {selectedItem ? (
+          <article className={styles.panel}>
+            <div className={styles.panelHeader}>
+              <div className={styles.inlineActions}>
+                <h2>{selectedItem.id}</h2>
+                <span className={styles.statusBadge} data-status={selectedItem.status === "Overdue" ? "Overdue" : selectedItem.workflowStatus === "Awaiting approval" ? "Due soon" : undefined}>
+                  {selectedItem.workflowStatus}
+                </span>
+              </div>
+              <Link className={styles.button} href={`/demo/officer/requests/${selectedItem.id}`}>
+                Open case
+              </Link>
+            </div>
+            <div className={styles.caseWorkspace}>
+              <section className={styles.caseSummary}>
+                <div><small>Applicant</small><strong>{selectedItem.applicant}</strong></div>
+                <div><small>Service</small><strong>{selectedItem.service}</strong></div>
+                <div><small>Current step</small><strong>{selectedItem.step}</strong></div>
+                <div><small>Due</small><strong>{selectedItem.due}</strong></div>
+              </section>
+              <Workflow currentStep={selectedItem.step} completed={false} />
+              <section className={styles.threeColumns}>
+                <article className={styles.miniCard}>
+                  <h3>Officer ownership</h3>
+                  <p>Student Records remains the coordinating workspace for this request.</p>
+                </article>
+                <article className={styles.miniCard}>
+                  <h3>Next action</h3>
+                  <p>{view === "returned" ? "Review the applicant response when new information arrives." : "Keep the workflow record current before handing the request forward."}</p>
+                </article>
+                <article className={styles.miniCard}>
+                  <h3>Workflow note</h3>
+                  <button className={styles.button} onClick={() => setMessage(`${copy.action} recorded for ${selectedItem.id} in this demo session.`)} type="button">
+                    {copy.action}
+                  </button>
+                </article>
+              </section>
+              <p className={styles.activityMessage} role="status">{message}</p>
+            </div>
+          </article>
+        ) : null}
+      </section>
+    </main>
+  );
+}
+
+type OfficerCommunicationKind = "applicant" | "internal";
+
+const applicantMessages = OFFICER_TASKS.slice(0, 5).map((task, index) => ({
+  id: `MSG-${task.id}`,
+  requestId: task.id,
+  name: task.applicant,
+  subject: index % 2 === 0 ? `Update requested for ${task.service}` : `Question about ${task.service}`,
+  detail: index % 2 === 0 ? "Supporting information has been added to the request." : "The applicant is awaiting a clear response from Student Records.",
+  received: `${index + 1}h ago`,
+}));
+
+const initialInternalNotes = AUDIT_EVENTS.filter((event) => event.category === "Comments").map((event) => ({
+  id: event.id,
+  requestId: event.id.includes("0004") ? "REQ-2026-0715" : "REQ-2026-0718",
+  author: event.actor,
+  detail: event.description,
+  recordedAt: event.time,
+}));
+
+export function OfficerCommunicationsWorkspace({
+  canonicalHref,
+  kind,
+}: {
+  readonly canonicalHref: string;
+  readonly kind: OfficerCommunicationKind;
+}) {
+  const [query, setQuery] = useState("");
+  const [message, setMessage] = useState("");
+  const [note, setNote] = useState("");
+  const [notes, setNotes] = useState(initialInternalNotes);
+  const isApplicant = kind === "applicant";
+  const records = isApplicant ? applicantMessages : notes;
+  const visibleRecords = records.filter((record) => {
+    const value = query.trim().toLowerCase();
+    return !value || Object.values(record).some((candidate) => String(candidate).toLowerCase().includes(value));
+  });
+
+  function addNote() {
+    const value = note.trim();
+    if (!value) {
+      setMessage("Enter an internal note before saving.");
+      return;
+    }
+
+    setNotes((current) => [
+      {
+        id: `NOTE-${Date.now()}`,
+        requestId: OFFICER_TASKS[0].id,
+        author: "Kevin Mwangi",
+        detail: value,
+        recordedAt: "Just now",
+      },
+      ...current,
+    ]);
+    setNote("");
+    setMessage("Internal note recorded in this demo session.");
+  }
+
+  return (
+    <main className={styles.workspace} data-officer-communications-route={canonicalHref}>
+      <PageHeader
+        title={isApplicant ? "Applicant Messages" : "Internal Notes"}
+        description={isApplicant ? "Review applicant updates and keep request communication in the officer workspace." : "Capture staff-only context across the active officer request set."}
+      />
+      <MetricGrid
+        metrics={[
+          { label: isApplicant ? "Open messages" : "Recorded notes", value: String(records.length), context: "Across active officer requests", tone: "good" },
+          { label: "Requests represented", value: String(new Set(records.map((record) => record.requestId)).size), context: "Not limited to one request", tone: "good" },
+          { label: "Awaiting applicant", value: String(OFFICER_TASKS.filter((task) => task.status === "Waiting").length), context: "Follow-up still in progress", tone: "warning" },
+          { label: "Due today", value: String(OFFICER_TASKS.filter((task) => task.group === "Today").length), context: "Prioritise a response", tone: "warning" },
+          { label: "Overdue", value: String(OFFICER_TASKS.filter((task) => task.status === "Overdue").length), context: "Keep the context current", tone: "danger" },
+          { label: "Assigned cases", value: String(OFFICER_TASKS.length), context: "Current demonstration set", tone: "good" },
+        ]}
+      />
+      <section className={styles.tasksLayout}>
+        <article className={styles.panel}>
+          <div className={styles.queueTools}>
+            <input aria-label={`Search ${isApplicant ? "applicant messages" : "internal notes"}`} className={styles.input} onChange={(event) => setQuery(event.target.value)} placeholder="Search by request, person or content..." type="search" value={query} />
+          </div>
+          <div className={styles.compactRows}>
+            {visibleRecords.map((record) => (
+              <p key={record.id}>
+                <strong>{isApplicant ? (record as (typeof applicantMessages)[number]).name : (record as (typeof initialInternalNotes)[number]).author}</strong>
+                <span>{record.requestId}</span>
+              </p>
+            ))}
+            {visibleRecords.length === 0 ? <p className={styles.emptyState}>No communication records match this filter.</p> : null}
+          </div>
+        </article>
+        <article className={styles.panel}>
+          <div className={styles.panelHeader}><h2>{isApplicant ? "Conversation activity" : "Staff context"}</h2></div>
+          <div className={styles.caseWorkspace}>
+            {visibleRecords.map((record) => (
+              <article className={styles.miniCard} key={record.id}>
+                <h3>{isApplicant ? (record as (typeof applicantMessages)[number]).subject : `Note for ${record.requestId}`}</h3>
+                <p>{isApplicant ? (record as (typeof applicantMessages)[number]).detail : (record as (typeof initialInternalNotes)[number]).detail}</p>
+                <p>{isApplicant ? (record as (typeof applicantMessages)[number]).received : (record as (typeof initialInternalNotes)[number]).recordedAt}</p>
+              </article>
+            ))}
+            {isApplicant ? (
+              <button className={styles.button} onClick={() => setMessage("Applicant reply composer opened for this demo session.")} type="button">Compose reply</button>
+            ) : (
+              <div className={styles.commentComposer}>
+                <textarea aria-label="Add internal note" className={styles.textarea} onChange={(event) => setNote(event.target.value)} placeholder="Add staff-only context for the active request set..." value={note} />
+                <button className={styles.button} onClick={addNote} type="button">Add note</button>
+              </div>
+            )}
+            <p className={styles.activityMessage} role="status">{message}</p>
+          </div>
+        </article>
+      </section>
+    </main>
+  );
+}
+
 function makeTrendData(values: number[]) {
   return values.map((value, index) => ({
     period: `P${index + 1}`,

@@ -83,6 +83,39 @@ export function PublicVerificationPage({
   readonly initialCode?: string;
 }) {
   const pack = useDemoPack();
+
+  return (
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.headerInner}>
+          <Link href="/demo" className={styles.brand}>
+            <span className={styles.brandMark}>{pack.organization.initials}</span>
+            <span>{pack.organization.name}</span>
+          </Link>
+          <nav className={styles.nav} aria-label="Public navigation">
+            <Link href="/demo">Home</Link>
+            <Link href="/demo#services">Services</Link>
+            <Link href="/demo/track">Track a Request</Link>
+            <Link href="/demo/verify-certificate" aria-current="page">Verify Certificate</Link>
+            <Link href="/demo#help">Help</Link>
+          </nav>
+        </div>
+      </header>
+      <VerificationWorkspaceBody initialCode={initialCode} />
+      <footer className={styles.footer}>
+        <span>© 2026 {pack.organization.name}. All rights reserved.</span>
+        <nav><Link href="/demo#privacy">Privacy Policy</Link><Link href="/demo#terms">Terms of Use</Link><Link href="/demo#contact">Contact Us</Link></nav>
+      </footer>
+    </div>
+  );
+}
+
+export function VerificationWorkspaceBody({
+  initialCode,
+}: {
+  readonly initialCode?: string;
+}) {
+  const pack = useDemoPack();
   const verification = pack.verification;
   const requestedCode = initialCode?.trim();
   const startingCode =
@@ -145,23 +178,6 @@ export function PublicVerificationPage({
   };
 
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <Link href="/demo" className={styles.brand}>
-            <span className={styles.brandMark}>{pack.organization.initials}</span>
-            <span>{pack.organization.name}</span>
-          </Link>
-          <nav className={styles.nav} aria-label="Public navigation">
-            <Link href="/demo">Home</Link>
-            <Link href="/demo#services">Services</Link>
-            <Link href="/demo/track">Track a Request</Link>
-            <Link href="/demo/verify-certificate" aria-current="page">Verify Certificate</Link>
-            <Link href="/demo#help">Help</Link>
-          </nav>
-        </div>
-      </header>
-
       <main>
         <section className={styles.hero}>
           <p>Public institutional verification</p>
@@ -221,12 +237,6 @@ export function PublicVerificationPage({
           </section>
         </section>
       </main>
-
-      <footer className={styles.footer}>
-        <span>© 2026 {pack.organization.name}. All rights reserved.</span>
-        <nav><Link href="/demo#privacy">Privacy Policy</Link><Link href="/demo#terms">Terms of Use</Link><Link href="/demo#contact">Contact Us</Link></nav>
-      </footer>
-    </div>
   );
 }
 
