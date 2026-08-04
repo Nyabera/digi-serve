@@ -54,12 +54,12 @@ export default async function DemoOfficerRequestPage({
   return (
     <>
       <ExternalRecipientSharePanel />
-<OfficerRequestReview
-      requestId={requestId}
-      organizationName={client.organization.name}
-      service={service}
-      departments={departments}
-    />
+      <OfficerRequestReview
+        requestId={requestId}
+        organizationName={client.organization.name}
+        service={service}
+        departments={departments}
+      />
     </>
   );
 }

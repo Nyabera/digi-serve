@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Check,
   CheckCircle2,
@@ -16,7 +15,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import { InternalAppShell } from "@/components/demo/internal-shell";
+import { OFFICER_ROUTE_HREFS } from "@/features/demo-engine/navigation/officer-navigation-contract";
 
 import styles from "./officer-individual-case.module.css";
 
@@ -108,26 +107,15 @@ const WORKFLOW_STAGES = [
   },
 ] as const;
 
-function dispatchDemoShortcut(key: "p" | "r") {
-  window.dispatchEvent(
-    new KeyboardEvent("keydown", {
-      key,
-      shiftKey: true,
-      bubbles: true,
-    }),
-  );
-}
-
 function normalizeRequestId(requestId: string) {
   const decoded = decodeURIComponent(requestId).trim();
 
   return decoded || "STC-TR-2026-0031";
 }
 
-export function OfficerIndividualCaseShell({
+export function OfficerIndividualCaseWorkspace({
   requestId,
 }: OfficerIndividualCaseShellProps) {
-  const router = useRouter();
   const normalizedRequestId = useMemo(
     () => normalizeRequestId(requestId),
     [requestId],
@@ -222,72 +210,20 @@ export function OfficerIndividualCaseShell({
   }
 
   return (
-    <InternalAppShell
-      role="OFFICER"
-      institutionName="Savannah Technical College"
-      institutionSubtitle="Student Services"
-      institutionInitials="STC"
-      staffName="Kevin Mwangi"
-      staffRoleLabel="Registry Officer"
-      requestSelector={
-        <label className={styles.requestSelector}>
-          <span>Request</span>
-          <select
-            aria-label="Select officer request"
-            value={normalizedRequestId}
-            onChange={(event) =>
-              router.push(
-                `/demo/officer/requests/${encodeURIComponent(
-                  event.target.value,
-                )}`,
-              )
-            }
-          >
-            <option value={normalizedRequestId}>
-              {normalizedRequestId} — {caseStatus}
-            </option>
-            <option value="STC-TR-2026-0038">
-              STC-TR-2026-0038 — Additional check
-            </option>
-            <option value="REQ-DEMO-001">
-              REQ-DEMO-001 — Transcript request
-            </option>
-          </select>
-        </label>
-      }
-      presentationAction={
-        <button
-          type="button"
-          className="button-base button-compact button-secondary"
-          onClick={() => dispatchDemoShortcut("p")}
-        >
-          Present
-        </button>
-      }
-      resetAction={
-        <button
-          type="button"
-          className="button-base button-compact button-destructive"
-          onClick={() => dispatchDemoShortcut("r")}
-        >
-          Reset
-        </button>
-      }
+    <main
+      className={styles.page}
+      aria-labelledby="individual-case-title"
+      data-officer-individual-case="true"
     >
-      <main
-        className={styles.page}
-        aria-labelledby="individual-case-title"
-        data-officer-individual-case="true"
-      >
         <nav
           className={styles.breadcrumbs}
           aria-label="Breadcrumb"
         >
-          <Link href="/demo/officer#application-queue">
+          <Link href={OFFICER_ROUTE_HREFS.queue}>
             My Queue
           </Link>
           <span aria-hidden="true">/</span>
-          <Link href="/demo/officer#application-queue">
+          <Link href={OFFICER_ROUTE_HREFS.queue}>
             Transcript Requests
           </Link>
           <span aria-hidden="true">/</span>
@@ -858,7 +794,9 @@ export function OfficerIndividualCaseShell({
             </section>
           </aside>
         </div>
-      </main>
-    </InternalAppShell>
+    </main>
   );
 }
+
+/** @deprecated Use OfficerIndividualCaseWorkspace for body-only rendering. */
+export const OfficerIndividualCaseShell = OfficerIndividualCaseWorkspace;

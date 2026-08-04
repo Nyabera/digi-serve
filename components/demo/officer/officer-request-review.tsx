@@ -1,17 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import {
-  Maximize2,
-  RefreshCw,
-} from "lucide-react";
 import {
   useMemo,
   useState,
   type FormEvent,
 } from "react";
 
-import { InternalAppShell } from "@/components/demo/internal-shell";
 import { getDemoOfficerReviewReference } from "@/features/demo-engine/adapters/get-demo-officer-review-reference";
 import { useDemoState } from "@/features/demo/state";
 import { OfficerReviewReferralBody } from "@/features/officer-review/components/officer-review-referral-body";
@@ -479,33 +473,12 @@ function applicantInitials(
     .join("");
 }
 
-function triggerPresentationShortcut() {
-  window.dispatchEvent(
-    new KeyboardEvent("keydown", {
-      key: "p",
-      shiftKey: true,
-      bubbles: true,
-    }),
-  );
-}
-
-function triggerResetShortcut() {
-  window.dispatchEvent(
-    new KeyboardEvent("keydown", {
-      key: "r",
-      shiftKey: true,
-      bubbles: true,
-    }),
-  );
-}
-
 export function OfficerRequestReview({
   requestId,
   organizationName,
   service,
   departments,
 }: OfficerRequestReviewProps) {
-  const router = useRouter();
   const {
     state,
     dispatch,
@@ -1092,104 +1065,7 @@ export function OfficerRequestReview({
   }
 
   return (
-    <div
-      data-d29r3-officer-shell="true"
-      data-internal-shell-role="OFFICER"
-    >
-      <InternalAppShell
-        role="OFFICER"
-        institutionName={
-          organizationName
-        }
-        institutionSubtitle="Student Services"
-        institutionInitials="STC"
-        staffName="Grace Wanjiku"
-        staffRoleLabel="Student Records Officer"
-        requestSelector={
-          <label>
-            <span className="sr-only">
-              Open request
-            </span>
-            <select
-              className="input-base input-compact"
-              value={
-                reference.requestOptions.find(
-                  (option) =>
-                    option.label ===
-                    requestId,
-                )?.href ?? ""
-              }
-              onChange={(event) =>
-                router.push(
-                  event.target.value,
-                )
-              }
-            >
-              {reference.requestOptions.map(
-                (option) => (
-                  <option
-                    key={option.label}
-                    value={option.href}
-                  >
-                    {option.label}
-                  </option>
-                ),
-              )}
-            </select>
-          </label>
-        }
-        roleSelector={
-          <label>
-            <span className="sr-only">
-              Switch workspace
-            </span>
-            <select
-              className="input-base input-compact"
-              value="/demo/officer"
-              onChange={(event) =>
-                router.push(
-                  event.target.value,
-                )
-              }
-            >
-              <option value="/demo/officer">
-                Officer
-              </option>
-              <option value="/demo/department">
-                Finance
-              </option>
-              <option value="/demo/supervisor">
-                Supervisor
-              </option>
-            </select>
-          </label>
-        }
-        presentationAction={
-          <button
-            type="button"
-            onClick={
-              triggerPresentationShortcut
-            }
-            className="button-base button-compact button-secondary"
-          >
-            <Maximize2 aria-hidden="true" />
-            Present
-          </button>
-        }
-        resetAction={
-          <button
-            type="button"
-            onClick={
-              triggerResetShortcut
-            }
-            className="button-base button-compact button-destructive"
-          >
-            <RefreshCw aria-hidden="true" />
-            Reset
-          </button>
-        }
-      >
-        <OfficerReviewReferralBody
+    <OfficerReviewReferralBody
           model={model}
           reviewStarted={
             reviewStarted
@@ -1350,8 +1226,6 @@ export function OfficerRequestReview({
           onCreateReferral={
             createReferral
           }
-        />
-      </InternalAppShell>
-    </div>
+    />
   );
 }

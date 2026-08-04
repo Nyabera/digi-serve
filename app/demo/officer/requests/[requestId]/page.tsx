@@ -3,7 +3,7 @@ import type {
 } from "react";
 
 import {
-  OfficerIndividualCaseShell,
+  OfficerIndividualCaseWorkspace,
 } from "@/components/demo/officer/individual-case";
 
 import ShareWorkflowReferralPage from "./share-workflow-referral-page";
@@ -61,7 +61,7 @@ export default async function OfficerRequestPage({
   }
 
   return (
-    <OfficerIndividualCaseShell
+    <OfficerIndividualCaseWorkspace
       requestId={resolvedParams.requestId}
     />
   );
