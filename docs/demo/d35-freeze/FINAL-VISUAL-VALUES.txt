@@ -1,0 +1,61 @@
+D35 FINAL SHARED NAVIGATION VALUES
+=================================
+
+Included workspaces
+-------------------
+APPLICANT
+OFFICER
+SUPERVISOR
+ADMIN
+
+Excluded workspace
+------------------
+DEPARTMENT
+
+Shared internal-shell navigation
+--------------------------------
+font-family: Source Code Pro
+font-size: 0.7125rem (11.4px)
+font-weight: 400
+letter-spacing: 0.05px
+inactive label color: #666666
+active item radius: 0
+item minimum height: 2.025rem (32.4px)
+icon size: 1.35rem (21.6px)
+icon stroke width: 1
+expanded desktop sidebar: 14.025rem (224.4px)
+collapsed sidebar: unchanged
+mobile drawer: unchanged
+horizontal padding: unchanged
+icon-label gap: unchanged
+inter-item gap: unchanged
+group spacing: unchanged
+
+Applicant navigation
+--------------------
+font-family: Source Code Pro
+font-size: 0.7125rem (11.4px)
+font-weight: 400
+letter-spacing: 0.05px
+inactive label color: #666666
+active item radius: 0
+item minimum height: 35.64px
+icon size: 17.1px
+icon stroke width: 1
+expanded desktop sidebar: 214.2px
+mobile drawer: unchanged
+horizontal padding: unchanged
+icon-label gap: unchanged
+inter-item gap: unchanged
+
+Protected behavior
+------------------
+navigation labels unchanged
+navigation order unchanged
+hrefs unchanged
+active-route matching unchanged
+active text color unchanged
+active icon color unchanged
+inactive icon color unchanged
+top-bar geometry unchanged
+Department workspace unchanged
