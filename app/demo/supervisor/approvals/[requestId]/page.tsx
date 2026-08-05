@@ -18,30 +18,20 @@ export default async function DemoSupervisorApprovalPage({
   const service =
     client.services.find(
       (candidate) =>
-        candidate.active &&
-        candidate.slug ===
-          "transcript-request",
-    ) ??
-    client.services.find(
-      (candidate) => candidate.active,
-    );
+        candidate.active && candidate.slug === "transcript-request",
+    ) ?? client.services.find((candidate) => candidate.active);
 
   if (!service) {
     notFound();
   }
 
   const registrarDepartment =
-    client.departments.find(
-      (department) =>
-        department.name === "Registrar",
-    ) ?? client.departments[0];
+    client.departments.find((department) => department.name === "Registrar") ??
+    client.departments[0];
 
   return (
     <SupervisorApprovalWorkspace
       requestId={requestId}
-      organizationName={
-        client.organization.name
-      }
       service={service}
       registrarDepartment={{
         id: registrarDepartment.id,
