@@ -734,3 +734,54 @@
   }
 }
 /* END D29R-19 request selector */
+
+/* D35-2 — Applicant, Officer, Supervisor, and Admin navigation refinement */
+.shell[data-internal-shell-role="APPLICANT"] .sidebar :global(.nav-item),
+.shell[data-internal-shell-role="OFFICER"] .sidebar :global(.nav-item),
+.shell[data-internal-shell-role="SUPERVISOR"] .sidebar :global(.nav-item),
+.shell[data-internal-shell-role="ADMIN"] .sidebar :global(.nav-item) {
+  min-height: 2.025rem;
+  font-family:
+    var(--font-source-code-pro, "Source Code Pro Variable"),
+    "Source Code Pro",
+    monospace;
+  font-size: 0.7125rem;
+  line-height: 1.25rem;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0.05px;
+}
+
+.shell[data-internal-shell-role="APPLICANT"] .sidebar :global(.nav-item:not([aria-current="page"]) .nav-item-label),
+.shell[data-internal-shell-role="OFFICER"] .sidebar :global(.nav-item:not([aria-current="page"]) .nav-item-label),
+.shell[data-internal-shell-role="SUPERVISOR"] .sidebar :global(.nav-item:not([aria-current="page"]) .nav-item-label),
+.shell[data-internal-shell-role="ADMIN"] .sidebar :global(.nav-item:not([aria-current="page"]) .nav-item-label) {
+  color: #666666;
+}
+
+.shell[data-internal-shell-role="APPLICANT"] .sidebar :global(.nav-item[aria-current="page"]),
+.shell[data-internal-shell-role="OFFICER"] .sidebar :global(.nav-item[aria-current="page"]),
+.shell[data-internal-shell-role="SUPERVISOR"] .sidebar :global(.nav-item[aria-current="page"]),
+.shell[data-internal-shell-role="ADMIN"] .sidebar :global(.nav-item[aria-current="page"]) {
+  border-radius: 0;
+}
+
+.shell[data-internal-shell-role="APPLICANT"] .sidebar :global(.nav-item-icon),
+.shell[data-internal-shell-role="OFFICER"] .sidebar :global(.nav-item-icon),
+.shell[data-internal-shell-role="SUPERVISOR"] .sidebar :global(.nav-item-icon),
+.shell[data-internal-shell-role="ADMIN"] .sidebar :global(.nav-item-icon) {
+  width: 1.35rem;
+  height: 1.35rem;
+  stroke-width: 1;
+}
+
+@media (min-width: 80rem) {
+  .shell:not(.shellCollapsed)[data-internal-shell-role="APPLICANT"],
+  .shell:not(.shellCollapsed)[data-internal-shell-role="OFFICER"],
+  .shell:not(.shellCollapsed)[data-internal-shell-role="SUPERVISOR"],
+  .shell:not(.shellCollapsed)[data-internal-shell-role="ADMIN"] {
+    grid-template-columns:
+      14.025rem
+      minmax(0, 1fr);
+  }
+}
+/* End D35-2 shared navigation refinement */
