@@ -3,12 +3,13 @@ import {
   OFFICER_NON_NAVIGATION_ROUTES,
   OFFICER_ROUTE_HREFS,
 } from "./officer-navigation-contract";
+import {
+  SUPERVISOR_LEGACY_ROUTE_HREFS,
+  SUPERVISOR_ROUTE_HREFS,
+} from "./supervisor-navigation-contract";
 
 export type DemoWorkspaceRole =
-  | "applicant"
-  | "officer"
-  | "supervisor"
-  | "admin";
+  "applicant" | "officer" | "supervisor" | "admin";
 
 export const DEMO_ROUTES = {
   public: {
@@ -27,10 +28,10 @@ export const DEMO_ROUTES = {
     documents: OFFICER_NON_NAVIGATION_ROUTES.documentsHub,
   },
   supervisor: {
-    home: "/demo/supervisor",
-    approvals: "/demo/supervisor/approvals",
-    audit: "/demo/supervisor/audit-trail",
-    sla: "/demo/supervisor/sla-monitor",
+    ...SUPERVISOR_ROUTE_HREFS,
+    approvals: SUPERVISOR_LEGACY_ROUTE_HREFS.approvals,
+    audit: SUPERVISOR_ROUTE_HREFS.auditTrail,
+    sla: SUPERVISOR_ROUTE_HREFS.slaMonitor,
   },
   admin: {
     home: "/demo/admin",
@@ -64,14 +65,8 @@ export function normalizeDemoPath(pathname: string): string {
   return normalized || "/";
 }
 
-function matchesPrefix(
-  pathname: string,
-  prefix: string,
-): boolean {
-  return (
-    pathname === prefix ||
-    pathname.startsWith(`${prefix}/`)
-  );
+function matchesPrefix(pathname: string, prefix: string): boolean {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`);
 }
 
 export function resolveDemoRoleFromPath(
