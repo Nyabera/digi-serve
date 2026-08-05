@@ -23,6 +23,9 @@ import {
 
 import { useDemoPack } from "@/features/demo-engine/config";
 import {
+  buildAdminWorkflowBuilderHref,
+} from "@/features/demo-engine/navigation/admin-workflow-route-compatibility";
+import {
   buildActiveWorkflowRows,
   buildRecentWorkflowActivity,
   buildWorkflowTemplateCards,
@@ -74,25 +77,25 @@ const quickActions = [
   {
     title: "Create Workflow Template",
     detail: "Design a new workflow template",
-    href: "/demo/admin/workflows/builder",
+    href: buildAdminWorkflowBuilderHref(),
     icon: Plus,
   },
   {
     title: "Workflow Builder",
     detail: "Build custom workflows visually",
-    href: "/demo/admin/workflows/builder",
+    href: buildAdminWorkflowBuilderHref(),
     icon: Workflow,
   },
   {
     title: "Manage Approval Chains",
     detail: "Create and manage approval chains",
-    href: "/demo/admin/workflows/builder",
+    href: buildAdminWorkflowBuilderHref(),
     icon: GitBranch,
   },
   {
     title: "Escalation Rules",
     detail: "Configure escalation conditions",
-    href: "/demo/admin/workflows/builder",
+    href: buildAdminWorkflowBuilderHref(),
     icon: ShieldCheck,
   },
 ];
@@ -163,7 +166,7 @@ export function WorkflowOverview({
 
         <Link
           className={styles.primaryButton}
-          href="/demo/admin/workflows/builder"
+          href={buildAdminWorkflowBuilderHref()}
         >
           <Plus aria-hidden="true" size={16} />
           Create Workflow Template
@@ -185,7 +188,7 @@ export function WorkflowOverview({
         >
           Active Workflows
         </button>
-        <Link href="/demo/admin/workflows/builder">
+        <Link href={buildAdminWorkflowBuilderHref()}>
           Visual Workflow Builder
         </Link>
       </nav>
@@ -282,7 +285,7 @@ export function WorkflowOverview({
 
                 <div className={styles.templateActions}>
                   <Link
-                    href={`/demo/admin/workflows/builder?template=${template.id}`}
+                    href={buildAdminWorkflowBuilderHref(template.id)}
                   >
                     Customize
                   </Link>
@@ -310,7 +313,7 @@ export function WorkflowOverview({
               <h2>Active workflows</h2>
               <p>Seeded operational instances currently moving through teams.</p>
             </div>
-            <Link href="/demo/admin/workflows/builder">
+            <Link href={buildAdminWorkflowBuilderHref()}>
               Open workflow builder
             </Link>
           </div>
@@ -338,7 +341,7 @@ export function WorkflowOverview({
                 {activeWorkflowRows.map((row) => (
                   <tr key={row.id}>
                     <td>
-                      <Link href="/demo/admin/workflows/builder">
+                      <Link href={buildAdminWorkflowBuilderHref()}>
                         {row.id}
                       </Link>
                     </td>
@@ -385,7 +388,7 @@ export function WorkflowOverview({
             {workflowTemplates.slice(0, 4).map((template) => (
               <Link
                 className={styles.popularCard}
-                href={`/demo/admin/workflows/builder?template=${template.id}`}
+                href={buildAdminWorkflowBuilderHref(template.id)}
                 key={template.id}
               >
                 <span

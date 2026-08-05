@@ -1,20 +1,42 @@
-import { WorkflowOverview } from "@/features/demo-admin-workflows/components/workflow-overview";
+import {
+  WorkflowBuilder,
+} from "@/features/demo-admin-workflows/components/workflow-builder";
+import {
+  WorkflowOverview,
+} from "@/features/demo-admin-workflows/components/workflow-overview";
+import {
+  resolveAdminWorkflowRouteSurface,
+  type AdminWorkflowRouteSearchParams,
+} from "@/features/demo-engine/navigation/admin-workflow-route-compatibility";
 
-type WorkflowOverviewPageProps = {
-  searchParams: Promise<{
-    tab?: string | string[];
-  }>;
+type CanonicalAdminWorkflowsPageProps = {
+  searchParams: Promise<AdminWorkflowRouteSearchParams>;
 };
 
-export default async function WorkflowOverviewPage({
+/**
+ * D34-6 canonical admin workflow destination.
+ *
+ * /demo/admin/workflows is the visible Workflow Builder route.
+ * The pre-existing overview remains available through ?view=overview.
+ */
+export default async function CanonicalAdminWorkflowsPage({
   searchParams,
-}: WorkflowOverviewPageProps) {
-  const resolved = await searchParams;
-  const rawTab = Array.isArray(resolved.tab) ? resolved.tab[0] : resolved.tab;
+}: CanonicalAdminWorkflowsPageProps) {
+  const surface = resolveAdminWorkflowRouteSurface(
+    await searchParams,
+  );
+
+  if (surface.kind === "overview") {
+    return (
+      <WorkflowOverview
+        initialTab={surface.initialTab}
+      />
+    );
+  }
 
   return (
-    <WorkflowOverview
-      initialTab={rawTab === "active" ? "active" : "templates"}
+    <WorkflowBuilder
+      initialTemplateId={surface.initialTemplateId}
     />
   );
 }

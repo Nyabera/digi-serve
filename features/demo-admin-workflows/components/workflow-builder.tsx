@@ -31,6 +31,9 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import {
+  buildAdminWorkflowOverviewHref,
+} from "@/features/demo-engine/navigation/admin-workflow-route-compatibility";
+import {
   createWorkflowBuilderNode,
   createWorkflowBuilderNodes,
   EMPTY_WORKFLOW_TEMPLATE,
@@ -205,7 +208,7 @@ export function WorkflowBuilder({
     <main className={styles.builderPage}>
       <header className={styles.builderHeader}>
         <div className={styles.breadcrumbs}>
-          <Link href="/demo/admin/workflows">
+          <Link href={buildAdminWorkflowOverviewHref()}>
             <ArrowLeft aria-hidden="true" size={15} />
             Workflows
           </Link>

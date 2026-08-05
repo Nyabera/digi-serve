@@ -1,22 +1,37 @@
-import { WorkflowBuilder } from "@/features/demo-admin-workflows/components/workflow-builder";
+import { redirect } from "next/navigation";
 
-type WorkflowBuilderPageProps = {
-  searchParams: Promise<{
-    template?: string | string[];
-  }>;
+import {
+  buildAdminWorkflowBuilderHref,
+  type AdminWorkflowRouteSearchParams,
+} from "@/features/demo-engine/navigation/admin-workflow-route-compatibility";
+
+type LegacyAdminWorkflowBuilderPageProps = {
+  searchParams: Promise<
+    Pick<AdminWorkflowRouteSearchParams, "template">
+  >;
 };
 
-export default async function WorkflowBuilderPage({
-  searchParams,
-}: WorkflowBuilderPageProps) {
-  const resolved = await searchParams;
-  const template = Array.isArray(resolved.template)
-    ? resolved.template[0]
-    : resolved.template;
+function firstTemplate(
+  value: string | string[] | undefined,
+): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
 
-  return (
-    <WorkflowBuilder
-      initialTemplateId={template ?? "transcript-request"}
-    />
+/**
+ * D34-6 legacy compatibility route.
+ *
+ * This route no longer owns a second workflow-builder page. It redirects to
+ * the canonical admin Workflow Builder destination and preserves the selected
+ * template query parameter.
+ */
+export default async function LegacyAdminWorkflowBuilderPage({
+  searchParams,
+}: LegacyAdminWorkflowBuilderPageProps) {
+  const resolved = await searchParams;
+
+  redirect(
+    buildAdminWorkflowBuilderHref(
+      firstTemplate(resolved.template),
+    ),
   );
 }
