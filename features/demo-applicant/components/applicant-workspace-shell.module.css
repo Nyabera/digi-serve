@@ -280,3 +280,41 @@
     gap: 10px;
   }
 }
+
+/* D35-3 — Applicant navigation parity */
+.navigation a,
+.sidebarFooter a {
+  min-height: 35.64px;
+  font-family:
+    var(--font-source-code-pro, "Source Code Pro Variable"),
+    "Source Code Pro",
+    monospace;
+  font-size: 0.7125rem;
+  font-weight: 400;
+  letter-spacing: 0.05px;
+}
+
+.navigation a:not([aria-current="page"]) span,
+.sidebarFooter a span {
+  color: #666666;
+}
+
+.navigation a[aria-current="page"] {
+  border-radius: 0;
+}
+
+.navigation a svg,
+.sidebarFooter a svg {
+  width: 17.1px;
+  height: 17.1px;
+  stroke-width: 1;
+}
+
+@media (min-width: 921px) {
+  .shell {
+    grid-template-columns:
+      214.2px
+      minmax(0, 1fr);
+  }
+}
+/* End D35-3 Applicant navigation parity */
