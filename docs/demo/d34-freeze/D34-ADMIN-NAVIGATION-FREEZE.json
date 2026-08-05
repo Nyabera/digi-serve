@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "stage": "D34-7",
+  "status": "frozen",
+  "branch": "demo/d34-admin-navigation-consolidation",
+  "baselineCommit": "eb23e253276b0bc291b66f8445ee0c23abfec424",
+  "baselineShort": "eb23e25",
+  "generatedAt": "2026-08-05T13:06:14Z",
+  "routeCount": 21,
+  "sectionCount": 9,
+  "logoutActionCount": 1,
+  "canonicalRoutes": [
+    "/demo/admin",
+    "/demo/admin/services",
+    "/demo/admin/services/builder",
+    "/demo/admin/forms-requirements",
+    "/demo/admin/workflows",
+    "/demo/admin/assignment-rules",
+    "/demo/admin/approval-rules",
+    "/demo/admin/sla-rules",
+    "/demo/admin/users",
+    "/demo/admin/departments",
+    "/demo/admin/roles-permissions",
+    "/demo/admin/applications",
+    "/demo/admin/unassigned-work",
+    "/demo/admin/audit-trail",
+    "/demo/admin/document-templates",
+    "/demo/admin/issued-documents",
+    "/demo/admin/qr-verification",
+    "/demo/admin/reports",
+    "/demo/admin/institution-profile",
+    "/demo/admin/branding",
+    "/demo/admin/portal-settings"
+  ],
+  "legacyCompatibility": [
+    {
+      "from": "/demo/admin/workflows/builder",
+      "to": "/demo/admin/workflows",
+      "behavior": "redirect-preserving-template-query"
+    }
+  ],
+  "acceptance": {
+    "structuralVerifiers": "passed",
+    "focusedUnitTests": "passed",
+    "completeVitestSuite": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "browserAcceptance": "passed",
+    "productionBuild": "passed"
+  },
+  "files": [
+    {
+      "path": "app/demo/admin/layout.tsx",
+      "sha256": "8a62069a70183d69a0ef91d9e1760a3e51380aede13516cad0e8a0253901db47"
+    },
+    {
+      "path": "app/demo/admin/page.tsx",
+      "sha256": "7e547b2733146ba82585cb0add0bc2ed591e16bcc0dabe35d17904ee7c8d8ae7"
+    },
+    {
+      "path": "app/demo/admin/applications/page.tsx",
+      "sha256": "afb30eeb3fff707b8bad138cf0476000b16692c86e6d3ed4f0551e374210012f"
+    },
+    {
+      "path": "app/demo/admin/approval-rules/page.tsx",
+      "sha256": "531e56434c0722bafcb92605c00ff09a5cc0f6c573dfc552dcd84903466e31e2"
+    },
+    {
+      "path": "app/demo/admin/assignment-rules/page.tsx",
+      "sha256": "dd3e5709fdd6e23766d8097bf8e3656056fc784a429eaed6dd8a6109ee9e6d3e"
+    },
+    {
+      "path": "app/demo/admin/audit-trail/page.tsx",
+      "sha256": "7551298fbf603b1906edb0635a18c3f9c4bce5045e12192261976eaae8575d12"
+    },
+    {
+      "path": "app/demo/admin/branding/page.tsx",
+      "sha256": "efefbcf341233b3fa9be677f2b7749d7d118c46f92bc0c69d240b9e487ada151"
+    },
+    {
+      "path": "app/demo/admin/departments/page.tsx",
+      "sha256": "7bcd29fd3299eb70f075f0cb8279c055a77b2d9080b21e46805899d15e182c9e"
+    },
+    {
+      "path": "app/demo/admin/document-templates/page.tsx",
+      "sha256": "bed12ba1ff8e85f0fad081d9ba558864dc4c1cd92caa59404c1fea0b53a69e32"
+    },
+    {
+      "path": "app/demo/admin/forms-requirements/page.tsx",
+      "sha256": "a89b55236a2571d3a82dedc3cab803ddba34bccf1d628ea47340d94e2617a132"
+    },
+    {
+      "path": "app/demo/admin/institution-profile/page.tsx",
+      "sha256": "e901b02aa597ba5515f696f1e4066374288190668fe65dcab48d68240cf5b745"
+    },
+    {
+      "path": "app/demo/admin/issued-documents/page.tsx",
+      "sha256": "262a59d9aa5e98b4c7dd35749e330ceba8e4d36f682250f6de713d49305cdf8a"
+    },
+    {
+      "path": "app/demo/admin/portal-settings/page.tsx",
+      "sha256": "5c6aa986789a8f4d15afe33fb119e329fb081004745c3545430013bcd7726a1c"
+    },
+    {
+      "path": "app/demo/admin/qr-verification/page.tsx",
+      "sha256": "37352c65f6dea567f0e2277bdc0a2488038e69487d35f202c8610195a0c65b41"
+    },
+    {
+      "path": "app/demo/admin/reports/page.tsx",
+      "sha256": "9e4073e86265a2ea188ab26b46f0a6616e5d12dd6471283b4585aa2dd2f77268"
+    },
+    {
+      "path": "app/demo/admin/roles-permissions/page.tsx",
+      "sha256": "521160d5e101439d6e75557a4041d6076fdb263b406b7c9df6c0c58c51941456"
+    },
+    {
+      "path": "app/demo/admin/services/page.tsx",
+      "sha256": "c919900e5e16fc15f4ea52a1f2ac7800a34b045557b9a2769d32a240a45d8102"
+    },
+    {
+      "path": "app/demo/admin/services/builder/page.tsx",
+      "sha256": "5202f7d7c359a119b4d86a3c1ab863e50dc14a754f454d59021d30e20de3b9ba"
+    },
+    {
+      "path": "app/demo/admin/sla-rules/page.tsx",
+      "sha256": "77eac83f1425981b67477dafcdd20a9625d01ee2bed6694a478c5b2219e75ac3"
+    },
+    {
+      "path": "app/demo/admin/unassigned-work/page.tsx",
+      "sha256": "a5bfd877b3fa51a9ed71c97fb3042867831955a4456386ce60b28dcd2bc47682"
+    },
+    {
+      "path": "app/demo/admin/users/page.tsx",
+      "sha256": "e667399af0bc9a3f2ca1346092f6d5ba8a25d58f9945964d4b4d583aad34ef87"
+    },
+    {
+      "path": "app/demo/admin/workflows/page.tsx",
+      "sha256": "84d50f4b879389bebee45d8b629e3cd7664d471060829f387243e6646625e247"
+    },
+    {
+      "path": "app/demo/admin/workflows/builder/page.tsx",
+      "sha256": "1d0453176ab1d327338f71e06982f24338e1438a70c4aec60bf107c1333c9cef"
+    },
+    {
+      "path": "components/demo/admin/admin-route-surface.tsx",
+      "sha256": "1abec75e3d428a78cd319f6c19fefb549f66e997d1fa6a10c928378a77bbabea"
+    },
+    {
+      "path": "components/demo/internal-shell/internal-app-shell.tsx",
+      "sha256": "d934d73b7d428ea2f7d92adcba973c847b88495d744d8a0ddae36f62b7df158d"
+    },
+    {
+      "path": "components/demo/internal-shell/internal-navigation.ts",
+      "sha256": "38bd57faf43dfb35a9f4ca443302433e5a325bec7b734df4ba4d0f43e5bcc649"
+    },
+    {
+      "path": "components/demo/internal-shell/internal-sidebar.tsx",
+      "sha256": "83b978e547745bf79acedc5ced5ccbe6b7ba93d72cbd2de9c509eb87252f9791"
+    },
+    {
+      "path": "components/demo/internal-shell/internal-topbar.tsx",
+      "sha256": "879bac21b5592446854cb9b7c32499af62755b2eec676fb7e5eef64e7cc43a78"
+    },
+    {
+      "path": "components/demo/internal-shell/role-workspace-shell.tsx",
+      "sha256": "827b3c7eaf367f8b28ace99f762818967db1f52d48550bc26a93cce27b2c9196"
+    },
+    {
+      "path": "components/demo/workspace-shells/admin-workspace-shell.tsx",
+      "sha256": "651d2e9305ed5fbdaefacc2dad12a86b49f65e8eee8819643725108cb4351294"
+    },
+    {
+      "path": "features/demo-admin-workflows/components/workflow-builder.tsx",
+      "sha256": "7ccf3546556d11b953f634303e8fbf1bd8308ec176aa3f8f23514d89980e9805"
+    },
+    {
+      "path": "features/demo-admin-workflows/components/workflow-overview.tsx",
+      "sha256": "f9eda30c535324b57c8e469cacc58d6ed767007fb5de632e45e9ba64f04aa7d8"
+    },
+    {
+      "path": "features/demo-engine/navigation/admin-navigation-contract.ts",
+      "sha256": "3afdf0bcdad2cde9cd5447e06ce614a4e24ba2dd993f6d84c8196f2f721c5886"
+    },
+    {
+      "path": "features/demo-engine/navigation/admin-workflow-route-compatibility.ts",
+      "sha256": "6165b4dfd9611c0b10ed9af657872200de1b5307c671e59b9ea956021499a41b"
+    },
+    {
+      "path": "features/demo-engine/navigation/demo-route-registry.ts",
+      "sha256": "8520567b06837e3b919af91622a44fe605d4ab799dbe6695632d05ea0bcd6abf"
+    },
+    {
+      "path": "tests/demo/unit/d34-admin-route-containment.test.ts",
+      "sha256": "4565a668e21b2b702287638929096985925b222a7a5ba32f1fa6087b8706458e"
+    },
+    {
+      "path": "tests/demo/unit/d34-admin-workflow-route-compatibility.test.ts",
+      "sha256": "f3ba283c6f32e88cef481629fe6acbd8ce44a5b0923d5fabbccf638627a3250f"
+    },
+    {
+      "path": "docs/demo/D34-0-ADMIN-WORKSPACE-SHELL-AUDIT.md",
+      "sha256": "68a551ef07627f90fedfda82af83112575379f515b2b6ae13cbdc70a2c1baccf"
+    },
+    {
+      "path": "docs/demo/D34-1-ADMIN-NAVIGATION-CONTRACT.md",
+      "sha256": "90e206247c64a57d8c190ba1b8cb5da004121b447691a515dd48f0a30cb7a7d5"
+    },
+    {
+      "path": "docs/demo/D34-2-CANONICAL-ADMIN-ROUTE-SURFACE.md",
+      "sha256": "ce26d1c331b401a68d7e225540a854de8a7b1991144b82bfec63224edf37d6e8"
+    },
+    {
+      "path": "docs/demo/D34-3-ADMIN-WORKSPACE-SHELL-CONSOLIDATION.md",
+      "sha256": "3ff5d11ac5d3d6989ad26004c418089db890248984cd5cc1e9a4284f33dcd3c9"
+    },
+    {
+      "path": "docs/demo/D34-4-CANONICAL-ADMIN-NAVIGATION-ACTIVATION.md",
+      "sha256": "77ab90a2d6a51ffebde34d87fb0cd91fceb5ff2a641f8991cad30df787433747"
+    },
+    {
+      "path": "docs/demo/D34-5-ADMIN-ROUTE-ROLE-CONTAINMENT.md",
+      "sha256": "624fa21539b5873e837390ebfeff9c162bc1fdcd7e09488420cdcdc4d7b05fe1"
+    },
+    {
+      "path": "docs/demo/D34-6-ADMIN-WORKFLOW-LEGACY-ROUTE-REMEDIATION.md",
+      "sha256": "93238bb3754adc18a694f1901f53da3a9e4b6991fc41f0f0c4974bf9d4340404"
+    }
+  ]
+}
