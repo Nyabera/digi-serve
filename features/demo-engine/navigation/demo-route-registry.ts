@@ -1,3 +1,7 @@
+import {
+  ADMIN_ROUTE_HREFS,
+} from "./admin-navigation-contract";
+
 export type DemoWorkspaceRole =
   | "applicant"
   | "officer"
@@ -30,9 +34,20 @@ export const DEMO_ROUTES = {
     sla: "/demo/supervisor/sla-monitor",
   },
   admin: {
-    home: "/demo/admin",
-    workflows: "/demo/admin/workflows",
-    workflowBuilder: "/demo/admin/workflows/builder",
+    /**
+     * Compatibility aliases used by existing role-switch and D30 consumers.
+     * All normal destinations now resolve from the D34-1 source of truth.
+     */
+    home: ADMIN_ROUTE_HREFS.dashboard,
+    workflows: ADMIN_ROUTE_HREFS.workflowBuilder,
+
+    ...ADMIN_ROUTE_HREFS,
+
+    /**
+     * D34-6 owns the legacy-route decision. Keeping the old route explicit
+     * here prevents it from being mistaken for a canonical destination.
+     */
+    legacyWorkflowBuilder: "/demo/admin/workflows/builder",
   },
 } as const;
 
