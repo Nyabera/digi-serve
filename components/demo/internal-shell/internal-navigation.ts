@@ -20,16 +20,11 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import {
-  OFFICER_NAVIGATION_CONTRACT,
-} from "../../../features/demo-engine/navigation/officer-navigation-contract";
+import { OFFICER_NAVIGATION_CONTRACT } from "../../../features/demo-engine/navigation/officer-navigation-contract";
+import { SUPERVISOR_NAVIGATION_CONTRACT } from "../../../features/demo-engine/navigation/supervisor-navigation-contract";
 
 export type InternalShellRole =
-  | "APPLICANT"
-  | "OFFICER"
-  | "DEPARTMENT"
-  | "SUPERVISOR"
-  | "ADMIN";
+  "APPLICANT" | "OFFICER" | "DEPARTMENT" | "SUPERVISOR" | "ADMIN";
 
 export type InternalNavigationItem = {
   readonly id?: string;
@@ -138,7 +133,11 @@ const departmentNavigation: readonly InternalNavigationGroup[] = [
         icon: LayoutDashboard,
         exact: true,
       },
-      { label: "My tasks", href: "/demo/department#my-tasks", icon: ListChecks },
+      {
+        label: "My tasks",
+        href: "/demo/department#my-tasks",
+        icon: ListChecks,
+      },
       {
         label: "Department queue",
         href: "/demo/department#department-queue",
@@ -166,75 +165,30 @@ const departmentNavigation: readonly InternalNavigationGroup[] = [
   account("/demo/department"),
 ];
 
-const supervisorNavigation: readonly InternalNavigationGroup[] = [
-  {
-    label: "Operations",
-    items: [
-      { label: "Audit trail", href: "/demo/supervisor/audit-trail", icon: LayoutDashboard },
-      { label: "SLA monitor", href: "/demo/supervisor/sla-monitor", icon: LayoutDashboard },
-      {
-        label: "Dashboard",
-        href: "/demo/supervisor",
-        icon: LayoutDashboard,
-        exact: true,
-      },
-      {
-        label: "My tasks",
-        href: "/demo/supervisor#my-tasks",
-        icon: ListChecks,
-      },
-      {
-        label: "Approval queue",
-        href: "/demo/supervisor#approval-queue",
-        icon: ShieldCheck,
-        activePrefixes: ["/demo/supervisor/approvals/"],
-        badge: "1",
-      },
-    ],
-  },
-  {
-    label: "Department workflow",
-    items: [
-      { label: "Workflow inbox", href: "/demo/department", icon: Inbox },
-      {
-        label: "Returned for clarification",
-        href: "/demo/supervisor#returned",
-        icon: Clock3,
-      },
-      {
-        label: "Shared workflows",
-        href: "/demo/department",
-        icon: UsersRound,
-      },
-    ],
-  },
-  {
-    label: "Documents",
-    items: [
-      {
-        label: "Document review",
-        href: "/demo/officer/requests/REQ-DEMO-001",
-        icon: FileText,
-      },
-      {
-        label: "Issued documents",
-        href: "/demo/outcomes/REQ-DEMO-001",
-        icon: FileCheck2,
-      },
-    ],
-  },
-  {
-    label: "Reporting",
-    items: [
-      {
-        label: "Department reports",
-        href: "/demo/reports?scope=department",
-        icon: BarChart3,
-      },
-    ],
-  },
-  account("/demo/supervisor"),
-];
+const supervisorNavigation: readonly InternalNavigationGroup[] =
+  SUPERVISOR_NAVIGATION_CONTRACT.map((group) => ({
+    label: group.label,
+    items: group.items.map((item) =>
+      item.kind === "route"
+        ? {
+            id: item.id,
+            kind: item.kind,
+            label: item.label,
+            href: item.href,
+            icon: item.icon,
+            exact: item.exactMatch,
+            activePrefixes: item.activePrefixes,
+            legacyAliases: item.legacyAliases,
+          }
+        : {
+            id: item.id,
+            kind: item.kind,
+            action: item.action,
+            label: item.label,
+            icon: item.icon,
+          },
+    ),
+  }));
 
 const adminNavigation: readonly InternalNavigationGroup[] = [
   {
@@ -413,6 +367,6 @@ export function isInternalNavigationItemActive({
 
   return Boolean(
     item.activePrefixes?.some((prefix) => pathname.startsWith(prefix)) ||
-      item.legacyAliases?.includes(pathname),
+    item.legacyAliases?.includes(pathname),
   );
 }
