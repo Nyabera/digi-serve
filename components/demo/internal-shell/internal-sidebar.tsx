@@ -5,6 +5,7 @@ import { PanelLeftClose, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { OFFICER_ROUTE_HREFS } from "../../../features/demo-engine/navigation/officer-navigation-contract";
+import { SUPERVISOR_ROUTE_HREFS } from "../../../features/demo-engine/navigation/supervisor-navigation-contract";
 
 import {
   getInternalNavigation,
@@ -24,9 +25,7 @@ type InternalSidebarProps = {
   readonly onMobileClose: () => void;
 };
 
-function initials(
-  institutionName: string,
-): string {
+function initials(institutionName: string): string {
   return institutionName
     .split(/\s+/)
     .filter(Boolean)
@@ -35,12 +34,16 @@ function initials(
     .join("");
 }
 
-export function getInternalSidebarBrandHref(
-  role: InternalShellRole,
-): string {
-  return role === "OFFICER"
-    ? OFFICER_ROUTE_HREFS.home
-    : "/demo";
+export function getInternalSidebarBrandHref(role: InternalShellRole): string {
+  if (role === "OFFICER") {
+    return OFFICER_ROUTE_HREFS.home;
+  }
+
+  if (role === "SUPERVISOR") {
+    return SUPERVISOR_ROUTE_HREFS.home;
+  }
+
+  return "/demo";
 }
 
 export function InternalSidebar({
@@ -72,18 +75,14 @@ export function InternalSidebar({
         tabIndex={mobileOpen ? 0 : -1}
         onClick={onMobileClose}
         className={`${styles.drawerBackdrop} ${
-          mobileOpen
-            ? styles.drawerBackdropOpen
-            : ""
+          mobileOpen ? styles.drawerBackdropOpen : ""
         }`}
       />
 
       <aside
         className={`${styles.sidebar} ${
           collapsed ? styles.sidebarCollapsed : ""
-        } ${
-          mobileOpen ? styles.sidebarMobileOpen : ""
-        }`}
+        } ${mobileOpen ? styles.sidebarMobileOpen : ""}`}
         aria-label="Internal workspace navigation"
       >
         <div className={styles.brandRow}>
@@ -93,8 +92,7 @@ export function InternalSidebar({
             onClick={onMobileClose}
           >
             <span className={styles.brandMark}>
-              {institutionInitials ??
-                initials(institutionName)}
+              {institutionInitials ?? initials(institutionName)}
             </span>
 
             <span className={styles.brandText}>
@@ -109,26 +107,16 @@ export function InternalSidebar({
             className={`${styles.sidebarButton} ${styles.mobileClose}`}
             aria-label="Close navigation"
           >
-            <X
-              aria-hidden="true"
-              className="h-4 w-4"
-            />
+            <X aria-hidden="true" className="h-4 w-4" />
           </button>
 
           <button
             type="button"
             onClick={onCollapseToggle}
             className={`${styles.sidebarButton} ${styles.desktopCollapse}`}
-            aria-label={
-              collapsed
-                ? "Expand navigation"
-                : "Collapse navigation"
-            }
+            aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
           >
-            <PanelLeftClose
-              aria-hidden="true"
-              className="h-4 w-4"
-            />
+            <PanelLeftClose aria-hidden="true" className="h-4 w-4" />
           </button>
         </div>
 
@@ -137,21 +125,15 @@ export function InternalSidebar({
           aria-label={`${role.toLowerCase()} navigation`}
         >
           {navigation.map((group) => (
-            <section
-              key={group.label}
-              className={styles.navigationGroup}
-            >
-              <h2 className={styles.navigationLabel}>
-                {group.label}
-              </h2>
+            <section key={group.label} className={styles.navigationGroup}>
+              <h2 className={styles.navigationLabel}>{group.label}</h2>
 
               <div className="nav-list">
                 {group.items.map((item) => {
-                  const active =
-                    isInternalNavigationItemActive({
-                      pathname,
-                      item,
-                    });
+                  const active = isInternalNavigationItemActive({
+                    pathname,
+                    item,
+                  });
                   const Icon = item.icon;
 
                   if (item.kind === "action") {
@@ -159,22 +141,13 @@ export function InternalSidebar({
                       <button
                         key={`${group.label}-${item.label}`}
                         type="button"
-                        title={
-                          collapsed
-                            ? item.label
-                            : undefined
-                        }
+                        title={collapsed ? item.label : undefined}
                         onClick={handleDemoLogout}
                         className="nav-item"
                       >
-                        <Icon
-                          aria-hidden="true"
-                          className="nav-item-icon"
-                        />
+                        <Icon aria-hidden="true" className="nav-item-icon" />
 
-                        <span className="nav-item-label">
-                          {item.label}
-                        </span>
+                        <span className="nav-item-label">{item.label}</span>
                       </button>
                     );
                   }
@@ -187,30 +160,17 @@ export function InternalSidebar({
                     <Link
                       key={`${group.label}-${item.label}`}
                       href={item.href}
-                      aria-current={
-                        active ? "page" : undefined
-                      }
-                      title={
-                        collapsed
-                          ? item.label
-                          : undefined
-                      }
+                      aria-current={active ? "page" : undefined}
+                      title={collapsed ? item.label : undefined}
                       onClick={onMobileClose}
                       className="nav-item"
                     >
-                      <Icon
-                        aria-hidden="true"
-                        className="nav-item-icon"
-                      />
+                      <Icon aria-hidden="true" className="nav-item-icon" />
 
-                      <span className="nav-item-label">
-                        {item.label}
-                      </span>
+                      <span className="nav-item-label">{item.label}</span>
 
                       {item.badge ? (
-                        <span className="nav-item-count">
-                          {item.badge}
-                        </span>
+                        <span className="nav-item-count">{item.badge}</span>
                       ) : null}
                     </Link>
                   );
@@ -225,9 +185,7 @@ export function InternalSidebar({
             <span className={styles.helpIcon}>?</span>
             <div className={styles.helpCopy}>
               <strong>Need help?</strong>
-              <span>
-                Review the guided demo journey.
-              </span>
+              <span>Review the guided demo journey.</span>
             </div>
           </div>
         </div>

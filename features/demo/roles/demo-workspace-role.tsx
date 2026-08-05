@@ -12,23 +12,22 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 
 import { isOfficerRoutePath } from "@/features/demo-engine/navigation/officer-navigation-contract";
+import {
+  isSupervisorRoutePath,
+  SUPERVISOR_ROUTE_HREFS,
+} from "@/features/demo-engine/navigation/supervisor-navigation-contract";
 
 export type DemoWorkspaceRole =
-  | "APPLICANT"
-  | "OFFICER"
-  | "SUPERVISOR"
-  | "ADMIN";
+  "APPLICANT" | "OFFICER" | "SUPERVISOR" | "ADMIN";
 
-export const DEMO_WORKSPACE_ROLE_STORAGE_KEY =
-  "faidia.demo-engine.role.v1";
+export const DEMO_WORKSPACE_ROLE_STORAGE_KEY = "faidia.demo-engine.role.v1";
 
-const ROLE_CHANGE_EVENT =
-  "faidia:demo-workspace-role-change";
+const ROLE_CHANGE_EVENT = "faidia:demo-workspace-role-change";
 
 const ROLE_HOME: Record<DemoWorkspaceRole, string> = {
   APPLICANT: "/demo/track/REQ-DEMO-001",
   OFFICER: "/demo/officer",
-  SUPERVISOR: "/demo/supervisor",
+  SUPERVISOR: SUPERVISOR_ROUTE_HREFS.home,
   ADMIN: "/demo/reports?scope=institution",
 };
 
@@ -38,12 +37,9 @@ type RoleContextValue = {
   readonly switchRole: (role: DemoWorkspaceRole) => void;
 };
 
-const RoleContext =
-  createContext<RoleContextValue | null>(null);
+const RoleContext = createContext<RoleContextValue | null>(null);
 
-function isRole(
-  value: string | null,
-): value is DemoWorkspaceRole {
+function isRole(value: string | null): value is DemoWorkspaceRole {
   return (
     value === "APPLICANT" ||
     value === "OFFICER" ||
@@ -52,17 +48,12 @@ function isRole(
   );
 }
 
-function fallbackRole(
-  pathname: string,
-): DemoWorkspaceRole {
-  if (pathname.startsWith("/demo/supervisor")) {
+function fallbackRole(pathname: string): DemoWorkspaceRole {
+  if (isSupervisorRoutePath(pathname)) {
     return "SUPERVISOR";
   }
 
-  if (
-    isOfficerRoutePath(pathname) ||
-    pathname.startsWith("/demo/department")
-  ) {
+  if (isOfficerRoutePath(pathname) || pathname.startsWith("/demo/department")) {
     return "OFFICER";
   }
 
@@ -73,44 +64,33 @@ function fallbackRole(
   return "APPLICANT";
 }
 
-function roleFromLocation(
-  pathname: string,
-): DemoWorkspaceRole | null {
+function roleFromLocation(pathname: string): DemoWorkspaceRole | null {
   if (typeof window === "undefined") {
     return null;
   }
 
   if (pathname === "/demo/reports") {
-    const search = new URLSearchParams(
-      window.location.search,
-    );
+    const search = new URLSearchParams(window.location.search);
 
-    return search.get("scope") === "institution"
-      ? "ADMIN"
-      : "SUPERVISOR";
+    return search.get("scope") === "institution" ? "ADMIN" : "SUPERVISOR";
   }
 
   if (isOfficerRoutePath(pathname)) {
     return "OFFICER";
   }
 
-  if (pathname.startsWith("/demo/supervisor")) {
+  if (isSupervisorRoutePath(pathname)) {
     return "SUPERVISOR";
   }
 
-  if (
-    pathname === "/demo" ||
-    pathname.startsWith("/demo/track/")
-  ) {
+  if (pathname === "/demo" || pathname.startsWith("/demo/track/")) {
     return "APPLICANT";
   }
 
   return null;
 }
 
-function getStoredRoleSnapshot():
-  | DemoWorkspaceRole
-  | null {
+function getStoredRoleSnapshot(): DemoWorkspaceRole | null {
   if (typeof window === "undefined") {
     return null;
   }
@@ -122,48 +102,29 @@ function getStoredRoleSnapshot():
   return isRole(storedRole) ? storedRole : null;
 }
 
-function subscribeToStoredRole(
-  onStoreChange: () => void,
-) {
+function subscribeToStoredRole(onStoreChange: () => void) {
   if (typeof window === "undefined") {
     return () => undefined;
   }
 
   const handleStorage = (event: StorageEvent) => {
-    if (
-      event.key ===
-      DEMO_WORKSPACE_ROLE_STORAGE_KEY
-    ) {
+    if (event.key === DEMO_WORKSPACE_ROLE_STORAGE_KEY) {
       onStoreChange();
     }
   };
 
-  window.addEventListener(
-    "storage",
-    handleStorage,
-  );
-  window.addEventListener(
-    ROLE_CHANGE_EVENT,
-    onStoreChange,
-  );
+  window.addEventListener("storage", handleStorage);
+  window.addEventListener(ROLE_CHANGE_EVENT, onStoreChange);
 
   return () => {
-    window.removeEventListener(
-      "storage",
-      handleStorage,
-    );
-    window.removeEventListener(
-      ROLE_CHANGE_EVENT,
-      onStoreChange,
-    );
+    window.removeEventListener("storage", handleStorage);
+    window.removeEventListener(ROLE_CHANGE_EVENT, onStoreChange);
   };
 }
 
 const subscribeToHydration = () => () => undefined;
 
-export function getDemoRoleHome(
-  role: DemoWorkspaceRole,
-) {
+export function getDemoRoleHome(role: DemoWorkspaceRole) {
   return ROLE_HOME[role];
 }
 
@@ -187,14 +148,9 @@ export function DemoWorkspaceRoleProvider({
     () => null,
   );
 
-  const routeRole = isHydrated
-    ? roleFromLocation(pathname)
-    : null;
+  const routeRole = isHydrated ? roleFromLocation(pathname) : null;
 
-  const role =
-    routeRole ??
-    storedRole ??
-    fallbackRole(pathname);
+  const role = routeRole ?? storedRole ?? fallbackRole(pathname);
 
   useEffect(() => {
     if (!isHydrated) {
@@ -202,23 +158,15 @@ export function DemoWorkspaceRoleProvider({
     }
 
     if (getStoredRoleSnapshot() !== role) {
-      window.sessionStorage.setItem(
-        DEMO_WORKSPACE_ROLE_STORAGE_KEY,
-        role,
-      );
+      window.sessionStorage.setItem(DEMO_WORKSPACE_ROLE_STORAGE_KEY, role);
     }
   }, [isHydrated, role]);
 
   const switchRole = useCallback(
     (nextRole: DemoWorkspaceRole) => {
-      window.sessionStorage.setItem(
-        DEMO_WORKSPACE_ROLE_STORAGE_KEY,
-        nextRole,
-      );
+      window.sessionStorage.setItem(DEMO_WORKSPACE_ROLE_STORAGE_KEY, nextRole);
 
-      window.dispatchEvent(
-        new Event(ROLE_CHANGE_EVENT),
-      );
+      window.dispatchEvent(new Event(ROLE_CHANGE_EVENT));
 
       router.push(ROLE_HOME[nextRole]);
     },
@@ -234,11 +182,7 @@ export function DemoWorkspaceRoleProvider({
     [isHydrated, role, switchRole],
   );
 
-  return (
-    <RoleContext.Provider value={value}>
-      {children}
-    </RoleContext.Provider>
-  );
+  return <RoleContext.Provider value={value}>{children}</RoleContext.Provider>;
 }
 
 export function useDemoWorkspaceRole() {
