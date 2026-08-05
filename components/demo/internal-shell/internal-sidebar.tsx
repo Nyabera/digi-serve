@@ -9,6 +9,10 @@ import {
   isInternalNavigationItemActive,
   type InternalShellRole,
 } from "./internal-navigation";
+import {
+  findActiveAdminNavigationItem,
+} from "@/features/demo-engine/navigation/admin-navigation-contract";
+
 import styles from "./internal-shell.module.css";
 
 type InternalSidebarProps = {
@@ -45,6 +49,10 @@ export function InternalSidebar({
 }: InternalSidebarProps) {
   const pathname = usePathname();
   const navigation = getInternalNavigation(role);
+  const activeAdminHref =
+    role === "ADMIN"
+      ? findActiveAdminNavigationItem(pathname)?.href ?? null
+      : null;
 
   return (
     <>
@@ -72,7 +80,11 @@ export function InternalSidebar({
       >
         <div className={styles.brandRow}>
           <Link
-            href="/demo"
+            href={
+              role === "ADMIN"
+                ? "/demo/admin"
+                : "/demo"
+            }
             className={styles.brand}
             onClick={onMobileClose}
           >
@@ -132,10 +144,12 @@ export function InternalSidebar({
               <div className="nav-list">
                 {group.items.map((item) => {
                   const active =
-                    isInternalNavigationItemActive({
-                      pathname,
-                      item,
-                    });
+                    role === "ADMIN"
+                      ? item.href === activeAdminHref
+                      : isInternalNavigationItemActive({
+                          pathname,
+                          item,
+                        });
                   const Icon = item.icon;
 
                   return (

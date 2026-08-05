@@ -22,6 +22,11 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import {
+  ADMIN_NAVIGATION_SECTIONS,
+  type AdminNavigationIconSlot,
+} from "@/features/demo-engine/navigation/admin-navigation-contract";
+
 export type InternalShellRole =
   | "APPLICANT"
   | "OFFICER"
@@ -317,151 +322,58 @@ const supervisorNavigation: readonly InternalNavigationGroup[] = [
   account("/demo/supervisor"),
 ];
 
-const adminNavigation: readonly InternalNavigationGroup[] = [
-  {
-    label: "Main",
-    items: [
-      {
-        label: "Dashboard",
-        href: "/demo/reports?scope=institution",
-        icon: LayoutDashboard,
-        exact: true,
-      },
-    ],
-  },
-  {
-    label: "Institution setup",
-    items: [
-      {
-        label: "Institution profile",
-        href: "/demo/reports?scope=institution#institution",
-        icon: Building2,
-      },
-      {
-        label: "Branding",
-        href: "/demo/reports?scope=institution#branding",
-        icon: FileText,
-      },
-      {
-        label: "Campuses / branches",
-        href: "/demo/reports?scope=institution#campuses",
-        icon: Building2,
-      },
-    ],
-  },
-  {
-    label: "Services",
-    items: [
-      {
-        label: "Service builder",
-        href: "/demo/reports?scope=institution#service-builder",
-        icon: ClipboardCheck,
-      },
-      { label: "Service catalogue", href: "/demo#services", icon: ListChecks },
-      {
-        label: "Requirements & fees",
-        href: "/demo/reports?scope=institution#requirements",
-        icon: FileText,
-      },
-      {
-        label: "SLA rules",
-        href: "/demo/reports?scope=institution#sla-rules",
-        icon: Clock3,
-      },
-    ],
-  },
-  {
-    label: "Users & roles",
-    items: [
-      {
-        label: "Users",
-        href: "/demo/reports?scope=institution#users",
-        icon: UsersRound,
-      },
-      {
-        label: "Departments",
-        href: "/demo/reports?scope=institution#departments",
-        icon: Building2,
-      },
-      {
-        label: "Access control",
-        href: "/demo/reports?scope=institution#access",
-        icon: ShieldCheck,
-      },
-    ],
-  },
-  {
-    label: "Workflows",
-    items: [
-      {
-        label: "Workflow templates",
-        href: "/demo/department",
-        icon: Inbox,
-      },
-      {
-        label: "Approval chains",
-        href: "/demo/supervisor",
-        icon: ShieldCheck,
-      },
-      {
-        label: "Escalation rules",
-        href: "/demo/reports?scope=institution#escalation",
-        icon: Clock3,
-      },
-    ],
-  },
-  {
-    label: "Reports",
-    items: [
-      {
-        label: "Reports dashboard",
-        href: "/demo/reports?scope=institution",
-        icon: BarChart3,
-      },
-      {
-        label: "SLA reports",
-        href: "/demo/reports?scope=institution#sla-reports",
-        icon: Clock3,
-      },
-      {
-        label: "Service reports",
-        href: "/demo/reports?scope=institution#service-reports",
-        icon: FileText,
-      },
-      {
-        label: "Officer reports",
-        href: "/demo/reports?scope=institution#officer-reports",
-        icon: UsersRound,
-      },
-      {
-        label: "Export centre",
-        href: "/demo/reports?scope=institution#export",
-        icon: FileCheck2,
-      },
-    ],
-  },
-  {
-    label: "Data",
-    items: [
-      {
-        label: "Records",
-        href: "/demo/reports?scope=institution#records",
-        icon: FileText,
-      },
-      {
-        label: "Audit logs",
-        href: "/demo/reports?scope=institution#audit",
-        icon: StickyNote,
-      },
-      {
-        label: "Activity logs",
-        href: "/demo/reports?scope=institution#activity",
-        icon: ListChecks,
-      },
-    ],
-  },
-  account("/demo/reports?scope=institution"),
-];
+const ADMIN_ICON_BY_SLOT: Readonly<
+  Record<AdminNavigationIconSlot, LucideIcon>
+> = {
+  dashboard: LayoutDashboard,
+  serviceCatalogue: ListChecks,
+  serviceBuilder: ClipboardCheck,
+  formsRequirements: FileText,
+  workflowBuilder: Inbox,
+  assignmentRules: UsersRound,
+  approvalRules: ShieldCheck,
+  slaRules: Clock3,
+  users: UsersRound,
+  departments: Building2,
+  rolesPermissions: ShieldCheck,
+  allApplications: ClipboardCheck,
+  unassignedWork: ListChecks,
+  auditTrail: StickyNote,
+  documentTemplates: FileText,
+  issuedDocuments: FileCheck2,
+  qrVerification: ShieldCheck,
+  reportsDashboard: BarChart3,
+  institutionProfile: Building2,
+  branding: FileText,
+  portalSettings: Settings,
+  logout: LogOut,
+};
+
+/**
+ * D34-4 canonical admin navigation.
+ *
+ * Labels, order, and admin-owned route hrefs come from the D34-1 contract.
+ * Icon components remain the existing Lucide components already used by the
+ * internal shell. Log Out retains the existing demo exit destination.
+ */
+const adminNavigation: readonly InternalNavigationGroup[] =
+  ADMIN_NAVIGATION_SECTIONS.map((section) => ({
+    label: section.label,
+    items: section.items.map(
+      (item): InternalNavigationItem => ({
+        label: item.label,
+        href:
+          item.kind === "route"
+            ? item.href
+            : "/demo",
+        icon: ADMIN_ICON_BY_SLOT[item.iconSlot],
+        exact:
+          item.kind === "route"
+            ? item.match === "exact"
+            : true,
+      }),
+    ),
+  }));
 
 export function getInternalNavigation(
   role: InternalShellRole,
